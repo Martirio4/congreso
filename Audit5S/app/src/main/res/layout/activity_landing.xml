@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout
+    android:id="@+id/contenedor_landing"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nomad.audit5s.Activities.ActivityLanding">
+    <LinearLayout
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50">
+        <LinearLayout
+            android:background="@color/tile1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/btn_start"
+                    android:src="@drawable/start"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent" />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/tile2"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/btn_search"
+                android:src="@drawable/search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50">
+        <LinearLayout
+
+            android:background="@color/tile3"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/btn_issue"
+                android:src="@drawable/issue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/tile4"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/btn_setting"
+                android:src="@drawable/settings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.widget.LinearLayout>

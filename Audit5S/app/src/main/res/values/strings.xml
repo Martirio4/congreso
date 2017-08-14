@@ -1,0 +1,111 @@
+<resources>
+    <string name="app_name">Audit5S</string>
+    <string name="action_home">Volver</string>
+    <string name="action_settings">Menu</string>
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="SeleccionArea">Select Audit Area</string>
+    <string name="nuevaArea">New Area</string>
+    <string name="nuevaAreaHint">Enter new area name</string>
+    <string name="guardarNuevaArea">Save new area</string>
+    <string name="seEliminoFoto">Image loaded</string>
+    <string name="noSeEliminoFoto">image loaded. a backup image was saved to gallery</string>
+
+
+  <!--enunciados-->
+
+    <string name="enunciado11">e11</string>
+    <string name="enunciado12">e12</string>
+    <string name="enunciado13">e13</string>
+    <string name="enunciado14">e14</string>
+    <string name="enunciado21">e21</string>
+    <string name="enunciado22">e22</string>
+    <string name="enunciado23">e23</string>
+    <string name="enunciado24">e24</string>
+    <string name="enunciado31">e31</string>
+    <string name="enunciado32">e32</string>
+    <string name="enunciado33">e33</string>
+    <string name="enunciado34">e34</string>
+
+
+    <!--criterios -->
+    <!--primera s-->
+    <string name="punto111">punto111</string>
+    <string name="punto112">punto111</string>
+    <string name="punto113">punto111</string>
+    <string name="punto114">punto111</string>
+    <string name="punto115">punto111</string>
+
+    <string name="punto121">punto111</string>
+    <string name="punto122">punto111</string>
+    <string name="punto123">punto111</string>
+    <string name="punto124">punto111</string>
+    <string name="punto125">punto111</string>
+
+    <string name="punto131">punto111</string>
+    <string name="punto132">punto111</string>
+    <string name="punto133">punto111</string>
+    <string name="punto134">punto111</string>
+    <string name="punto135">punto111</string>
+
+    <string name="punto141">punto111</string>
+    <string name="punto142">punto111</string>
+    <string name="punto143">punto111</string>
+    <string name="punto144">punto111</string>
+    <string name="punto145">punto111</string>
+
+    <!--segunda s-->
+    <string name="punto211">punto111</string>
+    <string name="punto212">punto111</string>
+    <string name="punto213">punto111</string>
+    <string name="punto214">punto111</string>
+    <string name="punto215">punto111</string>
+
+    <string name="punto221">punto111</string>
+    <string name="punto222">punto111</string>
+    <string name="punto223">punto111</string>
+    <string name="punto224">punto111</string>
+    <string name="punto225">punto111</string>
+
+    <string name="punto231">punto111</string>
+    <string name="punto232">punto111</string>
+    <string name="punto233">punto111</string>
+    <string name="punto234">punto111</string>
+    <string name="punto235">punto111</string>
+
+    <string name="punto241">punto111</string>
+    <string name="punto242">punto111</string>
+    <string name="punto243">punto111</string>
+    <string name="punto244">punto111</string>
+    <string name="punto245">punto111</string>
+
+    <!--tercera s-->
+    <string name="punto311">punto111</string>
+    <string name="punto312">punto111</string>
+    <string name="punto313">punto111</string>
+    <string name="punto314">punto111</string>
+    <string name="punto315">punto111</string>
+
+    <string name="punto321">punto111</string>
+    <string name="punto322">punto111</string>
+    <string name="punto323">punto111</string>
+    <string name="punto324">punto111</string>
+    <string name="punto325">punto111</string>
+
+    <string name="punto331">punto111</string>
+    <string name="punto332">punto111</string>
+    <string name="punto333">punto111</string>
+    <string name="punto334">punto111</string>
+    <string name="punto335">punto111</string>
+
+    <string name="punto341">punto111</string>
+    <string name="punto342">punto111</string>
+    <string name="punto343">punto111</string>
+    <string name="punto344">punto111</string>
+    <string name="punto345">punto111</string>
+
+
+</resources>

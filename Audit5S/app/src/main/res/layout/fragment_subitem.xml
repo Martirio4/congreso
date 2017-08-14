@@ -1,0 +1,53 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/tile4"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nomad.audit5s.Fragments.FragmentSubitem">
+
+<TextView
+    android:textSize="20dp"
+    android:layout_margin="@dimen/margenChico"
+    android:text="enunciado"
+    android:id="@+id/textoEnunciado"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="20dp"
+        android:layout_margin="@dimen/margenChico"
+        android:text="enunciado"
+        android:id="@+id/textoopcion1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="20dp"
+        android:layout_margin="@dimen/margenChico"
+        android:text="enunciado"
+        android:id="@+id/textoopcion2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="20dp"
+        android:layout_margin="@dimen/margenChico"
+        android:text="enunciado"
+        android:id="@+id/textoopcion3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="20dp"
+        android:layout_margin="@dimen/margenChico"
+        android:text="enunciado"
+        android:id="@+id/textoopcion4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+    android:textSize="20dp"
+    android:layout_margin="@dimen/margenChico"
+    android:text="enunciado"
+    android:id="@+id/textoopcion5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+
+</LinearLayout>
