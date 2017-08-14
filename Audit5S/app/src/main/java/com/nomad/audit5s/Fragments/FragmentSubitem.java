@@ -91,7 +91,7 @@ public class FragmentSubitem extends Fragment {
 
 
 
-    public static FragmentSubitem fragmentSubItem(SubItem unSubItem) {
+    public static FragmentSubitem CrearfragmentSubItem(SubItem unSubItem) {
         FragmentSubitem detalleFragment = new FragmentSubitem();
         Bundle unBundle = new Bundle();
 

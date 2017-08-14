@@ -23,11 +23,11 @@ public class ControllerDatos  {
         this.context = context;
     }
 
-
     public RealmList<SubItem>traerSubItems(){
         RealmList<SubItem>unaLista=new RealmList<>();
         
         SubItem subItem1=new SubItem();
+        subItem1.setId("1S 1");
         subItem1.setEnunciado(context.getString(R.string.enunciado11));
         subItem1.setPunto1(context.getString(R.string.punto111));
         subItem1.setPunto2(context.getString(R.string.punto112));
@@ -37,6 +37,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("seiri");
         unaLista.add(subItem1);
         SubItem subItem12=new SubItem();
+        subItem1.setId("1S 2");
         subItem12.setEnunciado(context.getString(R.string.enunciado12));
         subItem12.setPunto1(context.getString(R.string.punto121));
         subItem12.setPunto2(context.getString(R.string.punto122));
@@ -46,6 +47,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("seiri");
         unaLista.add(subItem12);
         SubItem subItem13=new SubItem();
+        subItem1.setId("1S 3");
         subItem13.setEnunciado(context.getString(R.string.enunciado13));
         subItem13.setPunto1(context.getString(R.string.punto131));
         subItem13.setPunto2(context.getString(R.string.punto132));
@@ -55,6 +57,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("seiri");
         unaLista.add(subItem13);
         SubItem subItem14=new SubItem();
+        subItem1.setId("1S 4");
         subItem14.setEnunciado(context.getString(R.string.enunciado14));
         subItem14.setPunto1(context.getString(R.string.punto141));
         subItem14.setPunto2(context.getString(R.string.punto142));
@@ -64,6 +67,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiri");
         unaLista.add(subItem14);
         SubItem subItem21=new SubItem();
+        subItem1.setId("2S 1");
         subItem21.setEnunciado(context.getString(R.string.enunciado21));
         subItem21.setPunto1(context.getString(R.string.punto211));
         subItem21.setPunto2(context.getString(R.string.punto212));
@@ -73,6 +77,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiton");
         unaLista.add(subItem21);
         SubItem subItem22=new SubItem();
+        subItem1.setId("2S 2");
         subItem22.setEnunciado(context.getString(R.string.enunciado22));
         subItem22.setPunto1(context.getString(R.string.punto221));
         subItem22.setPunto2(context.getString(R.string.punto222));
@@ -82,6 +87,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiton");
         unaLista.add(subItem22);
         SubItem subItem23=new SubItem();
+        subItem1.setId("2S 3");
         subItem23.setEnunciado(context.getString(R.string.enunciado23));
         subItem23.setPunto1(context.getString(R.string.punto231));
         subItem23.setPunto2(context.getString(R.string.punto232));
@@ -91,6 +97,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiton");
         unaLista.add(subItem23);
         SubItem subItem24=new SubItem();
+        subItem1.setId("2S 4");
         subItem24.setEnunciado(context.getString(R.string.enunciado24));
         subItem24.setPunto1(context.getString(R.string.punto241));
         subItem24.setPunto2(context.getString(R.string.punto242));
@@ -100,6 +107,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiton");
         unaLista.add(subItem24);
         SubItem subItem31=new SubItem();
+        subItem1.setId("3S 1");
         subItem31.setEnunciado(context.getString(R.string.enunciado31));
         subItem31.setPunto1(context.getString(R.string.punto311));
         subItem31.setPunto2(context.getString(R.string.punto312));
@@ -109,6 +117,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiso");
         unaLista.add(subItem31);
         SubItem subItem32=new SubItem();
+        subItem1.setId("3S 2");
         subItem32.setEnunciado(context.getString(R.string.enunciado32));
         subItem32.setPunto1(context.getString(R.string.punto321));
         subItem32.setPunto2(context.getString(R.string.punto322));
@@ -118,6 +127,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiso");
         unaLista.add(subItem32);
         SubItem subItem33=new SubItem();
+        subItem1.setId("3S 3");
         subItem33.setEnunciado(context.getString(R.string.enunciado33));
         subItem33.setPunto1(context.getString(R.string.punto331));
         subItem33.setPunto2(context.getString(R.string.punto332));
@@ -127,6 +137,7 @@ public class ControllerDatos  {
         subItem1.setPertenencia("Seiso");
         unaLista.add(subItem33);
         SubItem subItem34=new SubItem();
+        subItem1.setId("3S 4");
         subItem34.setEnunciado(context.getString(R.string.enunciado34));
         subItem34.setPunto1(context.getString(R.string.punto341));
         subItem34.setPunto2(context.getString(R.string.punto342));
@@ -135,25 +146,24 @@ public class ControllerDatos  {
         subItem34.setPunto5(context.getString(R.string.punto345));
         subItem1.setPertenencia("Seiso");
         unaLista.add(subItem34);
-        
-        
-        
 
+        return unaLista;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public List<String>traerTitulos(){
+        List<String>unaLista= new ArrayList<>();
+        unaLista.add("Seiri 1");
+        unaLista.add("Seiri 2");
+        unaLista.add("Seiri 3");
+        unaLista.add("Seiri 4");
+        unaLista.add("Seiton 1");
+        unaLista.add("Seiton 2");
+        unaLista.add("Seiton 3");
+        unaLista.add("Seiton 4");
+        unaLista.add("Seiso 1");
+        unaLista.add("Seiso 2");
+        unaLista.add("Seiso 3");
+        unaLista.add("Seiso 4");
         return unaLista;
     }
 }

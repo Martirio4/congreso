@@ -13,6 +13,8 @@ import com.nomad.audit5s.Fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.R;
 
+import java.util.UUID;
+
 public class ActivityLanding extends AppCompatActivity implements FragmentSeleccionAerea.Notificable {
 
     private ImageButton botonStart;
@@ -70,9 +72,11 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
 
     @Override
     public void comenzarAuditoria(Area unArea) {
+        String idAuditoría = "Audit_"+ UUID.randomUUID();
         Intent intent=new Intent(this, ActivityAuditoria.class);
         Bundle bundle= new Bundle();
         bundle.putString(ActivityAuditoria.AREA, unArea.getNombreArea());
+        bundle.putString(ActivityAuditoria.IDAUDITORIA, idAuditoría);
         intent.putExtras(bundle);
         startActivity(intent);
     }

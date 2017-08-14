@@ -21,11 +21,10 @@ public class AdapterPagerSubItems extends FragmentStatePagerAdapter {
     //EL ADAPTER NECESITA SIEMPRE UNA LISTA DE FRAGMENTS PARA MOSTRAR
     private List<Fragment> listaFragments;
     private RealmList<SubItem> listaSubItems = new RealmList<>();
-
+    private List<String> unaListaTitulos;
 
     public AdapterPagerSubItems(FragmentManager fm) {
         super(fm);
-
 
         //INICIALIZO LA LISTA DE FRAGMENT
         listaFragments = new ArrayList<>();
@@ -33,7 +32,8 @@ public class AdapterPagerSubItems extends FragmentStatePagerAdapter {
         //LE CARGO LOS FRAGMENTS QUE QUIERO. UTILIZO LA LISTA DE PELICULAS Y SERIES PARA CREAR LOS FRAGMENTS.
 
         for (SubItem unSubItem : listaSubItems) {
-            listaFragments.add(FragmentSubitem.fragmentSubItem(unSubItem));
+            listaFragments.add(FragmentSubitem.CrearfragmentSubItem(unSubItem));
+
         }
 
         //LE AVISO AL ADAPTER QUE CAMBIO SU LISTA DE FRAGMENTS.
@@ -54,18 +54,19 @@ public class AdapterPagerSubItems extends FragmentStatePagerAdapter {
     public void setListaSubItems(RealmList<SubItem> listaSubItems) {
         this.listaSubItems = listaSubItems;
         for (SubItem unSubItem : listaSubItems) {
-            listaFragments.add(FragmentSubitem.fragmentSubItem(unSubItem));
-        }
-        notifyDataSetChanged();
-    }
-
-    public void addListaSubItems(List<SubItem> listaSubItems) {
-        this.listaSubItems.addAll(listaSubItems);
-        for (SubItem unSubItem : listaSubItems) {
-            listaFragments.add(FragmentSubitem.fragmentSubItem(unSubItem));
+            listaFragments.add(FragmentSubitem.CrearfragmentSubItem(unSubItem));
         }
         notifyDataSetChanged();
     }
 
 
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return unaListaTitulos.get(position);
+    }
+
+    public void setUnaListaTitulos(List<String> unaListaTitulos) {
+        this.unaListaTitulos = unaListaTitulos;
+    }
 }
