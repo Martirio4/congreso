@@ -49,11 +49,11 @@
                     android:id="@+id/tabLayout"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@color/tile4"
-                    app:tabIndicatorColor="@color/marfil"
+                    android:background="@color/tile2"
+                    app:tabIndicatorColor="@color/colorAccent"
                     app:tabSelectedTextColor="@color/marfil"
                     app:tabMode="scrollable"
-                    app:tabTextColor="@color/marfil"
+                    app:tabTextColor="@color/tile4"
                     app:tabGravity="fill"/>
 
                 <android.support.design.widget.CoordinatorLayout
@@ -66,11 +66,7 @@
                         android:background="@color/tile3"
                         android:layout_height="match_parent">
                     </android.support.v4.view.ViewPager>
-                    <com.github.clans.fab.FloatingActionButton
-                        android:layout_gravity="bottom|right"
-                        android:layout_margin="16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+
                 </android.support.design.widget.CoordinatorLayout>
             </LinearLayout>
 

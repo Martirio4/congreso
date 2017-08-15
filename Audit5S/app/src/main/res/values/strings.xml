@@ -33,23 +33,23 @@
 
     <!--criterios -->
     <!--primera s-->
-    <string name="punto111">punto111</string>
-    <string name="punto112">punto111</string>
-    <string name="punto113">punto111</string>
-    <string name="punto114">punto111</string>
-    <string name="punto115">punto111</string>
+    <string name="punto111">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto112">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto113">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto114">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto115">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
 
-    <string name="punto121">punto111</string>
-    <string name="punto122">punto111</string>
-    <string name="punto123">punto111</string>
-    <string name="punto124">punto111</string>
-    <string name="punto125">punto111</string>
+    <string name="punto121">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto122">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto123">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto124">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto125">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
 
-    <string name="punto131">punto111</string>
-    <string name="punto132">punto111</string>
-    <string name="punto133">punto111</string>
-    <string name="punto134">punto111</string>
-    <string name="punto135">punto111</string>
+    <string name="punto131">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto132">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto133">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto134">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto135">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
 
     <string name="punto141">punto111</string>
     <string name="punto142">punto111</string>
@@ -83,11 +83,11 @@
     <string name="punto245">punto111</string>
 
     <!--tercera s-->
-    <string name="punto311">punto111</string>
-    <string name="punto312">punto111</string>
-    <string name="punto313">punto111</string>
-    <string name="punto314">punto111</string>
-    <string name="punto315">punto111</string>
+    <string name="punto311">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto312">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto313">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto314">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
+    <string name="punto315">m Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galle</string>
 
     <string name="punto321">punto111</string>
     <string name="punto322">punto111</string>
@@ -106,6 +106,9 @@
     <string name="punto343">punto111</string>
     <string name="punto344">punto111</string>
     <string name="punto345">punto111</string>
+    <string name="verCriterios">Criteria</string>
+    <string name="criteriaTitulo">Criteria</string>
+    <string name="sacarFoto">Add photo</string>
 
 
 </resources>

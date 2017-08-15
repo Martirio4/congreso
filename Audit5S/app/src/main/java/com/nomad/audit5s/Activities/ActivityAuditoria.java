@@ -24,9 +24,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.nomad.audit5s.Adapter.AdapterPagerSubItems;
 import com.nomad.audit5s.Controller.ControllerDatos;
+import com.nomad.audit5s.Fragments.FragmentSubitem;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
 
@@ -66,6 +70,7 @@ public class ActivityAuditoria extends AppCompatActivity {
     private String Auditor;
 
     private ControllerDatos controllerDatos;
+    private FloatingActionMenu fabMenu;
 
 
 
@@ -96,6 +101,37 @@ public class ActivityAuditoria extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.elDrawer);
         navigationView = (NavigationView) findViewById(R.id.naview);
         pager=(ViewPager)findViewById(R.id.viewPagerAuditoria);
+
+        fabMenu=(FloatingActionMenu)findViewById(R.id.fab_menu);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //        SETEAR EL VIEWPAGER
         controllerDatos=new ControllerDatos(this);
@@ -214,23 +250,36 @@ public class ActivityAuditoria extends AppCompatActivity {
             }
         });
 
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Toast.makeText(ActivityAuditoria.this, "paginaSeleccionada", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                
+            }
+        });
+
 
         updateTabTextColors();
 
 
     }
 
+
     private void updateTabTextColors(){
         LinearLayout tabsContainer=(LinearLayout)tabLayout.getChildAt(0);
-        for(int i =0;i<4;i++){
-            LinearLayout item = (LinearLayout) tabsContainer.getChildAt(i);
-            TextView tv =(TextView)item.getChildAt(1);
-            tv.setTextColor(ContextCompat.getColor(this, R.color.tile1));
-        }
+
         for(int i =4;i<8;i++){
             LinearLayout item = (LinearLayout) tabsContainer.getChildAt(i);
             TextView tv =(TextView)item.getChildAt(1);
-            tv.setTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+            tv.setTextColor(ContextCompat.getColor(this, R.color.tile1));
         }
 
     }

@@ -21,4 +21,10 @@
     <color name="tile3">#2b6a78</color>
     <color name="tile4">#1f5763</color>
 
+
+    <color name="light_grey">#EEEEEE</color>
+    <color name="white_transparent">#99FFFFFF</color>
+    <color name="black">#000</color>
+    <color name="rojoOscuro">#D32F2F</color>
+
 </resources>
