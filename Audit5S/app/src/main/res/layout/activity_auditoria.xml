@@ -49,11 +49,11 @@
                     android:id="@+id/tabLayout"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@color/tile2"
+                    android:background="@color/tile3"
                     app:tabIndicatorColor="@color/colorAccent"
                     app:tabSelectedTextColor="@color/marfil"
                     app:tabMode="scrollable"
-                    app:tabTextColor="@color/tile4"
+                    app:tabTextColor="@color/primary_text"
                     app:tabGravity="fill"/>
 
                 <android.support.design.widget.CoordinatorLayout
@@ -63,7 +63,7 @@
                     <android.support.v4.view.ViewPager
                         android:id="@+id/viewPagerAuditoria"
                         android:layout_width="match_parent"
-                        android:background="@color/tile3"
+                        android:background="@color/marfil"
                         android:layout_height="match_parent">
                     </android.support.v4.view.ViewPager>
 

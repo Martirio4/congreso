@@ -181,9 +181,9 @@ public class FragmentSubitem extends Fragment {
             public void onClick(View v) {
                 new MaterialDialog.Builder(v.getContext())
                         .title(R.string.criteriaTitulo)
-                        .contentColor(ContextCompat.getColor(v.getContext(), R.color.marfil))
-                        .titleColor(ContextCompat.getColor(v.getContext(), R.color.colorAccent))
-                        .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile3))
+                        .contentColor(ContextCompat.getColor(v.getContext(), R.color.primary_text))
+                        .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
+                        .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
                         .content("1- "+criterio1+"\n"+"\n"+"2- "+criterio2+"\n"+"\n"+"3- "+criterio3+"\n"+"\n"+"4- "+criterio5+"\n"+"\n"+"5- "+criterio5)
                         .positiveText("Dismiss")
                         .show();

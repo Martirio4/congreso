@@ -235,12 +235,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         });
 
 
-        updateTabTextColors();
+        //updateTabTextColors();
 
 
     }
 
-
+/*
     private void updateTabTextColors(){
         LinearLayout tabsContainer=(LinearLayout)tabLayout.getChildAt(0);
 
@@ -251,6 +251,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         }
 
     }
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
