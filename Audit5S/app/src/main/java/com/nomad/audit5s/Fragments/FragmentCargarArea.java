@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,8 @@ public interface Exitable{
         editNombre=(EditText) view.findViewById(R.id.nombreNuevaArea);
         imagenAreaNueva=(ImageView) view.findViewById(R.id.imagenNuevaArea);
         fabAreaNueva=(FloatingActionButton) view.findViewById(R.id.fab_NuevaArea);
+        fabAreaNueva.setColorNormal(ContextCompat.getColor(getContext(), R.color.colorAccent));
+        fabAreaNueva.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         botonGuardar=(Button) view.findViewById(R.id.btn_guardarAreaNueva);
         inputNombre=(TextInputLayout) view.findViewById(R.id.inputNuevaArea);
 
@@ -92,6 +95,7 @@ public interface Exitable{
                         @Override
                         public void execute(Realm realm) {
                             Area realmArea = realm.copyToRealm(unArea);
+
                         }
                     });
                     dialogoExito(unArea);
@@ -200,7 +204,7 @@ public interface Exitable{
 
         builder.setTitle("New area successfully created")
                 .setMessage("The area: " + unArea.getNombreArea() +"\n"+ "has been succesfully added to the system")
-                .setPositiveButton("Quit", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     limpiarCampos();

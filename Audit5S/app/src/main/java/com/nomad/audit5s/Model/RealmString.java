@@ -8,6 +8,8 @@ import io.realm.RealmObject;
 
 public class RealmString extends RealmObject{
     private String string;
+    private String auditoria;
+    private String subItem;
 
     public RealmString() {
     }
@@ -18,5 +20,21 @@ public class RealmString extends RealmObject{
 
     public void setString(String string) {
         this.string = string;
+    }
+
+    public String getAuditoria() {
+        return auditoria;
+    }
+
+    public void setAuditoria(String auditoria) {
+        this.auditoria = auditoria;
+    }
+
+    public String getSubItem() {
+        return subItem;
+    }
+
+    public void setSubItem(String subItem) {
+        this.subItem = subItem;
     }
 }

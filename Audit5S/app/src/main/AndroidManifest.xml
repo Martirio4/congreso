@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nomad.audit5s">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -21,12 +22,11 @@
             android:name=".Activities.ActivityAuditoria"
             android:parentActivityName=".Activities.LoginActivity" />
         <activity android:name=".Activities.ActivityLanding" />
-        <activity android:name=".Activities.SettingsActivity"
-            android:screenOrientation="portrait"
-            >
-
-        </activity>
-
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activities.GraficosActivity" />
+        <activity android:name=".Activities.ActivityVerAuditorias"></activity>
     </application>
 
 </manifest>

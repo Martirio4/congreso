@@ -47,7 +47,7 @@
                     android:layout_weight="15"
                     android:background="@color/tile1"
                     android:gravity="center"
-                    android:text="new area"
+
                     android:textColor="@color/primary_text" />
             </LinearLayout>
 

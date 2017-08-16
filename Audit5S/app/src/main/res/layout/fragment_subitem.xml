@@ -1,6 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/tile4"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tile3"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,6 +15,7 @@
     android:textSize="20dp"
     android:layout_margin="@dimen/margenChico"
     android:text="enunciado"
+        android:textColor="@color/marfil"
     android:id="@+id/textoEnunciado"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
@@ -84,6 +86,7 @@
 
 </LinearLayout>
     <com.github.clans.fab.FloatingActionMenu
+        fab:menu_icon="@drawable/ic_add_black_24dp"
         android:id="@+id/fab_menu"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"

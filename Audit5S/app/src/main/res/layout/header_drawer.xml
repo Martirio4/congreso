@@ -10,27 +10,16 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/textoMailUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textoMailUsuario"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            android:text="nombre persona"
+            android:background="@drawable/cyan_pent"
+
             android:textColor="@color/primary_light"
-            android:background="@drawable/cyan_pent"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
-            <Button
-                android:id="@+id/botonNavView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/boton"
-                android:text="boton"
-                android:textColor="@color/primary_light"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="8dp"
-            />
 
 
 </RelativeLayout>

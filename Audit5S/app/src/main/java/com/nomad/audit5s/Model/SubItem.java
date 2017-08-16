@@ -2,6 +2,7 @@ package com.nomad.audit5s.Model;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by elmar on 11/8/2017.
@@ -15,15 +16,24 @@ public class SubItem extends RealmObject {
     private String punto3;
     private String punto4;
     private String punto5;
+    @PrimaryKey
     private String pertenencia;
 
     private Integer puntuacion1;
-
+    private String auditoria;
 
     private RealmList<Foto> listaFotos;
     private RealmList<RealmString> listaComments;
 
     public SubItem() {
+    }
+
+    public String getAuditoria() {
+        return auditoria;
+    }
+
+    public void setAuditoria(String auditoria) {
+        this.auditoria = auditoria;
     }
 
     public String getPertenencia() {

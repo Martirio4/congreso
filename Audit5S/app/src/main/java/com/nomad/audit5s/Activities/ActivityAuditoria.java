@@ -1,9 +1,7 @@
 package com.nomad.audit5s.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.icu.text.SelectFormat;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,21 +10,24 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Selection;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
+import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.clans.fab.FloatingActionButton;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.github.clans.fab.FloatingActionMenu;
 import com.nomad.audit5s.Adapter.AdapterPagerSubItems;
 import com.nomad.audit5s.Controller.ControllerDatos;
@@ -34,12 +35,14 @@ import com.nomad.audit5s.Fragments.FragmentSubitem;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
 
-import java.nio.channels.Selector;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import io.realm.Realm;
+import io.realm.RealmList;
 
-public class ActivityAuditoria extends AppCompatActivity {
+
+public class ActivityAuditoria extends AppCompatActivity implements FragmentSubitem.Avisable{
 
     public static final String IDAUDITORIA ="IDAUDITORIA";
     public static final String AREA="AREA";
@@ -51,9 +54,9 @@ public class ActivityAuditoria extends AppCompatActivity {
     private ViewPager pager;
     private AdapterPagerSubItems adapterPager;
 
-    private String idAuditoria;
-    private String areaAuditada;
-    private String fechaAuditoria;
+    public static String idAuditoria;
+    public static String areaAuditada;
+    public static String fechaAuditoria;
 
     private SubItem sub1;
     private SubItem sub2;
@@ -79,18 +82,6 @@ public class ActivityAuditoria extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auditoria);
 
-        sub1=new SubItem();
-        sub2=new SubItem();
-        sub3=new SubItem();
-        sub4=new SubItem();
-        sub5=new SubItem();
-        sub6=new SubItem();
-        sub7=new SubItem();
-        sub8=new SubItem();
-        sub9=new SubItem();
-        sub10=new SubItem();
-        sub11=new SubItem();
-        sub12=new SubItem();
 
         Intent intent= getIntent();
         Bundle bundle= intent.getExtras();
@@ -98,37 +89,13 @@ public class ActivityAuditoria extends AppCompatActivity {
         areaAuditada=bundle.getString(AREA);
         fechaAuditoria=determinarFecha();
 
+        instanciarSubitems();
+
         drawerLayout = (DrawerLayout) findViewById(R.id.elDrawer);
         navigationView = (NavigationView) findViewById(R.id.naview);
         pager=(ViewPager)findViewById(R.id.viewPagerAuditoria);
 
         fabMenu=(FloatingActionMenu)findViewById(R.id.fab_menu);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -161,6 +128,7 @@ public class ActivityAuditoria extends AppCompatActivity {
         // Get a support ActionBar corresponding to this toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.marfil));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -257,7 +225,7 @@ public class ActivityAuditoria extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(ActivityAuditoria.this, "paginaSeleccionada", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -303,6 +271,51 @@ public class ActivityAuditoria extends AppCompatActivity {
         return date;
     }
 
+    public void instanciarSubitems(){
+
+        ControllerDatos controler= new ControllerDatos(this);
+        Realm realm = Realm.getDefaultInstance();
+        RealmList<SubItem>unaLista =controler.traerSubItems();
+        for (SubItem sub:unaLista
+             ) {
+            final SubItem subitem= new SubItem();
+            subitem.setPertenencia(ActivityAuditoria.idAuditoria+sub.getId());
+            subitem.setAuditoria(ActivityAuditoria.idAuditoria);
+            subitem.setEnunciado(sub.getEnunciado());
+            subitem.setId(sub.getId());
+            subitem.setPunto1(sub.getPunto1());
+            subitem.setPunto2(sub.getPunto2());
+            subitem.setPunto3(sub.getPunto3());
+            subitem.setPunto4(sub.getPunto4());
+            subitem.setPunto5(sub.getPunto5());
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    SubItem mSi = realm.copyToRealmOrUpdate(subitem);
+                }
+            });
+        }
+    }
 
 
+    @Override
+    public void cerrarAuditoria() {
+        Intent intent=new Intent(this, GraficosActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString(GraficosActivity.AUDIT, idAuditoria);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
+    }
+
+    public void calcularPuntajeAuditoria(){
+
+    }
+
+    @Override
+    public void salirDeAca() {
+        Intent intent= new Intent(this, ActivityLanding.class);
+        startActivity(intent);
+        this.finish();
+    }
 }

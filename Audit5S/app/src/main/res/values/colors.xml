@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#2b6a78</color>
     <color name="colorPrimaryDark">#1f5763</color>
-    <color name="colorAccent">#FF9800</color>
+    <color name="colorAccent">#ffb74d</color>
 
     <color name="primary">#2b6a78</color>
     <color name="primary_dark">#1f5763</color>
@@ -26,5 +26,12 @@
     <color name="white_transparent">#99FFFFFF</color>
     <color name="black">#000</color>
     <color name="rojoOscuro">#D32F2F</color>
+
+
+    <color name="semaVerde">#2ecc71</color>
+    <color name="semaAmarillo">#f1c40f</color>
+    <color name="semaRojo">#e74c3c</color>
+
+
 
 </resources>

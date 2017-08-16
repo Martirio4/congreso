@@ -1,16 +1,21 @@
 package com.nomad.audit5s.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,18 +26,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.nomad.audit5s.Activities.ActivityAuditoria;
 import com.nomad.audit5s.Adapter.AdapterFotos;
+import com.nomad.audit5s.Model.Area;
+import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.Foto;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import id.zelory.compressor.Compressor;
+import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
@@ -48,13 +63,16 @@ public class FragmentSubitem extends Fragment {
     public static final String OPCION4="OPCION4";
     public static final String OPCION5="OPCION5";
     public static final String PERTENENCIA="PERTENENCIA";
+    public static final String ID="ID";
 
     private File fotoOriginal;
     private File fotoComprimida;
     private RecyclerView recyclerFotos;
     private AdapterFotos adapterFotos;
     private LinearLayoutManager layoutManager;
+    private Integer puntuacion;
 
+    private Avisable avisable;
 
 
 
@@ -68,6 +86,7 @@ public class FragmentSubitem extends Fragment {
     private String criterio4;
     private String criterio5;
     private String pertenencia;
+    private String id;
 
     private TextView textViewEnunciado;
     private RadioGroup rg1;
@@ -90,12 +109,17 @@ public class FragmentSubitem extends Fragment {
         // Required empty public constructor
     }
 
+    public interface Avisable{
+        public void cerrarAuditoria();
+        public void salirDeAca();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_subitem, container, false);
+        final View view= inflater.inflate(R.layout.fragment_subitem, container, false);
 
         Bundle bundle=getArguments();
         if (bundle==null){
@@ -107,9 +131,9 @@ public class FragmentSubitem extends Fragment {
             criterio3=bundle.getString(OPCION3);
             criterio4=bundle.getString(OPCION4);
             criterio5=bundle.getString(OPCION5);
-
+            id=bundle.getString(ID);
             enunciado=bundle.getString(ENUNCIADO);
-            pertenencia=bundle.getString(PERTENENCIA);
+            pertenencia=ActivityAuditoria.idAuditoria+id;
         }
         rg1=(RadioGroup) view.findViewById(R.id.rg1);
         verCriterio=(Button)view.findViewById(R.id.btn_criterios);
@@ -128,6 +152,30 @@ public class FragmentSubitem extends Fragment {
         textViewEnunciado.setText(enunciado);
 
 
+//        HANDLE RADIOGROUP
+
+        rg1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                puntuacion =rg1.indexOfChild(view.findViewById(rg1.getCheckedRadioButtonId()))+1;
+
+                final SubItem unSubitem= new SubItem();
+                unSubitem.setPuntuacion1(puntuacion);
+                unSubitem.setPertenencia(pertenencia);
+
+                Realm realm = Realm.getDefaultInstance();
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        SubItem mSi = realm.copyToRealmOrUpdate(unSubitem);
+                    }
+                });
+
+
+            }
+        });
+
+
         verCriterio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,13 +191,18 @@ public class FragmentSubitem extends Fragment {
         });
 
 
+
+
+        //traigo la lista de fotos de la base
+
+
 //        RecyclerView FOTOS
         recyclerFotos= (RecyclerView)view.findViewById(R.id.recyclerFotos);
         layoutManager= new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerFotos.setLayoutManager(layoutManager);
         adapterFotos= new AdapterFotos();
         adapterFotos.setContext(getContext());
-        listaFotos=new RealmList<>();
+        listaFotos=cargarFotos();
         adapterFotos.setListaFotosOriginales(listaFotos);
         recyclerFotos.setAdapter(adapterFotos);
 
@@ -157,20 +210,23 @@ public class FragmentSubitem extends Fragment {
 
         //agregar los fabs al menu
         fabMenu=(FloatingActionMenu)view.findViewById(R.id.fab_menu);
+        fabMenu.setMenuButtonColorNormal(ContextCompat.getColor(getContext(),R.color.colorAccent));
+
 
         fabCamara = new FloatingActionButton(getActivity());
+        fabCamara.setColorNormal(ContextCompat.getColor(getContext(), R.color.colorAccent));
         fabCamara.setButtonSize(FloatingActionButton.SIZE_MINI);
         fabCamara.setLabelText(getString(R.string.sacarFoto));
         fabCamara.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         fabMenu.addMenuButton(fabCamara);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            fabCamara.setLabelColors(ContextCompat.getColor(getActivity(), R.color.rojoOscuro),
+            fabCamara.setLabelColors(ContextCompat.getColor(getActivity(), R.color.colorAccent),
                     ContextCompat.getColor(getActivity(), R.color.light_grey),
                     ContextCompat.getColor(getActivity(), R.color.white_transparent));
             fabCamara.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
         }
         else {
-            fabCamara.setLabelColors(getResources().getColor(R.color.rojoOscuro),
+            fabCamara.setLabelColors(getResources().getColor(R.color.colorAccent),
                     getResources().getColor(R.color.light_grey),
                     getResources().getColor(R.color.white_transparent));
             fabCamara.setLabelTextColor(getResources().getColor( R.color.black));
@@ -178,13 +234,96 @@ public class FragmentSubitem extends Fragment {
         fabCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fabMenu.close(true);
                 EasyImage.openCamera(FragmentSubitem.this, 1);
+            }
+        });
+
+
+        fabGuardar = new FloatingActionButton(getActivity());
+        fabGuardar.setButtonSize(FloatingActionButton.SIZE_MINI);
+        fabGuardar.setColorNormal(ContextCompat.getColor(getContext(), R.color.colorAccent));
+        fabGuardar.setLabelText(getString(R.string.guardarAuditoria));
+        fabGuardar.setImageResource(R.drawable.ic_save_black_24dp);
+        fabMenu.addMenuButton(fabGuardar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            fabGuardar.setLabelColors(ContextCompat.getColor(getActivity(), R.color.colorAccent),
+                    ContextCompat.getColor(getActivity(), R.color.light_grey),
+                    ContextCompat.getColor(getActivity(), R.color.white_transparent));
+            fabGuardar.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+        }
+        else {
+            fabGuardar.setLabelColors(getResources().getColor(R.color.colorAccent),
+                    getResources().getColor(R.color.light_grey),
+                    getResources().getColor(R.color.white_transparent));
+            fabGuardar.setLabelTextColor(getResources().getColor( R.color.black));
+        }
+        fabGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenu.close(true);
+                if(completoTodosLosPuntos()){
+                avisable.cerrarAuditoria();
+                }
+
+            }
+        });
+
+        fabSalir = new FloatingActionButton(getActivity());
+        fabSalir.setButtonSize(FloatingActionButton.SIZE_MINI);
+        fabSalir.setColorNormal(ContextCompat.getColor(getContext(), R.color.rojoOscuro));
+        fabSalir.setLabelText(getString(R.string.salir));
+        fabSalir.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
+        fabMenu.addMenuButton(fabSalir);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            fabSalir.setLabelColors(ContextCompat.getColor(getActivity(), R.color.rojoOscuro),
+                    ContextCompat.getColor(getActivity(), R.color.light_grey),
+                    ContextCompat.getColor(getActivity(), R.color.white_transparent));
+            fabSalir.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+        }
+        else {
+            fabSalir.setLabelColors(getResources().getColor(R.color.rojoOscuro),
+                    getResources().getColor(R.color.light_grey),
+                    getResources().getColor(R.color.white_transparent));
+            fabSalir.setLabelTextColor(getResources().getColor( R.color.black));
+        }
+        fabSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenu.close(true);
+                avisable.salirDeAca();
+
             }
         });
 
 
         return view;
     }
+
+    private Boolean completoTodosLosPuntos() {
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<SubItem> result2 = realm.where(SubItem.class)
+                .equalTo("auditoria", ActivityAuditoria.idAuditoria)
+                .findAll();
+
+        List<String> unaLista=new ArrayList<>();
+
+        for (SubItem unSub:result2
+             ) {
+            if (unSub.getPuntuacion1()==null){
+                unaLista.add(unSub.getId());
+            }
+        };
+        if (unaLista.size()>0){
+            Toast.makeText(getContext(), "You must complete items: "+unaLista.toString(), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 
 
     public static FragmentSubitem CrearfragmentSubItem(SubItem unSubItem) {
@@ -197,8 +336,8 @@ public class FragmentSubitem extends Fragment {
         unBundle.putString(OPCION3, unSubItem.getPunto3());
         unBundle.putString(OPCION4, unSubItem.getPunto4());
         unBundle.putString(OPCION5, unSubItem.getPunto5());
+        unBundle.putString(ID, unSubItem.getId());
         unBundle.putString(PERTENENCIA, unSubItem.getPertenencia());
-
         detalleFragment.setArguments(unBundle);
         return detalleFragment;
     }
@@ -231,18 +370,29 @@ public class FragmentSubitem extends Fragment {
                         e.printStackTrace();
                     }
 
-                    Foto unaFoto=new Foto();
+                    final Foto unaFoto=new Foto();
                     unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
+                    unaFoto.setAuditoria(ActivityAuditoria.idAuditoria);
+                    unaFoto.setSubItem(id);
+
+
                     listaFotos.add(unaFoto);
                     adapterFotos.notifyDataSetChanged();
                     Boolean seBorro=imageFile.delete();
                     if (seBorro){
-                        Toast.makeText(getContext(), "borrada con exito", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "borrada con exito", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(getContext(), "No se pudo borrar", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "No se pudo borrar", Toast.LENGTH_SHORT).show();
                     }
+                    Realm realm = Realm.getDefaultInstance();
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            Foto mFoto = realm.copyToRealmOrUpdate(unaFoto);
 
+                        }
+                    });
 
 
                 }
@@ -261,6 +411,9 @@ public class FragmentSubitem extends Fragment {
             }
         });
     }
+
+
+
     public void  existeDirectorioImagenes(){
         Boolean sePudo=true;
         File dir = new File( fotoOriginal.getParent()+File.separator+"images");
@@ -276,4 +429,27 @@ public class FragmentSubitem extends Fragment {
 
     }
 
+    public RealmList<Foto> cargarFotos(){
+        RealmList<Foto>unaLista= new RealmList<>();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Foto>fotos=realm.where(Foto.class)
+                .equalTo("auditoria", ActivityAuditoria.idAuditoria)
+                .equalTo("subItem",id)
+                .findAll();
+
+        if (fotos==null){
+            return new RealmList<>();
+        }
+        else{
+            unaLista.addAll(fotos);
+            return unaLista;
+        }
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.avisable = (Avisable)context;
+    }
 }

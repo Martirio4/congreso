@@ -1,6 +1,7 @@
 package com.nomad.audit5s.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +59,15 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
         botonIssue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent send = new Intent(Intent.ACTION_SENDTO);
+                String uriText = "mailto:" + Uri.encode("risomartin@gmail.com") +
+                        "?subject=" + Uri.encode("I want to report an issue") +
+                        "&body=" + Uri.encode("Please, tell us if you had any problem using our App. Suggestions are also welcome!");
+                Uri uri = Uri.parse(uriText);
+
+                send.setData(uri);
+                startActivity(Intent.createChooser(send, "Send mail..."));
 
             }
         });
