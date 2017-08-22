@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -211,6 +212,18 @@ public class FragmentSubitem extends Fragment {
         adapterFotos.setListaFotosOriginales(listaFotos);
         recyclerFotos.setAdapter(adapterFotos);
 
+        View.OnClickListener listenerComentario=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer posicion=recyclerFotos.getChildAdapterPosition(v);
+                RealmList<Foto> unaLista=adapterFotos.getListaFotosOriginales();
+                Foto unaFoto=unaLista.get(posicion);
+                crearDialogoParaModificarComentario(unaFoto);
+                adapterFotos.notifyDataSetChanged();
+
+            }
+        };
+        adapterFotos.setListener(listenerComentario);
 
 
         //agregar los fabs al menu
@@ -376,13 +389,22 @@ public class FragmentSubitem extends Fragment {
                         e.printStackTrace();
                     }
 
-                    final Foto unaFoto=new Foto();
-                    unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
-                    unaFoto.setAuditoria(ActivityAuditoria.idAuditoria);
-                    unaFoto.setSubItem(id);
 
+                    Realm realm = Realm.getDefaultInstance();
 
-                    listaFotos.add(unaFoto);
+                    //In Activity
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            SubItem elsub = realm.where(SubItem.class)
+                                    .equalTo("pertenencia",pertenencia)
+                                    .findFirst();
+                            if(elsub != null) {
+                                updateFotoSub(elsub, realm);
+                            }
+                        }
+                    });
+
                     adapterFotos.notifyDataSetChanged();
                     Boolean seBorro=imageFile.delete();
                     if (seBorro){
@@ -391,20 +413,7 @@ public class FragmentSubitem extends Fragment {
                     else{
 //                        Toast.makeText(getContext(), "No se pudo borrar", Toast.LENGTH_SHORT).show();
                     }
-
-                    Realm realm = Realm.getDefaultInstance();
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            Foto mFoto = realm.copyToRealmOrUpdate(unaFoto);
-
-                        }
-                    });
-
-
                 }
-
-
             }
 
             @Override
@@ -419,6 +428,19 @@ public class FragmentSubitem extends Fragment {
         });
     }
 
+    private void updateFotoSub(SubItem elsub, Realm realm) {
+
+        final Foto unaFoto=new Foto();
+        unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
+        unaFoto.setAuditoria(ActivityAuditoria.idAuditoria);
+        unaFoto.setSubItem(id);
+        crearDialogoComentarioParaFoto(unaFoto);
+        Foto fotoSubidaARealm = realm.copyToRealmOrUpdate(unaFoto);
+        elsub.getListaFotos().add(fotoSubidaARealm);
+        listaFotos.add(unaFoto);
+
+
+    }
 
 
     public void  existeDirectorioImagenes(){
@@ -438,19 +460,19 @@ public class FragmentSubitem extends Fragment {
 
     public RealmList<Foto> cargarFotos(){
         RealmList<Foto>unaLista= new RealmList<>();
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Foto>fotos=realm.where(Foto.class)
-                .equalTo("auditoria", ActivityAuditoria.idAuditoria)
-                .equalTo("subItem",id)
-                .findAll();
 
-        if (fotos==null||fotos.size()<1){
+        Realm realm = Realm.getDefaultInstance();
+        SubItem subIt=realm.where(SubItem.class)
+                .equalTo("pertenencia", pertenencia)
+                .findFirst();
+
+        if (subIt.getListaFotos()==null||subIt.getListaFotos().size()<1){
 
             return new RealmList<>();
         }
         else{
-            unaLista.addAll(fotos);
-            return unaLista;
+
+            return subIt.getListaFotos();
         }
 
     }
@@ -495,6 +517,75 @@ public class FragmentSubitem extends Fragment {
         unaAuditoriaBuscada.getSubItems().add(elSubitem);
     }
 
+    public void crearDialogoComentarioParaFoto(final Foto unaFoto){
 
+                new MaterialDialog.Builder(getContext())
+                        .title("Add a comment")
+                        .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
+                        .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
+                        .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                        .content("Please, add a comment for this photo")
+                        .inputType(InputType.TYPE_CLASS_TEXT)
+                        .input("Comment","", new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                unaFoto.setComentario(input.toString());
+
+                                actualizarFoto(unaFoto);
+                                adapterFotos.notifyDataSetChanged();
+
+
+                            }
+                        }).show();
+
+    }
+    public void crearDialogoParaModificarComentario(final Foto unaFoto){
+
+        new MaterialDialog.Builder(getContext())
+                .title("Add a comment")
+                .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
+                .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
+                .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                .content("Please, add a comment for this photo")
+                .inputType(InputType.TYPE_CLASS_TEXT)
+                .input("Comment","", new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog dialog, final CharSequence input) {
+
+                        Realm realm=Realm.getDefaultInstance();
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                               unaFoto.setComentario(input.toString());
+                                adapterFotos.notifyDataSetChanged();
+                            }
+                        });
+
+
+
+                    }
+                }).show();
+
+    }
+
+    private void actualizarFoto(final Foto unaFoto) {
+        Realm realm=Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                    Foto lafoto = realm.copyToRealmOrUpdate(unaFoto);
+
+
+            }
+        });
+
+//helper method
+
+    }
 
 }
+
+
+
+
