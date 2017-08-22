@@ -33,19 +33,21 @@
 
     <!--criterios -->
     <!--primera s-->
-    <string name="punto111">In several places, several anomalies was found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste)</string>
-    <string name="punto112">In several places, some anomalies was found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
+    <string name="punto111">In several places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste)</string>
+    <string name="punto112">In several places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).
+</string>
     <string name="punto113">In some places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
-    <string name="punto114">In some places, some anomalies was found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
+    <string name="punto114">In some places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).
+</string>
     <string name="punto115">"every resources on floors, tables and other open space are used properly (no excess, improvisations, unnecessary resources, lack or waste).
 There may be insignificant irregularities."</string>
 
-    <string name="punto121">In several places, several anomalies was found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste)</string>
-    <string name="punto122">In several places, some anomalies was found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
+    <string name="punto121">In several places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste)</string>
+    <string name="punto122">In several places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
     <string name="punto123">In some places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
-    <string name="punto124">In some places, some anomalies was found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
-    <string name="punto125">"Every resources in closets, drawers and other enclosed spaces are share and used correctly  (no excess, improvisations, unnecessary resources, lack or waste).
-There may be insignificant irregularities."</string>
+    <string name="punto124">In some places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
+    <string name="punto125">"Every resources in closets, drawers and other enclosed spaces are shared and used correctly  (no excess, improvisations, unnecessary resources, lack or waste).
+There may be insignificant irregularities.</string>
 
     <string name="punto131">There are widespread conservation problems and some compromise the safety or functionality of facilities and resources, according to environmental characteristics.</string>
     <string name="punto133">There are conservation problems in some facilities or resource. some compromises the safety or functionality, according to environmental characteristics.</string>
@@ -55,21 +57,21 @@ There may be insignificant irregularities."</string>
 
     <string name="punto141">There is no formal justification for most conservation problems encountered</string>
     <string name="punto142">There is no formal justification for some conservation problems, including for some that compromises the safety or functionality of facilities and resources, according to environmental characteristics.</string>
-    <string name="punto143">There is no formal justification for some conservation problems, but not compromises the safety or functionality of facilities and resources, according to environmental characteristics.</string>
-    <string name="punto144">There is no formal justification for one conservation problem, but not compromis the safety or functionality of facilities and resources, according to environmental characteristics.</string>
+    <string name="punto143">There is no formal justification for some conservation problems, but it does not compromises the safety or functionality of facilities and resources, according to environmental characteristics.</string>
+    <string name="punto144">There is no formal justification for one conservation problem, but it does not compromis the safety or functionality of facilities and resources, according to environmental characteristics.</string>
     <string name="punto145">There is a formal justification for all conservation problems and none of them compromise the safety or functionality of facilities and resources. There may be insignificant irregularities for the characteristics of the environment.</string>
 
     <!--segunda s-->
-    <string name="punto211">In several places there are deficiencies of identification and signaling. There is no plan for the correction of the majority.</string>
+    <string name="punto211">In several places there are deficiencies of identification and signaling. There is no plan for the correction of most of the deficiences</string>
     <string name="punto212">In several places there are deficiencies of identification and signaling. There is no plan for the correction some of them.</string>
     <string name="punto213">In some places there are deficiencies of identification and signaling. There is no plan for the correction some of them.</string>
     <string name="punto214">In some places there are deficiencies of identification and signaling. There is a plan for the correction of them</string>
     <string name="punto215">In all places there are identifications and signage  that facilitate the location and avoid the loss of time and risks. There may be insignificant irregularities for the characteristics of the environment.</string>
 
-    <string name="punto221">In several places there are several resources without defined places and suitable for their storage (format, dimensions, type of material, etc.).</string>
-    <string name="punto222">In several places there are some resources without defined places and suitable for their storage (format, dimensions, type of material, etc.).</string>
-    <string name="punto223">In some places there are several resources without defined places and suitable for their storage (format, dimensions, type of material, etc.).</string>
-    <string name="punto224">In some places there are some resources without defined places and suitable for their storage (format, dimensions, type of material, etc.).</string>
+    <string name="punto221">In several places there are several resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
+    <string name="punto222">In several places there are some resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
+    <string name="punto223">In some places there are several resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
+    <string name="punto224">In some places there are some resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
     <string name="punto225">There are defined and suitable places for all the resources used (format, dimensions, type of material, etc.). There may be insignificant irregularities for the characteristics of the environment.</string>
 
     <string name="punto231">In several places were found several resources disordered, making access difficult (there are useful resources outside the places of store, mixture, difficulty of visual identification or risk problems).</string>

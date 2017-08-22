@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 public class RadarMarkerView extends MarkerView {
 
     private TextView tvContent;
-    private DecimalFormat format = new DecimalFormat("##0");
+    private DecimalFormat format = new DecimalFormat("0.0");
 
     public RadarMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);

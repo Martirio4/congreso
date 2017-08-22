@@ -83,11 +83,9 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
 
     @Override
     public void comenzarAuditoria(Area unArea) {
-        String idAuditoría = "Audit_"+ UUID.randomUUID();
         Intent intent=new Intent(this, ActivityAuditoria.class);
         Bundle bundle= new Bundle();
-        bundle.putString(ActivityAuditoria.AREA, unArea.getNombreArea());
-        bundle.putString(ActivityAuditoria.IDAUDITORIA, idAuditoría);
+        bundle.putString(ActivityAuditoria.IDAREA, unArea.getIdArea());
         intent.putExtras(bundle);
         startActivity(intent);
     }

@@ -1,8 +1,6 @@
 package com.nomad.audit5s.Activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -10,42 +8,41 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
-import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionMenu;
 import com.nomad.audit5s.Adapter.AdapterPagerSubItems;
 import com.nomad.audit5s.Controller.ControllerDatos;
 import com.nomad.audit5s.Fragments.FragmentSubitem;
+import com.nomad.audit5s.Model.Area;
+import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 
 public class ActivityAuditoria extends AppCompatActivity implements FragmentSubitem.Avisable{
 
     public static final String IDAUDITORIA ="IDAUDITORIA";
-    public static final String AREA="AREA";
+    public static final String IDAREA="IDAREA";
     private TabLayout tabLayout;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -57,6 +54,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     public static String idAuditoria;
     public static String areaAuditada;
     public static String fechaAuditoria;
+
+    private String resultadoInputFoto;
 
     private SubItem sub1;
     private SubItem sub2;
@@ -82,23 +81,16 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auditoria);
 
-
         Intent intent= getIntent();
         Bundle bundle= intent.getExtras();
-        idAuditoria=bundle.getString(IDAUDITORIA);
-        areaAuditada=bundle.getString(AREA);
-        fechaAuditoria=determinarFecha();
 
-        instanciarSubitems();
+        areaAuditada=bundle.getString(IDAREA);
+        instanciarNuevaAuditoria();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.elDrawer);
         navigationView = (NavigationView) findViewById(R.id.naview);
         pager=(ViewPager)findViewById(R.id.viewPagerAuditoria);
-
         fabMenu=(FloatingActionMenu)findViewById(R.id.fab_menu);
-
-
-
 
 //        SETEAR EL VIEWPAGER
         controllerDatos=new ControllerDatos(this);
@@ -139,12 +131,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
 //        TOGGLE PARA EL BOTON HAMBURGUESA
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getColor(R.color.primary_light));
-        }
-        else{
-            actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.primary_light));
-        }
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.marfil));
+
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
@@ -272,30 +260,36 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         return date;
     }
 
-    public void instanciarSubitems(){
+    public void instanciarNuevaAuditoria(){
+//   CREAR UNA AUDITORIA NUEVA
+        final Auditoria nuevaAuditoria=new Auditoria();
+        Realm realm= Realm.getDefaultInstance();
 
-        ControllerDatos controler= new ControllerDatos(this);
-        Realm realm = Realm.getDefaultInstance();
-        RealmList<SubItem>unaLista =controler.traerSubItems();
-        for (SubItem sub:unaLista
-             ) {
-            final SubItem subitem= new SubItem();
-            subitem.setPertenencia(ActivityAuditoria.idAuditoria+sub.getId());
-            subitem.setAuditoria(ActivityAuditoria.idAuditoria);
-            subitem.setEnunciado(sub.getEnunciado());
-            subitem.setId(sub.getId());
-            subitem.setPunto1(sub.getPunto1());
-            subitem.setPunto2(sub.getPunto2());
-            subitem.setPunto3(sub.getPunto3());
-            subitem.setPunto4(sub.getPunto4());
-            subitem.setPunto5(sub.getPunto5());
-            realm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    SubItem mSi = realm.copyToRealmOrUpdate(subitem);
-                }
-            });
-        }
+
+        nuevaAuditoria.setIdAuditoria("AUDIT-"+UUID.randomUUID());
+        idAuditoria=nuevaAuditoria.getIdAuditoria();
+        nuevaAuditoria.setFechaAuditoria(determinarFecha());
+
+        Area mAreaAuditada = realm.where(Area.class)
+                .equalTo("idArea", areaAuditada)
+                .findFirst();
+        nuevaAuditoria.setAreaAuditada(mAreaAuditada);
+
+        //ESPACIO PARA GUARDAR EL USUARIO DE LA DATABASE
+        //ESPACIO PARA GUARDAR EL USUARIO DE LA DATABASE
+        //ESPACIO PARA GUARDAR EL USUARIO DE LA DATABASE
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+               Auditoria auditoriaRealm= realm.copyToRealmOrUpdate(nuevaAuditoria);
+                updateSubItems(realm, auditoriaRealm);
+            }
+        });
+
+
+
+
+
     }
 
 
@@ -318,5 +312,38 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         Intent intent= new Intent(this, ActivityLanding.class);
         startActivity(intent);
         this.finish();
+    }
+
+    public void pedirComment(){
+
+        new MaterialDialog.Builder(this)
+                .title("Add a comment")
+                .content("Please, add a comment for this photo")
+                .inputType(InputType.TYPE_CLASS_TEXT)
+                .input("Comment","", new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(MaterialDialog dialog, CharSequence input) {
+                        resultadoInputFoto=input.toString();
+                        entregarString();
+                    }
+                }).show();
+    }
+
+    private String entregarString() {
+        return resultadoInputFoto;
+    }
+
+    public void updateSubItems(Realm realm, final Auditoria unAudit){
+        ControllerDatos controler= new ControllerDatos(this);
+        RealmList<SubItem>unaListaDummie=controler.traerSubItems();
+
+        for (final SubItem sub:unaListaDummie
+                ) {
+            sub.setPertenencia(idAuditoria+sub.getId());
+            sub.setAuditoria(idAuditoria);
+            SubItem subItemSubidoARealm = realm.copyToRealmOrUpdate(sub);
+            unAudit.getSubItems().add(subItemSubidoARealm);
+
+        }
     }
 }

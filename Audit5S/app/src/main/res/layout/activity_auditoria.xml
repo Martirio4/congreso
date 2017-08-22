@@ -53,7 +53,7 @@
                     app:tabIndicatorColor="@color/colorAccent"
                     app:tabSelectedTextColor="@color/marfil"
                     app:tabMode="scrollable"
-                    app:tabTextColor="@color/primary_text"
+                    app:tabTextColor="@color/tile2"
                     app:tabGravity="fill"/>
 
                 <android.support.design.widget.CoordinatorLayout

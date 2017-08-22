@@ -33,7 +33,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentBarrasApiladas extends Fragment implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
+public class FragmentBarrasApiladas extends Fragment   {
 
     private BarChart mChart;
     private SeekBar mSeekBarX, mSeekBarY;
@@ -71,7 +71,6 @@ public class FragmentBarrasApiladas extends Fragment implements SeekBar.OnSeekBa
 
 
         mChart = (BarChart) view.findViewById(R.id.chart1);
-        mChart.setOnChartValueSelectedListener(this);
         mChart.getDescription().setEnabled(false);
 
 
@@ -84,8 +83,8 @@ public class FragmentBarrasApiladas extends Fragment implements SeekBar.OnSeekBa
         mChart.setPinchZoom(false);
 
         mChart.setDrawGridBackground(true);
-        mChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.tile3));
-        mChart.setGridBackgroundColor(ContextCompat.getColor(getContext(),R.color.tile1));
+        mChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.marfil));
+        mChart.setGridBackgroundColor(ContextCompat.getColor(getContext(),R.color.marfil));
         mChart.setDrawBarShadow(false);
 
 
@@ -166,8 +165,8 @@ public class FragmentBarrasApiladas extends Fragment implements SeekBar.OnSeekBa
                     set1.setColor(ContextCompat.getColor(getContext(), R.color.semaVerde));
                 }
             }
-            set1.setLabel("Result");
-            set1.setStackLabels(new String[]{"Result"});
+            set1.setLabel("Audit result");
+            set1.setStackLabels(new String[]{"Audit result"});
 
 
 
@@ -208,85 +207,8 @@ public class FragmentBarrasApiladas extends Fragment implements SeekBar.OnSeekBa
 
 
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-        tvX.setText("" + (mSeekBarX.getProgress() + 1));
-        tvY.setText("" + (mSeekBarY.getProgress()));
-
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-
-        for (int i = 0; i < mSeekBarX.getProgress() + 1; i++) {
-            float mult = (mSeekBarY.getProgress() + 1);
-            float val1 = (float) (Math.random() * mult) + mult / 3;
-            float val2 = (float) (Math.random() * mult) + mult / 3;
-            float val3 = (float) (Math.random() * mult) + mult / 3;
-
-            yVals1.add(new BarEntry(
-                    i,
-                    new float[]{val1, val2, val3},
-                    getResources().getDrawable(R.drawable.radar_marker)));
 
 
-
-        }
-
-        BarDataSet set1;
-
-        if (mChart.getData() != null &&
-                mChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) mChart.getData().getDataSetByIndex(0);
-            set1.setValues(yVals1);
-            mChart.getData().notifyDataChanged();
-            mChart.notifyDataSetChanged();
-        } else {
-            set1 = new BarDataSet(yVals1, "Statistics Vienna 2014");
-            set1.setDrawIcons(false);
-            set1.setColors(getColors());
-            set1.setStackLabels(new String[]{"Births", "Divorces", "Marriages"});
-
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-            dataSets.add(set1);
-
-            BarData data = new BarData(dataSets);
-            data.setValueFormatter(new MyValueFormatter());
-            data.setValueTextColor(Color.WHITE);
-
-            mChart.setData(data);
-        }
-
-        mChart.setFitBars(true);
-        mChart.invalidate();
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onValueSelected(Entry e, Highlight h) {
-
-        BarEntry entry = (BarEntry) e;
-
-        if (entry.getYVals() != null)
-            Log.i("VAL SELECTED", "Value: " + entry.getYVals()[h.getStackIndex()]);
-        else
-            Log.i("VAL SELECTED", "Value: " + entry.getY());
-    }
-
-    @Override
-    public void onNothingSelected() {
-        // TODO Auto-generated method stub
-
-    }
 
     private int[] getColors() {
         int stacksize = 3;

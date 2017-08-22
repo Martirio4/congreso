@@ -13,6 +13,7 @@ public class Foto extends RealmObject{
     private String rutaFoto;
     private String auditoria;
     private String subItem;
+    private String comentario;
 
     public Foto() {
     }
@@ -39,5 +40,13 @@ public class Foto extends RealmObject{
 
     public void setSubItem(String subItem) {
         this.subItem = subItem;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 }

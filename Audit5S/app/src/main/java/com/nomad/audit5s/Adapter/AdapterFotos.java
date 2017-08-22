@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.nomad.audit5s.Activities.ActivityAuditoria;
 import com.nomad.audit5s.Model.Foto;
 import com.nomad.audit5s.R;
 import com.squareup.picasso.Picasso;
@@ -24,6 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import io.realm.Realm;
 import io.realm.RealmList;
 
 /**
@@ -74,7 +79,31 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
         viewCelda = layoutInflater.inflate(R.layout.detalle_celda_recycler_fotos, parent, false);
 
        final FotoViewHolder fotosViewHolder = new FotoViewHolder(viewCelda);
-        viewCelda.setOnClickListener(new View.OnClickListener() {
+
+        fotosViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new MaterialDialog.Builder(context)
+                        .title("Add a comment")
+                        .contentColor(ContextCompat.getColor(context, R.color.primary_text))
+                        .backgroundColor(ContextCompat.getColor(context, R.color.tile1))
+                        .titleColor(ContextCompat.getColor(context, R.color.tile4))
+                        .content("Please, add a comment for this photo")
+                        .inputType(InputType.TYPE_CLASS_TEXT)
+                        .input("Comment","", new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                fotosViewHolder.textView.setText(input.toString());
+
+
+
+                            }
+                        }).show();
+
+            }
+        });
+        /*viewCelda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -98,7 +127,7 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
 
             }
         });
-
+*/
         return fotosViewHolder;
     }
 
@@ -107,6 +136,7 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
         final Foto unFoto = listaFotosOriginales.get(position);
         FotoViewHolder FotoViewHolder = (FotoViewHolder) holder;
         FotoViewHolder.cargarFoto(unFoto);
+
 
 
     }
@@ -146,12 +176,14 @@ public class AdapterFotos extends RecyclerView.Adapter implements View.OnClickLi
 
         public void cargarFoto(Foto unFoto) {
 
-            File f =new File(unFoto.getRutaFoto());
+
+                File f = new File(unFoto.getRutaFoto());
 
 
-            Picasso.with(imageView.getContext())
-                    .load(f)
-                    .into(imageView);
+                Picasso.with(imageView.getContext())
+                        .load(f)
+                        .into(imageView);
+
         }
 
 

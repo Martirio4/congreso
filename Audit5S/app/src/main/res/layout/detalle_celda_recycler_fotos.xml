@@ -25,11 +25,7 @@
                 android:background="@color/marfil"
                 android:orientation="vertical">
 
-                <EditText
-                    android:visibility="gone"
-                    android:id="@+id/editFoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
 
                 <ImageView
                     android:id="@+id/imagenCamara"
@@ -39,7 +35,11 @@
                     android:layout_weight="85"
                     android:background="@color/tile4"
                     android:scaleType="fitXY" />
-
+                <EditText
+                    android:visibility="gone"
+                    android:id="@+id/editFoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/nombreNuevaArea"
                     android:layout_width="match_parent"
@@ -47,6 +47,7 @@
                     android:layout_weight="15"
                     android:background="@color/marfil"
                     android:gravity="center"
+                    android:text="Click here to add comment"
                     android:textColor="@color/tile4"
                     />
             </LinearLayout>

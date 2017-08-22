@@ -20,7 +20,8 @@
         </activity>
         <activity
             android:name=".Activities.ActivityAuditoria"
-            android:parentActivityName=".Activities.LoginActivity" />
+            android:parentActivityName=".Activities.LoginActivity"
+            android:launchMode="singleInstance"/>
         <activity android:name=".Activities.ActivityLanding" />
         <activity
             android:name=".Activities.SettingsActivity"

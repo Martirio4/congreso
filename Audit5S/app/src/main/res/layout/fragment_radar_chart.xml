@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/tile3"
+    android:background="@color/marfil"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 <LinearLayout
     android:orientation="horizontal"
-    android:layout_marginEnd="@dimen/margenGrande"
-    android:layout_marginStart="@dimen/margenGrande"
+   android:background="@color/tile3"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="?actionBarSize">
 
     <TextView
         android:layout_marginEnd="@dimen/margenGrande"
         android:gravity="end"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:text="Audit Result for:"
         android:textSize="20sp"
         android:layout_weight="50"
@@ -25,20 +24,14 @@
         android:layout_marginStart="@dimen/margenGrande"
         android:gravity="start"
         android:id="@+id/textoAreaResultado"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:textSize="20sp"
         android:layout_weight="50"
         android:textColor="@color/marfil"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
 </LinearLayout>
-    <ImageView
 
-        android:layout_marginEnd="@dimen/margenGrande"
-        android:layout_marginStart="@dimen/margenGrande"
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="2dp" />
 
 
     <com.github.mikephil.charting.charts.RadarChart

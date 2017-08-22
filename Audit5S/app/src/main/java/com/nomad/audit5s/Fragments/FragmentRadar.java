@@ -24,12 +24,15 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
+import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.RadarMarkerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,21 +78,20 @@ public class FragmentRadar extends Fragment {
         puntpro=unBundle.getDouble(PROMEDIO3S);
         areaAuditada=unBundle.getString(AREA);
 
+        Realm realm = Realm.getDefaultInstance();
+        Area unArea= realm.where(Area.class)
+                .equalTo("idArea",areaAuditada)
+                .findFirst();
+
         textoTitulo= (TextView)view.findViewById(R.id.textoAreaResultado);
-        textoTitulo.setText(areaAuditada);
+        textoTitulo.setText(unArea.getNombreArea());
         /*TextView tv = (TextView) findViewById(R.id.textView);
         tv.setTextColor(Color.WHITE);
         tv.setBackgroundColor(Color.rgb(60, 65, 82));
 */
         mChart = (RadarChart) view.findViewById(R.id.chart1);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mChart.setBackgroundColor(getContext().getColor(R.color.tile3));
+        mChart.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.marfil));
 
-        }
-        else {
-            mChart.setBackgroundColor(getResources().getColor(R.color.tile3));
-
-        }
         mChart.getDescription().setEnabled(false);
 
         mChart.setWebLineWidth(1f);
@@ -124,7 +126,7 @@ public class FragmentRadar extends Fragment {
                 return mActivities[(int) value % mActivities.length];
             }
         });
-        xAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(Color.BLACK);
         xAxis.setTextSize(20f);
 
         YAxis yAxis = mChart.getYAxis();
@@ -135,13 +137,13 @@ public class FragmentRadar extends Fragment {
         yAxis.setDrawLabels(false);
 
         Legend l = mChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(5f);
-        l.setTextColor(Color.WHITE);
+        l.setTextColor(Color.BLACK);
         l.setTextSize(20f);
 
 
@@ -198,8 +200,8 @@ public class FragmentRadar extends Fragment {
         set1.setDrawHighlightIndicators(false);
 
         RadarDataSet set2 = new RadarDataSet(entries2, "Target");
-        set2.setColor(ContextCompat.getColor(getContext(), R.color.marfil));
-        set2.setFillColor(ContextCompat.getColor(getContext(), R.color.marfil));
+        set2.setColor(ContextCompat.getColor(getContext(), R.color.tile3));
+        set2.setFillColor(ContextCompat.getColor(getContext(), R.color.tile3));
         set2.setDrawFilled(true);
         set2.setFillAlpha(50);
         set2.setLineWidth(2f);
@@ -213,7 +215,7 @@ public class FragmentRadar extends Fragment {
         RadarData data = new RadarData(sets);
         data.setValueTextSize(8f);
         data.setDrawValues(false);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
 
         mChart.setData(data);
         mChart.invalidate();

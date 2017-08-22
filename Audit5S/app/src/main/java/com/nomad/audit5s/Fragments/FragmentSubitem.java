@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -73,6 +74,9 @@ public class FragmentSubitem extends Fragment {
     private Integer puntuacion;
 
     private Avisable avisable;
+
+    private Auditoria unaAuditoria;
+    private RealmList<SubItem> unaListaSubitems;
 
 
 
@@ -154,24 +158,25 @@ public class FragmentSubitem extends Fragment {
 
 //        HANDLE RADIOGROUP
 
+        //In Activity
+
         rg1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 puntuacion =rg1.indexOfChild(view.findViewById(rg1.getCheckedRadioButtonId()))+1;
 
-                final SubItem unSubitem= new SubItem();
-                unSubitem.setPuntuacion1(puntuacion);
-                unSubitem.setPertenencia(pertenencia);
-
                 Realm realm = Realm.getDefaultInstance();
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        SubItem mSi = realm.copyToRealmOrUpdate(unSubitem);
+                        Auditoria audit = realm.where(Auditoria.class)
+                                .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
+                                .findFirst();
+                        if (audit != null) {
+                            update(audit, realm);
+                        }
                     }
                 });
-
-
             }
         });
 
@@ -211,6 +216,7 @@ public class FragmentSubitem extends Fragment {
         //agregar los fabs al menu
         fabMenu=(FloatingActionMenu)view.findViewById(R.id.fab_menu);
         fabMenu.setMenuButtonColorNormal(ContextCompat.getColor(getContext(),R.color.colorAccent));
+
 
 
         fabCamara = new FloatingActionButton(getActivity());
@@ -385,6 +391,7 @@ public class FragmentSubitem extends Fragment {
                     else{
 //                        Toast.makeText(getContext(), "No se pudo borrar", Toast.LENGTH_SHORT).show();
                     }
+
                     Realm realm = Realm.getDefaultInstance();
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
@@ -437,7 +444,8 @@ public class FragmentSubitem extends Fragment {
                 .equalTo("subItem",id)
                 .findAll();
 
-        if (fotos==null){
+        if (fotos==null||fotos.size()<1){
+
             return new RealmList<>();
         }
         else{
@@ -452,4 +460,41 @@ public class FragmentSubitem extends Fragment {
         super.onAttach(context);
         this.avisable = (Avisable)context;
     }
+
+    public void unafuncionreloca() {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Auditoria audit = realm.where(Auditoria.class)
+                        .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
+                        .findFirst();
+                if (audit != null) {
+                    update(audit, realm);
+                }
+            }
+        });
+    }
+
+        //helper method
+    public void update(Auditoria unaAuditoriaBuscada, Realm realm) {
+        //do update stuff
+
+        SubItem subItemAgregar= new SubItem();
+        subItemAgregar.setId(id);
+        subItemAgregar.setEnunciado(enunciado);
+        subItemAgregar.setPertenencia(pertenencia);
+        subItemAgregar.setAuditoria(ActivityAuditoria.idAuditoria);
+        subItemAgregar.setPunto1(criterio1);
+        subItemAgregar.setPunto2(criterio2);
+        subItemAgregar.setPunto3(criterio3);
+        subItemAgregar.setPunto4(criterio4);
+        subItemAgregar.setPunto5(criterio5);
+        subItemAgregar.setPuntuacion1(puntuacion);
+        SubItem elSubitem = realm.copyToRealmOrUpdate(subItemAgregar);
+        unaAuditoriaBuscada.getSubItems().add(elSubitem);
+    }
+
+
+
 }

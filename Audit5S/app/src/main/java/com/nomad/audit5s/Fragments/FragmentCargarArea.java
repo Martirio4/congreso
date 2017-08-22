@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Foto;
@@ -53,9 +56,10 @@ public class FragmentCargarArea extends Fragment {
     public FragmentCargarArea() {
         // Required empty public constructor
     }
-public interface Exitable{
-    public void cerrarFragment();
-}
+
+    public interface Exitable {
+        public void cerrarFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,31 +67,31 @@ public interface Exitable{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cargar_area, container, false);
 
-        editNombre=(EditText) view.findViewById(R.id.nombreNuevaArea);
-        imagenAreaNueva=(ImageView) view.findViewById(R.id.imagenNuevaArea);
-        fabAreaNueva=(FloatingActionButton) view.findViewById(R.id.fab_NuevaArea);
+        editNombre = (EditText) view.findViewById(R.id.nombreNuevaArea);
+        imagenAreaNueva = (ImageView) view.findViewById(R.id.imagenNuevaArea);
+        fabAreaNueva = (FloatingActionButton) view.findViewById(R.id.fab_NuevaArea);
         fabAreaNueva.setColorNormal(ContextCompat.getColor(getContext(), R.color.colorAccent));
         fabAreaNueva.setImageResource(R.drawable.ic_camera_alt_black_24dp);
-        botonGuardar=(Button) view.findViewById(R.id.btn_guardarAreaNueva);
-        inputNombre=(TextInputLayout) view.findViewById(R.id.inputNuevaArea);
+        botonGuardar = (Button) view.findViewById(R.id.btn_guardarAreaNueva);
+        inputNombre = (TextInputLayout) view.findViewById(R.id.inputNuevaArea);
 
         fabAreaNueva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EasyImage.openChooserWithGallery(FragmentCargarArea.this, "Select image",1);
+                EasyImage.openChooserWithGallery(FragmentCargarArea.this, "Select image", 1);
             }
         });
 
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (puedoGuardar()){
-                    final Area unArea= new Area();
-                    Foto unaFoto= new Foto();
+                if (puedoGuardar()) {
+                    final Area unArea = new Area();
+                    Foto unaFoto = new Foto();
                     unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
                     unArea.setNombreArea(editNombre.getText().toString());
                     unArea.setFotoArea(unaFoto);
-                    unArea.setIdArea("area"+ UUID.randomUUID());
+                    unArea.setIdArea("area" + UUID.randomUUID());
 
                     //guardo nueva area en Realm
                     Realm realm = Realm.getDefaultInstance();
@@ -99,8 +103,7 @@ public interface Exitable{
                         }
                     });
                     dialogoExito(unArea);
-                }
-                else{
+                } else {
 
                 }
             }
@@ -109,12 +112,11 @@ public interface Exitable{
         return view;
     }
 
-    public Boolean puedoGuardar(){
-        if (editNombre.getText()==null || editNombre.getText().toString().isEmpty()){
+    public Boolean puedoGuardar() {
+        if (editNombre.getText() == null || editNombre.getText().toString().isEmpty()) {
             inputNombre.setError("Name field can´t be empty");
             return false;
-        }
-        else {
+        } else {
             if (editNombre.getText().toString().length() > 13) {
 
                 inputNombre.setError("Name must be under 13 characters");
@@ -126,7 +128,7 @@ public interface Exitable{
     }
 
     @Override
-    public void onActivityResult( int  requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         EasyImage.handleActivityResult(requestCode, resultCode, data, getActivity(), new DefaultCallback() {
             @Override
@@ -137,33 +139,33 @@ public interface Exitable{
             @Override
             public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
 
-                if (type==1){
-                        fotoOriginal = imageFile;
-                        existeDirectorioImagenes();
-                        try {
-                            fotoComprimida = new Compressor(getContext())
-                                    .setMaxWidth(640)
-                                    .setMaxHeight(480)
-                                    .setQuality(75)
-                                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                                    .setDestinationDirectoryPath(fotoOriginal.getParent() + File.separator + "images")
-                                    .compressToFile(fotoOriginal);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                if (type == 1) {
+                    fotoOriginal = imageFile;
+                    existeDirectorioImagenes();
+                    try {
+                        fotoComprimida = new Compressor(getContext())
+                                .setMaxWidth(640)
+                                .setMaxHeight(480)
+                                .setQuality(75)
+                                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                                .setDestinationDirectoryPath(fotoOriginal.getParent() + File.separator + "images")
+                                .compressToFile(fotoOriginal);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                        Foto unaFoto = new Foto();
-                        unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
-                        Boolean seBorro = imageFile.delete();
-                        if (seBorro) {
-                            Toast.makeText(getContext(), R.string.seEliminoFoto, Toast.LENGTH_SHORT).show();
+                    Foto unaFoto = new Foto();
+                    unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
+                    Boolean seBorro = imageFile.delete();
+                    if (seBorro) {
+                        Toast.makeText(getContext(), R.string.seEliminoFoto, Toast.LENGTH_SHORT).show();
 
-                        } else {
-                            Toast.makeText(getContext(), R.string.noSeEliminoFoto, Toast.LENGTH_SHORT).show();
-                        }
+                    } else {
+                        Toast.makeText(getContext(), R.string.noSeEliminoFoto, Toast.LENGTH_SHORT).show();
+                    }
 
                     //cargo la imagen en el imageview
-                    File f=new File(fotoComprimida.getAbsolutePath());
+                    File f = new File(fotoComprimida.getAbsolutePath());
                     Picasso.with(getContext())
                             .load(f)
                             .into(imagenAreaNueva);
@@ -184,25 +186,54 @@ public interface Exitable{
     }
 
 
-    public void  existeDirectorioImagenes(){
-        Boolean sePudo=true;
-        File dir = new File( fotoOriginal.getParent()+File.separator+"images");
-        if(!dir.exists() || !dir.isDirectory()) {
-            sePudo=dir.mkdirs();
+    public void existeDirectorioImagenes() {
+        Boolean sePudo = true;
+        File dir = new File(fotoOriginal.getParent() + File.separator + "images");
+        if (!dir.exists() || !dir.isDirectory()) {
+            sePudo = dir.mkdirs();
         }
-        if (sePudo){
+        if (sePudo) {
 
-        }
-        else{
+        } else {
             Toast.makeText(getContext(), "no se pudo crear el directorio", Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    public void dialogoExito(Area unArea) {
+
+
+                new MaterialDialog.Builder(getContext())
+                        .title("New area successfully created")
+                        .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
+                        .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                        .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
+                        .content("The area: " + unArea.getNombreArea() +"\n"+ "has been succesfully added to the system")
+                        .positiveText("Go back")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                limpiarCampos();
+                                unExitable.cerrarFragment();
+                            }
+                        })
+                        .negativeText("Add new area")
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                limpiarCampos();
+                            }
+                        })
+                        .show();
+
+
+
+    }
+/*
     public void dialogoExito(Area unArea){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext(), R.style.Dialog);
 
-        builder.setTitle("New area successfully created")
+        builder.setTitle()
                 .setMessage("The area: " + unArea.getNombreArea() +"\n"+ "has been succesfully added to the system")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
@@ -235,11 +266,12 @@ public interface Exitable{
         positiveButtonLL.width = ViewGroup.LayoutParams.MATCH_PARENT;
         positiveButton.setLayoutParams(positiveButtonLL);
 
-    }
+    }*/
 
     private void limpiarCampos() {
         imagenAreaNueva.setImageResource(R.color.tile3);
         editNombre.setText("");
+
     }
 
     @Override

@@ -15,7 +15,7 @@
     android:textSize="20dp"
     android:layout_margin="@dimen/margenChico"
     android:text="enunciado"
-        android:textColor="@color/tile4"
+    android:textColor="@color/primary_text"
     android:id="@+id/textoEnunciado"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
@@ -30,37 +30,48 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+
+            android:textColorHighlight="@color/colorAccent"
+            android:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
-            android:textColor="@color/tile4"
+            android:textColor="@color/primary_text"
             android:id="@+id/item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <RadioButton
+            android:textColorHighlight="@color/colorAccent"
+            android:buttonTint="@color/tile4"
             android:id="@+id/item2"
-            android:textColor="@color/tile4"
+            android:textColor="@color/primary_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margenChico"
            />
 
         <RadioButton
+            android:textColorHighlight="@color/colorAccent"
+            android:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
-            android:textColor="@color/tile4"
+            android:textColor="@color/primary_text"
 
             android:id="@+id/item3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
+            android:textColorHighlight="@color/colorAccent"
+            android:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
-            android:textColor="@color/tile4"
+            android:textColor="@color/primary_text"
 
             android:id="@+id/item4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
+            android:textColorHighlight="@color/colorAccent"
+            android:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
-            android:textColor="@color/tile4"
+            android:textColor="@color/primary_text"
             android:id="@+id/item5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -86,7 +97,6 @@
 
 </LinearLayout>
     <com.github.clans.fab.FloatingActionMenu
-
         android:id="@+id/fab_menu"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
