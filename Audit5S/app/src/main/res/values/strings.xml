@@ -117,6 +117,8 @@ There may be insignificant irregularities.</string>
     <string name="manageAreas">Manage audit areas</string>
     <string name="myAudits">My Audits</string>
     <string name="addNewArea">Add new Area</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="signed_out">Signed out</string>
 
 
 </resources>
