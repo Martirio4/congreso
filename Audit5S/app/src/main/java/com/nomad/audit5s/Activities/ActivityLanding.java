@@ -96,4 +96,9 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
         super.onResume();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

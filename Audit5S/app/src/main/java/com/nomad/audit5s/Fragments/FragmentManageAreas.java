@@ -23,6 +23,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.Adapter.AdapterArea;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Foto;
@@ -56,6 +57,7 @@ public class FragmentManageAreas extends Fragment {
     private FloatingActionMenu fabMenuManage;
     private FloatingActionButton fabAgregarArea;
     private FloatingActionButton fabSalir;
+    private FloatingActionButton fabSignOut;
 
     private Avisable unAvisable;
 
@@ -118,7 +120,7 @@ public class FragmentManageAreas extends Fragment {
         fabAgregarArea=new FloatingActionButton(getActivity());
 
 
-        fabAgregarArea.setButtonSize(FloatingActionButton.SIZE_NORMAL);
+        fabAgregarArea.setButtonSize(FloatingActionButton.SIZE_MINI);
         fabAgregarArea.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
         fabAgregarArea.setLabelText(getString(R.string.addNewArea));
         fabAgregarArea.setImageResource(R.drawable.ic_note_add_black_24dp);
@@ -138,7 +140,7 @@ public class FragmentManageAreas extends Fragment {
         });
 
         fabSalir = new FloatingActionButton(getActivity());
-        fabSalir.setButtonSize(FloatingActionButton.SIZE_NORMAL);
+        fabSalir.setButtonSize(FloatingActionButton.SIZE_MINI);
         fabSalir.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
         fabSalir.setLabelText(getString(R.string.salir));
         fabSalir.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
@@ -157,6 +159,29 @@ public class FragmentManageAreas extends Fragment {
 
             }
         });
+
+        fabSignOut = new FloatingActionButton(getActivity());
+        fabSignOut.setButtonSize(FloatingActionButton.SIZE_MINI);
+        fabSignOut.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
+        fabSignOut.setLabelText(getString(R.string.signOut));
+        fabSignOut.setImageResource(R.drawable.ic_block_black_24dp);
+        fabMenuManage.addMenuButton(fabSignOut);
+
+        fabSignOut.setLabelColors(ContextCompat.getColor(getActivity(), R.color.tile3),
+                ContextCompat.getColor(getActivity(), R.color.light_grey),
+                ContextCompat.getColor(getActivity(), R.color.white_transparent));
+        fabSignOut.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+
+        fabSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fabMenuManage.close(true);
+                FirebaseAuth.getInstance().signOut();
+                unAvisable.salirDeAca();
+
+            }
+        });
+
 
 
 

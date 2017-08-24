@@ -28,6 +28,8 @@ import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
+import com.nomad.mylibrary.PDFWriter;
+import com.nomad.mylibrary.PaperSize;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -355,4 +357,5 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         super.onBackPressed();
 
     }
+
 }

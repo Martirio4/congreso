@@ -170,12 +170,11 @@ public class FragmentSubitem extends Fragment {
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        Auditoria audit = realm.where(Auditoria.class)
-                                .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
+
+                        SubItem sub = realm.where(SubItem.class)
+                                .equalTo("pertenencia",pertenencia)
                                 .findFirst();
-                        if (audit != null) {
-                            update(audit, realm);
-                        }
+                        sub.setPuntuacion1(puntuacion);
                     }
                 });
             }
@@ -224,6 +223,7 @@ public class FragmentSubitem extends Fragment {
             }
         };
         adapterFotos.setListener(listenerComentario);
+        adapterFotos.notifyDataSetChanged();
 
 
         //agregar los fabs al menu
@@ -234,7 +234,7 @@ public class FragmentSubitem extends Fragment {
 
         fabCamara = new FloatingActionButton(getActivity());
         fabCamara.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
-        fabCamara.setButtonSize(FloatingActionButton.SIZE_NORMAL);
+        fabCamara.setButtonSize(FloatingActionButton.SIZE_MINI);
         fabCamara.setLabelText(getString(R.string.sacarFoto));
         fabCamara.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         fabMenu.addMenuButton(fabCamara);
@@ -254,7 +254,7 @@ public class FragmentSubitem extends Fragment {
 
 
         fabGuardar = new FloatingActionButton(getActivity());
-        fabGuardar.setButtonSize(FloatingActionButton.SIZE_NORMAL);
+        fabGuardar.setButtonSize(FloatingActionButton.SIZE_MINI);
         fabGuardar.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
         fabGuardar.setLabelText(getString(R.string.guardarAuditoria));
         fabGuardar.setImageResource(R.drawable.ic_save_black_24dp);
@@ -277,7 +277,7 @@ public class FragmentSubitem extends Fragment {
         });
 
         fabSalir = new FloatingActionButton(getActivity());
-        fabSalir.setButtonSize(FloatingActionButton.SIZE_NORMAL);
+        fabSalir.setButtonSize(FloatingActionButton.SIZE_MINI);
         fabSalir.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
         fabSalir.setLabelText(getString(R.string.salir));
         fabSalir.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
@@ -465,20 +465,7 @@ public class FragmentSubitem extends Fragment {
         this.avisable = (Avisable)context;
     }
 
-    public void unafuncionreloca() {
-        Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Auditoria audit = realm.where(Auditoria.class)
-                        .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
-                        .findFirst();
-                if (audit != null) {
-                    update(audit, realm);
-                }
-            }
-        });
-    }
+
 
         //helper method
     public void update(Auditoria unaAuditoriaBuscada, Realm realm) {
@@ -495,6 +482,7 @@ public class FragmentSubitem extends Fragment {
         subItemAgregar.setPunto4(criterio4);
         subItemAgregar.setPunto5(criterio5);
         subItemAgregar.setPuntuacion1(puntuacion);
+
         SubItem elSubitem = realm.copyToRealmOrUpdate(subItemAgregar);
 
 

@@ -119,6 +119,9 @@ There may be insignificant irregularities.</string>
     <string name="addNewArea">Add new Area</string>
     <string name="auth_failed">Authentication failed</string>
     <string name="signed_out">Signed out</string>
+    <string name="generarPDF">Send PDF report</string>
+    <string name="quit">Quit</string>
+    <string name="signOut">Sign out your account and quit</string>
 
 
 </resources>
