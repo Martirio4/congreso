@@ -132,7 +132,7 @@
                 android:layout_height="0dp">
                 <TextView
 
-                    android:text="3S::"
+                    android:text="3S:"
                     android:gravity="center"
                     android:id="@+id/tagPuntaje3s"
                     android:layout_weight="50"
@@ -143,6 +143,52 @@
                     android:text="Date"
                     android:gravity="center"
                     android:id="@+id/puntaje3s"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="25"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+
+                    android:text="4S:"
+                    android:gravity="center"
+                    android:id="@+id/tagPuntaje4s"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textColor="@color/primary_text"
+                    android:text="Date"
+                    android:gravity="center"
+                    android:id="@+id/puntaje4s"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="25"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+
+                    android:text="5S:"
+                    android:gravity="center"
+                    android:id="@+id/tagPuntaje5s"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:textColor="@color/primary_text"
+                    android:text="Date"
+                    android:gravity="center"
+                    android:id="@+id/puntaje5s"
                     android:layout_weight="50"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />

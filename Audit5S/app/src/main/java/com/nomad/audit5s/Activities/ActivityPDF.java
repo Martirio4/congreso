@@ -36,23 +36,6 @@ public class ActivityPDF extends AppCompatActivity {
 
         idAuditoria=unBundle.getString(IDAAUDITORIA);
 
-        Realm realm= Realm.getDefaultInstance();
-        Auditoria mAudit= realm.where(Auditoria.class)
-                .equalTo("idAuditoria",idAuditoria)
-                .findFirst();
-
-        PDFWriter writer = new PDFWriter(PaperSize.LETTER_WIDTH, PaperSize.LETTER_HEIGHT);
-        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.TIMES_BOLD, StandardFonts.WIN_ANSI_ENCODING);
-        writer.addText(25,280,20,"Hola primeraPrueba");
-        Foto unaFoto=mAudit.getSubItems().get(0).getListaFotos().get(0);
-        File unFile= new File(unaFoto.getRutaFoto());
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-        writer.addImage(25,250,bitmap);
-        writer.newPage();
-
-
-        outputToFile("MyFirstReport.pdf", writer.asString(), "ISO-8859-1");
     }
     public void outputToFile(String fileName, String pdfContent, String encoding) {
         File newFile = new File("/storage/emulated/0/Android/data/com.nomad.audit5s/cache/EasyImage" + "/" + fileName);
@@ -68,5 +51,23 @@ public class ActivityPDF extends AppCompatActivity {
         } catch(IOException e) {
             // ...
         }
+    }
+
+    public void generarInformePDF(){
+        Realm realm= Realm.getDefaultInstance();
+        Auditoria mAudit= realm.where(Auditoria.class)
+                .equalTo("idAuditoria",idAuditoria)
+                .findFirst();
+
+        PDFWriter writer = new PDFWriter(PaperSize.LETTER_WIDTH, PaperSize.LETTER_HEIGHT);
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.TIMES_BOLD, StandardFonts.WIN_ANSI_ENCODING);
+        writer.addText(25,280,20,"Hola primeraPrueba");
+        Foto unaFoto=mAudit.getSubItems().get(0).getListaFotos().get(0);
+        File unFile= new File(unaFoto.getRutaFoto());
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+        writer.addImage(25,250,bitmap);
+        writer.newPage();
+        outputToFile("MyFirstReport.pdf", writer.asString(), "ISO-8859-1");
     }
 }

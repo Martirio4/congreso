@@ -151,12 +151,16 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
 
         public void cargarArea(Area unArea) {
 
+            if (unArea.getFotoArea()!=null) {
+
+
             File f =new File(unArea.getFotoArea().getRutaFoto());
             Picasso.with(imageView.getContext())
                     .load(f)
                     .into(imageView);
 
             textView.setText(unArea.getNombreArea());
+            }
         }
 
 

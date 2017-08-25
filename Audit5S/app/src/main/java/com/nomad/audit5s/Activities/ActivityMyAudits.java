@@ -107,6 +107,7 @@ public class ActivityMyAudits extends AppCompatActivity implements FragmentMyAud
         Intent intent=new Intent(this, GraficosActivity.class);
         Bundle unBundle=new Bundle();
         unBundle.putString(GraficosActivity.AUDIT,unAuditoria.getIdAuditoria());
+        unBundle.putString(GraficosActivity.ORIGEN, "myAudits");
         intent.putExtras(unBundle);
         startActivity(intent);
         this.finish();

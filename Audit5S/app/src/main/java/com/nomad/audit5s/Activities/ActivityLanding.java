@@ -2,20 +2,19 @@ package com.nomad.audit5s.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.nomad.audit5s.Adapter.AdapterArea;
+import com.nomad.audit5s.Fragments.FragmentManageAreas;
 import com.nomad.audit5s.Fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.R;
-
-import java.util.UUID;
 
 public class ActivityLanding extends AppCompatActivity implements FragmentSeleccionAerea.Notificable {
 
@@ -25,10 +24,13 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
     private ImageButton botonSettings;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+
         botonIssue=(ImageButton) findViewById(R.id.btn_issue);
         botonaudits=(ImageButton) findViewById(R.id.btn_search);
         botonSettings=(ImageButton) findViewById(R.id.btn_setting);
@@ -78,8 +80,8 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
         FragmentSeleccionAerea fragmentSeleccionAerea= new FragmentSeleccionAerea();
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.contenedor_landing,fragmentSeleccionAerea);
-        fragmentTransaction.commit();
+        fragmentTransaction.add(R.id.contenedor_landing,fragmentSeleccionAerea,"SeleccionArea").addToBackStack("SeleccionArea").commit();
+
     }
 
     @Override
@@ -88,7 +90,9 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
         Bundle bundle= new Bundle();
         bundle.putString(ActivityAuditoria.IDAREA, unArea.getIdArea());
         intent.putExtras(bundle);
+        FragmentManager fragmentManager=(FragmentManager) this.getSupportFragmentManager();
         startActivity(intent);
+        fragmentManager.popBackStack();
     }
 
     @Override
@@ -99,6 +103,21 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        FragmentActivity unaActivity = (FragmentActivity) this;
+        FragmentManager fragmentManager = (FragmentManager) this.getSupportFragmentManager();
+        FragmentSeleccionAerea seleccionAreas = (FragmentSeleccionAerea) fragmentManager.findFragmentByTag("SeleccionArea");
+
+
+        if (seleccionAreas != null && seleccionAreas.isVisible()) {
+           fragmentManager.popBackStackImmediate();
+
+        } else {
+            super.onBackPressed();
+        }
+
+
+
+
     }
+
 }

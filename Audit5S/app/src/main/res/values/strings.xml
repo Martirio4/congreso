@@ -29,6 +29,23 @@
     <string name="enunciado32">3.2 Level of cleaning (dirt caused by the process or the external spaces)</string>
     <string name="enunciado33">3.3 Cleaning standard</string>
     <string name="enunciado34">3.4 Garbage baskets And other discart collectors</string>
+    <string name="enunciado41">4.1. Standardization of Paints, Identifications and Signsed
+</string>;
+    <string name="enunciado42">4.2. Hygiene and health
+</string>;
+    <string name="enunciado43">4.3. Routines and Systematics for Maintenance of 5S
+</string>;
+    <string name="enunciado44">4.4. Systematic of saveing for electronic documents
+</string>;
+    <string name="enunciado51">5.1. Self-discipline in the practice of 5S
+</string>;
+    <string name="enunciado52">5.2. Self-discipline in compliance with rules and procedures
+</string>;
+    <string name="enunciado53">5.3. Attitude of people
+</string>;
+    <string name="enunciado54">5.4. Self-discipline in the storage of electronic documents (if any)
+</string>;
+
 
 
     <!--criterios -->
@@ -122,6 +139,110 @@ There may be insignificant irregularities.</string>
     <string name="generarPDF">Send PDF report</string>
     <string name="quit">Quit</string>
     <string name="signOut">Sign out your account and quit</string>
+    <string name="settings">Settings</string>
+
+    <string name="punto411">There are only a few rules on identifications and signage. Most do not obey any rules.</string>
+    <string name="punto412">There are some rules on identifications and signage. Most do not obey any standard.
+</string>
+    <string name="punto413">In all places there are identifications and signage. There may be some insignificant irregularity for the characteristics of the environment. Some paintings, identifications and signage do not obey a standard.
+</string>
+    <string name="punto414">In all places there are identifications and signage. There may be some insignificant irregularity for the characteristics of the environment. Few paintings, identifications and signage do not obey a standard.
+</string>
+    <string name="punto415">In all places there are identifications and signage. There may be an insignificant irregularity for the characteristics of the environment. All paintings, identifications and signage are standardized.
+</string>
+    <string name="punto421">There are some ergonomic problems and / or some hygiene problems in the work area, but there is no plan to solve it
+</string>
+    <string name="punto422">There are some ergonomic problem and / or  hygiene problem in the work area, but there is no study to solve them.
+</string>
+    <string name="punto423">There are some ergonomic problem and / or hygiene problem in the work area and there is study to solve them.
+</string>
+    <string name="punto424">There are some ergonomic problem and / or hygiene problem in the work area and there are concrete actions to solve it.
+</string>
+    <string name="punto425">There is no ergonomic or hygiene problem in the work area It may have insignificant irregularities for the characteristics of the environment.
+</string>
+    <string name="punto431">There is no system for maintenance of 5S. The practice is random.
+</string>
+    <string name="punto432">There is some system for maintenance to 5S, but it does not guarantee continuous improvement (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
+</string>
+    <string name="punto433">There is a system for continuous improvement of 5S, but there is a deficiency in several aspects  (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
+</string>
+    <string name="punto434">There is a system for continuous improvement of 5S, but there is a deficiency in some aspects  (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
+</string>
+    <string name="punto435">There is an efficient system for the continuous improvement of 5S  (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
+</string>
+    <string name="punto441">There is no defined criteria for the electronic storage of documents.
+</string>
+    <string name="punto442">The possible definition for the electronic storage of documents  is not extended for all types (Net, CPU, E-mail).
+</string>
+    <string name="punto443">There is no defined protocol for the storage of electronic documents. (Net, CPU, E-mail). Some folders and shared files do not uniform denomination.
+</string>
+    <string name="punto444">There is defined  for the storage  of electronic documents (Net, CPU, E-mail).  There is no clear separation beetwen a personal and profesional files.
+</string>
+    <string name="punto445">There is a definition for keeping all types of electronic documents (network, CPU, E-mail). All shared files and folders have uniform names. There is a general separation beetwen of personal and profesional  files. There may be insignificant irregularities for the characteristics of the environment.
+</string>
+
+    <string name="punto511">Some of the people observed / interviewed, practice 5S in the day to day without need of monitoring or order
+</string>
+    <string name="punto512">several of the people observed / interviewed, practice 5S in the day to day without need of monitoring or order
+</string>
+    <string name="punto513">Some of the people observed / interviewed, do not practice 5S in the day to day without need of monitoring or order
+</string>
+    <string name="punto514">Few of the people observed / interviewed, do not practice 5S in the day to day without need of monitoring or order
+</string>
+    <string name="punto515">"All of people observed / interviewed, practice 5S in the day to day without need of monitoring or order
+Even in other areas that they frequent or work.
+"
+</string>
+    <string name="punto521">some of the people observed / interviewed comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
+</string>
+    <string name="punto522">several of the people observed / interviewed comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
+</string>
+    <string name="punto523">some of the people observed / interviewed do not comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
+</string>
+    <string name="punto524">Few of the people observed / interviewed do not comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
+</string>
+    <string name="punto525">All of people observed / interviewed do not comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
+</string>
+    <string name="punto531">"Most people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
+* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
+* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
+* Inadequate smoking practice
+* Lack of team spirit
+* Lack of initiative for 5S, etc.."
+</string>
+    <string name="punto532">"Several people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
+* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
+* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
+* Inadequate smoking practice
+* Lack of team spirit
+* Lack of initiative for 5S, etc.."
+</string>
+    <string name="punto533">"Some people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
+* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
+* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
+* Inadequate smoking practice
+* Lack of team spirit
+* Lack of initiative for 5S, etc.."
+</string>
+    <string name="punto534">"Few people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
+* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
+* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
+* Inadequate smoking practice
+* Lack of team spirit
+* Lack of initiative for 5S, etc.."
+</string>
+    <string name="punto535">"Non of the people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
+* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
+* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
+* Inadequate smoking practice
+* Lack of team spirit
+* Lack of initiative for 5S, etc.."</string>
+    <string name="punto541">There are several anomalies in the storage of various types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names, outside the established standard, etc.).</string>
+    <string name="punto542">There are several anomalies in the storage of some types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
+    <string name="punto543">There are some anomalies in the storage of various types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
+    <string name="punto544">There are some anomalies in the storage of some types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
+    <string name="punto545">All electronic documents are used and stored in appropriate folders in accordance with the established standard. It may have insignificant irregularities for the characteristics of the environment.</string>
+
 
 
 </resources>

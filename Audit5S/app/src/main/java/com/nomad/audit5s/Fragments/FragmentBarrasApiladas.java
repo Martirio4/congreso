@@ -39,9 +39,7 @@ public class FragmentBarrasApiladas extends Fragment   {
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
 
-    public static final String  PUNJTAJE1="PUNTAJE1";
-    public static final String  PUNJTAJE2="PUNTAJE2";
-    public static final String  PUNJTAJE3="PUNTAJE3";
+
     public static final String  PROMEDIO3S="PROMEDIO3S";
 
     private Double punt1;
@@ -62,9 +60,7 @@ public class FragmentBarrasApiladas extends Fragment   {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_barras_apiladas, container, false);
         Bundle bundle = getArguments();
-        punt1=bundle.getDouble(PUNJTAJE1);
-        punt2=bundle.getDouble(PUNJTAJE2);
-        punt3=bundle.getDouble(PUNJTAJE3);
+
         puntpro=bundle.getDouble(PROMEDIO3S);
 
 
@@ -116,9 +112,6 @@ public class FragmentBarrasApiladas extends Fragment   {
         l.setFormToTextSpace(4f);
         l.setXEntrySpace(6f);
 
-        Float punto1= Float.parseFloat(punt1.toString());
-        Float punto2= Float.parseFloat(punt2.toString());
-        Float punto3= Float.parseFloat(punt3.toString());
         Float promedio= Float.parseFloat(puntpro.toString());
 
 

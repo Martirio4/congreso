@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,13 +22,11 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmResults;
 
 /**
  * Created by elmar on 18/5/2017.
@@ -116,12 +113,16 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
         private TextView text3s;
         private TextView textFinal;
         private TextView textFoto;
+        private TextView text4s;
+        private TextView text5s;
 
         private TextView tagDate;
         private TextView tag1s;
         private TextView tag2s;
         private TextView tag3s;
         private TextView tagfinal;
+        private TextView tag4s;
+        private TextView tag5s;
 
         private CardView tarjetaPutaje;
 
@@ -147,6 +148,10 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
             textFecha = (TextView) itemView.findViewById(R.id.fechaAuditoria);
             textFoto = (TextView) itemView.findViewById(R.id.nombreAreaResumenAuditoria);
             tarjetaPutaje=(CardView) itemView.findViewById(R.id.tarjetaPuntaje);
+            text4s = (TextView) itemView.findViewById(R.id.puntaje4s);
+            text5s = (TextView) itemView.findViewById(R.id.puntaje5s);
+            tag4s=(TextView)itemView.findViewById(R.id.tagPuntaje4s);
+            tag5s=(TextView)itemView.findViewById(R.id.tagPuntaje5s);
 
 
             tagDate.setTypeface(roboto);
@@ -160,6 +165,10 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
             textFinal.setTypeface(roboto);
             textFecha.setTypeface(roboto);
             textFoto.setTypeface(roboto);
+            tag4s.setTypeface(roboto);
+            text4s.setTypeface(roboto);
+            tag5s.setTypeface(roboto);
+            text5s.setTypeface(roboto);
         }
 
         public void cargarAuditoria(Auditoria unAuditoria) {
@@ -169,11 +178,16 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
             List<String> listaSeiri=controllerDatos.traerSeiri();
             List<String>listaSeiton=controllerDatos.traerSeiton();
             List<String>listaSeiso=controllerDatos.traerSeiso();
+            List<String>listaSeiketsu=controllerDatos.traerSeiketsu();
+            List<String>listaShitsuke=controllerDatos.traerShitsuke();
+
             Realm realm = Realm.getDefaultInstance();
 
             Integer sumaSeiri=0;
             Integer sumaSeiton =0;
             Integer sumaSeiso=0;
+            Integer sumaSeiketsu=0;
+            Integer sumaShitsuke=0;
 
             for (SubItem sub:unAuditoria.getSubItems()
                  ) {
@@ -192,19 +206,31 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
                         sumaSeiso = sumaSeiso + sub.getPuntuacion1();
                     }
                 }
+                if (sub.getId().equals("4S 1")||sub.getId().equals("4S 2")||sub.getId().equals("4S 3")||sub.getId().equals("4S 4")) {
+                    if (sub.getPuntuacion1()!=null) {
+                        sumaSeiketsu = sumaSeiketsu + sub.getPuntuacion1();
+                    }
+                }
+                if (sub.getId().equals("5S 1")||sub.getId().equals("5S 2")||sub.getId().equals("5S 3")||sub.getId().equals("5S 4")) {
+                    if (sub.getPuntuacion1()!=null) {
+                        sumaShitsuke = sumaShitsuke + sub.getPuntuacion1();
+                    }
+                }
             }
 
             Double promedioSeiri=((sumaSeiri/4.0)/5.0);
             Double promedioSeiton=((sumaSeiton /4.0)/5.0);
             Double promedioSeiso=((sumaSeiso/4.0)/5.0);
-            Double promedio3s=((promedioSeiso+promedioSeiri+promedioSeiton)/3);
+            Double promedioSeiketsu=((sumaSeiketsu/4.0)/5.0);
+            Double promedioShitsuke=((sumaShitsuke/4.0)/5.0);
+            Double promedio5s =((promedioSeiso+promedioSeiri+promedioSeiton+promedioSeiketsu+promedioShitsuke)/5);
             //FIN CALCULO PUNTAJES
 
-            if (promedio3s<=0.5f){
+            if (promedio5s <=0.5f){
                 tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaRojo));
             }
             else{
-                if (promedio3s<0.8f){
+                if (promedio5s <0.8f){
                     tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaAmarillo));
                 }
                 else{
@@ -219,12 +245,16 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
             String percentage1 = format.format(promedioSeiri);
             String percentage2 = format.format(promedioSeiton);
             String percentage3 = format.format(promedioSeiso);
-            String percentage4 = format.format(promedio3s);
+            String percentage4 = format.format(promedioSeiketsu);
+            String percentage5 = format.format(promedioShitsuke);
+            String percentage6 = format.format(promedio5s);
 
-            text1s.setText(percentage1.toString());
-            text2s.setText(percentage2.toString());
-            text3s.setText(percentage3.toString());
-            textFinal.setText(percentage4.toString());
+            text1s.setText(percentage1);
+            text2s.setText(percentage2);
+            text3s.setText(percentage3);
+            text4s.setText(percentage4);
+            text5s.setText(percentage5);
+            textFinal.setText(percentage6);
             textFecha.setText(unAuditoria.getFechaAuditoria());
             textFoto.setText(unAuditoria.getAreaAuditada().getNombreArea());
 

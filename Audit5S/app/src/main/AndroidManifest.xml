@@ -16,26 +16,33 @@
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:screenOrientation="portrait"
             android:name=".Activities.ActivityAuditoria"
-            android:launchMode="singleInstance"
-            android:parentActivityName=".Activities.LoginActivity" />
-        <activity android:name=".Activities.ActivityLanding"
+            android:parentActivityName=".Activities.ActivityLanding" />
+
+        <activity android:name=".Activities.ActivityLanding" />
+
+        <activity android:name=".Activities.SettingsActivity"
+            android:parentActivityName=".Activities.ActivityLanding"
+                  android:screenOrientation="portrait" />
+
+        <activity android:name=".Activities.GraficosActivity"
+            android:parentActivityName=".Activities.ActivityLanding"
             />
-        <activity
-            android:name=".Activities.SettingsActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Activities.GraficosActivity" />
+
         <activity android:name=".Activities.ActivityVerAuditorias" />
+
         <activity
             android:name=".Activities.ActivityMyAudits"
-            android:parentActivityName=".Activities.ActivityLanding"></activity>
-        <activity android:name=".Activities.ActivityPDF"></activity>
+            android:parentActivityName=".Activities.ActivityLanding"/>
+
+        <activity android:name=".Activities.ActivityPDF"/>
+
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.nomad.audit5s.Adapter.AdapterArea;
 import com.nomad.audit5s.Fragments.FragmentCargarArea;
 import com.nomad.audit5s.Fragments.FragmentManageAreas;
+import com.nomad.audit5s.Fragments.FragmentSettings;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.R;
 
@@ -25,8 +26,16 @@ public class SettingsActivity extends AppCompatActivity implements FragmentCarga
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        cargarFragmentManageAreas();
+        cargarFragmentSettings();
 
+    }
+
+    private void cargarFragmentSettings() {
+        FragmentSettings fragmentManageAreas = new FragmentSettings();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.contenedorSettings, fragmentManageAreas,"fragmentManageAreas");
+        fragmentTransaction.commit();
     }
 
 
@@ -36,13 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements FragmentCarga
         this.finish();
     }
 
-    public void cargarFragmentManageAreas(){
-        FragmentManageAreas fragmentManageAreas = new FragmentManageAreas();
-        FragmentManager fragmentManager= getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.contenedorSettings, fragmentManageAreas,"fragmentManageAreas");
-        fragmentTransaction.commit();
-    }
+
 
     @Override
     public void cerrarFragment() {

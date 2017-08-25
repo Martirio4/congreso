@@ -8,7 +8,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,11 +26,11 @@ dependencies {
     })
 
     compile project(path: ':mylibrary')
+
     compile 'com.google.firebase:firebase-auth:11.2.0'
     compile 'com.google.firebase:firebase-core:11.2.0'
     compile 'com.google.firebase:firebase-database:11.2.0'
     compile 'com.google.firebase:firebase-messaging:11.2.0'
-
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'

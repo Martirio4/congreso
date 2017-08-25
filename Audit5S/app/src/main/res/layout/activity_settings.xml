@@ -17,7 +17,7 @@
             android:id="@+id/tituloManageAreas"
             android:textColor="@color/marfil"
             android:textSize="@dimen/titulos"
-            android:text="@string/manageAreas"
+            android:text="@string/settings"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

@@ -22,8 +22,6 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.nomad.audit5s.Controller.ControllerDatos;
 import com.nomad.audit5s.Fragments.FragmentBarrasApiladas;
 import com.nomad.audit5s.Fragments.FragmentRadar;
-import com.nomad.audit5s.Fragments.FragmentSubitem;
-import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.Foto;
 import com.nomad.audit5s.Model.SubItem;
@@ -40,25 +38,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
-import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class GraficosActivity extends AppCompatActivity {
 
     public static final String AUDIT="AUDIT";
     public static final String AREA="AREA";
+    public static final String ORIGEN="ORIGEN";
+
+    private String origenIntent;
     private String idAudit;
     private String areaAuditada;
     private Double promedioSeiri;
     private Double promedioSeiton;
     private Double promedioSeiso;
-    private Double promedio3s;
+    private Double promedio5s;
     
     private FloatingActionMenu fabMenuGraficos;
     private FloatingActionButton fabGenerarPDF;
     private FloatingActionButton fabQuit;
 
     private ProgressBar progressBar;
+    private Double promedioSeiketsu;
+    private Double promedioShitsuke;
 
 
     @Override
@@ -70,10 +71,11 @@ public class GraficosActivity extends AppCompatActivity {
         promedioSeiso=0.0;
         promedioSeiton=0.0;
         promedioSeiri=0.0;
-        promedio3s=0.0;
+        promedio5s =0.0;
         Intent intent= getIntent();
         Bundle bundle=intent.getExtras();
         idAudit=bundle.getString(AUDIT);
+        origenIntent=bundle.getString(ORIGEN);
         calcularPuntajes();
         cargarGraficoRadar();
         cargarGraficoBarras();
@@ -137,7 +139,8 @@ public class GraficosActivity extends AppCompatActivity {
         bundle.putDouble(FragmentRadar.PUNJTAJE1, promedioSeiri);
         bundle.putDouble(FragmentRadar.PUNJTAJE2, promedioSeiton);
         bundle.putDouble(FragmentRadar.PUNJTAJE3, promedioSeiso);
-        bundle.putDouble(FragmentRadar.PROMEDIO3S, promedio3s);
+        bundle.putDouble(FragmentRadar.PUNJTAJE4, promedioSeiketsu);
+        bundle.putDouble(FragmentRadar.PUNJTAJE5, promedioShitsuke);
         bundle.putString(FragmentRadar.AREA,areaAuditada);
 
         graficoFragment.setArguments(bundle);
@@ -151,10 +154,7 @@ public class GraficosActivity extends AppCompatActivity {
         FragmentBarrasApiladas fragmentBarrasApiladas= new FragmentBarrasApiladas();
 
         Bundle bundle=new Bundle();
-        bundle.putDouble(FragmentBarrasApiladas.PUNJTAJE1, promedioSeiri);
-        bundle.putDouble(FragmentBarrasApiladas.PUNJTAJE2, promedioSeiton);
-        bundle.putDouble(FragmentBarrasApiladas.PUNJTAJE3, promedioSeiso);
-        bundle.putDouble(FragmentRadar.PROMEDIO3S, promedio3s);
+        bundle.putDouble(FragmentBarrasApiladas.PROMEDIO3S, promedio5s);
         fragmentBarrasApiladas.setArguments(bundle);
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
@@ -167,6 +167,8 @@ public class GraficosActivity extends AppCompatActivity {
         List<String>listaSeiri=controllerDatos.traerSeiri();
         List<String>listaSeiton=controllerDatos.traerSeiton();
         List<String>listaSeiso=controllerDatos.traerSeiso();
+        List<String>listaSeiketsu=controllerDatos.traerSeiketsu();
+        List<String>listaShitsuke=controllerDatos.traerShitsuke();
         Realm realm = Realm.getDefaultInstance();
 
         Auditoria mAudit=realm.where(Auditoria.class)
@@ -177,6 +179,8 @@ public class GraficosActivity extends AppCompatActivity {
         Integer sumaSeiri=0;
         Integer sumaSeiton =0;
         Integer sumaSeiso=0;
+        Integer sumaSeiketsu=0;
+        Integer sumaShitsuke=0;
 
         for (String unString:listaSeiri
              ) {
@@ -205,10 +209,31 @@ public class GraficosActivity extends AppCompatActivity {
                 sumaSeiso = sumaSeiso + resultSeiso.getPuntuacion1();
             }
         }
+        for (String unString:listaSeiketsu
+                ) {
+            SubItem resultSeiketsu = realm.where(SubItem.class)
+                    .equalTo("pertenencia", idAudit+unString)
+                    .findFirst();
+            if (resultSeiketsu.getPuntuacion1()!=null) {
+                sumaSeiketsu = sumaSeiketsu + resultSeiketsu.getPuntuacion1();
+            }
+        }
+        for (String unString:listaShitsuke
+                ) {
+            SubItem resultShitsuke = realm.where(SubItem.class)
+                    .equalTo("pertenencia", idAudit+unString)
+                    .findFirst();
+            if (resultShitsuke.getPuntuacion1()!=null) {
+                sumaShitsuke = sumaShitsuke + resultShitsuke.getPuntuacion1();
+            }
+        }
         promedioSeiri=((sumaSeiri/4.0)/5.0);
         promedioSeiton=((sumaSeiton /4.0)/5.0);
         promedioSeiso=((sumaSeiso/4.0)/5.0);
-        promedio3s=(promedioSeiso+promedioSeiri+promedioSeiton)/3.0;
+        promedioSeiketsu=((sumaSeiketsu/4.0)/5.0);
+        promedioShitsuke=((sumaShitsuke/4.0)/5.0);
+
+        promedio5s =(promedioSeiso+promedioSeiri+promedioSeiton+promedioSeiketsu+promedioShitsuke)/5.0;
 
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -216,7 +241,7 @@ public class GraficosActivity extends AppCompatActivity {
                 Auditoria mAudit = realm.where(Auditoria.class)
                         .equalTo("idAuditoria",idAudit)
                         .findFirst();
-                mAudit.setPuntajeFinal(promedio3s);
+                mAudit.setPuntajeFinal(promedio5s);
             }
 
         });
@@ -226,8 +251,15 @@ public class GraficosActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
+        if (origenIntent.equals("myAudits")){
+            Intent unIntent= new Intent(this, ActivityMyAudits.class);
+            startActivity(unIntent);
+            GraficosActivity.this.finish();
+        }
+        else {
+            super.onBackPressed();
+            this.finish();
+        }
     }
 
     public void enviarPDF(){

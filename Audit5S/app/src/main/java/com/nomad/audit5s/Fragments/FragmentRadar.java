@@ -43,13 +43,17 @@ public class FragmentRadar extends Fragment {
     public static final String  PUNJTAJE1="PUNTAJE1";
     public static final String  PUNJTAJE2="PUNTAJE2";
     public static final String  PUNJTAJE3="PUNTAJE3";
-    public static final String  PROMEDIO3S="PROMEDIO3S";
+    public static final String  PUNJTAJE4="PUNTAJE4";
+    public static final String  PUNJTAJE5="PUNTAJE5";
+
 
     public static final String  AREA="AREA";
 
     private Double punt1;
     private Double punt2;
     private Double punt3;
+    private Double punt4;
+    private Double punt5;
 
     private Double puntpro;
     private String areaAuditada;
@@ -75,7 +79,8 @@ public class FragmentRadar extends Fragment {
         punt1=unBundle.getDouble(PUNJTAJE1);
         punt2=unBundle.getDouble(PUNJTAJE2);
         punt3=unBundle.getDouble(PUNJTAJE3);
-        puntpro=unBundle.getDouble(PROMEDIO3S);
+        punt4=unBundle.getDouble(PUNJTAJE4);
+        punt5=unBundle.getDouble(PUNJTAJE5);
         areaAuditada=unBundle.getString(AREA);
 
 
@@ -116,7 +121,7 @@ public class FragmentRadar extends Fragment {
         xAxis.setXOffset(0f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
-            private String[] mActivities = new String[]{"General","1S", "2S", "3S"};
+            private String[] mActivities = new String[]{"1S", "2S", "3S", "4S","5S"};
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -141,7 +146,7 @@ public class FragmentRadar extends Fragment {
         l.setXEntrySpace(7f);
         l.setYEntrySpace(5f);
         l.setTextColor(Color.BLACK);
-        l.setTextSize(20f);
+        l.setTextSize(15f);
 
 
         return view;
@@ -161,15 +166,20 @@ public class FragmentRadar extends Fragment {
         Float punto1= Float.parseFloat(punt1.toString());
         Float punto2= Float.parseFloat(punt2.toString());
         Float punto3= Float.parseFloat(punt3.toString());
-        Float promedio= Float.parseFloat(puntpro.toString());
+        Float punto4= Float.parseFloat(punt4.toString());
+        Float punto5= Float.parseFloat(punt5.toString());
 
-        entries1.add(new RadarEntry(promedio*100));
+
+
         entries1.add(new RadarEntry(punto1*100));
         entries1.add(new RadarEntry(punto2*100));
         entries1.add(new RadarEntry(punto3*100));
+        entries1.add(new RadarEntry(punto4*100));
+        entries1.add(new RadarEntry(punto5*100));
 
 
 
+        entries2.add(new RadarEntry(4f*20));
         entries2.add(new RadarEntry(4f*20));
         entries2.add(new RadarEntry(4f*20));
         entries2.add(new RadarEntry(4f*20));

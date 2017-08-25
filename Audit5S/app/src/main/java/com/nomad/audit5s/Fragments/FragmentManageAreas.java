@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -57,9 +59,11 @@ public class FragmentManageAreas extends Fragment {
     private FloatingActionMenu fabMenuManage;
     private FloatingActionButton fabAgregarArea;
     private FloatingActionButton fabSalir;
-    private FloatingActionButton fabSignOut;
+
 
     private Avisable unAvisable;
+
+    private TextView textView;
 
 
     public FragmentManageAreas() {
@@ -103,6 +107,11 @@ public class FragmentManageAreas extends Fragment {
         recyclerAreas.setLayoutManager(layoutManager);
         adapterArea.setListaAreasOriginales(listaAreas);
         recyclerAreas.setAdapter(adapterArea);
+
+        textView=(TextView)view.findViewById(R.id.textoTituloManage);
+        Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
+        textView.setTypeface(roboto);
+
 
         View.OnClickListener listenerArea = new View.OnClickListener() {
             @Override
@@ -160,27 +169,7 @@ public class FragmentManageAreas extends Fragment {
             }
         });
 
-        fabSignOut = new FloatingActionButton(getActivity());
-        fabSignOut.setButtonSize(FloatingActionButton.SIZE_MINI);
-        fabSignOut.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
-        fabSignOut.setLabelText(getString(R.string.signOut));
-        fabSignOut.setImageResource(R.drawable.ic_block_black_24dp);
-        fabMenuManage.addMenuButton(fabSignOut);
 
-        fabSignOut.setLabelColors(ContextCompat.getColor(getActivity(), R.color.tile3),
-                ContextCompat.getColor(getActivity(), R.color.light_grey),
-                ContextCompat.getColor(getActivity(), R.color.white_transparent));
-        fabSignOut.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
-
-        fabSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fabMenuManage.close(true);
-                FirebaseAuth.getInstance().signOut();
-                unAvisable.salirDeAca();
-
-            }
-        });
 
 
 

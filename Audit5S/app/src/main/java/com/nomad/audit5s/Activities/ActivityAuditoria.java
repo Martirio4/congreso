@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -104,7 +105,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         adapterPager.notifyDataSetChanged();
 
 //        CAMBIAR LA FUENTE DE LOS TITUTLOS DEL DRAWER
-        Menu menu = navigationView.getMenu();
+       /* Menu menu = navigationView.getMenu();
         MenuItem tools= menu.findItem(R.id.titulo1s);
         SpannableString s = new SpannableString(tools.getTitle());
         s.setSpan(new TextAppearanceSpan(this, R.style.tituloNav), 0, s.length(), 0);
@@ -119,11 +120,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         SpannableString s2 = new SpannableString(tools2.getTitle());
         s2.setSpan(new TextAppearanceSpan(this, R.style.tituloNav), 0, s2.length(), 0);
         tools2.setTitle(s2);
-
+*/
         // Get a support ActionBar corresponding to this toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.marfil));
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -262,8 +264,6 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 //   CREAR UNA AUDITORIA NUEVA
         final Auditoria nuevaAuditoria=new Auditoria();
         Realm realm= Realm.getDefaultInstance();
-
-
         nuevaAuditoria.setIdAuditoria("AUDIT-"+UUID.randomUUID());
         idAuditoria=nuevaAuditoria.getIdAuditoria();
         nuevaAuditoria.setFechaAuditoria(determinarFecha());
@@ -301,6 +301,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         Intent intent=new Intent(this, GraficosActivity.class);
         Bundle bundle=new Bundle();
         bundle.putString(GraficosActivity.AUDIT, idAuditoria);
+        bundle.putString(GraficosActivity.ORIGEN, "auditoria");
         intent.putExtras(bundle);
         startActivity(intent);
         this.finish();
