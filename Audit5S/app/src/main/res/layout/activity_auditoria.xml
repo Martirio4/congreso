@@ -47,12 +47,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tabLayout"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
                     android:background="@color/tile3"
                     app:tabIndicatorColor="@color/colorAccent"
                     app:tabSelectedTextColor="@color/marfil"
-                    app:tabMode="scrollable"
+                   app:tabMode="scrollable"
                     app:tabTextColor="@color/tile2"
                     app:tabGravity="fill"/>
 

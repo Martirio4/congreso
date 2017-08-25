@@ -52,7 +52,8 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
         botonaudits.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent= new Intent(v.getContext(), ActivityMyAudits.class);
+                startActivity(intent);
             }
         });
 

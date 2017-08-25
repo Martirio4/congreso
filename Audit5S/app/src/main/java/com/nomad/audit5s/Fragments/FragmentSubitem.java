@@ -233,23 +233,17 @@ public class FragmentSubitem extends Fragment {
 
 
         fabCamara = new FloatingActionButton(getActivity());
-        fabCamara.setColorNormal(ContextCompat.getColor(getContext(), R.color.colorAccent));
-        fabCamara.setButtonSize(FloatingActionButton.SIZE_MINI);
+        fabCamara.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
+        fabCamara.setButtonSize(FloatingActionButton.SIZE_NORMAL);
         fabCamara.setLabelText(getString(R.string.sacarFoto));
         fabCamara.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         fabMenu.addMenuButton(fabCamara);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            fabCamara.setLabelColors(ContextCompat.getColor(getActivity(), R.color.colorAccent),
+
+            fabCamara.setLabelColors(ContextCompat.getColor(getActivity(), R.color.tile3),
                     ContextCompat.getColor(getActivity(), R.color.light_grey),
                     ContextCompat.getColor(getActivity(), R.color.white_transparent));
             fabCamara.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
-        }
-        else {
-            fabCamara.setLabelColors(getResources().getColor(R.color.colorAccent),
-                    getResources().getColor(R.color.light_grey),
-                    getResources().getColor(R.color.white_transparent));
-            fabCamara.setLabelTextColor(getResources().getColor( R.color.black));
-        }
+
         fabCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -260,23 +254,17 @@ public class FragmentSubitem extends Fragment {
 
 
         fabGuardar = new FloatingActionButton(getActivity());
-        fabGuardar.setButtonSize(FloatingActionButton.SIZE_MINI);
-        fabGuardar.setColorNormal(ContextCompat.getColor(getContext(), R.color.colorAccent));
+        fabGuardar.setButtonSize(FloatingActionButton.SIZE_NORMAL);
+        fabGuardar.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
         fabGuardar.setLabelText(getString(R.string.guardarAuditoria));
         fabGuardar.setImageResource(R.drawable.ic_save_black_24dp);
         fabMenu.addMenuButton(fabGuardar);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            fabGuardar.setLabelColors(ContextCompat.getColor(getActivity(), R.color.colorAccent),
+
+            fabGuardar.setLabelColors(ContextCompat.getColor(getActivity(), R.color.tile3),
                     ContextCompat.getColor(getActivity(), R.color.light_grey),
                     ContextCompat.getColor(getActivity(), R.color.white_transparent));
             fabGuardar.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
-        }
-        else {
-            fabGuardar.setLabelColors(getResources().getColor(R.color.colorAccent),
-                    getResources().getColor(R.color.light_grey),
-                    getResources().getColor(R.color.white_transparent));
-            fabGuardar.setLabelTextColor(getResources().getColor( R.color.black));
-        }
+
         fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -289,23 +277,17 @@ public class FragmentSubitem extends Fragment {
         });
 
         fabSalir = new FloatingActionButton(getActivity());
-        fabSalir.setButtonSize(FloatingActionButton.SIZE_MINI);
-        fabSalir.setColorNormal(ContextCompat.getColor(getContext(), R.color.rojoOscuro));
+        fabSalir.setButtonSize(FloatingActionButton.SIZE_NORMAL);
+        fabSalir.setColorNormal(ContextCompat.getColor(getContext(), R.color.tile3));
         fabSalir.setLabelText(getString(R.string.salir));
         fabSalir.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
         fabMenu.addMenuButton(fabSalir);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            fabSalir.setLabelColors(ContextCompat.getColor(getActivity(), R.color.rojoOscuro),
+
+            fabSalir.setLabelColors(ContextCompat.getColor(getActivity(), R.color.tile3),
                     ContextCompat.getColor(getActivity(), R.color.light_grey),
                     ContextCompat.getColor(getActivity(), R.color.white_transparent));
             fabSalir.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
-        }
-        else {
-            fabSalir.setLabelColors(getResources().getColor(R.color.rojoOscuro),
-                    getResources().getColor(R.color.light_grey),
-                    getResources().getColor(R.color.white_transparent));
-            fabSalir.setLabelTextColor(getResources().getColor( R.color.black));
-        }
+
         fabSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -514,7 +496,8 @@ public class FragmentSubitem extends Fragment {
         subItemAgregar.setPunto5(criterio5);
         subItemAgregar.setPuntuacion1(puntuacion);
         SubItem elSubitem = realm.copyToRealmOrUpdate(subItemAgregar);
-        unaAuditoriaBuscada.getSubItems().add(elSubitem);
+
+
     }
 
     public void crearDialogoComentarioParaFoto(final Foto unaFoto){
@@ -580,7 +563,6 @@ public class FragmentSubitem extends Fragment {
             }
         });
 
-//helper method
 
     }
 

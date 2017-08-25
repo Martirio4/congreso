@@ -20,14 +20,18 @@
         </activity>
         <activity
             android:name=".Activities.ActivityAuditoria"
-            android:parentActivityName=".Activities.LoginActivity"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:parentActivityName=".Activities.LoginActivity" />
         <activity android:name=".Activities.ActivityLanding" />
         <activity
             android:name=".Activities.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Activities.GraficosActivity" />
-        <activity android:name=".Activities.ActivityVerAuditorias"></activity>
+        <activity android:name=".Activities.ActivityVerAuditorias" />
+        <activity android:name=".Activities.ActivityMyAudits"
+            android:parentActivityName=".Activities.ActivityLanding">
+
+        </activity>
     </application>
 
 </manifest>

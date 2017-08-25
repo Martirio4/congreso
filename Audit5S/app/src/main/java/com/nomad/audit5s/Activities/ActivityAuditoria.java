@@ -43,13 +43,14 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
     public static final String IDAUDITORIA ="IDAUDITORIA";
     public static final String IDAREA="IDAREA";
-    private TabLayout tabLayout;
+
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private ViewPager pager;
     private AdapterPagerSubItems adapterPager;
+    private TabLayout tabLayout;
 
     public static String idAuditoria;
     public static String areaAuditada;
@@ -253,12 +254,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         actionBarDrawerToggle.syncState();
     }
 
-    public String determinarFecha(){
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String date=sdf.format(cal.getTime());
-        return date;
-    }
+
 
     public void instanciarNuevaAuditoria(){
 //   CREAR UNA AUDITORIA NUEVA
@@ -291,7 +287,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
 
     }
-
+    public String determinarFecha(){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String date=sdf.format(cal.getTime());
+        return date;
+    }
 
     @Override
     public void cerrarAuditoria() {
@@ -300,6 +301,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         bundle.putString(GraficosActivity.AUDIT, idAuditoria);
         intent.putExtras(bundle);
         startActivity(intent);
+        this.finish();
 
     }
 
@@ -345,5 +347,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
             unAudit.getSubItems().add(subItemSubidoARealm);
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+        super.onBackPressed();
+
     }
 }

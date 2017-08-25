@@ -78,13 +78,10 @@ public class FragmentRadar extends Fragment {
         puntpro=unBundle.getDouble(PROMEDIO3S);
         areaAuditada=unBundle.getString(AREA);
 
-        Realm realm = Realm.getDefaultInstance();
-        Area unArea= realm.where(Area.class)
-                .equalTo("idArea",areaAuditada)
-                .findFirst();
+
 
         textoTitulo= (TextView)view.findViewById(R.id.textoAreaResultado);
-        textoTitulo.setText(unArea.getNombreArea());
+        textoTitulo.setText(areaAuditada);
         /*TextView tv = (TextView) findViewById(R.id.textView);
         tv.setTextColor(Color.WHITE);
         tv.setBackgroundColor(Color.rgb(60, 65, 82));

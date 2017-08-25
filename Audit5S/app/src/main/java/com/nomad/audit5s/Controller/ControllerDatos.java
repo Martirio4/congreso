@@ -209,4 +209,11 @@ public class ControllerDatos  {
         unaLista.add("Seiso 4");
         return unaLista;
     }
+
+    public List<String> traerListaViewPager(){
+        List<String>unaLista=new ArrayList<>();
+        unaLista.add("My Audits");
+        unaLista.add("Ranking");
+        return unaLista;
+    }
 }
