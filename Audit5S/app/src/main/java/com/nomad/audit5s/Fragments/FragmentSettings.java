@@ -1,6 +1,7 @@
 package com.nomad.audit5s.Fragments;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.nomad.audit5s.Activities.LoginActivity;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.Foto;
@@ -79,8 +81,10 @@ public class FragmentSettings extends Fragment {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 FirebaseAuth.getInstance().signOut();
+                                Intent intent= new Intent(getContext(), LoginActivity.class);
+                                startActivity(intent);
                                 getActivity().finish();
-                                System.exit(0);
+                                
                             }
                         })
                         .negativeText("Cancel")

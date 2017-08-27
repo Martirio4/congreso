@@ -19,6 +19,8 @@ public class SubItem extends RealmObject {
     @PrimaryKey
     private String pertenencia;
 
+    private String aQuePertenece;
+
     private Integer puntuacion1;
     private String auditoria;
 
@@ -26,6 +28,14 @@ public class SubItem extends RealmObject {
     private RealmList<RealmString> listaComments;
 
     public SubItem() {
+    }
+
+    public String getaQuePertenece() {
+        return aQuePertenece;
+    }
+
+    public void setaQuePertenece(String aQuePertenece) {
+        this.aQuePertenece = aQuePertenece;
     }
 
     public String getAuditoria() {

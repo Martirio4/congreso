@@ -11,22 +11,21 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:icon="@drawable/ic_change_history_black_24dp"
                     android:id="@+id/item11"
-                    android:title="Go to item 1" />
+                    android:title="Item 1" />
                 <item
-                    android:icon="@drawable/ic_change_history_black_24dp"
+
                     android:id="@+id/item12"
-                    android:title="Go to item 2" />
+                    android:title="Item 2" />
 
                 <item
-                    android:icon="@drawable/ic_change_history_black_24dp"
+
                     android:id="@+id/item13"
-                    android:title="Go to item 3" />
+                    android:title="Item 3" />
                 <item
-                    android:icon="@drawable/ic_change_history_black_24dp"
+                 
                     android:id="@+id/item14"
-                    android:title="Go to item 4" />
+                    android:title="Item 4" />
 
             </group>
         </menu>
@@ -38,22 +37,22 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:icon="@drawable/ic_radio_button_unchecked_black_24dp"
+                   
                     android:id="@+id/item21"
-                    android:title="Go to item 1" />
+                    android:title="Item 1" />
                 <item
-                    android:icon="@drawable/ic_radio_button_unchecked_black_24dp"
+                   
                     android:id="@+id/item22"
-                    android:title="Go to item 2" />
+                    android:title="Item 2" />
 
                 <item
-                    android:icon="@drawable/ic_radio_button_unchecked_black_24dp"
+                   
                     android:id="@+id/item23"
-                    android:title="Go to item 3" />
+                    android:title="Item 3" />
                 <item
-                    android:icon="@drawable/ic_radio_button_unchecked_black_24dp"
+                   
                     android:id="@+id/item24"
-                    android:title="Go to item 4" />
+                    android:title="Item 4" />
 
             </group>
         </menu>
@@ -63,22 +62,74 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:icon="@drawable/ic_check_box_outline_blank_black_24dp"
+                    
                     android:id="@+id/item31"
-                    android:title="Go to item 1" />
+                    android:title="Item 1" />
                 <item
-                    android:icon="@drawable/ic_check_box_outline_blank_black_24dp"
+                    
                     android:id="@+id/item32"
-                    android:title="Go to item 2" />
+                    android:title="Item 2" />
 
                 <item
-                    android:icon="@drawable/ic_check_box_outline_blank_black_24dp"
+                    
                     android:id="@+id/item33"
-                    android:title="Go to item 3" />
+                    android:title="Item 3" />
                 <item
-                    android:icon="@drawable/ic_check_box_outline_blank_black_24dp"
+                    
                     android:id="@+id/item34"
-                    android:title="Go to item 4" />
+                    android:title="Item 4" />
+
+            </group>
+        </menu>
+    </item>
+    <item android:title="4S - Seiketsu - Standarize"
+        android:id="@+id/titulo4s"
+        >
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    
+                    android:id="@+id/item41"
+                    android:title="Item 1" />
+                <item
+                    
+                    android:id="@+id/item42"
+                    android:title="Item 2" />
+
+                <item
+                    
+                    android:id="@+id/item43"
+                    android:title="Item 3" />
+                <item
+                    
+                    android:id="@+id/item44"
+                    android:title="Item 4" />
+
+            </group>
+        </menu>
+    </item>
+    <item android:title="5S - Shitsuke - Sustain"
+        android:id="@+id/titulo5s"
+        >
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    
+                    android:id="@+id/item51"
+                    android:title="Item 1" />
+                <item
+                    
+                    android:id="@+id/item52"
+                    android:title="Item 2" />
+
+                <item
+                    
+                    android:id="@+id/item53"
+                    android:title="Item 3" />
+                <item
+                    
+                    android:id="@+id/item54"
+                    android:title="Item 4" />
 
             </group>
         </menu>

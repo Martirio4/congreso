@@ -22,6 +22,10 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.nomad.audit5s.Adapter.AdapterPagerSubItems;
 import com.nomad.audit5s.Controller.ControllerDatos;
 import com.nomad.audit5s.Fragments.FragmentSubitem;
@@ -74,6 +78,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     private SubItem sub11;
     private SubItem sub12;
     private String Auditor;
+
 
     private ControllerDatos controllerDatos;
     private FloatingActionMenu fabMenu;
@@ -183,6 +188,31 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                         case R.id.item34:
                             pager.setCurrentItem(11);
                             break;
+                        case R.id.item41:
+                            pager.setCurrentItem(12);
+                            break;
+                        case R.id.item42:
+                            pager.setCurrentItem(13);
+                            break;
+                        case R.id.item43:
+                            pager.setCurrentItem(14);
+                            break;
+                        case R.id.item44:
+                            pager.setCurrentItem(15);
+                            break;
+                        case R.id.item51:
+                            pager.setCurrentItem(16);
+                            break;
+                        case R.id.item52:
+                            pager.setCurrentItem(17);
+                            break;
+                        case R.id.item53:
+                            pager.setCurrentItem(18);
+                            break;
+                        case R.id.item54:
+                            pager.setCurrentItem(19);
+                            break;
+
 
                     }
 
@@ -298,6 +328,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
     @Override
     public void cerrarAuditoria() {
+
         Intent intent=new Intent(this, GraficosActivity.class);
         Bundle bundle=new Bundle();
         bundle.putString(GraficosActivity.AUDIT, idAuditoria);

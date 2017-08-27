@@ -1,13 +1,18 @@
 package com.nomad.audit5s.Activities;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.LabeledIntent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -19,10 +24,19 @@ import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nomad.audit5s.Controller.ControllerDatos;
 import com.nomad.audit5s.Fragments.FragmentBarrasApiladas;
+import com.nomad.audit5s.Fragments.FragmentManageAreas;
 import com.nomad.audit5s.Fragments.FragmentRadar;
 import com.nomad.audit5s.Model.Auditoria;
+import com.nomad.audit5s.Model.AuditoriaFirebase;
 import com.nomad.audit5s.Model.Foto;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
@@ -34,10 +48,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import id.zelory.compressor.Compressor;
 import io.realm.Realm;
+import io.realm.RealmResults;
+
 
 public class GraficosActivity extends AppCompatActivity {
 
@@ -61,11 +80,21 @@ public class GraficosActivity extends AppCompatActivity {
     private Double promedioSeiketsu;
     private Double promedioShitsuke;
 
+    private PDFWriter writer;
+
+    private File fotoComprimida;
+    private Bitmap fotoOriginal;
+
+
+    public static final int MARGEN_IZQUIERDO=50;
+    public static final int SALTO_LINEA=25;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficos);
+
         progressBar=(ProgressBar) findViewById(R.id.progressBar);
 
         promedioSeiso=0.0;
@@ -76,9 +105,32 @@ public class GraficosActivity extends AppCompatActivity {
         Bundle bundle=intent.getExtras();
         idAudit=bundle.getString(AUDIT);
         origenIntent=bundle.getString(ORIGEN);
+
+
+        FragmentActivity unaActivity = (FragmentActivity) this;
+        FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
+        FragmentManageAreas fragmentRadar = (FragmentManageAreas) fragmentManager.findFragmentByTag("radar");
+
         calcularPuntajes();
-        cargarGraficoRadar();
-        cargarGraficoBarras();
+
+        if (fragmentRadar != null && fragmentRadar.isVisible()) {
+
+        }
+        else{
+            cargarGraficoRadar();
+            cargarGraficoBarras();
+
+            Realm realm=Realm.getDefaultInstance();
+            Auditoria mAudit=realm.where(Auditoria.class)
+                    .equalTo("idAuditoria",idAudit)
+                    .findFirst();
+
+        }
+
+
+
+
+
         
         fabMenuGraficos= (FloatingActionMenu) findViewById(R.id.menuSalida);
 
@@ -146,7 +198,7 @@ public class GraficosActivity extends AppCompatActivity {
         graficoFragment.setArguments(bundle);
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.contenedorGraficos,graficoFragment);
+        fragmentTransaction.add(R.id.contenedorGraficos,graficoFragment,"radar");
         fragmentTransaction.commit();
     }
 
@@ -158,7 +210,7 @@ public class GraficosActivity extends AppCompatActivity {
         fragmentBarrasApiladas.setArguments(bundle);
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.contenedorGraficos,fragmentBarrasApiladas);
+        fragmentTransaction.add(R.id.contenedorGraficos,fragmentBarrasApiladas,"barras");
        fragmentTransaction.commit();
     }
 
@@ -247,6 +299,7 @@ public class GraficosActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     @Override
@@ -263,66 +316,68 @@ public class GraficosActivity extends AppCompatActivity {
     }
 
     public void enviarPDF(){
+        writer = new PDFWriter(PaperSize.LETTER_WIDTH, PaperSize.LETTER_HEIGHT);
+        ControllerDatos controllerDatos=new ControllerDatos(this);
         Realm realm= Realm.getDefaultInstance();
         Auditoria mAudit= realm.where(Auditoria.class)
                 .equalTo("idAuditoria",idAudit)
                 .findFirst();
 
-        PDFWriter writer = new PDFWriter(PaperSize.LETTER_WIDTH, PaperSize.LETTER_HEIGHT);
-        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.TIMES_BOLD, StandardFonts.WIN_ANSI_ENCODING);
-        writer.addText(25,280,20,"Hola primeraPrueba");
-        Foto unaFoto=mAudit.getSubItems().get(0).getListaFotos().get(0);
-        File unFile= new File(unaFoto.getRutaFoto());
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-        writer.addImage(25,250,bitmap);
-        writer.newPage();
-
-
-        outputToFile("MyFirstReport.pdf", writer.asString(), "ISO-8859-1");
-    }
-    public void outputToFile(String fileName, String pdfContent, String encoding) {
-        File newFile = new File("/storage/emulated/0/Android/data/com.nomad.audit5s/cache/EasyImage" + "/" + fileName);
-        try {
-            newFile.createNewFile();
-            try {
-                FileOutputStream pdfFile = new FileOutputStream(newFile);
-                pdfFile.write(pdfContent.getBytes(encoding));
-                pdfFile.close();
-
-
-                ArrayList<Uri> uris = new ArrayList<>();
-                Uri uri = Uri.parse("file://" + newFile.getAbsolutePath());
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", "", null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "5S Report");
-                List<ResolveInfo> resolveInfos = getPackageManager().queryIntentActivities(emailIntent, 0);
-                List<LabeledIntent> intents = new ArrayList<>();
-                for (ResolveInfo info : resolveInfos) {
-                    Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                    intent.setComponent(new ComponentName(info.activityInfo.packageName, info.activityInfo.name));
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{""});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "5S Report");
-                    intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris); //ArrayList<Uri> of attachment Uri's
-                    intents.add(new LabeledIntent(intent, info.activityInfo.packageName, info.loadLabel(getPackageManager()), info.icon));
-                }
-                Intent chooser = Intent.createChooser(intents.remove(intents.size() - 1), "Send PDF report");
-                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents.toArray(new LabeledIntent[intents.size()]));
-
-
-                try {
-                    startActivityForResult(chooser,1);
-                } catch (Exception e) {
-                    Toast.makeText(this, "Error: Cannot open or share created PDF report.", Toast.LENGTH_SHORT).show();
-                }
-
-            } catch(FileNotFoundException e) {
-                // ...
+        
+        List<String>alistaSeiri=controllerDatos.traerSeiri();
+        List<String>alistaSeiton=controllerDatos.traerSeiton();
+        List<String>alistaSeiso=controllerDatos.traerSeiso();
+        List<String>alistaSeiketsu=controllerDatos.traerSeiketsu();
+        List<String>alistaShitsuke=controllerDatos.traerShitsuke();
+        
+        List<SubItem>unListaSeiri=new ArrayList<>();
+        List<SubItem>unListaSeiton=new ArrayList<>();
+        List<SubItem>unListaSeiso=new ArrayList<>();
+        List<SubItem>unListaSeiketsu=new ArrayList<>();
+        List<SubItem>unListaShitsuke=new ArrayList<>();
+        
+        for (SubItem sub:mAudit.getSubItems()
+             ) {
+            if (alistaSeiri.contains(sub.getId())){
+                unListaSeiri.add(sub);
             }
-        } catch(IOException e) {
-            // ...
+            if (alistaSeiton.contains(sub.getId())){
+                unListaSeiton.add(sub);
+            }
+            if (alistaSeiso.contains(sub.getId())){
+                unListaSeiso.add(sub);
+            }
+            if (alistaSeiketsu.contains(sub.getId())){
+                unListaSeiketsu.add(sub);
+            }
+            if (alistaShitsuke.contains(sub.getId())){
+                unListaShitsuke.add(sub);
+            }
         }
+        //fuente titulo
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        //escribir titulo
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+        //fuente fecha escribir fecga
+        writer.addText(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,"Date: "+mAudit.getFechaAuditoria());
+
+
+        armarPagina(unListaSeiri);
+        writer.newPage();
+        armarPagina(unListaSeiton);
+        writer.newPage();
+        armarPagina(unListaSeiso);
+        writer.newPage();
+        armarPagina(unListaSeiketsu);
+        writer.newPage();
+        armarPagina(unListaShitsuke);
+        writer.newPage();
+        cargarGraficos(mAudit);
+
+        outputToFile("5S Report-"+mAudit.getAreaAuditada().getNombreArea()+"-"+mAudit.getFechaAuditoria()+".pdf", writer.asString(), "ISO-8859-1");
     }
+
+
 
     private class EnviarPDF extends AsyncTask<Void, Void, Void> {
 
@@ -345,5 +400,172 @@ public class GraficosActivity extends AppCompatActivity {
 
         }
     }
+    
+    public void armarPagina(List<SubItem> unaLista){
+        Integer inicioFotos=85;
+        Integer altoImagen=120;
+
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,unaLista.get(0).getaQuePertenece());
+
+        //linea separacion
+        writer.addLine(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85));
+        
+        //agrego primer subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA),12,unaLista.get(0).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA+12),12,"Score: "+unaLista.get(0).getPuntuacion1().toString());
+        Integer cantidadFotos=unaLista.get(0).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(0).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*2+altoImagen),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*2+altoImagen+10),10,unaFoto.getComentario());
+
+        }
+        //agrego segundo subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*3+altoImagen),12,unaLista.get(1).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*3+altoImagen+12),12,"Score: "+unaLista.get(1).getPuntuacion1().toString());
+        cantidadFotos=unaLista.get(1).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(1).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*4+altoImagen*2),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*4+altoImagen*2+10),10,unaFoto.getComentario());
+
+        }
+        //agrego tercer subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*5+altoImagen*2),12,unaLista.get(2).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*5+altoImagen*2+12),12,"Score: "+unaLista.get(2).getPuntuacion1().toString());
+        cantidadFotos=unaLista.get(2).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(2).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*6+altoImagen*3),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*6+altoImagen*3+10),10,unaFoto.getComentario());
+
+        }
+        //agrego cuarto subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*7+altoImagen*3),12,unaLista.get(3).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*7+altoImagen*3+12),12,"Score: "+unaLista.get(3).getPuntuacion1().toString());
+        cantidadFotos=unaLista.get(3).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(3).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*8+altoImagen*4),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*8+altoImagen*4+10),10,unaFoto.getComentario());
+
+        }
+    }
+    public void outputToFile(String fileName, String pdfContent, String encoding) {
+        File newFile = new File("/storage/emulated/0/Android/data/com.nomad.audit5s/cache/EasyImage" + "/" + fileName);
+        try {
+            newFile.createNewFile();
+            try {
+                FileOutputStream pdfFile = new FileOutputStream(newFile);
+                pdfFile.write(pdfContent.getBytes(encoding));
+                pdfFile.close();
+
+
+                Uri path = Uri.fromFile(newFile);
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+// set the type to 'email'
+                emailIntent .setType("vnd.android.cursor.dir/email");
+                String to[] = {""};
+                emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
+// the attachment
+                emailIntent .putExtra(Intent.EXTRA_STREAM, path);
+// the mail subject
+                emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                startActivity(Intent.createChooser(emailIntent , "Send email..."));
+
+            } catch(FileNotFoundException e) {
+                // ...
+            }
+        } catch(IOException e) {
+            // ...
+        }
+    }
+
+    public Bitmap screenShot(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
+                view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    public void cargarGraficos(Auditoria unAudit){
+
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,"Final result");
+
+        //linea separacion
+        writer.addLine(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85));
+
+        //agrego puntaje final
+        Locale locale = new Locale("en","US");
+        NumberFormat format = NumberFormat.getPercentInstance(locale);
+        String percentage1 = format.format(unAudit.getPuntajeFinal());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85+SALTO_LINEA),12,"Final score: "+percentage1);
+
+        View rootView = this.getWindow().getDecorView().findViewById(android.R.id.content);
+        View v = rootView.findViewById(R.id.contenedorGraficos);
+
+        Bitmap unBitmap=screenShot(v);
+        Bitmap resizedBm=getResizedBitmap(unBitmap,510,260);
+
+
+        unBitmap.getHeight();
+        unBitmap.getWidth();
+       // Bitmap SunBitmap=Bitmap.createScaledBitmap(unBitmap, 300,510,false);
+        writer.addImage(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-85-SALTO_LINEA*2-510,resizedBm);
+    }
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth)
+    {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+        // recreate the new Bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+        return resizedBitmap;
+    }
+
 }
 

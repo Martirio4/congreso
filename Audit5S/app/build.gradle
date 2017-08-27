@@ -8,8 +8,9 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
-        versionName "0.0.12"
+        versionName "0.1.15"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -27,6 +28,7 @@ dependencies {
 
     compile project(path: ':mylibrary')
 
+
     compile 'com.google.firebase:firebase-auth:11.2.0'
     compile 'com.google.firebase:firebase-core:11.2.0'
     compile 'com.google.firebase:firebase-database:11.2.0'
@@ -43,7 +45,8 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.4.6'
     compile 'id.zelory:compressor:2.1.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    compile 'com.getkeepsafe.taptargetview:taptargetview:1.9.1'
     testCompile 'junit:junit:4.12'
+
+    compile 'com.android.support:multidex:1.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -80,6 +80,7 @@ public class ControllerDatos  {
         SubItem subItem1=new SubItem();
         subItem1.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem1.setId("1S 1");
+        subItem1.setaQuePertenece("Seiri / Sort");
         subItem1.setEnunciado(context.getString(R.string.enunciado11));
         subItem1.setPunto1(context.getString(R.string.punto111));
         subItem1.setPunto2(context.getString(R.string.punto112));
@@ -91,6 +92,7 @@ public class ControllerDatos  {
         SubItem subItem12=new SubItem();
         subItem12.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem12.setId("1S 2");
+        subItem12.setaQuePertenece("Seiri / Sort");
         subItem12.setEnunciado(context.getString(R.string.enunciado12));
         subItem12.setPunto1(context.getString(R.string.punto121));
         subItem12.setPunto2(context.getString(R.string.punto122));
@@ -102,6 +104,7 @@ public class ControllerDatos  {
         SubItem subItem13=new SubItem();
         subItem13.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem13.setId("1S 3");
+        subItem13.setaQuePertenece("Seiri / Sort");
         subItem13.setEnunciado(context.getString(R.string.enunciado13));
         subItem13.setPunto1(context.getString(R.string.punto131));
         subItem13.setPunto2(context.getString(R.string.punto132));
@@ -113,6 +116,7 @@ public class ControllerDatos  {
         SubItem subItem14=new SubItem();
         subItem14.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem14.setId("1S 4");
+        subItem14.setaQuePertenece("Seiri / Sort");
         subItem14.setEnunciado(context.getString(R.string.enunciado14));
         subItem14.setPunto1(context.getString(R.string.punto141));
         subItem14.setPunto2(context.getString(R.string.punto142));
@@ -124,6 +128,7 @@ public class ControllerDatos  {
         SubItem subItem21=new SubItem();
         subItem21.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem21.setId("2S 1");
+        subItem21.setaQuePertenece("Seiton / Set in order");
         subItem21.setEnunciado(context.getString(R.string.enunciado21));
         subItem21.setPunto1(context.getString(R.string.punto211));
         subItem21.setPunto2(context.getString(R.string.punto212));
@@ -135,6 +140,7 @@ public class ControllerDatos  {
         SubItem subItem22=new SubItem();
         subItem22.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem22.setId("2S 2");
+        subItem22.setaQuePertenece("Seiton / Set in order");
         subItem22.setEnunciado(context.getString(R.string.enunciado22));
         subItem22.setPunto1(context.getString(R.string.punto221));
         subItem22.setPunto2(context.getString(R.string.punto222));
@@ -146,6 +152,7 @@ public class ControllerDatos  {
         SubItem subItem23=new SubItem();
         subItem23.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem23.setId("2S 3");
+        subItem23.setaQuePertenece("Seiton / Set in order");
         subItem23.setEnunciado(context.getString(R.string.enunciado23));
         subItem23.setPunto1(context.getString(R.string.punto231));
         subItem23.setPunto2(context.getString(R.string.punto232));
@@ -157,6 +164,7 @@ public class ControllerDatos  {
         SubItem subItem24=new SubItem();
         subItem24.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem24.setId("2S 4");
+        subItem24.setaQuePertenece("Seiton / Set in order");
         subItem24.setEnunciado(context.getString(R.string.enunciado24));
         subItem24.setPunto1(context.getString(R.string.punto241));
         subItem24.setPunto2(context.getString(R.string.punto242));
@@ -168,6 +176,7 @@ public class ControllerDatos  {
         SubItem subItem31=new SubItem();
         subItem31.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem31.setId("3S 1");
+        subItem31.setaQuePertenece("Seiso / Shine");
         subItem31.setEnunciado(context.getString(R.string.enunciado31));
         subItem31.setPunto1(context.getString(R.string.punto311));
         subItem31.setPunto2(context.getString(R.string.punto312));
@@ -179,6 +188,7 @@ public class ControllerDatos  {
         SubItem subItem32=new SubItem();
         subItem32.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem32.setId("3S 2");
+        subItem32.setaQuePertenece("Seiso / Shine");
         subItem32.setEnunciado(context.getString(R.string.enunciado32));
         subItem32.setPunto1(context.getString(R.string.punto321));
         subItem32.setPunto2(context.getString(R.string.punto322));
@@ -190,6 +200,7 @@ public class ControllerDatos  {
         SubItem subItem33=new SubItem();
         subItem33.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem33.setId("3S 3");
+        subItem33.setaQuePertenece("Seiso / Shine");
         subItem33.setEnunciado(context.getString(R.string.enunciado33));
         subItem33.setPunto1(context.getString(R.string.punto331));
         subItem33.setPunto2(context.getString(R.string.punto332));
@@ -201,6 +212,7 @@ public class ControllerDatos  {
         SubItem subItem34=new SubItem();
         subItem34.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem34.setId("3S 4");
+        subItem34.setaQuePertenece("Seiso / Shine");
         subItem34.setEnunciado(context.getString(R.string.enunciado34));
         subItem34.setPunto1(context.getString(R.string.punto341));
         subItem34.setPunto2(context.getString(R.string.punto342));
@@ -213,6 +225,7 @@ public class ControllerDatos  {
         SubItem subItem41=new SubItem();
         subItem41.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem41.setId("4S 1");
+        subItem41.setaQuePertenece("Seiketsu / Standarize");
         subItem41.setEnunciado(context.getString(R.string.enunciado41));
         subItem41.setPunto1(context.getString(R.string.punto411));
         subItem41.setPunto2(context.getString(R.string.punto412));
@@ -225,6 +238,7 @@ public class ControllerDatos  {
         SubItem subItem42=new SubItem();
         subItem42.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem42.setId("4S 2");
+        subItem42.setaQuePertenece("Seiketsu / Standarize");
         subItem42.setEnunciado(context.getString(R.string.enunciado42));
         subItem42.setPunto1(context.getString(R.string.punto421));
         subItem42.setPunto2(context.getString(R.string.punto422));
@@ -236,6 +250,7 @@ public class ControllerDatos  {
         SubItem subItem43=new SubItem();
         subItem43.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem43.setId("4S 3");
+        subItem43.setaQuePertenece("Seiketsu / Standarize");
         subItem43.setEnunciado(context.getString(R.string.enunciado43));
         subItem43.setPunto1(context.getString(R.string.punto431));
         subItem43.setPunto2(context.getString(R.string.punto432));
@@ -247,6 +262,7 @@ public class ControllerDatos  {
         SubItem subItem44=new SubItem();
         subItem44.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem44.setId("4S 4");
+        subItem44.setaQuePertenece("Seiketsu / Standarize");
         subItem44.setEnunciado(context.getString(R.string.enunciado44));
         subItem44.setPunto1(context.getString(R.string.punto441));
         subItem44.setPunto2(context.getString(R.string.punto442));
@@ -258,6 +274,7 @@ public class ControllerDatos  {
         SubItem subItem51=new SubItem();
         subItem51.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem51.setId("5S 1");
+        subItem51.setaQuePertenece("Shitsuke / Sustain");
         subItem51.setEnunciado(context.getString(R.string.enunciado51));
         subItem51.setPunto1(context.getString(R.string.punto511));
         subItem51.setPunto2(context.getString(R.string.punto512));
@@ -269,6 +286,7 @@ public class ControllerDatos  {
         SubItem subItem52=new SubItem();
         subItem52.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem52.setId("5S 2");
+        subItem52.setaQuePertenece("Shitsuke / Sustain");
         subItem52.setEnunciado(context.getString(R.string.enunciado52));
         subItem52.setPunto1(context.getString(R.string.punto521));
         subItem52.setPunto2(context.getString(R.string.punto522));
@@ -280,6 +298,7 @@ public class ControllerDatos  {
         SubItem subItem53=new SubItem();
         subItem53.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem53.setId("5S 3");
+        subItem53.setaQuePertenece("Shitsuke / Sustain");
         subItem53.setEnunciado(context.getString(R.string.enunciado53));
         subItem53.setPunto1(context.getString(R.string.punto531));
         subItem53.setPunto2(context.getString(R.string.punto532));
@@ -291,6 +310,7 @@ public class ControllerDatos  {
         SubItem subItem54=new SubItem();
         subItem54.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem54.setId("5S 4");
+        subItem54.setaQuePertenece("Shitsuke / Sustain");
         subItem54.setEnunciado(context.getString(R.string.enunciado54));
         subItem54.setPunto1(context.getString(R.string.punto541));
         subItem54.setPunto2(context.getString(R.string.punto542));

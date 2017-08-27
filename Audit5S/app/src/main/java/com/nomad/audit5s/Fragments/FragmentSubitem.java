@@ -28,9 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
+
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.nomad.audit5s.Activities.ActivityAuditoria;
@@ -269,9 +267,9 @@ public class FragmentSubitem extends Fragment {
             @Override
             public void onClick(View v) {
                 fabMenu.close(true);
-                if(completoTodosLosPuntos()){
+               if(completoTodosLosPuntos()){
                 avisable.cerrarAuditoria();
-                }
+               }
 
             }
         });
