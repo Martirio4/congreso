@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titulos">30dp</dimen>
+    <dimen name="margenChico">8dp</dimen>
+    <dimen name="altoTarjeta">140dp</dimen>
+    <dimen name="altoTarjeta2">280dp</dimen>
+    <dimen name="anchoTarjeta2">260dp</dimen>
+    <dimen name="anchoTarjeta">130dp</dimen>
+    <dimen name="altoImageViewCargarArea">250dp</dimen>
+    <dimen name="margenGrande">16dp</dimen>
+    <dimen name="title_text_size">12dp</dimen>
+</resources>

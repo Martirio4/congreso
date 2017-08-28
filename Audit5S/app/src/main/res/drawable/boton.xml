@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <shape
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <stroke
+            android:width="3dp"
+            android:color="@color/tile4"/>
+        <corners
+            android:radius="20dp" />
+
+
+        <padding
+            android:left="16dp"
+            android:right="16dp"
+            android:top="1dp"
+            android:bottom="1dp"/>
+
+        <solid android:color="@color/tile3"/>
+    </shape>
