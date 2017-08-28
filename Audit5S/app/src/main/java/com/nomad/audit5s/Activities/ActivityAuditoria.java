@@ -385,9 +385,19 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
     @Override
     public void onBackPressed() {
+
+            Realm realm = Realm.getDefaultInstance();
+            final Auditoria mAuditDelete=realm.where(Auditoria.class)
+                    .equalTo("idAuditoria",idAuditoria)
+                    .findFirst();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    mAuditDelete.deleteFromRealm();
+                }
+            });
         this.finish();
         super.onBackPressed();
-
     }
 
 }

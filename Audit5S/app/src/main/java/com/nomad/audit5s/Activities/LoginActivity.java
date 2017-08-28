@@ -254,7 +254,7 @@ public class LoginActivity extends AppCompatActivity  {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed. Check yout internet connection", Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
