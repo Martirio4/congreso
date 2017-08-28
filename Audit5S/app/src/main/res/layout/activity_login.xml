@@ -23,7 +23,7 @@
         />
     <TextView
         android:id="@+id/codBeta"
-        android:text="Beta version 0.1.15"
+        android:text="Beta version 0.3.15"
         android:textColor="@color/tile2"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textViewLogin"
