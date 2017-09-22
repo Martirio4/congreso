@@ -22,6 +22,19 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_marginStart="@dimen/margenChico"
+        android:layout_marginEnd="@dimen/margenChico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sinAreas"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/secondary_text"
+        android:id="@+id/textoSinAreas"
+        android:visibility="gone"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerArea"
         android:layout_gravity="center_horizontal"

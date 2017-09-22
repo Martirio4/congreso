@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nomad.audit5s.Adapter.AdapterArea;
 import com.nomad.audit5s.Model.Area;
@@ -48,9 +49,18 @@ public class FragmentSeleccionAerea extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_seleccion_aerea, container, false);
+        TextView textoSinAreas=(TextView)view.findViewById(R.id.textoSinAreas);
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Area> result2 = realm.where(Area.class)
                 .findAll();
+
+        if  (result2.size()<1){
+            textoSinAreas.setVisibility(View.VISIBLE);
+        }
+        else{
+            textoSinAreas.setVisibility(View.GONE);
+        }
+
         listaAreas=new RealmList<>();
         listaAreas.addAll(result2);
         recyclerAreas= (RecyclerView)view.findViewById(R.id.recyclerArea);

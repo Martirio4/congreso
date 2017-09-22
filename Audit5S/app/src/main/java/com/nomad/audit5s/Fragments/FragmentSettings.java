@@ -170,10 +170,11 @@ public class FragmentSettings extends Fragment {
                         .findAll();
                 Subitems.deleteAllFromRealm();
 
+                /*//no borro las areas solo las auditorias hechas
                 RealmResults<Area>Areas=realm.where(Area.class)
                         .findAll();
                 Areas.deleteAllFromRealm();
-
+                */
                 RealmResults<Auditoria>audits=realm.where(Auditoria.class)
                         .findAll();
                 audits.deleteAllFromRealm();

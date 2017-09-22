@@ -26,6 +26,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Foto;
+
 import com.nomad.audit5s.R;
 import com.squareup.picasso.Picasso;
 

@@ -145,7 +145,7 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
 
             if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
                 fabEliminar = (FloatingActionButton) itemView.findViewById(R.id.botonEliminar);
-                fabEliminar.setColorNormal(ContextCompat.getColor(itemView.getContext(), R.color.primary_text));
+                fabEliminar.setColorNormal(ContextCompat.getColor(itemView.getContext(), R.color.accent));
             }
         }
 

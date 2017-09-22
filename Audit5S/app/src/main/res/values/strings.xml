@@ -242,7 +242,8 @@ Even in other areas that they frequent or work.
     <string name="punto543">There are some anomalies in the storage of various types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
     <string name="punto544">There are some anomalies in the storage of some types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
     <string name="punto545">All electronic documents are used and stored in appropriate folders in accordance with the established standard. It may have insignificant irregularities for the characteristics of the environment.</string>
-
+    <string name="ayuda">\?</string>
+    <string name="sinAreas">No areas created. Go to \"Settings\" menu and then click \"Manage audit areas\"</string>
 
 
 </resources>

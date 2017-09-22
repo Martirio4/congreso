@@ -197,14 +197,14 @@ public class FragmentManageAreas extends Fragment {
 
                 if (type == 1) {
                     fotoOriginal = imageFile;
-                    existeDirectorioImagenes();
+                    existeDirectorioImagenesAreas();
                     try {
                         fotoComprimida = new Compressor(getContext())
                                 .setMaxWidth(640)
                                 .setMaxHeight(480)
                                 .setQuality(75)
                                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                                .setDestinationDirectoryPath(fotoOriginal.getParent() + File.separator + "images")
+                                .setDestinationDirectoryPath(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "areas")
                                 .compressToFile(fotoOriginal);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -237,9 +237,9 @@ public class FragmentManageAreas extends Fragment {
             }
         });
     }
-    public void existeDirectorioImagenes() {
+    public void existeDirectorioImagenesAreas() {
         Boolean sePudo = true;
-        File dir = new File(fotoOriginal.getParent() + File.separator + "images");
+        File dir = new File(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "areas");
         if (!dir.exists() || !dir.isDirectory()) {
             sePudo = dir.mkdirs();
         }
