@@ -362,7 +362,7 @@ public class FragmentSubitem extends Fragment {
                                 .setMaxWidth(640)
                                 .setMaxHeight(480)
                                 .setQuality(75)
-                                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                                .setCompressFormat(Bitmap.CompressFormat.PNG)
                                 .setDestinationDirectoryPath(fotoOriginal.getParent()+File.separator+"images")
                                 .compressToFile(fotoOriginal);
                     } catch (IOException e) {
