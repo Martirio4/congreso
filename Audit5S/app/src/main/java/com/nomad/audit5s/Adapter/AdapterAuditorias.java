@@ -174,94 +174,95 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
         public void cargarAuditoria(Auditoria unAuditoria) {
 
             //COMIENZA CALCULO PUNTAJES
-            ControllerDatos controllerDatos=new ControllerDatos(context);
-            List<String> listaSeiri=controllerDatos.traerSeiri();
-            List<String>listaSeiton=controllerDatos.traerSeiton();
-            List<String>listaSeiso=controllerDatos.traerSeiso();
-            List<String>listaSeiketsu=controllerDatos.traerSeiketsu();
-            List<String>listaShitsuke=controllerDatos.traerShitsuke();
+            if (unAuditoria.getIdAuditoria()!=null && !unAuditoria.getIdAuditoria().isEmpty()) {
+                ControllerDatos controllerDatos=new ControllerDatos(context);
+                List<String> listaSeiri=controllerDatos.traerSeiri();
+                List<String>listaSeiton=controllerDatos.traerSeiton();
+                List<String>listaSeiso=controllerDatos.traerSeiso();
+                List<String>listaSeiketsu=controllerDatos.traerSeiketsu();
+                List<String>listaShitsuke=controllerDatos.traerShitsuke();
 
-            Realm realm = Realm.getDefaultInstance();
+                Realm realm = Realm.getDefaultInstance();
 
-            Integer sumaSeiri=0;
-            Integer sumaSeiton =0;
-            Integer sumaSeiso=0;
-            Integer sumaSeiketsu=0;
-            Integer sumaShitsuke=0;
+                Integer sumaSeiri=0;
+                Integer sumaSeiton =0;
+                Integer sumaSeiso=0;
+                Integer sumaSeiketsu=0;
+                Integer sumaShitsuke=0;
 
-            for (SubItem sub:unAuditoria.getSubItems()
-                 ) {
-                if (sub.getId().equals("1S 1")||sub.getId().equals("1S 2")||sub.getId().equals("1S 3")||sub.getId().equals("1S 4")){
-                    if (sub.getPuntuacion1()!=null) {
-                        sumaSeiri = sumaSeiri + sub.getPuntuacion1();
+                for (SubItem sub:unAuditoria.getSubItems()
+                     ) {
+                    if (sub.getId().equals("1S 1")||sub.getId().equals("1S 2")||sub.getId().equals("1S 3")||sub.getId().equals("1S 4")){
+                        if (sub.getPuntuacion1()!=null) {
+                            sumaSeiri = sumaSeiri + sub.getPuntuacion1();
+                        }
+                    }
+                    if (sub.getId().equals("2S 1")||sub.getId().equals("2S 2")||sub.getId().equals("2S 3")||sub.getId().equals("2S 4")) {
+                        if (sub.getPuntuacion1()!=null) {
+                            sumaSeiton = sumaSeiton + sub.getPuntuacion1();
+                        }
+                    }
+                    if (sub.getId().equals("3S 1")||sub.getId().equals("3S 2")||sub.getId().equals("3S 3")||sub.getId().equals("3S 4")) {
+                        if (sub.getPuntuacion1()!=null) {
+                            sumaSeiso = sumaSeiso + sub.getPuntuacion1();
+                        }
+                    }
+                    if (sub.getId().equals("4S 1")||sub.getId().equals("4S 2")||sub.getId().equals("4S 3")||sub.getId().equals("4S 4")) {
+                        if (sub.getPuntuacion1()!=null) {
+                            sumaSeiketsu = sumaSeiketsu + sub.getPuntuacion1();
+                        }
+                    }
+                    if (sub.getId().equals("5S 1")||sub.getId().equals("5S 2")||sub.getId().equals("5S 3")||sub.getId().equals("5S 4")) {
+                        if (sub.getPuntuacion1()!=null) {
+                            sumaShitsuke = sumaShitsuke + sub.getPuntuacion1();
+                        }
                     }
                 }
-                if (sub.getId().equals("2S 1")||sub.getId().equals("2S 2")||sub.getId().equals("2S 3")||sub.getId().equals("2S 4")) {
-                    if (sub.getPuntuacion1()!=null) {
-                        sumaSeiton = sumaSeiton + sub.getPuntuacion1();
-                    }
-                }
-                if (sub.getId().equals("3S 1")||sub.getId().equals("3S 2")||sub.getId().equals("3S 3")||sub.getId().equals("3S 4")) {
-                    if (sub.getPuntuacion1()!=null) {
-                        sumaSeiso = sumaSeiso + sub.getPuntuacion1();
-                    }
-                }
-                if (sub.getId().equals("4S 1")||sub.getId().equals("4S 2")||sub.getId().equals("4S 3")||sub.getId().equals("4S 4")) {
-                    if (sub.getPuntuacion1()!=null) {
-                        sumaSeiketsu = sumaSeiketsu + sub.getPuntuacion1();
-                    }
-                }
-                if (sub.getId().equals("5S 1")||sub.getId().equals("5S 2")||sub.getId().equals("5S 3")||sub.getId().equals("5S 4")) {
-                    if (sub.getPuntuacion1()!=null) {
-                        sumaShitsuke = sumaShitsuke + sub.getPuntuacion1();
-                    }
-                }
-            }
 
-            Double promedioSeiri=((sumaSeiri/4.0)/5.0);
-            Double promedioSeiton=((sumaSeiton /4.0)/5.0);
-            Double promedioSeiso=((sumaSeiso/4.0)/5.0);
-            Double promedioSeiketsu=((sumaSeiketsu/4.0)/5.0);
-            Double promedioShitsuke=((sumaShitsuke/4.0)/5.0);
-            Double promedio5s =((promedioSeiso+promedioSeiri+promedioSeiton+promedioSeiketsu+promedioShitsuke)/5);
-            //FIN CALCULO PUNTAJES
+                Double promedioSeiri=((sumaSeiri/4.0)/5.0);
+                Double promedioSeiton=((sumaSeiton /4.0)/5.0);
+                Double promedioSeiso=((sumaSeiso/4.0)/5.0);
+                Double promedioSeiketsu=((sumaSeiketsu/4.0)/5.0);
+                Double promedioShitsuke=((sumaShitsuke/4.0)/5.0);
+                Double promedio5s =((promedioSeiso+promedioSeiri+promedioSeiton+promedioSeiketsu+promedioShitsuke)/5);
+                //FIN CALCULO PUNTAJES
 
-            if (promedio5s <=0.5f){
-                tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaRojo));
-            }
-            else{
-                if (promedio5s <0.8f){
-                    tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaAmarillo));
+                if (promedio5s <=0.5f){
+                    tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaRojo));
                 }
                 else{
-                    tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaVerde));
+                    if (promedio5s <0.8f){
+                        tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaAmarillo));
+                    }
+                    else{
+                        tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaVerde));
+                    }
                 }
+
+
+                Locale locale = new Locale("en","US");
+                NumberFormat format = NumberFormat.getPercentInstance(locale);
+                String percentage1 = format.format(promedioSeiri);
+                String percentage2 = format.format(promedioSeiton);
+                String percentage3 = format.format(promedioSeiso);
+                String percentage4 = format.format(promedioSeiketsu);
+                String percentage5 = format.format(promedioShitsuke);
+                String percentage6 = format.format(promedio5s);
+
+                text1s.setText(percentage1);
+                text2s.setText(percentage2);
+                text3s.setText(percentage3);
+                text4s.setText(percentage4);
+                text5s.setText(percentage5);
+                textFinal.setText(percentage6);
+                textFecha.setText(unAuditoria.getFechaAuditoria());
+                textFoto.setText(unAuditoria.getAreaAuditada().getNombreArea());
+
+                File f =new File(unAuditoria.getAreaAuditada().getFotoArea().getRutaFoto());
+                Picasso.with(imageView.getContext())
+                        .load(f)
+                        .into(imageView);
             }
-
-
-
-            Locale locale = new Locale("en","US");
-            NumberFormat format = NumberFormat.getPercentInstance(locale);
-            String percentage1 = format.format(promedioSeiri);
-            String percentage2 = format.format(promedioSeiton);
-            String percentage3 = format.format(promedioSeiso);
-            String percentage4 = format.format(promedioSeiketsu);
-            String percentage5 = format.format(promedioShitsuke);
-            String percentage6 = format.format(promedio5s);
-
-            text1s.setText(percentage1);
-            text2s.setText(percentage2);
-            text3s.setText(percentage3);
-            text4s.setText(percentage4);
-            text5s.setText(percentage5);
-            textFinal.setText(percentage6);
-            textFecha.setText(unAuditoria.getFechaAuditoria());
-            textFoto.setText(unAuditoria.getAreaAuditada().getNombreArea());
-
-            File f =new File(unAuditoria.getAreaAuditada().getFotoArea().getRutaFoto());
-            Picasso.with(imageView.getContext())
-                    .load(f)
-                    .into(imageView);
 
         }
     }

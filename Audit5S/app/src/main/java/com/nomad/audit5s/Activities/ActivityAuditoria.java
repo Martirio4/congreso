@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nomad.audit5s.Adapter.AdapterPagerSubItems;
 import com.nomad.audit5s.Controller.ControllerDatos;
+import com.nomad.audit5s.Fragments.FragmentManageAreas;
 import com.nomad.audit5s.Fragments.FragmentSubitem;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
@@ -44,6 +46,7 @@ import java.util.UUID;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
+import pl.aprilapps.easyphotopicker.EasyImage;
 
 
 public class ActivityAuditoria extends AppCompatActivity implements FragmentSubitem.Avisable{
@@ -385,18 +388,44 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
     @Override
     public void onBackPressed() {
-        Realm realm = Realm.getDefaultInstance();
-        final Auditoria mAuditDelete=realm.where(Auditoria.class)
-                .equalTo("idAuditoria", idAuditoria)
-                .findFirst();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                mAuditDelete.deleteFromRealm();
-            }
-        });
-        this.finish();
-        super.onBackPressed();
+        new MaterialDialog.Builder(this)
+                .title("Warning!")
+                .contentColor(ContextCompat.getColor(this, R.color.primary_text))
+                .titleColor(ContextCompat.getColor(this, R.color.tile4))
+                .backgroundColor(ContextCompat.getColor(this, R.color.tile1))
+                .content("Unfinished audit will not be saved."+"\n"+"Continue?")
+                .positiveText("Yes")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Realm realm = Realm.getDefaultInstance();
+                        final Auditoria mAuditDelete=realm.where(Auditoria.class)
+                                .equalTo("idAuditoria", idAuditoria)
+                                .findFirst();
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                mAuditDelete.deleteFromRealm();
+                            }
+                        });
+                        ActivityAuditoria.this.finish();
+                        ActivityAuditoria.super.onBackPressed();
+                    }
+                })
+                .negativeText("Cancel")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                    }
+                })
+                .show();
+
+    }
+
+    public void cerrarSinGuardar(){
+
+
 
     }
 

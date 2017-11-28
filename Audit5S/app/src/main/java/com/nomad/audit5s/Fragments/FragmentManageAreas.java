@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -277,7 +278,10 @@ public class FragmentManageAreas extends Fragment {
                                 Area realmArea = realm.copyToRealm(unArea);
                             }
                         });
-                        dialogoExito(unArea);
+
+                        updateAdapter();
+                        Snackbar.make(getView(),unArea.getNombreArea()+" was succesfully created",Snackbar.LENGTH_SHORT)
+                                .show();
 
 
                     }
@@ -285,6 +289,8 @@ public class FragmentManageAreas extends Fragment {
 
     }
 
+    //por UX se reemplaza este metodo por un snackbar
+    /*
     public void dialogoExito(Area unArea) {
 
         new MaterialDialog.Builder(getContext())
@@ -313,6 +319,7 @@ public class FragmentManageAreas extends Fragment {
 
 
     }
+    */
 
 
 }
