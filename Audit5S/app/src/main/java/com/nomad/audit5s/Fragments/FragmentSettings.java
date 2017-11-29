@@ -149,8 +149,8 @@ public class FragmentSettings extends Fragment {
             @Override
             public void execute(Realm realm) {
 
+                //borrar base de datos
                 RealmResults<Foto>fotis=realm.where(Foto.class)
-                        .beginsWith("rutaFoto", Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "evidencias")
                         .findAll();
                 fotis.deleteAllFromRealm();
 
@@ -158,14 +158,22 @@ public class FragmentSettings extends Fragment {
                         .findAll();
                 Subitems.deleteAllFromRealm();
 
-                /*//no borro las areas solo las auditorias hechas
+
                 RealmResults<Area>Areas=realm.where(Area.class)
                         .findAll();
                 Areas.deleteAllFromRealm();
-                */
+
                 RealmResults<Auditoria>audits=realm.where(Auditoria.class)
                         .findAll();
                 audits.deleteAllFromRealm();
+
+                //borrar directorios
+                File path = new File(Environment.getExternalStorageDirectory() + File.separator + "nomad" + File.separator + "audit5s");
+               if (deleteDirectory(path)){
+                   Snackbar.make(areas,"All data was succesfully deleted", Snackbar.LENGTH_SHORT)
+                           .show();
+               }
+
 
             }
         });
@@ -192,6 +200,23 @@ public class FragmentSettings extends Fragment {
             super.onPreExecute();
 
         }
+    }
+    public static boolean deleteDirectory(File path) {
+        if( path.exists() ) {
+            File[] files = path.listFiles();
+            if (files == null) {
+                return true;
+            }
+            for(int i=0; i<files.length; i++) {
+                if(files[i].isDirectory()) {
+                    deleteDirectory(files[i]);
+                }
+                else {
+                    files[i].delete();
+                }
+            }
+        }
+        return( path.delete() );
     }
 
 }

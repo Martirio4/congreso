@@ -380,6 +380,8 @@ public class GraficosActivity extends AppCompatActivity {
 
 
 
+
+
     private class EnviarPDF extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -583,6 +585,173 @@ public class GraficosActivity extends AppCompatActivity {
         Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
         return resizedBitmap;
     }
+
+
+
+    public void crearPdf(){
+
+        ControllerDatos controllerDatos=new ControllerDatos(this);
+        Realm realm= Realm.getDefaultInstance();
+        Auditoria mAudit= realm.where(Auditoria.class)
+                .equalTo("idAuditoria",idAudit)
+                .findFirst();
+
+
+        List<String>alistaSeiri=controllerDatos.traerSeiri();
+        List<String>alistaSeiton=controllerDatos.traerSeiton();
+        List<String>alistaSeiso=controllerDatos.traerSeiso();
+        List<String>alistaSeiketsu=controllerDatos.traerSeiketsu();
+        List<String>alistaShitsuke=controllerDatos.traerShitsuke();
+
+        List<SubItem>unListaSeiri=new ArrayList<>();
+        List<SubItem>unListaSeiton=new ArrayList<>();
+        List<SubItem>unListaSeiso=new ArrayList<>();
+        List<SubItem>unListaSeiketsu=new ArrayList<>();
+        List<SubItem>unListaShitsuke=new ArrayList<>();
+
+        for (SubItem sub:mAudit.getSubItems()
+                ) {
+            if (alistaSeiri.contains(sub.getId())){
+                unListaSeiri.add(sub);
+            }
+            if (alistaSeiton.contains(sub.getId())){
+                unListaSeiton.add(sub);
+            }
+            if (alistaSeiso.contains(sub.getId())){
+                unListaSeiso.add(sub);
+            }
+            if (alistaSeiketsu.contains(sub.getId())){
+                unListaSeiketsu.add(sub);
+            }
+            if (alistaShitsuke.contains(sub.getId())){
+                unListaShitsuke.add(sub);
+            }
+        }
+
+        Integer cursorPosY=PaperSize.LETTER_HEIGHT;
+        Integer cursorPosX=0;
+        writer = new PDFWriter(PaperSize.LETTER_WIDTH, PaperSize.LETTER_HEIGHT);
+        //fuente titulo
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        //escribir titulo
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+        cursorPosY=cursorPosY-MARGEN_IZQUIERDO;
+        cursorPosX=cursorPosX+MARGEN_IZQUIERDO;
+        //fuente fecha escribir fecga
+        writer.addText(cursorPosX, cursorPosY-SALTO_LINEA,12,"Date: "+mAudit.getFechaAuditoria());
+        cursorPosY=cursorPosY-SALTO_LINEA;
+
+        Integer inicioFotos=85;
+        Integer altoImagen=120;
+
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorPosY,12,unListaSeiri.get(0).getaQuePertenece());
+
+        //linea separacion
+        writer.addLine(,PaperSize.LETTER_HEIGHT-(85),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85));
+
+        //agrego primer subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA),12,unaLista.get(0).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA+12),12,"Score: "+unaLista.get(0).getPuntuacion1().toString());
+
+
+
+
+        outputToFile("5S Report-"+mAudit.getAreaAuditada().getNombreArea()+"-"+mAudit.getFechaAuditoria()+".pdf", writer.asString(), "ISO-8859-1");
+    }
+
+    public void armarPagsdassaddasdasdaina(List<SubItem> unaLista){
+        Integer inicioFotos=85;
+        Integer altoImagen=120;
+
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,unaLista.get(0).getaQuePertenece());
+
+        //linea separacion
+        writer.addLine(,PaperSize.LETTER_HEIGHT-(85),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85));
+
+        //agrego primer subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA),12,unaLista.get(0).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA+12),12,"Score: "+unaLista.get(0).getPuntuacion1().toString());
+        Integer cantidadFotos=unaLista.get(0).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(0).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*2+altoImagen),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*2+altoImagen+10),10,unaFoto.getComentario());
+
+        }
+        //agrego segundo subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*3+altoImagen),12,unaLista.get(1).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*3+altoImagen+12),12,"Score: "+unaLista.get(1).getPuntuacion1().toString());
+        cantidadFotos=unaLista.get(1).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(1).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*4+altoImagen*2),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*4+altoImagen*2+10),10,unaFoto.getComentario());
+
+        }
+        //agrego tercer subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*5+altoImagen*2),12,unaLista.get(2).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*5+altoImagen*2+12),12,"Score: "+unaLista.get(2).getPuntuacion1().toString());
+        cantidadFotos=unaLista.get(2).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(2).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*6+altoImagen*3),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*6+altoImagen*3+10),10,unaFoto.getComentario());
+
+        }
+        //agrego cuarto subitem
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*7+altoImagen*3),12,unaLista.get(3).getEnunciado());
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*7+altoImagen*3+12),12,"Score: "+unaLista.get(3).getPuntuacion1().toString());
+        cantidadFotos=unaLista.get(3).getListaFotos().size();
+        if (cantidadFotos>3){
+            cantidadFotos=3;
+        }
+
+        for (int i=0;i<cantidadFotos;i++){
+
+            Foto unaFoto=unaLista.get(3).getListaFotos().get(i);
+            File unFile= new File(unaFoto.getRutaFoto());
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
+            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*8+altoImagen*4),bitmapScaled);
+            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*8+altoImagen*4+10),10,unaFoto.getComentario());
+
+        }
+    }
+
+
+
+
+
 
 }
 
