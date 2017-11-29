@@ -48,6 +48,7 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -151,18 +152,53 @@ public class FragmentManageAreas extends Fragment {
             public void onClick(final View v) {
 
 
-                Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, new PermissionCallback() {
-                    @Override
-                    public void permissionGranted() {
-                        fabMenuManage.close(true);
-                        EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
-                    }
 
-                    @Override
-                    public void permissionRefused() {
-                        Toast.makeText(getContext(), "please give permission", Toast.LENGTH_SHORT).show();
+                if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    fabMenuManage.close(true);
+                    EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+                }
+                else {
+                    if (Nammu.shouldShowRequestPermissionRationale(FragmentManageAreas.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        //User already refused to give us this permission or removed it
+                        //Now he/she can mark "never ask again" (sic!)
+                        Snackbar.make(getView(), "App needs permission to store audit data",
+                                Snackbar.LENGTH_INDEFINITE).setAction("OK", new View.OnClickListener() {
+                            @Override public void onClick(View view) {
+                                Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                        new PermissionCallback() {
+                                            @Override
+                                            public void permissionGranted() {
+                                                fabMenuManage.close(true);
+                                                EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+                                            }
+
+                                            @Override
+                                            public void permissionRefused() {
+                                                Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        }).show();
+                    } else {
+                        //First time asking for permission
+                        // or phone doesn't offer permission
+                        // or user marked "never ask again"
+                        Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                new PermissionCallback() {
+                                    @Override
+                                    public void permissionGranted() {
+                                        fabMenuManage.close(true);
+                                        EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+                                    }
+
+                                    @Override
+                                    public void permissionRefused() {
+                                        Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
                     }
-                });
+                }
             }
         });
 
@@ -186,11 +222,6 @@ public class FragmentManageAreas extends Fragment {
 
             }
         });
-
-
-
-
-
 
         return view;
     }
@@ -308,7 +339,7 @@ public class FragmentManageAreas extends Fragment {
 
     }
 
-    //por UX se reemplaza este metodo por un snackbar
+    //--------------por UX se reemplaza este metodo por un snackbar-----------------//
     /*
     public void dialogoExito(Area unArea) {
 
@@ -340,5 +371,8 @@ public class FragmentManageAreas extends Fragment {
     }
     */
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        Nammu.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }

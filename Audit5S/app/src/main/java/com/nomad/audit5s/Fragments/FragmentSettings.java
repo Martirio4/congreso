@@ -4,6 +4,7 @@ package com.nomad.audit5s.Fragments;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,8 @@ import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.Foto;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
+
+import java.io.File;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -137,24 +140,8 @@ public class FragmentSettings extends Fragment {
                 getActivity().finish();
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return view;
     }
-
 
     public void borrarBaseDeDatos(){
         Realm realm = Realm.getDefaultInstance();
@@ -163,6 +150,7 @@ public class FragmentSettings extends Fragment {
             public void execute(Realm realm) {
 
                 RealmResults<Foto>fotis=realm.where(Foto.class)
+                        .beginsWith("rutaFoto", Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "evidencias")
                         .findAll();
                 fotis.deleteAllFromRealm();
 

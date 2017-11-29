@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -489,33 +490,49 @@ public class GraficosActivity extends AppCompatActivity {
         }
     }
     public void outputToFile(String fileName, String pdfContent, String encoding) {
-        File newFile = new File("/storage/emulated/0/Android/data/com.nomad.audit5s/cache/EasyImage" + "/" + fileName);
-        try {
-            newFile.createNewFile();
+        if (existeDirectorio()) {
+            String pathe = Environment.getExternalStorageDirectory().getAbsolutePath();
+
+            File newFile = new File(pathe+File.separator + "nomad" +File.separator+ "audit5s" + File.separator+"audits"+File.separator+fileName);
             try {
-                FileOutputStream pdfFile = new FileOutputStream(newFile);
-                pdfFile.write(pdfContent.getBytes(encoding));
-                pdfFile.close();
+                newFile.createNewFile();
+                try {
+                    FileOutputStream pdfFile = new FileOutputStream(newFile);
+                    pdfFile.write(pdfContent.getBytes(encoding));
+                    pdfFile.close();
 
 
-                Uri path = Uri.fromFile(newFile);
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-// set the type to 'email'
-                emailIntent .setType("vnd.android.cursor.dir/email");
-                String to[] = {""};
-                emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
-// the attachment
-                emailIntent .putExtra(Intent.EXTRA_STREAM, path);
-// the mail subject
-                emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                startActivity(Intent.createChooser(emailIntent , "Send email..."));
+                    Uri path = Uri.fromFile(newFile);
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    // set the type to 'email'
+                    emailIntent.setType("vnd.android.cursor.dir/email");
+                    String to[] = {""};
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+                    // the attachment
+                    emailIntent.putExtra(Intent.EXTRA_STREAM, path);
+                    // the mail subject
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                    startActivity(Intent.createChooser(emailIntent, "Send email..."));
 
-            } catch(FileNotFoundException e) {
-                // ...
+                } catch (FileNotFoundException e) {
+                    Log.e("NOMAD/ERROR", "exception", e);
+                }
+            } catch (IOException e) {
+                Log.e("NOMAD/ERROR", "exception", e);
             }
-        } catch(IOException e) {
-            // ...
         }
+        else{
+            Toast.makeText(this, "Error, check permissions", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private Boolean existeDirectorio() {
+        Boolean sePudo=true;
+            File dir = new File(Environment.getExternalStorageDirectory()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "audits");
+            if (!dir.exists() || !dir.isDirectory()) {
+                sePudo = dir.mkdirs();
+            }
+            return sePudo;
     }
 
     public Bitmap screenShot(View view) {

@@ -7,11 +7,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
 import android.support.annotation.IdRes;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -50,6 +53,8 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
+import pl.tajchert.nammu.Nammu;
+import pl.tajchert.nammu.PermissionCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -93,12 +98,12 @@ public class FragmentSubitem extends Fragment {
 
     private TextView textViewEnunciado;
     private RadioGroup rg1;
-    private RadioButton rb1;
-    private RadioButton rb2;
-    private RadioButton rb3;
-    private RadioButton rb4;
-    private RadioButton rb5;
-    private RadioButton textviewPertenencia;
+    private AppCompatRadioButton rb1;
+    private AppCompatRadioButton rb2;
+    private AppCompatRadioButton rb3;
+    private AppCompatRadioButton rb4;
+    private AppCompatRadioButton rb5;
+
 
     private Button verCriterio;
 
@@ -140,11 +145,11 @@ public class FragmentSubitem extends Fragment {
         }
         rg1=(RadioGroup) view.findViewById(R.id.rg1);
         verCriterio=(Button)view.findViewById(R.id.btn_criterios);
-        rb1 =(RadioButton) view.findViewById(R.id.item1);
-        rb2 =(RadioButton) view.findViewById(R.id.item2);
-        rb3 =(RadioButton) view.findViewById(R.id.item3);
-        rb4 =(RadioButton) view.findViewById(R.id.item4);
-        rb5 =(RadioButton) view.findViewById(R.id.item5);
+        rb1 =(AppCompatRadioButton) view.findViewById(R.id.item1);
+        rb2 =(AppCompatRadioButton) view.findViewById(R.id.item2);
+        rb3 =(AppCompatRadioButton) view.findViewById(R.id.item3);
+        rb4 =(AppCompatRadioButton) view.findViewById(R.id.item4);
+        rb5 =(AppCompatRadioButton) view.findViewById(R.id.item5);
         textViewEnunciado=(TextView) view.findViewById(R.id.textoEnunciado);
 
         rb1.setText("1");
@@ -245,10 +250,55 @@ public class FragmentSubitem extends Fragment {
         fabCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fabMenu.close(true);
-                EasyImage.openCamera(FragmentSubitem.this, 1);
+                if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    fabMenu.close(true);
+                    EasyImage.openCamera(FragmentSubitem.this, 1);
+                }
+                else {
+                    if (Nammu.shouldShowRequestPermissionRationale(FragmentSubitem.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        //User already refused to give us this permission or removed it
+                        //Now he/she can mark "never ask again" (sic!)
+                        Snackbar.make(getView(), "App needs permission to store audit data",
+                                Snackbar.LENGTH_INDEFINITE).setAction("OK", new View.OnClickListener() {
+                            @Override public void onClick(View view) {
+                                Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                        new PermissionCallback() {
+                                            @Override
+                                            public void permissionGranted() {
+                                                fabMenu.close(true);
+                                                EasyImage.openCamera(FragmentSubitem.this, 1);
+                                            }
+
+                                            @Override
+                                            public void permissionRefused() {
+                                                Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        }).show();
+                    } else {
+                        //First time asking for permission
+                        // or phone doesn't offer permission
+                        // or user marked "never ask again"
+                        Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                new PermissionCallback() {
+                                    @Override
+                                    public void permissionGranted() {
+                                        fabMenu.close(true);
+                                        EasyImage.openCamera(FragmentSubitem.this, 1);
+                                    }
+
+                                    @Override
+                                    public void permissionRefused() {
+                                        Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                    }
+                }
             }
         });
+
 
 
         fabGuardar = new FloatingActionButton(getActivity());
@@ -354,44 +404,44 @@ public class FragmentSubitem extends Fragment {
             @Override
             public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
 
-                if (type==1){
-                    fotoOriginal=imageFile;
-                    existeDirectorioImagenes();
-                    try {
-                        fotoComprimida = new Compressor(getContext())
-                                .setMaxWidth(640)
-                                .setMaxHeight(480)
-                                .setQuality(75)
-                                .setCompressFormat(Bitmap.CompressFormat.PNG)
-                                .setDestinationDirectoryPath(fotoOriginal.getParent()+File.separator+"images")
-                                .compressToFile(fotoOriginal);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    Realm realm = Realm.getDefaultInstance();
-
-                    //In Activity
-                    realm.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            SubItem elsub = realm.where(SubItem.class)
-                                    .equalTo("pertenencia",pertenencia)
-                                    .findFirst();
-                            if(elsub != null) {
-                                updateFotoSub(elsub, realm);
-                            }
+                if (type == 1) {
+                    fotoOriginal = imageFile;
+                    if (existeDirectorioImagenes()) {
+                        try {
+                            fotoComprimida = new Compressor(getContext())
+                                    .setMaxWidth(640)
+                                    .setMaxHeight(480)
+                                    .setQuality(75)
+                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                                    .setDestinationDirectoryPath(Environment.getExternalStorageDirectory() + File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "evidencias")
+                                    .compressToFile(fotoOriginal);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    });
 
-                    adapterFotos.notifyDataSetChanged();
-                    Boolean seBorro=imageFile.delete();
-                    if (seBorro){
-//                        Toast.makeText(getContext(), "borrada con exito", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-//                        Toast.makeText(getContext(), "No se pudo borrar", Toast.LENGTH_SHORT).show();
+
+                        Realm realm = Realm.getDefaultInstance();
+
+                        //In Activity
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                SubItem elsub = realm.where(SubItem.class)
+                                        .equalTo("pertenencia", pertenencia)
+                                        .findFirst();
+                                if (elsub != null) {
+                                    updateFotoSub(elsub, realm);
+                                }
+                            }
+                        });
+
+                        adapterFotos.notifyDataSetChanged();
+                        Boolean seBorro = imageFile.delete();
+                        if (seBorro) {
+                            //                        Toast.makeText(getContext(), "borrada con exito", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //                        Toast.makeText(getContext(), "No se pudo borrar", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -411,9 +461,11 @@ public class FragmentSubitem extends Fragment {
     private void updateFotoSub(SubItem elsub, Realm realm) {
 
         final Foto unaFoto=new Foto();
+
         unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
         unaFoto.setAuditoria(ActivityAuditoria.idAuditoria);
         unaFoto.setSubItem(id);
+
         crearDialogoComentarioParaFoto(unaFoto);
         Foto fotoSubidaARealm = realm.copyToRealmOrUpdate(unaFoto);
         elsub.getListaFotos().add(fotoSubidaARealm);
@@ -423,18 +475,13 @@ public class FragmentSubitem extends Fragment {
     }
 
 
-    public void  existeDirectorioImagenes(){
+    public Boolean  existeDirectorioImagenes(){
         Boolean sePudo=true;
-        File dir = new File( fotoOriginal.getParent()+File.separator+"images");
+        File dir = new File( Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "evidencias");
         if(!dir.exists() || !dir.isDirectory()) {
             sePudo=dir.mkdirs();
         }
-        if (sePudo){
-
-        }
-        else{
-            Toast.makeText(getContext(), "no se pudo crear el directorio", Toast.LENGTH_SHORT).show();
-        }
+        return sePudo;
 
     }
 
@@ -503,7 +550,6 @@ public class FragmentSubitem extends Fragment {
                                 actualizarFoto(unaFoto);
                                 adapterFotos.notifyDataSetChanged();
 
-
                             }
                         }).show();
 
@@ -549,7 +595,10 @@ public class FragmentSubitem extends Fragment {
             }
         });
 
-
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        Nammu.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 }

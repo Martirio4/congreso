@@ -1,0 +1,2 @@
+29/11/2017- fix colores radiobutton para api<21 se reemplazo por AppCompatRadioButton
+29/11/2017- se agrego permisos de escritura en runtime, para Api>23
