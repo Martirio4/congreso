@@ -16,6 +16,8 @@ import com.nomad.audit5s.Fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.R;
 
+import pl.tajchert.nammu.Nammu;
+
 public class ActivityLanding extends AppCompatActivity implements FragmentSeleccionAerea.Notificable {
 
     private ImageButton botonStart;
@@ -29,6 +31,8 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Nammu.init(getApplicationContext());
+
         setContentView(R.layout.activity_landing);
 
         botonIssue=(ImageButton) findViewById(R.id.btn_issue);

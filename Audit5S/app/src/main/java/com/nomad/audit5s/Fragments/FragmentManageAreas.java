@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.Snackbar;
@@ -28,12 +29,14 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.Adapter.AdapterArea;
+import com.nomad.audit5s.Manifest;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Foto;
 import com.nomad.audit5s.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.acl.Permission;
 import java.util.UUID;
 
 import id.zelory.compressor.Compressor;
@@ -42,6 +45,8 @@ import io.realm.RealmList;
 import io.realm.RealmResults;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
+import pl.tajchert.nammu.Nammu;
+import pl.tajchert.nammu.PermissionCallback;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -143,9 +148,21 @@ public class FragmentManageAreas extends Fragment {
 
         fabAgregarArea.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                fabMenuManage.close(true);
-                EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+            public void onClick(final View v) {
+
+
+                Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, new PermissionCallback() {
+                    @Override
+                    public void permissionGranted() {
+                        fabMenuManage.close(true);
+                        EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+                    }
+
+                    @Override
+                    public void permissionRefused() {
+                        Toast.makeText(getContext(), "please give permission", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -204,8 +221,8 @@ public class FragmentManageAreas extends Fragment {
                                 .setMaxWidth(640)
                                 .setMaxHeight(480)
                                 .setQuality(75)
-                                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                                .setDestinationDirectoryPath(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "areas")
+                                .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                                .setDestinationDirectoryPath(Environment.getExternalStorageDirectory()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "areas")
                                 .compressToFile(fotoOriginal);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -213,12 +230,14 @@ public class FragmentManageAreas extends Fragment {
 
                     Foto unaFoto = new Foto();
                     unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
-                    Boolean seBorro = imageFile.delete();
-                    if (seBorro) {
-                     //   Toast.makeText(getContext(), R.string.seEliminoFoto, Toast.LENGTH_SHORT).show();
+                    if (source == EasyImage.ImageSource.CAMERA) {
+                        Boolean seBorro = imageFile.delete();
+                        if (seBorro) {
+                         //   Toast.makeText(getContext(), R.string.seEliminoFoto, Toast.LENGTH_SHORT).show();
 
-                    } else {
-                       // Toast.makeText(getContext(), R.string.noSeEliminoFoto, Toast.LENGTH_SHORT).show();
+                        } else {
+                           // Toast.makeText(getContext(), R.string.noSeEliminoFoto, Toast.LENGTH_SHORT).show();
+                        }
                     }
                     crearDialogoNombreArea(unaFoto);
 
@@ -240,7 +259,7 @@ public class FragmentManageAreas extends Fragment {
     }
     public void existeDirectorioImagenesAreas() {
         Boolean sePudo = true;
-        File dir = new File(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "areas");
+        File dir = new File(Environment.getExternalStorageDirectory()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "areas");
         if (!dir.exists() || !dir.isDirectory()) {
             sePudo = dir.mkdirs();
         }
