@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -87,8 +88,9 @@ public class GraficosActivity extends AppCompatActivity {
     private Bitmap fotoOriginal;
 
 
-    public static final int MARGEN_IZQUIERDO=50;
-    public static final int SALTO_LINEA=25;
+    public static final int MARGEN_IZQUIERDO=30;
+    public static final int SALTO_LINEA=18;
+    public static final int SEPARACIONFOTOS=9;
 
 
     @Override
@@ -316,7 +318,9 @@ public class GraficosActivity extends AppCompatActivity {
         }
     }
 
-    public void enviarPDF(){
+    /*
+    public void enviarePDF(){
+
         writer = new PDFWriter(PaperSize.LETTER_WIDTH, PaperSize.LETTER_HEIGHT);
         ControllerDatos controllerDatos=new ControllerDatos(this);
         Realm realm= Realm.getDefaultInstance();
@@ -377,6 +381,7 @@ public class GraficosActivity extends AppCompatActivity {
 
         outputToFile("5S Report-"+mAudit.getAreaAuditada().getNombreArea()+"-"+mAudit.getFechaAuditoria()+".pdf", writer.asString(), "ISO-8859-1");
     }
+    */
 
 
 
@@ -404,7 +409,9 @@ public class GraficosActivity extends AppCompatActivity {
         }
     }
     
+    /*
     public void armarPagina(List<SubItem> unaLista){
+
         Integer inicioFotos=85;
         Integer altoImagen=120;
 
@@ -491,6 +498,7 @@ public class GraficosActivity extends AppCompatActivity {
 
         }
     }
+    */
     public void outputToFile(String fileName, String pdfContent, String encoding) {
         if (existeDirectorio()) {
             String pathe = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -563,7 +571,7 @@ public class GraficosActivity extends AppCompatActivity {
         View v = rootView.findViewById(R.id.contenedorGraficos);
 
         Bitmap unBitmap=screenShot(v);
-        Bitmap resizedBm=getResizedBitmap(unBitmap,510,260);
+        Bitmap resizedBm=scaleBitmap(unBitmap,260);
 
 
         unBitmap.getHeight();
@@ -571,24 +579,11 @@ public class GraficosActivity extends AppCompatActivity {
        // Bitmap SunBitmap=Bitmap.createScaledBitmap(unBitmap, 300,510,false);
         writer.addImage(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-85-SALTO_LINEA*2-510,resizedBm);
     }
-    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth)
-    {
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // create a matrix for the manipulation
-        Matrix matrix = new Matrix();
-        // resize the bit map
-        matrix.postScale(scaleWidth, scaleHeight);
-        // recreate the new Bitmap
-        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-        return resizedBitmap;
-    }
 
 
 
-    public void crearPdf(){
+
+    public void enviarPDF(){
 
         ControllerDatos controllerDatos=new ControllerDatos(this);
         Realm realm= Realm.getDefaultInstance();
@@ -628,130 +623,166 @@ public class GraficosActivity extends AppCompatActivity {
             }
         }
 
-        Integer cursorPosY=PaperSize.LETTER_HEIGHT;
-        Integer cursorPosX=0;
         writer = new PDFWriter(PaperSize.LETTER_WIDTH, PaperSize.LETTER_HEIGHT);
-        //fuente titulo
-        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-        //escribir titulo
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
-        cursorPosY=cursorPosY-MARGEN_IZQUIERDO;
-        cursorPosX=cursorPosX+MARGEN_IZQUIERDO;
-        //fuente fecha escribir fecga
-        writer.addText(cursorPosX, cursorPosY-SALTO_LINEA,12,"Date: "+mAudit.getFechaAuditoria());
-        cursorPosY=cursorPosY-SALTO_LINEA;
-
-        Integer inicioFotos=85;
-        Integer altoImagen=120;
-
-        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorPosY,12,unListaSeiri.get(0).getaQuePertenece());
-
-        //linea separacion
-        writer.addLine(,PaperSize.LETTER_HEIGHT-(85),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85));
-
-        //agrego primer subitem
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA),12,unaLista.get(0).getEnunciado());
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA+12),12,"Score: "+unaLista.get(0).getPuntuacion1().toString());
-
-
-
+        crearPdfEse(unListaSeiri);
+        writer.newPage();
+        crearPdfEse(unListaSeiton);
+        writer.newPage();
+        crearPdfEse(unListaSeiso);
+        writer.newPage();
+        crearPdfEse(unListaSeiketsu);
+        writer.newPage();
+        crearPdfEse(unListaShitsuke);
 
         outputToFile("5S Report-"+mAudit.getAreaAuditada().getNombreArea()+"-"+mAudit.getFechaAuditoria()+".pdf", writer.asString(), "ISO-8859-1");
     }
 
-    public void armarPagsdassaddasdasdaina(List<SubItem> unaLista){
-        Integer inicioFotos=85;
-        Integer altoImagen=120;
 
-        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,unaLista.get(0).getaQuePertenece());
 
-        //linea separacion
-        writer.addLine(,PaperSize.LETTER_HEIGHT-(85),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85));
+    /**
+     * Scales the provided bitmap to have the height and width provided.
+     * (Alternative method for scaling bitmaps
+     * since Bitmap.createScaledBitmap(...) produces bad (blocky) quality bitmaps.)
 
-        //agrego primer subitem
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA),12,unaLista.get(0).getEnunciado());
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA+12),12,"Score: "+unaLista.get(0).getPuntuacion1().toString());
-        Integer cantidadFotos=unaLista.get(0).getListaFotos().size();
-        if (cantidadFotos>3){
-            cantidadFotos=3;
+     */
+    public static Bitmap scaleBitmap(Bitmap elBit, int newWidth) {
+        Bitmap bitmap;
+        Matrix rotMatrix = new Matrix();
+        rotMatrix.postRotate(90);
+
+        if (elBit.getWidth()>elBit.getHeight()){
+            bitmap=elBit;
         }
-
-        for (int i=0;i<cantidadFotos;i++){
-
-            Foto unaFoto=unaLista.get(0).getListaFotos().get(i);
-            File unFile= new File(unaFoto.getRutaFoto());
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
-            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*2+altoImagen),bitmapScaled);
-            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*2+altoImagen+10),10,unaFoto.getComentario());
-
+        else{
+            bitmap=Bitmap.createBitmap(elBit , 0, 0, elBit.getWidth(), elBit .getHeight(), rotMatrix, true);
         }
-        //agrego segundo subitem
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*3+altoImagen),12,unaLista.get(1).getEnunciado());
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*3+altoImagen+12),12,"Score: "+unaLista.get(1).getPuntuacion1().toString());
-        cantidadFotos=unaLista.get(1).getListaFotos().size();
-        if (cantidadFotos>3){
-            cantidadFotos=3;
+        Double proporcion=(bitmap.getWidth()*1.00/bitmap.getHeight()*1.00);
+
+        int newHeight=(int)Math.round(newWidth / proporcion);
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float scaleX = newWidth / (float) bitmap.getWidth();
+        float scaleY = newHeight / (float) bitmap.getHeight();
+        float pivotX = 0;
+        float pivotY = 0;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(scaleX, scaleY, pivotX, pivotY);
+        if (bitmap.getHeight()>bitmap.getWidth()){
+            scaleMatrix.postRotate(90);
         }
-
-        for (int i=0;i<cantidadFotos;i++){
-
-            Foto unaFoto=unaLista.get(1).getListaFotos().get(i);
-            File unFile= new File(unaFoto.getRutaFoto());
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
-            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*4+altoImagen*2),bitmapScaled);
-            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*4+altoImagen*2+10),10,unaFoto.getComentario());
-
-        }
-        //agrego tercer subitem
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*5+altoImagen*2),12,unaLista.get(2).getEnunciado());
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*5+altoImagen*2+12),12,"Score: "+unaLista.get(2).getPuntuacion1().toString());
-        cantidadFotos=unaLista.get(2).getListaFotos().size();
-        if (cantidadFotos>3){
-            cantidadFotos=3;
-        }
-
-        for (int i=0;i<cantidadFotos;i++){
-
-            Foto unaFoto=unaLista.get(2).getListaFotos().get(i);
-            File unFile= new File(unaFoto.getRutaFoto());
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
-            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*6+altoImagen*3),bitmapScaled);
-            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*6+altoImagen*3+10),10,unaFoto.getComentario());
-
-        }
-        //agrego cuarto subitem
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*7+altoImagen*3),12,unaLista.get(3).getEnunciado());
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*7+altoImagen*3+12),12,"Score: "+unaLista.get(3).getPuntuacion1().toString());
-        cantidadFotos=unaLista.get(3).getListaFotos().size();
-        if (cantidadFotos>3){
-            cantidadFotos=3;
-        }
-
-        for (int i=0;i<cantidadFotos;i++){
-
-            Foto unaFoto=unaLista.get(3).getListaFotos().get(i);
-            File unFile= new File(unaFoto.getRutaFoto());
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-            Bitmap bitmapScaled= Bitmap.createScaledBitmap(bitmap,120,120,false);
-            writer.addImage(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*8+altoImagen*4),bitmapScaled);
-            writer.addText(MARGEN_IZQUIERDO+(i*145),PaperSize.LETTER_HEIGHT-(inicioFotos+SALTO_LINEA*8+altoImagen*4+10),10,unaFoto.getComentario());
-
-        }
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
+        return scaledBitmap;
     }
 
+    public void crearPdfEse(List<SubItem> laLista){
 
+        Integer cursorX=0;
+        Integer cursorY=792;
+        Integer renglonesFoto;
 
+//        traigo la auditoria que quiero armar
+        Realm realm= Realm.getDefaultInstance();
+        Auditoria mAudit= realm.where(Auditoria.class)
+                .equalTo("idAuditoria",idAudit)
+                .findFirst();
 
+//        declaro el pdwriter
+        //fuente titulo
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        //escribir titulo
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+        cursorY=cursorY-MARGEN_IZQUIERDO;
+        cursorX=cursorX+MARGEN_IZQUIERDO;
+        //fuente fecha escribir fecga
+        writer.addText(cursorX, cursorY-SALTO_LINEA,12,"Date: "+mAudit.getFechaAuditoria());
+        cursorY=cursorY-SALTO_LINEA;
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
 
+        //linea separacion
+        writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
+        cursorY=PaperSize.LETTER_HEIGHT-65;
+        cursorY=cursorY-SALTO_LINEA;
+        cursorX=MARGEN_IZQUIERDO;
+//        EMPIEZO A RECORRER LOS SUBITEMS
+        recorrerSubitemLista(laLista,cursorX, cursorY,mAudit.getFechaAuditoria());
+    }
 
+    private void recorrerSubitemLista(List<SubItem>laLista,int x, int y,String fecha) {
+        int cursorX=x;
+        int cursorY=y;
+        for (SubItem sub : laLista) {
+            writer.addText(cursorX,cursorY-SALTO_LINEA,12,sub.getEnunciado());
+            cursorY=cursorY-SALTO_LINEA;
+            writer.addText(cursorX,cursorY-SALTO_LINEA,12,"Score: "+sub.getPuntuacion1().toString());
+            cursorY=cursorY-2*SALTO_LINEA;
+            //renglonesFoto=Math.round(sub.getListaFotos().size()/3);
+            for (Foto foto:sub.getListaFotos()
+                    ) {
+                Foto unaFoto=foto;
+                File unFile= new File(unaFoto.getRutaFoto());
+                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                Bitmap rawBitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
+                Bitmap bitmapScaled = scaleBitmap(rawBitmap,180);
+
+//                    SI LA FOTO NO ENTRA EN LO QUE QUEDA DE PAGINA
+                if (cursorY-bitmapScaled.getHeight()<SALTO_LINEA){
+                    //si la imagen no entra armo una pagina nueva
+                    //vuelvo a poner los titulos y demas
+                    writer.newPage();
+                    cursorX=0;
+                    cursorY=792;
+                    //fuente titulo
+                    writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+                    //escribir titulo
+                    writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+                    cursorY=cursorY-MARGEN_IZQUIERDO;
+                    cursorX=cursorX+MARGEN_IZQUIERDO;
+                    //fuente fecha escribir fecga
+                    writer.addText(cursorX, cursorY-SALTO_LINEA,12,"Date: "+fecha);
+                    cursorY=cursorY-SALTO_LINEA;
+                    writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+                    writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
+
+                    //linea separacion
+                    writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
+                    cursorY=PaperSize.LETTER_HEIGHT-65;
+                    cursorY=cursorY-SALTO_LINEA;
+                    cursorX=MARGEN_IZQUIERDO;
+
+                    //FINALMENTE AGREGO LA FOTO
+                    writer.addImage(cursorX,cursorY-bitmapScaled.getHeight(),bitmapScaled);
+                    cursorX=cursorX+bitmapScaled.getWidth()+ SALTO_LINEA;
+                    cursorY=cursorY-bitmapScaled.getHeight();
+                }
+                else{
+//                        SI HAY LUGAR HACIA ABAJO CHEQUEO QUE ENTRE HORIZONTALMENTE
+                    if (cursorX+bitmapScaled.getWidth()>612-MARGEN_IZQUIERDO){
+//                            NO ENTRA
+//                            LA PONGO ABAJO
+                        cursorX=MARGEN_IZQUIERDO;
+                        cursorY=cursorY-bitmapScaled.getHeight()-SALTO_LINEA;
+                        writer.addImage(cursorX,cursorY,bitmapScaled);
+                        cursorX=cursorX+bitmapScaled.getWidth();
+                    }
+                    else {
+                        if (cursorX == MARGEN_IZQUIERDO) {
+                            writer.addImage(cursorX, cursorY - bitmapScaled.getHeight(), bitmapScaled);
+                            cursorX = cursorX + bitmapScaled.getWidth();
+                            cursorY = cursorY-bitmapScaled.getHeight();
+                        }
+                        else {
+//                       ENTRA EN LA MISMA LINEA
+                            writer.addImage(cursorX + SEPARACIONFOTOS, cursorY, bitmapScaled);
+                            cursorX = cursorX + SEPARACIONFOTOS + bitmapScaled.getWidth();
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
