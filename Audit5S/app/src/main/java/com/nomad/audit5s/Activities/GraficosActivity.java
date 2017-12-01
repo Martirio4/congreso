@@ -554,12 +554,32 @@ public class GraficosActivity extends AppCompatActivity {
     }
 
     public void cargarGraficos(Auditoria unAudit){
+        writer.newPage();
+
+        int cursorX=MARGEN_IZQUIERDO;
+        int cursorY=792;
+        //fuente titulo
+        writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+        //escribir titulo
+        writer.addText(cursorX,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+        cursorY=cursorY-MARGEN_IZQUIERDO;
+        cursorX=cursorX+MARGEN_IZQUIERDO;
+        //fuente fecha escribir fecga
+
+        cursorY=cursorY-SALTO_LINEA;
+
+
+        //linea separacion
+        writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
+        cursorY=PaperSize.LETTER_HEIGHT-65;
+        cursorY=cursorY-SALTO_LINEA;
+        cursorX=MARGEN_IZQUIERDO;
+
 
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
         writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,"Final result");
 
-        //linea separacion
-        writer.addLine(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85));
+
 
         //agrego puntaje final
         Locale locale = new Locale("en","US");
@@ -571,13 +591,10 @@ public class GraficosActivity extends AppCompatActivity {
         View v = rootView.findViewById(R.id.contenedorGraficos);
 
         Bitmap unBitmap=screenShot(v);
-        Bitmap resizedBm=scaleBitmap(unBitmap,260);
-
-
-        unBitmap.getHeight();
-        unBitmap.getWidth();
+        Bitmap scaledBitmap= scaleSinRotar(unBitmap,250);
        // Bitmap SunBitmap=Bitmap.createScaledBitmap(unBitmap, 300,510,false);
-        writer.addImage(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-85-SALTO_LINEA*2-510,resizedBm);
+        writer.addImage(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-85-SALTO_LINEA-scaledBitmap.getHeight()-SEPARACIONFOTOS,scaledBitmap);
+
     }
 
 
@@ -633,6 +650,7 @@ public class GraficosActivity extends AppCompatActivity {
         crearPdfEse(unListaSeiketsu);
         writer.newPage();
         crearPdfEse(unListaShitsuke);
+        cargarGraficos(mAudit);
 
         outputToFile("5S Report-"+mAudit.getAreaAuditada().getNombreArea()+"-"+mAudit.getFechaAuditoria()+".pdf", writer.asString(), "ISO-8859-1");
     }
@@ -645,37 +663,8 @@ public class GraficosActivity extends AppCompatActivity {
      * since Bitmap.createScaledBitmap(...) produces bad (blocky) quality bitmaps.)
 
      */
-    public static Bitmap scaleBitmap(Bitmap elBit, int newWidth) {
-        Bitmap bitmap;
-        Matrix rotMatrix = new Matrix();
-        rotMatrix.postRotate(90);
 
-        if (elBit.getWidth()>elBit.getHeight()){
-            bitmap=elBit;
-        }
-        else{
-            bitmap=Bitmap.createBitmap(elBit , 0, 0, elBit.getWidth(), elBit .getHeight(), rotMatrix, true);
-        }
-        Double proporcion=(bitmap.getWidth()*1.00/bitmap.getHeight()*1.00);
 
-        int newHeight=(int)Math.round(newWidth / proporcion);
-        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-
-        float scaleX = newWidth / (float) bitmap.getWidth();
-        float scaleY = newHeight / (float) bitmap.getHeight();
-        float pivotX = 0;
-        float pivotY = 0;
-
-        Matrix scaleMatrix = new Matrix();
-        scaleMatrix.setScale(scaleX, scaleY, pivotX, pivotY);
-        if (bitmap.getHeight()>bitmap.getWidth()){
-            scaleMatrix.postRotate(90);
-        }
-        Canvas canvas = new Canvas(scaledBitmap);
-        canvas.setMatrix(scaleMatrix);
-        canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
-        return scaledBitmap;
-    }
 
     public void crearPdfEse(List<SubItem> laLista){
 
@@ -715,18 +704,48 @@ public class GraficosActivity extends AppCompatActivity {
         int cursorX=x;
         int cursorY=y;
         for (SubItem sub : laLista) {
+            cursorX=MARGEN_IZQUIERDO;
+            cursorY = cursorY-(SEPARACIONFOTOS/2);
+            if (cursorY<2*MARGEN_IZQUIERDO) {
+                writer.newPage();
+
+                cursorX=0;
+                cursorY=792;
+                //fuente titulo
+                writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+                //escribir titulo
+                writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+                cursorY=cursorY-MARGEN_IZQUIERDO;
+                cursorX=cursorX+MARGEN_IZQUIERDO;
+                //fuente fecha escribir fecga
+                writer.addText(cursorX, cursorY-SALTO_LINEA,12,"Date: "+fecha);
+                cursorY=cursorY-SALTO_LINEA;
+                writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
+                writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
+
+                //linea separacion
+                writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
+                cursorY=PaperSize.LETTER_HEIGHT-65;
+                cursorY=cursorY-SALTO_LINEA;
+                cursorX=MARGEN_IZQUIERDO;
+
+            }
+
             writer.addText(cursorX,cursorY-SALTO_LINEA,12,sub.getEnunciado());
             cursorY=cursorY-SALTO_LINEA;
             writer.addText(cursorX,cursorY-SALTO_LINEA,12,"Score: "+sub.getPuntuacion1().toString());
             cursorY=cursorY-2*SALTO_LINEA;
+
             //renglonesFoto=Math.round(sub.getListaFotos().size()/3);
             for (Foto foto:sub.getListaFotos()
                     ) {
                 Foto unaFoto=foto;
                 File unFile= new File(unaFoto.getRutaFoto());
                 BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                bmOptions.inScaled=false;
                 Bitmap rawBitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-                Bitmap bitmapScaled = scaleBitmap(rawBitmap,180);
+                Bitmap bitmapScaled = scaleBitmap(rawBitmap,270);
+
 
 //                    SI LA FOTO NO ENTRA EN LO QUE QUEDA DE PAGINA
                 if (cursorY-bitmapScaled.getHeight()<SALTO_LINEA){
@@ -755,6 +774,7 @@ public class GraficosActivity extends AppCompatActivity {
 
                     //FINALMENTE AGREGO LA FOTO
                     writer.addImage(cursorX,cursorY-bitmapScaled.getHeight(),bitmapScaled);
+                    writer.addText(cursorX,cursorY-bitmapScaled.getHeight()-SEPARACIONFOTOS,10,unaFoto.getComentario());
                     cursorX=cursorX+bitmapScaled.getWidth()+ SALTO_LINEA;
                     cursorY=cursorY-bitmapScaled.getHeight();
                 }
@@ -764,25 +784,83 @@ public class GraficosActivity extends AppCompatActivity {
 //                            NO ENTRA
 //                            LA PONGO ABAJO
                         cursorX=MARGEN_IZQUIERDO;
-                        cursorY=cursorY-bitmapScaled.getHeight()-SALTO_LINEA;
+                        cursorY=cursorY-bitmapScaled.getHeight()-SEPARACIONFOTOS;
                         writer.addImage(cursorX,cursorY,bitmapScaled);
+                        writer.addText(cursorX,cursorY-SEPARACIONFOTOS,10,unaFoto.getComentario());
                         cursorX=cursorX+bitmapScaled.getWidth();
+
                     }
                     else {
                         if (cursorX == MARGEN_IZQUIERDO) {
                             writer.addImage(cursorX, cursorY - bitmapScaled.getHeight(), bitmapScaled);
+                            writer.addText(cursorX,cursorY-bitmapScaled.getHeight()-SEPARACIONFOTOS,10,unaFoto.getComentario());
                             cursorX = cursorX + bitmapScaled.getWidth();
                             cursorY = cursorY-bitmapScaled.getHeight();
                         }
                         else {
 //                       ENTRA EN LA MISMA LINEA
                             writer.addImage(cursorX + SEPARACIONFOTOS, cursorY, bitmapScaled);
+                            writer.addText(cursorX+SEPARACIONFOTOS,cursorY-SEPARACIONFOTOS,10,unaFoto.getComentario());
                             cursorX = cursorX + SEPARACIONFOTOS + bitmapScaled.getWidth();
+                            cursorY=cursorY-SEPARACIONFOTOS;
                         }
                     }
                 }
             }
         }
+    }
+
+    public static Bitmap scaleBitmap(Bitmap elBit, int newWidth) {
+        Bitmap bitmap;
+        Matrix rotMatrix = new Matrix();
+        rotMatrix.postRotate(90);
+
+        if (elBit.getWidth()>elBit.getHeight()){
+            bitmap=elBit;
+        }
+        else{
+            bitmap=Bitmap.createBitmap(elBit , 0, 0, elBit.getWidth(), elBit .getHeight(), rotMatrix, true);
+        }
+        Double proporcion=(bitmap.getWidth()*1.00/bitmap.getHeight()*1.00);
+
+        int newHeight=(int)Math.round(newWidth / proporcion);
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float scaleX = newWidth / (float) bitmap.getWidth();
+        float scaleY = newHeight / (float) bitmap.getHeight();
+        float pivotX = 0;
+        float pivotY = 0;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(scaleX, scaleY, pivotX, pivotY);
+        if (bitmap.getHeight()>bitmap.getWidth()){
+            scaleMatrix.postRotate(90);
+        }
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
+        return scaledBitmap;
+    }
+    public static Bitmap scaleSinRotar(Bitmap bitmap, int newWidth) {
+
+
+        Double proporcion=(bitmap.getWidth()*1.00/bitmap.getHeight()*1.00);
+
+        int newHeight=(int)Math.round(newWidth / proporcion);
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float scaleX = newWidth / (float) bitmap.getWidth();
+        float scaleY = newHeight / (float) bitmap.getHeight();
+        float pivotX = 0;
+        float pivotY = 0;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(scaleX, scaleY, pivotX, pivotY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
+        return scaledBitmap;
     }
 }
 

@@ -409,10 +409,10 @@ public class FragmentSubitem extends Fragment {
                     if (existeDirectorioImagenes()) {
                         try {
                             fotoComprimida = new Compressor(getContext())
-                                    .setMaxWidth(640)
+                                    .setMaxWidth(600)
                                     .setMaxHeight(480)
-                                    .setQuality(75)
-                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                                    .setQuality(100)
+                                    .setCompressFormat(Bitmap.CompressFormat.PNG)
                                     .setDestinationDirectoryPath(Environment.getExternalStorageDirectory() + File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "evidencias")
                                     .compressToFile(fotoOriginal);
                         } catch (IOException e) {

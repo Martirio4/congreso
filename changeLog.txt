@@ -1,4 +1,6 @@
 29/11/2017- fix colores radiobutton para api<21 se reemplazo por AppCompatRadioButton
 29/11/2017- se agrego permisos de escritura en runtime, para Api>23
 29/11/2017- fix borrar datos app
+30/11/2017- automatizacion de generacion de reporte, en funcion del ancho de foto deseado ordena y genera las paginas necesarias.
 
+	
