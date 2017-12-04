@@ -3,7 +3,7 @@ package com.nomad.audit5s.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nomad.audit5s.Activities.ActivityVerAuditorias;
-import com.nomad.audit5s.Adapter.AdapterFotos;
+import com.nomad.audit5s.Adapter.AdapterVerAudit;
 import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
@@ -23,7 +23,7 @@ import io.realm.RealmList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentRevusarAuditoria extends Fragment {
+public class FragmentRevisarAuditoria extends Fragment {
     
     private static final String NUMERO="NUMERO";
     private String idNumero;
@@ -46,16 +46,16 @@ public class FragmentRevusarAuditoria extends Fragment {
     private RecyclerView recycler3;
     private RecyclerView recycler4;
     
-    private AdapterFotos adapter1;
-    private AdapterFotos adapter2;
-    private AdapterFotos adapter3;
-    private AdapterFotos adapter4;
+    private AdapterVerAudit adapter1;
+    private AdapterVerAudit adapter2;
+    private AdapterVerAudit adapter3;
+    private AdapterVerAudit adapter4;
 
     private Auditoria mAudit;
     
 
 
-    public FragmentRevusarAuditoria() {
+    public FragmentRevisarAuditoria() {
         // Required empty public constructor
     }
 
@@ -88,10 +88,10 @@ public class FragmentRevusarAuditoria extends Fragment {
         recycler3= view.findViewById(R.id.recycler3VerAudit);
         recycler4= view.findViewById(R.id.recycler4VerAudit);
         
-        adapter1=new AdapterFotos();
-        adapter2=new AdapterFotos();
-        adapter3=new AdapterFotos();
-        adapter4=new AdapterFotos();
+        adapter1=new AdapterVerAudit();
+        adapter2=new AdapterVerAudit();
+        adapter3=new AdapterVerAudit();
+        adapter4=new AdapterVerAudit();
         
         adapter1.setContext(getContext());
         adapter2.setContext(getContext());
@@ -123,6 +123,18 @@ public class FragmentRevusarAuditoria extends Fragment {
         fecha.setText(mAudit.getFechaAuditoria());
         String puntajeTexto=mAudit.getPuntajeFinal().toString();
         puntaje.setText(puntajeTexto);
+
+        if (mAudit.getPuntajeFinal()<=0.5f){
+            puntaje.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.semaRojo));
+        }
+        else{
+            if (mAudit.getPuntajeFinal() <0.8f){
+                puntaje.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.semaAmarillo));
+            }
+            else{
+                puntaje.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.semaVerde));
+            }
+        }
 
         switch(idNumero){
             case "1":
@@ -261,9 +273,9 @@ public class FragmentRevusarAuditoria extends Fragment {
         RealmList<SubItem>lista=mAudit.getSubItems();
 
         sub1.setText(lista.get(16).getEnunciado());
-        sub1.setText(lista.get(17).getEnunciado());
-        sub1.setText(lista.get(18).getEnunciado());
-        sub1.setText(lista.get(19).getEnunciado());
+        sub2.setText(lista.get(17).getEnunciado());
+        sub3.setText(lista.get(18).getEnunciado());
+        sub4.setText(lista.get(19).getEnunciado());
 
         String aux0=lista.get(16).getPuntuacion1().toString();
         String aux1=lista.get(17).getPuntuacion1().toString();
@@ -289,9 +301,9 @@ public class FragmentRevusarAuditoria extends Fragment {
 
     public static Fragment crearFragment(String unString) {
 
-        FragmentRevusarAuditoria fragment= new FragmentRevusarAuditoria();
+        FragmentRevisarAuditoria fragment= new FragmentRevisarAuditoria();
         Bundle bundle=new Bundle();
-        bundle.putString(FragmentRevusarAuditoria.NUMERO,unString);
+        bundle.putString(FragmentRevisarAuditoria.NUMERO,unString);
         fragment.setArguments(bundle);
         return fragment;
     }

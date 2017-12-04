@@ -5,14 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.nomad.audit5s.Fragments.FragmentRevusarAuditoria;
-import com.nomad.audit5s.Fragments.FragmentSubitem;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.Fragments.FragmentRevisarAuditoria;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
 
 /**
  * Created by Pablo on 31/5/2017.
@@ -34,7 +30,7 @@ public class AdapterPagerVerAudits extends FragmentStatePagerAdapter {
         //LE CARGO LOS FRAGMENTS QUE QUIERO. UTILIZO LA LISTA DE PELICULAS Y SERIES PARA CREAR LOS FRAGMENTS.
 
         for (String unString : listaStrings) {
-            listaFragments.add(FragmentRevusarAuditoria.crearFragment(unString));
+            listaFragments.add(FragmentRevisarAuditoria.crearFragment(unString));
 
         }
 
@@ -56,7 +52,7 @@ public class AdapterPagerVerAudits extends FragmentStatePagerAdapter {
     public void setListaEses(List<String> lista) {
         this.listaStrings = lista;
         for (String unStr : listaStrings) {
-            listaFragments.add(FragmentRevusarAuditoria.crearFragment(unStr));
+            listaFragments.add(FragmentRevisarAuditoria.crearFragment(unStr));
         }
         notifyDataSetChanged();
     }
