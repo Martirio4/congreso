@@ -353,4 +353,24 @@ public class ControllerDatos  {
         unaLista.add("Ranking");
         return unaLista;
     }
+
+    public List<String> traerListaVerAudit() {
+        List<String>lista =new ArrayList<>();
+        lista.add("1");
+        lista.add("2");
+        lista.add("3");
+        lista.add("4");
+        lista.add("5");
+        return lista;
+    }
+
+    public List<String> traerTitulosVerAudit(){
+        List<String>lista =new ArrayList<>();
+        lista.add("1S Seiri");
+        lista.add("2S Seiton");
+        lista.add("3S Seiso");
+        lista.add("4S Seiketsu");
+        lista.add("5S Shitsuke");
+        return lista;
+    }
 }

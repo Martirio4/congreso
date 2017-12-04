@@ -6,9 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,31 +16,26 @@
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:screenOrientation="portrait"
             android:name=".Activities.ActivityAuditoria"
-            android:parentActivityName=".Activities.ActivityLanding" />
-
+            android:parentActivityName=".Activities.ActivityLanding"
+            android:screenOrientation="portrait" />
         <activity android:name=".Activities.ActivityLanding" />
-
-        <activity android:name=".Activities.SettingsActivity"
+        <activity
+            android:name=".Activities.SettingsActivity"
             android:parentActivityName=".Activities.ActivityLanding"
-                  android:screenOrientation="portrait" />
-
-        <activity android:name=".Activities.GraficosActivity"
-            android:parentActivityName=".Activities.ActivityLanding"
-            />
-
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.GraficosActivity"
+            android:parentActivityName=".Activities.ActivityLanding" />
         <activity android:name=".Activities.ActivityVerAuditorias" />
-
         <activity
             android:name=".Activities.ActivityMyAudits"
-            android:parentActivityName=".Activities.ActivityLanding"/>
-
+            android:parentActivityName=".Activities.ActivityLanding" />
     </application>
 
 </manifest>

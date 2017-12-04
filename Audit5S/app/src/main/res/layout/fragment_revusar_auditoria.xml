@@ -1,0 +1,244 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.nomad.audit5s.Fragments.FragmentRevusarAuditoria">
+    <TextView
+        android:textColor="@color/primary_text"
+        android:id="@+id/tituloVerAudit"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:text="Titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+
+        android:paddingStart="@dimen/margenChico"
+        android:paddingEnd="@dimen/margenChico"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <TextView
+
+                android:text="Date: "
+                android:id="@+id/tagFechaVerAudit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="30"
+                android:textSize="16sp"
+                android:text="02/02/1983"
+                android:id="@+id/fechaAuditVerAudit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+
+                android:text="Score: "
+                android:id="@+id/tagPuntajeVerAudit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="20"
+                android:textSize="16sp"
+                android:text="50%"
+                android:id="@+id/puntajeVerAudit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:layout_marginEnd="@dimen/margenChico"
+        android:layout_marginStart="@dimen/margenChico"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/primary_text"
+        >
+
+    </View>
+    <LinearLayout
+        android:paddingTop="@dimen/margenChico"
+        android:paddingStart="@dimen/margenChico"
+        android:paddingEnd="@dimen/margenChico"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textColor="@color/primary_text"
+        android:id="@+id/tag1sVerAudit"
+        android:text="1°S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tagSubitem1VerAudit"
+                android:text="item: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subitem1VerAudit"
+                android:text="item 2.4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="@dimen/margenChico"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tagScoreVerAudit"
+                android:text="Score: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/score1sVerAudit"
+                android:text="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="@dimen/margenChico"
+            android:id="@+id/recycler1sVerAudit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+        <!--SEGUNDO SUBITEM-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tagSubitem2VerAudit"
+                android:text="item: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subitem2VerAudit"
+                android:text="item 2.4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="@dimen/margenChico"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tagScore2VerAudit"
+                android:text="Score: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/score2VerAudit"
+                android:text="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="@dimen/margenChico"
+            android:id="@+id/recycler2VerAudit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+        <!--TERCER SUBITEM-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tagSubitem3VerAudit"
+                android:text="item: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subitem3VerAudit"
+                android:text="item 2.4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="@dimen/margenChico"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tagScore3VerAudit"
+                android:text="Score: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/score3VerAudit"
+                android:text="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="@dimen/margenChico"
+            android:id="@+id/recycler3VerAudit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+        <!--CUARTO SUBITEM-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tagSubitem4VerAudit"
+                android:text="item: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/subitem4VerAudit"
+                android:text="item 2.4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="@dimen/margenChico"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tagScore4VerAudit"
+                android:text="Score: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/score4VerAudit"
+                android:text="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginBottom="@dimen/margenChico"
+            android:id="@+id/recycler4VerAudit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+</LinearLayout>

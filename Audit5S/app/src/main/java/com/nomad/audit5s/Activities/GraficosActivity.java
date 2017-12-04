@@ -77,6 +77,7 @@ public class GraficosActivity extends AppCompatActivity {
     private FloatingActionMenu fabMenuGraficos;
     private FloatingActionButton fabGenerarPDF;
     private FloatingActionButton fabQuit;
+    private FloatingActionButton fabVerAuditoria;
 
     private ProgressBar progressBar;
     private Double promedioSeiketsu;
@@ -139,6 +140,32 @@ public class GraficosActivity extends AppCompatActivity {
 
         fabMenuGraficos.setMenuButtonColorNormal(ContextCompat.getColor(this,R.color.colorAccent));
 
+        fabVerAuditoria = new FloatingActionButton(this);
+        fabVerAuditoria.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
+       fabVerAuditoria.setButtonSize(FloatingActionButton.SIZE_MINI);
+       fabVerAuditoria.setLabelText(getString(R.string.verAuditoria));
+       fabVerAuditoria.setImageResource(R.drawable.ic_find_in_page_black_24dp);
+       fabMenuGraficos.addMenuButton(fabVerAuditoria);
+
+       fabVerAuditoria.setLabelColors(ContextCompat.getColor(this, R.color.tile3),
+        ContextCompat.getColor(this, R.color.light_grey),
+        ContextCompat.getColor(this, R.color.white_transparent));
+       fabVerAuditoria.setLabelTextColor(ContextCompat.getColor(this, R.color.black));
+
+       fabVerAuditoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inten=new Intent(v.getContext(), ActivityVerAuditorias.class);
+                Bundle bundle123=new Bundle();
+                bundle123.putString(ActivityVerAuditorias.AUDITORIA,idAudit);
+                inten.putExtras(bundle123);
+                startActivity(inten);
+
+            }
+        });
+
+
+
 
 
         fabGenerarPDF = new FloatingActionButton(this);
@@ -182,6 +209,8 @@ public class GraficosActivity extends AppCompatActivity {
                 GraficosActivity.this.finish();
             }
         });
+
+
 
 
 
@@ -598,8 +627,6 @@ public class GraficosActivity extends AppCompatActivity {
     }
 
 
-
-
     public void enviarPDF(){
 
         ControllerDatos controllerDatos=new ControllerDatos(this);
@@ -607,7 +634,6 @@ public class GraficosActivity extends AppCompatActivity {
         Auditoria mAudit= realm.where(Auditoria.class)
                 .equalTo("idAuditoria",idAudit)
                 .findFirst();
-
 
         List<String>alistaSeiri=controllerDatos.traerSeiri();
         List<String>alistaSeiton=controllerDatos.traerSeiton();
@@ -663,8 +689,6 @@ public class GraficosActivity extends AppCompatActivity {
      * since Bitmap.createScaledBitmap(...) produces bad (blocky) quality bitmaps.)
 
      */
-
-
 
     public void crearPdfEse(List<SubItem> laLista){
 
