@@ -34,7 +34,7 @@ public class FragmentSeleccionAerea extends Fragment {
     private RealmList<Area> listaAreas;
     private RecyclerView recyclerAreas;
     private AdapterArea adapterArea;
-    private GridLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
 
     private Notificable notificable;
 
@@ -70,7 +70,7 @@ public class FragmentSeleccionAerea extends Fragment {
         recyclerAreas= (RecyclerView)view.findViewById(R.id.recyclerArea);
         adapterArea= new AdapterArea();
         adapterArea.setContext(getContext());
-        layoutManager= new GridLayoutManager(getContext(),2);
+        layoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerAreas.setLayoutManager(layoutManager);
         adapterArea.setListaAreasOriginales(listaAreas);
         recyclerAreas.setAdapter(adapterArea);

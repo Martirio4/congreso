@@ -13,4 +13,8 @@
     <dimen name="altoImageViewCargarArea">250dp</dimen>
     <dimen name="margenGrande">16dp</dimen>
     <dimen name="title_text_size">12dp</dimen>
+
+    <dimen name="margenMini">4dp</dimen>
+    <dimen name="altoTarjeta3">84dp</dimen>
+    <dimen name="margenMicro">2dp</dimen>
 </resources>

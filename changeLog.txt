@@ -13,3 +13,6 @@
 05/12/2017- service para evitar guardar audit incompleta al hacer hardKill de la app
 05/12/2017- diseño de reporte digital
 05/12/2017- fix navegacion, si estabas en el logi podias hacer back a alguna activity
+06/12/2017- fix en ubicacion de storage de imagenes.
+06/12/2017- fix compatibilidad api 23 (context/contextwrapper/activity)
+06/12/2017- cambio icono borrar area

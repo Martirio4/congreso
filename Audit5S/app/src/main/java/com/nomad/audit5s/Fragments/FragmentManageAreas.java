@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -57,7 +58,7 @@ public class FragmentManageAreas extends Fragment {
     private RealmList<Area> listaAreas;
     private RecyclerView recyclerAreas;
     private AdapterArea adapterArea;
-    private GridLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
 
     private File fotoOriginal;
     private File fotoComprimida;
@@ -110,7 +111,7 @@ public class FragmentManageAreas extends Fragment {
         recyclerAreas= (RecyclerView)view.findViewById(R.id.recyclerArea);
         adapterArea= new AdapterArea();
         adapterArea.setContext(getContext());
-        layoutManager= new GridLayoutManager(getContext(),2);
+        layoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerAreas.setLayoutManager(layoutManager);
         adapterArea.setListaAreasOriginales(listaAreas);
         recyclerAreas.setAdapter(adapterArea);
@@ -253,7 +254,7 @@ public class FragmentManageAreas extends Fragment {
                                 .setMaxHeight(480)
                                 .setQuality(75)
                                 .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                                .setDestinationDirectoryPath(Environment.getExternalStorageDirectory()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "areas")
+                                .setDestinationDirectoryPath(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "areas")
                                 .compressToFile(fotoOriginal);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -290,7 +291,7 @@ public class FragmentManageAreas extends Fragment {
     }
     public void existeDirectorioImagenesAreas() {
         Boolean sePudo = true;
-        File dir = new File(Environment.getExternalStorageDirectory()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "areas");
+        File dir = new File(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "areas");
         if (!dir.exists() || !dir.isDirectory()) {
             sePudo = dir.mkdirs();
         }

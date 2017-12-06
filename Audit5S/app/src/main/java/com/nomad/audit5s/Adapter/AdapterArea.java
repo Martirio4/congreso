@@ -1,6 +1,9 @@
 package com.nomad.audit5s.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -9,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -72,10 +76,10 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
 
 
         if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
-            viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_areas, parent, false);
+            viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_areas2, parent, false);
 
         } else {
-            viewCelda = layoutInflater.inflate(R.layout.detalle_celda_recycler_cargar_producto, parent, false);
+            viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_areas2, parent, false);
             viewCelda.setOnClickListener(this);
         }
         AreaViewHolder areasViewHolder = new AreaViewHolder(viewCelda);
@@ -99,13 +103,24 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
             AreaViewHolder.fabEliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    eliminable = (Eliminable) v.getContext();
+                    eliminable = (Eliminable) getRequiredActivity(v);
                     eliminable.EliminarArea(unArea);
 
                 }
             });
         }
 
+    }
+
+    private Activity getRequiredActivity(View req_view) {
+        Context context = req_view.getContext();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity)context;
+            }
+            context = ((ContextWrapper)context).getBaseContext();
+        }
+        return null;
     }
 
     @Override
@@ -130,30 +145,29 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
     private static class AreaViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView textView;
-        private FloatingActionButton fabEliminar;
-
-
+        private ImageButton fabEliminar;
 
         public AreaViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.imagenCamara);
-            textView= (TextView) itemView.findViewById(R.id.nombreNuevaArea);
+            textView= (TextView) itemView.findViewById(R.id.nombreArea);
+            Typeface robotoL = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/Roboto-Light.ttf");
+            textView.setTypeface(robotoL);
+            fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
+            fabEliminar.setVisibility(View.GONE);
 
             FragmentActivity unaActivity = (FragmentActivity) itemView.getContext();
             FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
             FragmentManageAreas fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
 
             if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
-                fabEliminar = (FloatingActionButton) itemView.findViewById(R.id.botonEliminar);
-                fabEliminar.setColorNormal(ContextCompat.getColor(itemView.getContext(), R.color.accent));
+                fabEliminar.setVisibility(View.VISIBLE);
             }
         }
 
         public void cargarArea(Area unArea) {
 
             if (unArea.getFotoArea()!=null) {
-
-
             File f =new File(unArea.getFotoArea().getRutaFoto());
             Picasso.with(imageView.getContext())
                     .load(f)

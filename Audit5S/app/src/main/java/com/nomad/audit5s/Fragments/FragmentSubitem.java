@@ -447,7 +447,7 @@ public class FragmentSubitem extends Fragment {
                                     .setMaxHeight(480)
                                     .setQuality(100)
                                     .setCompressFormat(Bitmap.CompressFormat.PNG)
-                                    .setDestinationDirectoryPath(Environment.getExternalStorageDirectory() + File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "evidencias")
+                                    .setDestinationDirectoryPath(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "evidencias")
                                     .compressToFile(fotoOriginal);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -511,7 +511,7 @@ public class FragmentSubitem extends Fragment {
 
     public Boolean  existeDirectorioImagenes(){
         Boolean sePudo=true;
-        File dir = new File( Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "images"+ File.separator + "evidencias");
+        File dir = new File( getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "evidencias");
         if(!dir.exists() || !dir.isDirectory()) {
             sePudo=dir.mkdirs();
         }

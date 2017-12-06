@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity  {
 
 
         mAuth = FirebaseAuth.getInstance();
-        Realm.init(this);
+        Realm.init(getApplicationContext());
         mAuthListener=new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
