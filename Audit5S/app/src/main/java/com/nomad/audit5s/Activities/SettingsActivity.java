@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.nomad.audit5s.Adapter.AdapterArea;
-import com.nomad.audit5s.Fragments.FragmentCargarArea;
 import com.nomad.audit5s.Fragments.FragmentManageAreas;
 import com.nomad.audit5s.Fragments.FragmentSettings;
 import com.nomad.audit5s.Model.Area;
@@ -25,7 +23,7 @@ import com.nomad.audit5s.R;
 
 import io.realm.Realm;
 
-public class SettingsActivity extends AppCompatActivity implements FragmentCargarArea.Exitable, AdapterArea.Eliminable, FragmentManageAreas.Avisable{
+public class SettingsActivity extends AppCompatActivity implements AdapterArea.Eliminable, FragmentManageAreas.Avisable{
 
     private LinearLayout layout;
 
@@ -71,10 +69,7 @@ public class SettingsActivity extends AppCompatActivity implements FragmentCarga
 
 
 
-    @Override
-    public void cerrarFragment() {
-        irALanding();
-    }
+
 
     @Override
     public void EliminarArea(Area unArea) {

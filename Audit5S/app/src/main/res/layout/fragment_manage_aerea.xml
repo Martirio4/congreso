@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.nomad.audit5s.Fragments.FragmentSeleccionAerea">
     <LinearLayout
+        android:background="@color/blancoNomad"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
