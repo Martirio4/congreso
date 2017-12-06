@@ -12,3 +12,4 @@
 05/12/2017- fix back buttons de la toolbar
 05/12/2017- service para evitar guardar audit incompleta al hacer hardKill de la app
 05/12/2017- diseño de reporte digital
+05/12/2017- fix navegacion, si estabas en el logi podias hacer back a alguna activity
