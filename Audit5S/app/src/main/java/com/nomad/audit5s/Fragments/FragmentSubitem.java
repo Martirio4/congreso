@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +31,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -339,8 +341,40 @@ public class FragmentSubitem extends Fragment {
         fabSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fabMenu.close(true);
-                avisable.salirDeAca();
+
+                new MaterialDialog.Builder(getContext())
+                        .title("Warning!")
+                        .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
+                        .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                        .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
+                        .content("Unfinished audit will not be saved."+"\n"+"Continue?")
+                        .positiveText("Yes")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                Realm realm = Realm.getDefaultInstance();
+                                final Auditoria mAuditDelete=realm.where(Auditoria.class)
+                                        .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
+                                        .findFirst();
+                                realm.executeTransaction(new Realm.Transaction() {
+                                    @Override
+                                    public void execute(Realm realm) {
+                                        mAuditDelete.deleteFromRealm();
+                                    }
+                                });
+                                //aca lo que pasa si voy para atras
+                                fabMenu.close(true);
+                                avisable.salirDeAca();
+                            }
+                        })
+                        .negativeText("Cancel")
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                            }
+                        })
+                        .show();
 
             }
         });
@@ -542,6 +576,7 @@ public class FragmentSubitem extends Fragment {
                         .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
                         .content("Please, add a comment for this photo")
                         .inputType(InputType.TYPE_CLASS_TEXT)
+                        .inputRange(0,40)
                         .input("Comment","", new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(MaterialDialog dialog, CharSequence input) {
@@ -563,6 +598,7 @@ public class FragmentSubitem extends Fragment {
                 .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
                 .content("Please, add a comment for this photo")
                 .inputType(InputType.TYPE_CLASS_TEXT)
+                .inputRange(0,40)
                 .input("Comment","", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, final CharSequence input) {

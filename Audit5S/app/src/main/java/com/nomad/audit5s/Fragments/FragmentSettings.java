@@ -2,6 +2,7 @@ package com.nomad.audit5s.Fragments;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.IntentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.Button;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.nomad.audit5s.Activities.ActivityLanding;
 import com.nomad.audit5s.Activities.LoginActivity;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
@@ -56,6 +59,11 @@ public class FragmentSettings extends Fragment {
         logout=(Button)view.findViewById(R.id.botonLogOut);
         borrar=(Button)view.findViewById(R.id.botonBorrarTodo);
         salir=(Button)view.findViewById(R.id.botonVolver);
+        Typeface roboto = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Light.ttf");
+        areas.setTypeface(roboto);
+        logout.setTypeface(roboto);
+        borrar.setTypeface(roboto);
+        salir.setTypeface(roboto);
 
         areas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,19 +82,19 @@ public class FragmentSettings extends Fragment {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(v.getContext())
-                        .title("Sign out and quit")
+                        .title("Sign out")
                         .contentColor(ContextCompat.getColor(v.getContext(), R.color.primary_text))
                         .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
                         .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
-                        .content("You are about to log out your account and quit the application."+"\n"+"Continue")
-                        .positiveText("Log out & Quit")
+                        .content("You are about to log out your account."+"\n"+"Continue")
+                        .positiveText("Log out")
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 FirebaseAuth.getInstance().signOut();
-                                Intent intent= new Intent(getContext(), LoginActivity.class);
+                                Intent intent = new Intent(getContext().getApplicationContext(), LoginActivity.class);
                                 startActivity(intent);
-                                getActivity().finish();
+                                getActivity().finishAffinity();
 
                             }
                         })

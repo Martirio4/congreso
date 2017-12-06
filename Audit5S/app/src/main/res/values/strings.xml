@@ -244,6 +244,9 @@ Even in other areas that they frequent or work.
     <string name="ayuda">\?</string>
     <string name="sinAreas">No areas created. Go to \"Settings\" menu and then click \"Manage audit areas\"</string>
     <string name="verAuditoria">Audit detail</string>
+    <string name="start">Start Audit</string>
+    <string name="contact">Contact us</string>
+    <string name="firstTime">Click here if it is your first time</string>
 
 
 </resources>

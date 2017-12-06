@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nomad.audit5s.Adapter.AdapterAuditorias;
-import com.nomad.audit5s.Adapter.AdapterRanking;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
-import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
 
 import io.realm.Realm;
@@ -29,7 +27,7 @@ public class FragmentRanking extends Fragment {
 
     private RealmList<Auditoria> listaAuditorias;
     private RecyclerView recyclerAreas;
-    private AdapterRanking adapterAudits;
+    private AdapterAuditorias adapterAudits;
     private LinearLayoutManager layoutManager;
     private RealmList<Area>listaAreas;
     private Graficable graficable;
@@ -58,7 +56,7 @@ public class FragmentRanking extends Fragment {
         listaAuditorias=new RealmList<>();
         listaAuditorias.addAll(result2);
         recyclerAreas= (RecyclerView)view.findViewById(R.id.recyclerArea);
-        adapterAudits= new AdapterRanking();
+        adapterAudits= new AdapterAuditorias();
         adapterAudits.setContext(getContext());
         layoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerAreas.setLayoutManager(layoutManager);
@@ -93,8 +91,7 @@ public class FragmentRanking extends Fragment {
 
 
     public static FragmentRanking crearFragmentRanking() {
-        FragmentRanking fragmentRanking = new FragmentRanking();
-        return fragmentRanking;
+        return new FragmentRanking();
     }
 
     @Override

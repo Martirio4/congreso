@@ -1,6 +1,7 @@
 package com.nomad.audit5s.Fragments;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +17,9 @@ import com.nomad.audit5s.Adapter.AdapterVerAudit;
 import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -64,24 +68,37 @@ public class FragmentRevisarAuditoria extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_revusar_auditoria, container, false);
+        View view = inflater.inflate(R.layout.fragment_revisar_auditoria, container, false);
         
         Bundle bundle=getArguments();
         idNumero=bundle.getString(NUMERO);
 
+        Typeface robotoL = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
+
         subTit=view.findViewById(R.id.tituloVerAudit);
+        subTit.setTypeface(robotoL);
         fecha=view.findViewById(R.id.fechaAuditVerAudit);
+        fecha.setTypeface(robotoL);
         puntaje=view.findViewById(R.id.puntajeVerAudit);
+        puntaje.setTypeface(robotoL);
 
         sub1=view.findViewById(R.id.subitem1VerAudit);
+        sub1.setTypeface(robotoL);
         sub2=view.findViewById(R.id.subitem2VerAudit);
+        sub2.setTypeface(robotoL);
         sub3=view.findViewById(R.id.subitem3VerAudit);
+        sub3.setTypeface(robotoL);
         sub4=view.findViewById(R.id.subitem4VerAudit);
+        sub4.setTypeface(robotoL);
         
         punt1=view.findViewById(R.id.score1sVerAudit);
+        punt1.setTypeface(robotoL);
         punt2=view.findViewById(R.id.score2VerAudit);
+        punt2.setTypeface(robotoL);
         punt3=view.findViewById(R.id.score3VerAudit);
+        punt3.setTypeface(robotoL);
         punt4=view.findViewById(R.id.score4VerAudit);
+        punt4.setTypeface(robotoL);
 
         recycler1= view.findViewById(R.id.recycler1sVerAudit);
         recycler2= view.findViewById(R.id.recycler2VerAudit);
@@ -121,7 +138,13 @@ public class FragmentRevisarAuditoria extends Fragment {
 
         subTit.setText(mAudit.getAreaAuditada().getNombreArea());
         fecha.setText(mAudit.getFechaAuditoria());
-        String puntajeTexto=mAudit.getPuntajeFinal().toString();
+
+        Double puntajeAuditoria=mAudit.getPuntajeFinal();
+        Locale locale = new Locale("en","US");
+        NumberFormat format = NumberFormat.getPercentInstance(locale);
+        String puntajeTexto = format.format(puntajeAuditoria);
+
+
         puntaje.setText(puntajeTexto);
 
         if (mAudit.getPuntajeFinal()<=0.5f){

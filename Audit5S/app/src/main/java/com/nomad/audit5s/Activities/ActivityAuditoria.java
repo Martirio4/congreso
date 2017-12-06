@@ -1,6 +1,7 @@
 package com.nomad.audit5s.Activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -18,6 +19,7 @@ import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -35,6 +37,7 @@ import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.Model.SubItem;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.Services.ServiceLoco;
 import com.nomad.mylibrary.PDFWriter;
 import com.nomad.mylibrary.PaperSize;
 
@@ -93,6 +96,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auditoria);
 
+        startService(new Intent(getBaseContext(), ServiceLoco.class));
+
         Intent intent= getIntent();
         Bundle bundle= intent.getExtras();
 
@@ -134,6 +139,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.marfil));
 
+        Typeface robotoR = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        TextView unText=toolbar.findViewById(R.id.textoToolbar);
+        unText.setTypeface(robotoR);
+        unText.setTextColor(getResources().getColor(R.color.tile5));
+
+        unText.setText("5S Audit");
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

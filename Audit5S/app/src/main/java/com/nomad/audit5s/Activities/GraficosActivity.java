@@ -155,6 +155,7 @@ public class GraficosActivity extends AppCompatActivity {
        fabVerAuditoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fabMenuGraficos.close(true);
                 Intent inten=new Intent(v.getContext(), ActivityVerAuditorias.class);
                 Bundle bundle123=new Bundle();
                 bundle123.putString(ActivityVerAuditorias.AUDITORIA,idAudit);

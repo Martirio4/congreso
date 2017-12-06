@@ -29,7 +29,6 @@
                 android:orientation="vertical">
 
 
-
                 <ImageView
                     android:clickable="false"
                     android:id="@+id/imagenCamara"

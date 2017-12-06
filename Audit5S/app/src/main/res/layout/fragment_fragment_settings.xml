@@ -1,59 +1,105 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/contenedor_landing"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/tile1"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nomad.audit5s.Fragments.FragmentSettings">
+    tools:context="com.nomad.audit5s.Activities.ActivityLanding">
+
+        <LinearLayout
+
+            android:background="@color/tile1"
+            android:id="@+id/lin1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="50"
+            android:layout_height="0dp">
+
+                <Button
+
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/roboto1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Manage Audit Areas"
+                    android:id="@+id/botonManageAreas"
+                    android:textColor="@color/tile5"
+                    />
 
 
-        <Button
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:text="Manage Audit Areas"
-            android:id="@+id/botonManageAreas"
-            android:layout_below="@id/inputLayout2"
-            android:background="@drawable/boton2"
-            android:textColor="@color/primary_text"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"/>
-        <Button
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:text="Log out and Quit"
-            android:id="@+id/botonLogOut"
-            android:layout_below="@id/inputLayout2"
-            android:background="@drawable/boton2"
-            android:textColor="@color/primary_text"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lin2"
+                android:background="@color/tile2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="50"
+            android:layout_height="0dp">
+                <Button
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    android:drawableStart="@drawable/roboto2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Log out"
+                    android:id="@+id/botonLogOut"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/tile5"
+                    />
 
-        <Button
-            android:id="@+id/botonBorrarTodo"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/inputLayout2"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/boton3"
-            android:text="Delete Audit Database"
-            android:textColor="@color/primary_text" />
+        </LinearLayout>
 
 
-        <Button
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:text="Go Back"
-            android:id="@+id/botonVolver"
-            android:layout_below="@id/inputLayout2"
-            android:background="@drawable/boton2"
-            android:textColor="@color/primary_text"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal"/>
+        <LinearLayout
+            android:background="@color/tile3"
+            android:id="@+id/lin3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="50"
+            android:layout_height="0dp">
+
+                <Button
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/botonBorrarTodo"
+                    android:drawableStart="@drawable/roboto3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Delete Audit Database"
+                    android:textColor="@color/tile5" />
 
 
 
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/tile4"
+            android:id="@+id/line4"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="50"
+            android:layout_height="0dp">
+                <Button
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    android:drawableStart="@drawable/roboto4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Go Back"
+                    android:id="@+id/botonVolver"
+                    android:textColor="@color/tile5"
+                    android:background="@android:color/transparent"
+                    />
 
 
-
+        </LinearLayout>
 </LinearLayout>
+
+
+
+
+

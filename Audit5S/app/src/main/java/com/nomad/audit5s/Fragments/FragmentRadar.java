@@ -2,6 +2,7 @@ package com.nomad.audit5s.Fragments;
 
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -60,7 +61,8 @@ public class FragmentRadar extends Fragment {
 
     private FloatingActionMenu fab_menu;
 
-    private TextView textoTitulo;
+
+
 
 
     public FragmentRadar() {
@@ -84,8 +86,12 @@ public class FragmentRadar extends Fragment {
         areaAuditada=unBundle.getString(AREA);
 
 
+        Typeface robotoR = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        TextView textoTitulo= (TextView)view.findViewById(R.id.textoAreaResultado);
+        TextView tagTitulo=(TextView)view.findViewById(R.id.tagRadarChart);
+        textoTitulo.setTypeface(robotoR);
+        tagTitulo.setTypeface(robotoR);
 
-        textoTitulo= (TextView)view.findViewById(R.id.textoAreaResultado);
         textoTitulo.setText(areaAuditada);
         /*TextView tv = (TextView) findViewById(R.id.textView);
         tv.setTextColor(Color.WHITE);

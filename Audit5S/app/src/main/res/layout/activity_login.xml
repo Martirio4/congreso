@@ -23,7 +23,7 @@
         />
     <TextView
         android:id="@+id/codBeta"
-        android:text="Beta version 0.3.15"
+        android:text="Beta version 0.4.00"
         android:textColor="@color/tile2"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textViewLogin"
@@ -148,6 +148,7 @@
 
     </LinearLayout>
     <TextView
+        android:id="@+id/disclaimer"
         android:layout_marginStart="@dimen/margenChico"
         android:layout_marginEnd="@dimen/margenChico"
         android:textColor="@color/tile2"
@@ -165,14 +166,8 @@
 
 
 
-    <ProgressBar
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
-        android:layout_gravity="center_horizontal|center_vertical"
-        />
+
+
 
 
 

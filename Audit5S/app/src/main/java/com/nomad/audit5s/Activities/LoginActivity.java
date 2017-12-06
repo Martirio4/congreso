@@ -3,6 +3,7 @@ package com.nomad.audit5s.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity  {
 
     private ImageButton loginBtn;
 
-    private ProgressBar unProgressBar;
+
     private ImageButton fakeFbLogin;
     ProgressDialog progress;
     private String idFacebook, nombreFacebook, nombreMedioFacebook, apellidoFacebook, sexoFacebook, imagenFacebook, nombreCompletoFacebook, emailFacebook;
@@ -56,14 +57,20 @@ public class LoginActivity extends AppCompatActivity  {
     private Button botonRegister;
     private Button botonOk;
 
+    private String mail;
+    private String contraseña;
+
     private TextView titulo;
 
     // [END declare_auth]
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
         mAuth = FirebaseAuth.getInstance();
         Realm.init(this);
         mAuthListener=new FirebaseAuth.AuthStateListener(){
@@ -97,8 +104,8 @@ public class LoginActivity extends AppCompatActivity  {
                         reference.child("foto").setValue(user.getPhotoUrl().toString());
                     }
 
-                    irALanding();
 
+                    irALanding();
 
 
 
@@ -148,13 +155,13 @@ public class LoginActivity extends AppCompatActivity  {
                     return;
                 }
                 
-                String mail = editUsuario.getText().toString().toLowerCase();
-                String contraseña = editPass.getText().toString();
+                 mail = editUsuario.getText().toString().toLowerCase();
+                 contraseña = editPass.getText().toString();
                 
                     loguearFirebaseManual(mail, contraseña);
                 
-                    editPass.setText(null);
-                    editUsuario.setText(null);
+                   editPass.setText(null);
+                   editUsuario.setText(null);
                 
             }
         });
@@ -301,5 +308,7 @@ public class LoginActivity extends AppCompatActivity  {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+
 
 }

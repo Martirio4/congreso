@@ -2,11 +2,15 @@ package com.nomad.audit5s.Fragments;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +85,19 @@ public class FragmentSeleccionAerea extends Fragment {
             }
         };
         adapterArea.setListener(listenerArea);
+
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.my_toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
+        Typeface robotoR = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Regular.ttf");
+        TextView unText=toolbar.findViewById(R.id.textoToolbar);
+        unText.setTypeface(robotoR);
+        unText.setTextColor(getResources().getColor(R.color.tile5));
+        unText.setText("Select area");
+
+        if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         
         return view;
     }

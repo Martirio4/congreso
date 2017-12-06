@@ -1,6 +1,7 @@
 package com.nomad.audit5s.Activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
@@ -9,7 +10,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -32,6 +35,22 @@ public class SettingsActivity extends AppCompatActivity implements FragmentCarga
         setContentView(R.layout.activity_settings);
         cargarFragmentSettings();
         layout=findViewById(R.id.contenedor_landing);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
+        Typeface robotoR = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        TextView unText=toolbar.findViewById(R.id.textoToolbar);
+        unText.setTypeface(robotoR);
+        unText.setTextColor(getResources().getColor(R.color.tile5));
+
+        unText.setText("Settings");
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        }
+
 
     }
 

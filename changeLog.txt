@@ -2,5 +2,13 @@
 29/11/2017- se agrego permisos de escritura en runtime, para Api>23
 29/11/2017- fix borrar datos app
 30/11/2017- automatizacion de generacion de reporte, en funcion del ancho de foto deseado ordena y genera las paginas necesarias.
-
-	
+05/12/2017-fix en el quit de "realizando auditoria" si le dabas quit, deja la auditoria incompleta.
+05/12/2017-rediseño de menu principal
+05/12/2017-rediseño menu settings
+05/12/2017-fix en las toolbars
+05/12/2017-limite de caracteres en los dialogos de comentario de fotos.
+05/12/2017-fix tamaño de fotos (detalle celdas)
+05/12/2017-fix porcentaje(decimal periodico)
+05/12/2017- fix back buttons de la toolbar
+05/12/2017- service para evitar guardar audit incompleta al hacer hardKill de la app
+05/12/2017- diseño de reporte digital

@@ -1,12 +1,14 @@
 package com.nomad.audit5s.Activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.nomad.audit5s.Adapter.AdapterPagerVerAudits;
 import com.nomad.audit5s.Controller.ControllerDatos;
@@ -33,6 +35,14 @@ public class ActivityVerAuditorias extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.marfil));
+
+        Typeface robotoR = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        TextView unText=toolbar.findViewById(R.id.textoToolbar);
+        unText.setTypeface(robotoR);
+        unText.setTextColor(getResources().getColor(R.color.tile5));
+        unText.setText("Audit detail");
+
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
