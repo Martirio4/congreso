@@ -27,7 +27,7 @@
                     android:background="@android:color/transparent" />
             <TextView
                 android:textColor="@color/tile5"
-                android:textSize="40sp"
+                android:textSize="@dimen/titulosMain"
                 android:id="@+id/primeraOpcion"
                 android:layout_marginStart="@dimen/margenChico"
                 android:layout_marginEnd="@dimen/margenChico"
@@ -56,7 +56,7 @@
                 android:background="@android:color/transparent" />
             <TextView
                 android:textColor="@color/tile5"
-                android:textSize="40sp"
+                android:textSize="@dimen/titulosMain"
                 android:id="@+id/segundaOpcion"
                 android:layout_marginStart="@dimen/margenChico"
                 android:layout_marginEnd="@dimen/margenChico"
@@ -93,7 +93,7 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:textColor="@color/tile5"
-                    android:textSize="40sp"
+                    android:textSize="@dimen/titulosMain"
                     android:id="@+id/terceraOpcion"
                     android:layout_marginStart="@dimen/margenChico"
                     android:layout_marginEnd="@dimen/margenChico"
@@ -132,7 +132,7 @@
 
             <TextView
                 android:textColor="@color/tile5"
-                android:textSize="40sp"
+                android:textSize="@dimen/titulosMain"
                 android:id="@+id/cuartaOpcion"
                 android:layout_marginStart="@dimen/margenChico"
                 android:layout_marginEnd="@dimen/margenChico"
