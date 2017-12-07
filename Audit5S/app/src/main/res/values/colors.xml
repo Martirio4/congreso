@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4caf50</color>
-    <color name="colorPrimaryDark">#1b5e20</color>
+    <color name="colorPrimary">#2196f3</color>
+    <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorAccent">#ff5722</color>
 
     <color name="primary">#2196f3</color>
@@ -16,14 +16,10 @@
     <color name="hueso">#d7d7d7</color>
     <color name="divider">#BDBDBD</color>
 
-    <color name="tile1">#C8E6C9</color>
-    <color name="tile2">#A5D6A7</color>
-    <color name="tile3">#81C784</color>
-    <color name="tile4">#66BB6A</color>
 
     <color name="tile6">#4caf50</color>
 
-    <color name="tile5">#1b5e20</color>
+
     <color name="blancoNomad">#fcfbf5</color>
 
 
@@ -45,11 +41,11 @@
     <color name="roja0">#e83b21</color>
 
 
-    <!--<color name="tile1">#e3f2fd</color>-->
-    <!--<color name="tile2">#64b5f6</color>-->
-    <!--<color name="tile3">#2196f3</color>-->
-    <!--<color name="tile4">#1976d2</color>-->
-    <!--<color name="tile5">#0d47a1</color>-->
+    <color name="tile1">#e3f2fd</color>
+    <color name="tile2">#64b5f6</color>
+    <color name="tile3">#2196f3</color>
+    <color name="tile4">#1976d2</color>
+    <color name="tile5">#0d47a1</color>
 
 
 </resources>

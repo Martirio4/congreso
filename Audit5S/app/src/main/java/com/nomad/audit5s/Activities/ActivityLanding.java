@@ -232,6 +232,7 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
            fragmentManager.popBackStackImmediate();
 
         } else {
+            finishAffinity();
             super.onBackPressed();
         }
 

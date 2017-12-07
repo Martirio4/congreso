@@ -9,7 +9,8 @@
     tools:context="com.nomad.audit5s.Activities.ActivityLanding">
 
         <LinearLayout
-
+                android:paddingStart="@dimen/margenChico"
+                android:paddingEnd="@dimen/margenChico"
             android:background="@color/tile1"
             android:id="@+id/lin1"
             android:orientation="horizontal"
@@ -22,7 +23,7 @@
                     android:textAlignment="viewStart"
                     android:textSize="30sp"
                     android:background="@android:color/transparent"
-                    android:drawableStart="@drawable/roboto1"
+                    android:drawableStart="@drawable/azul1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Manage Audit Areas"
@@ -33,6 +34,8 @@
 
         </LinearLayout>
         <LinearLayout
+            android:paddingStart="@dimen/margenChico"
+            android:paddingEnd="@dimen/margenChico"
             android:id="@+id/lin2"
                 android:background="@color/tile2"
             android:orientation="horizontal"
@@ -42,7 +45,7 @@
                 <Button
                     android:textAlignment="viewStart"
                     android:textSize="30sp"
-                    android:drawableStart="@drawable/roboto2"
+                    android:drawableStart="@drawable/azul2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Log out"
@@ -55,6 +58,8 @@
 
 
         <LinearLayout
+            android:paddingStart="@dimen/margenChico"
+            android:paddingEnd="@dimen/margenChico"
             android:background="@color/tile3"
             android:id="@+id/lin3"
             android:orientation="horizontal"
@@ -67,7 +72,7 @@
                     android:textSize="30sp"
                     android:background="@android:color/transparent"
                     android:id="@+id/botonBorrarTodo"
-                    android:drawableStart="@drawable/roboto3"
+                    android:drawableStart="@drawable/azul3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Delete Audit Database"
@@ -77,6 +82,8 @@
 
         </LinearLayout>
         <LinearLayout
+            android:paddingStart="@dimen/margenChico"
+            android:paddingEnd="@dimen/margenChico"
             android:background="@color/tile4"
             android:id="@+id/line4"
             android:orientation="horizontal"
@@ -86,7 +93,7 @@
                 <Button
                     android:textAlignment="viewStart"
                     android:textSize="30sp"
-                    android:drawableStart="@drawable/roboto4"
+                    android:drawableStart="@drawable/azul4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Go Back"

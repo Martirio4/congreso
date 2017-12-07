@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -60,6 +61,7 @@ public class FragmentManageAreas extends Fragment {
     private AdapterArea adapterArea;
     private LinearLayoutManager layoutManager;
 
+
     private File fotoOriginal;
     private File fotoComprimida;
 
@@ -103,6 +105,7 @@ public class FragmentManageAreas extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_manage_aerea, container, false);
+
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Area> result2 = realm.where(Area.class)
                 .findAll();

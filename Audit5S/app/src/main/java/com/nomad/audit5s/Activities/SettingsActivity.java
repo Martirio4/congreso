@@ -3,6 +3,7 @@ package com.nomad.audit5s.Activities;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         cargarFragmentSettings();
-        layout=findViewById(R.id.contenedor_landing);
+        layout=findViewById(R.id.contenedorSettings);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);

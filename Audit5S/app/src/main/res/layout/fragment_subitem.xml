@@ -97,6 +97,7 @@
 
 
 </LinearLayout>
+
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab_menu"
         android:layout_gravity="bottom|right"
