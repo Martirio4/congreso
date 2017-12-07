@@ -7,7 +7,7 @@
 
     <TextView
         android:layout_gravity="center_horizontal"
-        android:text="Final Result"
+        android:text="@string/ResultadoFinal"
         android:textSize="20sp"
         android:textColor="@color/tile4"
         android:layout_width="wrap_content"
@@ -40,8 +40,9 @@
             android:textColor="@color/primary_text"
             android:gravity="end"
             android:paddingEnd="@dimen/margenGrande"
+            android:paddingStart="@dimen/margenMicro"
             android:textSize="16sp"
-            android:text="Audit Result"
+            android:text="@string/auditResult"
             android:layout_weight="50"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
@@ -54,17 +55,13 @@
             android:gravity="start"
             android:textSize="16sp"
             android:paddingStart="@dimen/margenGrande"
-            android:text="Target"
+            android:paddingEnd="@dimen/margenMicro"
+            android:text="@string/target"
             android:layout_weight="50"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp">
 
-    </LinearLayout>
     
 
 

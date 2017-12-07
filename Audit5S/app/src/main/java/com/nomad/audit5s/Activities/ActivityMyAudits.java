@@ -47,12 +47,10 @@ public class ActivityMyAudits extends AppCompatActivity implements FragmentMyAud
             public void onTabSelected(TabLayout.Tab tab) {
                 pager.setCurrentItem(tab.getPosition(), true);
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 pager.setCurrentItem(tab.getPosition(), true);
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 pager.setCurrentItem(tab.getPosition(), true);
@@ -63,15 +61,11 @@ public class ActivityMyAudits extends AppCompatActivity implements FragmentMyAud
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
-
             @Override
             public void onPageSelected(int position) {
-
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -84,17 +78,11 @@ public class ActivityMyAudits extends AppCompatActivity implements FragmentMyAud
         TextView unText=toolbar.findViewById(R.id.textoToolbar);
         unText.setTypeface(robotoR);
         unText.setTextColor(getResources().getColor(R.color.tile5));
-
-        unText.setText("My audits");
+        unText.setText(getResources().getString(R.string.misAuditorias));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         }
-
-
-
-
     }
 
     private void cargarFragmentMyAudits() {

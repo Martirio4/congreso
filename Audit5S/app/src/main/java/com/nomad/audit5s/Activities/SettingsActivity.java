@@ -43,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
         unText.setTypeface(robotoR);
         unText.setTextColor(getResources().getColor(R.color.tile5));
 
-        unText.setText("Settings");
+        unText.setText(getResources().getText(R.string.settings));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -96,7 +96,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
 
         if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
             fragmentManageAreas.updateAdapter();
-            Snackbar.make(layout,"Area was succesfully deleted",Snackbar.LENGTH_SHORT)
+            Snackbar.make(layout,getResources().getString(R.string.delteAreaOk),Snackbar.LENGTH_SHORT)
                     .show();
 
         } else {
@@ -106,19 +106,19 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
     
     public void CrearDialogoBorrarArea(final Area unArea){
         new MaterialDialog.Builder(this)
-                .title("Delete Selected Area")
+                .title(getResources().getString(R.string.deleteTituloDialog))
                 .contentColor(ContextCompat.getColor(this, R.color.primary_text))
                 .titleColor(ContextCompat.getColor(this, R.color.tile4))
                 .backgroundColor(ContextCompat.getColor(this, R.color.tile1))
-                .content("The area: " + unArea.getNombreArea() +"\n"+ "will be permanently deleted."+"\n"+"Do you wisht to continue?")
-                .positiveText("Delete")
+                .content(getResources().getString(R.string.elArea) + unArea.getNombreArea() +"\n"+ getResources().getString(R.string.deletePermanente)+"\n"+getResources().getString(R.string.deseaContinuar))
+                .positiveText(getResources().getString(R.string.delete))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         borrarDefinitivamente(unArea);
                     }
                 })
-                .negativeText("Cancel")
+                .negativeText(getResources().getString(R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

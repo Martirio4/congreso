@@ -158,15 +158,15 @@ public class FragmentBarrasApiladas extends Fragment   {
                     set1.setColor(ContextCompat.getColor(getContext(), R.color.semaVerde));
                 }
             }
-            set1.setLabel("Audit result");
-            set1.setStackLabels(new String[]{"Audit result"});
+            set1.setLabel(getResources().getString(R.string.auditResult));
+            set1.setStackLabels(new String[]{getResources().getString(R.string.auditResult)});
 
 
 
             set2 = new BarDataSet(yVals2,"");
             set2.setDrawIcons(false);
             set2.setColors(ContextCompat.getColor(getContext(), R.color.semaRojo),ContextCompat.getColor(getContext(), R.color.semaAmarillo),ContextCompat.getColor(getContext(), R.color.semaVerde));
-            set2.setStackLabels(new String[]{"Bad", "Average", "Good"});
+            set2.setStackLabels(new String[]{getResources().getString(R.string.bad), getResources().getString(R.string.average), getResources().getString(R.string.good)});
             set2.setDrawValues(false);
 
 

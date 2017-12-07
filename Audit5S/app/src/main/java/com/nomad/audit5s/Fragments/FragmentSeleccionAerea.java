@@ -93,7 +93,7 @@ public class FragmentSeleccionAerea extends Fragment {
         TextView unText=toolbar.findViewById(R.id.textoToolbar);
         unText.setTypeface(robotoR);
         unText.setTextColor(getResources().getColor(R.color.tile5));
-        unText.setText("Select area");
+        unText.setText(getResources().getString(R.string.selectArea));
 
         if (((AppCompatActivity)getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);

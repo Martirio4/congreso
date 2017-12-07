@@ -26,7 +26,7 @@
                     android:drawableStart="@drawable/azul1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Manage Audit Areas"
+                    android:text="@string/manageAuditAreas"
                     android:id="@+id/botonManageAreas"
                     android:textColor="@color/tile5"
                     />
@@ -48,7 +48,7 @@
                     android:drawableStart="@drawable/azul2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Log out"
+                    android:text="@string/signOut"
                     android:id="@+id/botonLogOut"
                     android:background="@android:color/transparent"
                     android:textColor="@color/tile5"
@@ -75,7 +75,7 @@
                     android:drawableStart="@drawable/azul3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Delete Audit Database"
+                    android:text="@string/databaseAuditDelete"
                     android:textColor="@color/tile5" />
 
 
@@ -96,7 +96,7 @@
                     android:drawableStart="@drawable/azul4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Go Back"
+                    android:text="@string/goBack"
                     android:id="@+id/botonVolver"
                     android:textColor="@color/tile5"
                     android:background="@android:color/transparent"

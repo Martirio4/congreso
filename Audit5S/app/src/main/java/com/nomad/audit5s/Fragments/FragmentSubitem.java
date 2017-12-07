@@ -133,7 +133,7 @@ public class FragmentSubitem extends Fragment {
 
         Bundle bundle=getArguments();
         if (bundle==null){
-            Toast.makeText(getContext(), "no data found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.noEncontroDatos), Toast.LENGTH_SHORT).show();
         }
         else{
             criterio1=bundle.getString(OPCION1);
@@ -195,7 +195,7 @@ public class FragmentSubitem extends Fragment {
                         .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
                         .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
                         .content("1- "+criterio1+"\n"+"\n"+"2- "+criterio2+"\n"+"\n"+"3- "+criterio3+"\n"+"\n"+"4- "+criterio5+"\n"+"\n"+"5- "+criterio5)
-                        .positiveText("Dismiss")
+                        .positiveText(getResources().getString(R.string.dismiss))
                         .show();
             }
         });
@@ -260,8 +260,8 @@ public class FragmentSubitem extends Fragment {
                     if (Nammu.shouldShowRequestPermissionRationale(FragmentSubitem.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         //User already refused to give us this permission or removed it
                         //Now he/she can mark "never ask again" (sic!)
-                        Snackbar.make(getView(), "App needs permission to store audit data",
-                                Snackbar.LENGTH_INDEFINITE).setAction("OK", new View.OnClickListener() {
+                        Snackbar.make(getView(), getResources().getString(R.string.appNecesitaPermiso),
+                                Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.id.ok), new View.OnClickListener() {
                             @Override public void onClick(View view) {
                                 Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                         new PermissionCallback() {
@@ -273,7 +273,7 @@ public class FragmentSubitem extends Fragment {
 
                                             @Override
                                             public void permissionRefused() {
-                                                Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), getResources().getString(R.string.damePermiso), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
@@ -292,7 +292,7 @@ public class FragmentSubitem extends Fragment {
 
                                     @Override
                                     public void permissionRefused() {
-                                        Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), getResources().getString(R.string.damePermiso), Toast.LENGTH_SHORT).show();
 
                                     }
                                 });
@@ -347,8 +347,8 @@ public class FragmentSubitem extends Fragment {
                         .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
                         .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
                         .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
-                        .content("Unfinished audit will not be saved."+"\n"+"Continue?")
-                        .positiveText("Yes")
+                        .content(getResources().getString(R.string.auditoriaSinTerminar)+"\n"+getResources().getString(R.string.continuar))
+                        .positiveText(getResources().getString(R.string.si))
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -367,7 +367,7 @@ public class FragmentSubitem extends Fragment {
                                 avisable.salirDeAca();
                             }
                         })
-                        .negativeText("Cancel")
+                        .negativeText(getResources().getString(R.string.cancel))
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -399,7 +399,7 @@ public class FragmentSubitem extends Fragment {
             }
         };
         if (unaLista.size()>0){
-            Toast.makeText(getContext(), "You must complete items: "+unaLista.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.completarItemFaltante)+unaLista.toString(), Toast.LENGTH_SHORT).show();
             return false;
         }
         else{
@@ -570,18 +570,17 @@ public class FragmentSubitem extends Fragment {
     public void crearDialogoComentarioParaFoto(final Foto unaFoto){
 
                 new MaterialDialog.Builder(getContext())
-                        .title("Add a comment")
+                        .title(getResources().getString(R.string.agregarComentario))
                         .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
                         .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
                         .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
-                        .content("Please, add a comment for this photo")
+                        .content(getResources().getString(R.string.favorAgregueComentario))
                         .inputType(InputType.TYPE_CLASS_TEXT)
                         .inputRange(0,40)
-                        .input("Comment","", new MaterialDialog.InputCallback() {
+                        .input(getResources().getString(R.string.comment),"", new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(MaterialDialog dialog, CharSequence input) {
                                 unaFoto.setComentario(input.toString());
-
                                 actualizarFoto(unaFoto);
                                 adapterFotos.notifyDataSetChanged();
 
@@ -592,14 +591,14 @@ public class FragmentSubitem extends Fragment {
     public void crearDialogoParaModificarComentario(final Foto unaFoto){
 
         new MaterialDialog.Builder(getContext())
-                .title("Add a comment")
+                .title(getResources().getString(R.string.agregarComentario))
                 .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
                 .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
                 .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
-                .content("Please, add a comment for this photo")
+                .content(getResources().getString(R.string.favorAgregueComentario))
                 .inputType(InputType.TYPE_CLASS_TEXT)
                 .inputRange(0,40)
-                .input("Comment","", new MaterialDialog.InputCallback() {
+                .input(getResources().getString(R.string.comment),"", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, final CharSequence input) {
 

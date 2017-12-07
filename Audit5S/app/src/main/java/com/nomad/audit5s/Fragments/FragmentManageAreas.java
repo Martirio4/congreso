@@ -159,26 +159,26 @@ public class FragmentManageAreas extends Fragment {
 
                 if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     fabMenuManage.close(true);
-                    EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+                    EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
                 }
                 else {
                     if (Nammu.shouldShowRequestPermissionRationale(FragmentManageAreas.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                         //User already refused to give us this permission or removed it
                         //Now he/she can mark "never ask again" (sic!)
-                        Snackbar.make(getView(), "App needs permission to store audit data",
-                                Snackbar.LENGTH_INDEFINITE).setAction("OK", new View.OnClickListener() {
+                        Snackbar.make(getView(), getResources().getString(R.string.appNecesitaPermiso),
+                                Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
                             @Override public void onClick(View view) {
                                 Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                         new PermissionCallback() {
                                             @Override
                                             public void permissionGranted() {
                                                 fabMenuManage.close(true);
-                                                EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+                                                EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
                                             }
 
                                             @Override
                                             public void permissionRefused() {
-                                                Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), getResources().getString(R.string.permisoParaFotos), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
@@ -192,12 +192,12 @@ public class FragmentManageAreas extends Fragment {
                                     @Override
                                     public void permissionGranted() {
                                         fabMenuManage.close(true);
-                                        EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
+                                        EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
                                     }
 
                                     @Override
                                     public void permissionRefused() {
-                                        Toast.makeText(getContext(), "please grant storage permissions to take photos", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), getResources().getString(R.string.permisoParaFotos), Toast.LENGTH_SHORT).show();
 
                                     }
                                 });
@@ -301,7 +301,7 @@ public class FragmentManageAreas extends Fragment {
         if (sePudo) {
 
         } else {
-            Toast.makeText(getContext(), "no se pudo crear el directorio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.noSeCreoDirectorio), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -309,13 +309,13 @@ public class FragmentManageAreas extends Fragment {
     public void crearDialogoNombreArea(final Foto unaFoto){
 
         new MaterialDialog.Builder(getContext())
-                .title("New Area")
+                .title(getResources().getString(R.string.addNewArea))
                 .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
                 .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
                 .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
-                .content("Name for the new Area")
+                .content(getResources().getString(R.string.nombreArea))
                 .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("Area name","", new MaterialDialog.InputCallback() {
+                .input(getResources().getString(R.string.areaName),"", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
 
@@ -334,7 +334,7 @@ public class FragmentManageAreas extends Fragment {
                         });
 
                         updateAdapter();
-                        Snackbar.make(getView(),unArea.getNombreArea()+" was succesfully created",Snackbar.LENGTH_SHORT)
+                        Snackbar.make(getView(),unArea.getNombreArea()+getResources().getString(R.string.creadoExitosamente),Snackbar.LENGTH_SHORT)
                                 .show();
 
 

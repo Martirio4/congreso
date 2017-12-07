@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -33,7 +32,6 @@
                 android:layout_marginStart="@dimen/margenChico"
                 android:layout_marginEnd="@dimen/margenChico"
                 android:layout_marginBottom="@dimen/margenChico"
-                android:text="Area Name Here"
                 android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -64,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
                 <TextView
-                    android:text="Date"
+                    android:text="@string/fecha"
                     android:gravity="center"
                     android:id="@+id/tagFechaAuditoria"
                     android:layout_weight="35"
@@ -72,7 +70,6 @@
                     android:layout_height="match_parent" />
                 <TextView
                     android:textColor="@color/primary_text"
-                    android:text="Date"
                     android:gravity="center"
                     android:id="@+id/fechaAuditoria"
                     android:layout_weight="65"
@@ -95,7 +92,7 @@
                     android:layout_height="match_parent" />
                 <TextView
                     android:textColor="@color/primary_text"
-                    android:text="Date"
+                    
                     android:gravity="center"
                     android:id="@+id/puntaje1s"
                     android:layout_weight="50"
@@ -117,7 +114,7 @@
                     android:layout_height="match_parent" />
                 <TextView
                     android:textColor="@color/primary_text"
-                    android:text="Date"
+                    
                     android:gravity="center"
                     android:id="@+id/puntaje2s"
                     android:layout_weight="50"
@@ -140,7 +137,7 @@
                     android:layout_height="match_parent" />
                 <TextView
                     android:textColor="@color/primary_text"
-                    android:text="Date"
+                    
                     android:gravity="center"
                     android:id="@+id/puntaje3s"
                     android:layout_weight="50"
@@ -163,7 +160,7 @@
                     android:layout_height="match_parent" />
                 <TextView
                     android:textColor="@color/primary_text"
-                    android:text="Date"
+                    
                     android:gravity="center"
                     android:id="@+id/puntaje4s"
                     android:layout_weight="50"
@@ -186,7 +183,7 @@
                     android:layout_height="match_parent" />
                 <TextView
                     android:textColor="@color/primary_text"
-                    android:text="Date"
+                    
                     android:gravity="center"
                     android:id="@+id/puntaje5s"
                     android:layout_weight="50"
@@ -219,7 +216,7 @@
                 android:layout_marginStart="@dimen/margenChico"
                 android:layout_marginEnd="@dimen/margenChico"
                 android:layout_marginTop="@dimen/margenChico"
-                android:text="Final score:"
+                android:text="@string/puntajeFinal"
                 android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -227,7 +224,7 @@
                 />
             <TextView
                 android:textColor="@color/primary_text"
-                android:text="89%"
+               
                 android:textSize="25sp"
                 android:gravity="center"
                 android:id="@+id/textPuntajeFinal"

@@ -551,8 +551,8 @@ public class GraficosActivity extends AppCompatActivity {
                     // the attachment
                     emailIntent.putExtra(Intent.EXTRA_STREAM, path);
                     // the mail subject
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                    startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.reporteAuditoria));
+                    startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.enviarMail)));
 
                 } catch (FileNotFoundException e) {
                     Log.e("NOMAD/ERROR", "exception", e);
@@ -562,7 +562,7 @@ public class GraficosActivity extends AppCompatActivity {
             }
         }
         else{
-            Toast.makeText(this, "Error, check permissions", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.errorRevisarPermisos), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -591,7 +591,7 @@ public class GraficosActivity extends AppCompatActivity {
         //fuente titulo
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
         //escribir titulo
-        writer.addText(cursorX,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+        writer.addText(cursorX,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
         cursorY=cursorY-MARGEN_IZQUIERDO;
         cursorX=cursorX+MARGEN_IZQUIERDO;
         //fuente fecha escribir fecga
@@ -607,7 +607,7 @@ public class GraficosActivity extends AppCompatActivity {
 
 
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,"Final result");
+        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,getResources().getString(R.string.ResultadoFinal));
 
 
 
@@ -615,7 +615,7 @@ public class GraficosActivity extends AppCompatActivity {
         Locale locale = new Locale("en","US");
         NumberFormat format = NumberFormat.getPercentInstance(locale);
         String percentage1 = format.format(unAudit.getPuntajeFinal());
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85+SALTO_LINEA),12,"Final score: "+percentage1);
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85+SALTO_LINEA),12,getResources().getString(R.string.puntajeFinal)+percentage1);
 
         View rootView = this.getWindow().getDecorView().findViewById(android.R.id.content);
         View v = rootView.findViewById(R.id.contenedorGraficos);
@@ -707,11 +707,11 @@ public class GraficosActivity extends AppCompatActivity {
         //fuente titulo
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
         //escribir titulo
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
         cursorY=cursorY-MARGEN_IZQUIERDO;
         cursorX=cursorX+MARGEN_IZQUIERDO;
         //fuente fecha escribir fecga
-        writer.addText(cursorX, cursorY-SALTO_LINEA,12,"Date: "+mAudit.getFechaAuditoria());
+        writer.addText(cursorX, cursorY-SALTO_LINEA,12,getResources().getString(R.string.fecha)+mAudit.getFechaAuditoria());
         cursorY=cursorY-SALTO_LINEA;
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
         writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
@@ -739,11 +739,11 @@ public class GraficosActivity extends AppCompatActivity {
                 //fuente titulo
                 writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
                 //escribir titulo
-                writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+                writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
                 cursorY=cursorY-MARGEN_IZQUIERDO;
                 cursorX=cursorX+MARGEN_IZQUIERDO;
                 //fuente fecha escribir fecga
-                writer.addText(cursorX, cursorY-SALTO_LINEA,12,"Date: "+fecha);
+                writer.addText(cursorX, cursorY-SALTO_LINEA,12,getResources().getString(R.string.fecha)+fecha);
                 cursorY=cursorY-SALTO_LINEA;
                 writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
                 writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
@@ -758,7 +758,7 @@ public class GraficosActivity extends AppCompatActivity {
 
             writer.addText(cursorX,cursorY-SALTO_LINEA,12,sub.getEnunciado());
             cursorY=cursorY-SALTO_LINEA;
-            writer.addText(cursorX,cursorY-SALTO_LINEA,12,"Score: "+sub.getPuntuacion1().toString());
+            writer.addText(cursorX,cursorY-SALTO_LINEA,12,getResources().getString(R.string.score)+sub.getPuntuacion1().toString());
             cursorY=cursorY-2*SALTO_LINEA;
 
             //renglonesFoto=Math.round(sub.getListaFotos().size()/3);
@@ -782,11 +782,11 @@ public class GraficosActivity extends AppCompatActivity {
                     //fuente titulo
                     writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
                     //escribir titulo
-                    writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,"5S Audit Report");
+                    writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
                     cursorY=cursorY-MARGEN_IZQUIERDO;
                     cursorX=cursorX+MARGEN_IZQUIERDO;
                     //fuente fecha escribir fecga
-                    writer.addText(cursorX, cursorY-SALTO_LINEA,12,"Date: "+fecha);
+                    writer.addText(cursorX, cursorY-SALTO_LINEA,12,getResources().getString(R.string.fecha)+fecha);
                     cursorY=cursorY-SALTO_LINEA;
                     writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
                     writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());

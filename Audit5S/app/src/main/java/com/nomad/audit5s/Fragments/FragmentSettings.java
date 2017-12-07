@@ -83,12 +83,12 @@ public class FragmentSettings extends Fragment {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(v.getContext())
-                        .title("Sign out")
+                        .title(getResources().getString(R.string.signOut))
                         .contentColor(ContextCompat.getColor(v.getContext(), R.color.primary_text))
                         .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
                         .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
-                        .content("You are about to log out your account."+"\n"+"Continue")
-                        .positiveText("Log out")
+                        .content(getResources().getString(R.string.avisoSignout)+"\n"+getResources().getString(R.string.continuar))
+                        .positiveText(getResources().getString(R.string.signOut))
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -96,10 +96,9 @@ public class FragmentSettings extends Fragment {
                                 Intent intent = new Intent(getContext().getApplicationContext(), LoginActivity.class);
                                 startActivity(intent);
                                 getActivity().finishAffinity();
-
                             }
                         })
-                        .negativeText("Cancel")
+                        .negativeText(getResources().getString(R.string.cancel))
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -115,12 +114,12 @@ public class FragmentSettings extends Fragment {
             public void onClick(View v) {
 
                 new MaterialDialog.Builder(v.getContext())
-                        .title("Delete Database")
+                        .title(getResources().getString(R.string.databaseDelete))
                         .contentColor(ContextCompat.getColor(v.getContext(), R.color.primary_text))
                         .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
                         .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
-                        .content("All your Audits will be permanently deleted"+"\n"+"Continue?")
-                        .positiveText("Delete")
+                        .content(getResources().getString(R.string.auditsWillBeDeleted)+"\n"+getResources().getString(R.string.continuar))
+                        .positiveText(getResources().getString(R.string.delete))
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -129,7 +128,7 @@ public class FragmentSettings extends Fragment {
 
                             }
                         })
-                        .negativeText("Cancel")
+                        .negativeText(getResources().getString(R.string.cancel))
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -179,7 +178,7 @@ public class FragmentSettings extends Fragment {
                 //borrar directorios
                 File path = new File(Environment.getExternalStorageDirectory() + File.separator + "nomad" + File.separator + "audit5s");
                if (deleteDirectory(path)){
-                   Snackbar.make(areas,"All data was succesfully deleted", Snackbar.LENGTH_SHORT)
+                   Snackbar.make(areas,getResources().getString(R.string.confirmaBorrarBaseDeDato), Snackbar.LENGTH_SHORT)
                            .show();
                }
 
@@ -198,7 +197,7 @@ public class FragmentSettings extends Fragment {
 
         @Override
         protected void onPostExecute(Void result) {
-            Snackbar.make(borrar, "Audit Database has been deleted", Snackbar.LENGTH_SHORT)
+            Snackbar.make(borrar, getResources().getString(R.string.confirmaBorrarBaseDeDato), Snackbar.LENGTH_SHORT)
                     .show();
             super.onPostExecute(result);
         }

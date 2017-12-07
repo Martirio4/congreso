@@ -20,7 +20,6 @@
 
 
         <TextView
-            android:text="TextoPrueba"
             android:textSize="20sp"
             android:id="@+id/textoToolbar"
             android:gravity="start"

@@ -158,12 +158,12 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
 
                 Intent send = new Intent(Intent.ACTION_SENDTO);
                 String uriText = "mailto:" + Uri.encode("risomartin@gmail.com") +
-                        "?subject=" + Uri.encode("I want to report an issue") +
-                        "&body=" + Uri.encode("Please, tell us if you had any problem using our App. Suggestions are also welcome!");
+                        "?subject=" + Uri.encode(getResources().getString(R.string.quieroReportar)) +
+                        "&body=" + Uri.encode(getResources().getString(R.string.textoIssue));
                 Uri uri = Uri.parse(uriText);
 
                 send.setData(uri);
-                startActivity(Intent.createChooser(send, "Send mail..."));
+                startActivity(Intent.createChooser(send, getResources().getString(R.string.enviarMail)));
 
             }
         });
@@ -172,12 +172,12 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
             public void onClick(View view) {
                 Intent send = new Intent(Intent.ACTION_SENDTO);
                 String uriText = "mailto:" + Uri.encode("risomartin@gmail.com") +
-                        "?subject=" + Uri.encode("I want to report an issue") +
-                        "&body=" + Uri.encode("Please, tell us if you had any problem using our App. Suggestions are also welcome!");
+                        "?subject=" + Uri.encode(getResources().getString(R.string.quieroReportar)) +
+                        "&body=" + Uri.encode(getResources().getString(R.string.textoIssue));
                 Uri uri = Uri.parse(uriText);
 
                 send.setData(uri);
-                startActivity(Intent.createChooser(send, "Send mail..."));
+                startActivity(Intent.createChooser(send, getResources().getString(R.string.enviarMail)));
             }
         });
         texto4.setOnClickListener(new View.OnClickListener() {
@@ -185,12 +185,12 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
             public void onClick(View view) {
                 Intent send = new Intent(Intent.ACTION_SENDTO);
                 String uriText = "mailto:" + Uri.encode("risomartin@gmail.com") +
-                        "?subject=" + Uri.encode("I want to report an issue") +
-                        "&body=" + Uri.encode("Please, tell us if you had any problem using our App. Suggestions are also welcome!");
+                        "?subject=" + Uri.encode(getResources().getString(R.string.quieroReportar)) +
+                        "&body=" + Uri.encode(getResources().getString(R.string.textoIssue));
                 Uri uri = Uri.parse(uriText);
 
                 send.setData(uri);
-                startActivity(Intent.createChooser(send, "Send mail..."));
+                startActivity(Intent.createChooser(send, getResources().getString(R.string.enviarMail)));
             }
         });
     }

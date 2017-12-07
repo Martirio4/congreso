@@ -16,7 +16,7 @@
         android:layout_marginEnd="@dimen/margenGrande"
         android:gravity="end"
         android:layout_gravity="center_vertical"
-        android:text="Audit Result for:"
+        android:text="@string/auditResultFor"
         android:textSize="20sp"
         android:layout_weight="50"
         android:textColor="@color/tile5"

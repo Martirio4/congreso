@@ -203,7 +203,7 @@ public class FragmentRadar extends Fragment {
         }
         */
 
-        RadarDataSet set1 = new RadarDataSet(entries1, "Audit");
+        RadarDataSet set1 = new RadarDataSet(entries1, getResources().getString(R.string.audit));
         set1.setColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
         set1.setFillColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
         set1.setDrawFilled(true);
@@ -212,7 +212,8 @@ public class FragmentRadar extends Fragment {
         set1.setDrawHighlightCircleEnabled(true);
         set1.setDrawHighlightIndicators(false);
 
-        RadarDataSet set2 = new RadarDataSet(entries2, "Target");
+
+        RadarDataSet set2 = new RadarDataSet(entries2, getResources().getString(R.string.target));
         set2.setColor(ContextCompat.getColor(getContext(), R.color.tile3));
         set2.setFillColor(ContextCompat.getColor(getContext(), R.color.tile3));
         set2.setDrawFilled(true);

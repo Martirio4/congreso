@@ -14,6 +14,39 @@
     <string name="seEliminoFoto">Image loaded</string>
     <string name="noSeEliminoFoto">image loaded. a backup image was saved to gallery</string>
 
+    <!--SETTINGS ACTIVITY-->
+    <string name="delteAreaOk">Area was succesfully deleted</string>
+    <string name="deleteTituloDialog">Delete Selected Area</string>
+    <string name="elArea">The area: </string>
+    <string name="deletePermanente">will be permanently deleted.</string>
+    <string name="deseaContinuar">Do you wisht to continue?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <!--LOGIN ACTIVITY-->
+    <string name="ingreseUsuarioValido">Please enter a valid username.</string>
+    <string name="ingreseContraseniaValida">Please enter a valid password.</string>
+    <string name="caracteresContrasenia">Password must be at least 6 characters</string>
+    <string name="contraseniasNoCoinciden">Passwords do not match.</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="quieroReportar">I want to report an issue</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!--enunciados-->
 
@@ -137,7 +170,7 @@ There may be insignificant irregularities.</string>
     <string name="signed_out">Signed out</string>
     <string name="generarPDF">Send PDF report</string>
     <string name="quit">Quit</string>
-    <string name="signOut">Sign out your account and quit</string>
+    <string name="signOut">Log out</string>
     <string name="settings">Settings</string>
 
     <string name="punto411">There are only a few rules on identifications and signage. Most do not obey any rules.</string>
@@ -247,6 +280,69 @@ Even in other areas that they frequent or work.
     <string name="start">Start Audit</string>
     <string name="contact">Contact us</string>
     <string name="firstTime">Click here if it is your first time</string>
+    <string name="autenticacionFallida">Authentication Failed.</string>
+    <string name="sinConexionIntenteMasTarde">No internet connections, please try again later.</string>
+    <string name="reporteAuditoria">Audit report.</string>
+    <string name="enviarMail">Send mail.</string>
+    <string name="errorRevisarPermisos">Error, check permissions.</string>
+    <string name="tituloPdf">5S Audit Report</string>
+    <string name="ResultadoFinal">Final result.</string>
+    <string name="puntajeFinal">Final score:</string>
+    <string name="fecha">Date:</string>
+    <string name="score">Score:</string>
+    <string name="detalleAuditoria">Audit detail</string>
+    <string name="misAuditorias">My audits</string>
+    <string name="textoIssue">Please, tell us if you had any problem using our App. Suggestions are also welcome!</string>
+    <string name="audit5s">5S Audit</string>
+    <string name="agregarComentario">Add a comment</string>
+    <string name="favorAgregueComentario">Please, add a comment for this photo</string>
+    <string name="comment">comment</string>
+    <string name="advertencia">Warning!</string>
+    <string name="auditoriaSinTerminar">Unfinished audit will not be saved</string>
+    <string name="continuar">Continue?</string>
+    <string name="si">Yes</string>
+    <string name="seiriSeiri">Seiri / Sort</string>
+    <string name="seitonSeiton">Seiton / Set in order</string>
+    <string name="seisoSeiso">Seiso / Shine</string>
+    <string name="seiketsuSeiketsu">Seiketsu / Standarize</string>
+    <string name="shitsukeShitsuke">Shitsuke / Sustain</string>
+    <string name="ranking">Ranking</string>
+    <string name="noEncontroDatos">No data found</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="appNecesitaPermiso">App needs permission to store audit data</string>
+    <string name="damePermiso">Please grant storage permissions to take photos</string>
+    <string name="completarItemFaltante">You must complete items:</string>
+    <string name="avisoSignout">You are about to log out your account.</string>
+    <string name="databaseDelete">Delete database</string>
+    <string name="auditsWillBeDeleted">All your Audits will be permanently deleted</string>
+    <string name="confirmaBorrarBaseDeDato">All data was succesfully deleted</string>
+    <string name="selectArea">Select area</string>
+    <string name="audit">Audit</string>
+    <string name="target">Target</string>
+    <string name="seleccionaImagen">Choose image</string>
+    <string name="ok">Ok</string>
+    <string name="permisoParaFotos">Please grant storage permissions to take photos</string>
+    <string name="noSeCreoDirectorio">The requested Directory was not created.</string>
+    <string name="nombreArea">Insert new area name:</string>
+    <string name="areaName">area name</string>
+    <string name="creadoExitosamente"> was successfuly created</string>
+    <string name="auditResult">Audit result</string>
+    <string name="bad">Bad</string>
+    <string name="average">Average</string>
+    <string name="good">Good</string>
+    <string name="auditResultFor">Audit Result for:</string>
+    <string name="titulo">Title:</string>
+    <string name="manageAuditAreas">Manage Audit Areas</string>
+    <string name="databaseAuditDelete">delete audit database</string>
+    <string name="goBack">Go back</string>
+    <string name="enunciado">Statement</string>
+    <string name="clicToAddComment">Click here to add comment</string>
+    <string name="e5s">e-5S</string>
+    <string name="mail">mail</string>
+    <string name="hinPass">password</string>
+    <string name="signIn">Sign in</string>
+    <string name="register">register</string>
+    <string name="disclaimer">Please register. an Email adress is required for authentication. Your data will not be used for any other purpose</string>
 
 
 </resources>

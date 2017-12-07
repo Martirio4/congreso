@@ -1,6 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/blancoNomad"
     android:orientation="vertical"
@@ -14,9 +13,9 @@
     android:layout_height="match_parent">
     <TextView
     android:gravity="center"
-    android:textSize="20dp"
+    android:textSize="20sp"
     android:layout_margin="@dimen/margenChico"
-    android:text="enunciado"
+    android:text="@string/enunciado"
     android:textColor="@color/primary_text"
     android:id="@+id/textoEnunciado"
     android:layout_width="match_parent"
@@ -100,7 +99,7 @@
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab_menu"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

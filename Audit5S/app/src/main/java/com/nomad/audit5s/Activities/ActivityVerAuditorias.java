@@ -40,7 +40,7 @@ public class ActivityVerAuditorias extends AppCompatActivity {
         TextView unText=toolbar.findViewById(R.id.textoToolbar);
         unText.setTypeface(robotoR);
         unText.setTextColor(getResources().getColor(R.color.tile5));
-        unText.setText("Audit detail");
+        unText.setText(getResources().getString(R.string.detalleAuditoria));
 
 
         if (getSupportActionBar() != null) {

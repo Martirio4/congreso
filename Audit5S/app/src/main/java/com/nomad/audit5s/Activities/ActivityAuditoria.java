@@ -144,7 +144,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         unText.setTypeface(robotoR);
         unText.setTextColor(getResources().getColor(R.color.tile5));
 
-        unText.setText("5S Audit");
+        unText.setText(getResources().getString(R.string.audit5s));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -367,10 +367,10 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     public void pedirComment(){
 
         new MaterialDialog.Builder(this)
-                .title("Add a comment")
-                .content("Please, add a comment for this photo")
+                .title(getResources().getString(R.string.agregarComentario))
+                .content(getResources().getString(R.string.favorAgregueComentario))
                 .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("Comment","", new MaterialDialog.InputCallback() {
+                .input(getResources().getString(R.string.comment),"", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
                         resultadoInputFoto=input.toString();
@@ -401,11 +401,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     public void onBackPressed() {
         new MaterialDialog.Builder(this)
                 .title("Warning!")
+                .title(getResources().getString(R.string.advertencia))
                 .contentColor(ContextCompat.getColor(this, R.color.primary_text))
                 .titleColor(ContextCompat.getColor(this, R.color.tile4))
                 .backgroundColor(ContextCompat.getColor(this, R.color.tile1))
-                .content("Unfinished audit will not be saved."+"\n"+"Continue?")
-                .positiveText("Yes")
+                .content(getResources().getString(R.string.auditoriaSinTerminar)+"\n"+getResources().getString(R.string.continuar))
+                .positiveText(getResources().getString(R.string.si))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -423,7 +424,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                         ActivityAuditoria.super.onBackPressed();
                     }
                 })
-                .negativeText("Cancel")
+                .negativeText(getResources().getString(R.string.cancel))
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {

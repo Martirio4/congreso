@@ -142,12 +142,12 @@ public class LoginActivity extends AppCompatActivity  {
                 til2.setError(null);
                 Integer validar =0;
                 if (editUsuario.getText().toString().isEmpty()) {
-                    til1.setError("Por favor, ingrese un usuario valido");
+                    til1.setError(getResources().getString(R.string.ingreseUsuarioValido));
                     validar = validar + 1;
                 }
 
                 if (editPass.getText().toString().toLowerCase().isEmpty()) {
-                    til2.setError("Por favor, ingrese una contraseña valida");
+                    til2.setError(getResources().getString(R.string.ingreseContraseniaValida));
                     validar = validar + 1;
                 }
 
@@ -187,16 +187,16 @@ public class LoginActivity extends AppCompatActivity  {
                 til3.setError(null);
 
                 if (editUsuario.getText().toString().isEmpty()) {
-                    til1.setError("Por favor ingrese un usuario valido");
+                    til1.setError(getResources().getString(R.string.ingreseUsuarioValido));
                     control = control + 1;
                 }
 
                 if (editPass.getText().toString().isEmpty()) {
-                    til3.setError("Por favor ingrese una contraseña valida");
+                    til3.setError(getResources().getString(R.string.ingreseContraseniaValida));
                     control = control + 1;
                 }
                 if (editPass.getText().toString().length() < 6) {
-                    til3.setError("La contraseña debe tener al menos 6 caracteres");
+                    til3.setError(getResources().getString(R.string.caracteresContrasenia));
                     control = control + 1;
                 }
 
@@ -224,7 +224,7 @@ public class LoginActivity extends AppCompatActivity  {
 
                 }
                 else {
-                    til3.setError("Las contraseñas ingresadas no coinciden");
+                    til3.setError(getResources().getString(R.string.contraseniasNoCoinciden));
                     editRepePass.setText("");
                 }
             }
@@ -238,7 +238,7 @@ public class LoginActivity extends AppCompatActivity  {
     public void irALanding(){
         Intent unIntent = new Intent(this, ActivityLanding.class);
         startActivity(unIntent);
-        Toast.makeText(this, "Welcome! "+mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.bienvenido)+mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
         LoginActivity.this.finish();
 
     }
@@ -261,7 +261,7 @@ public class LoginActivity extends AppCompatActivity  {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -286,7 +286,7 @@ public class LoginActivity extends AppCompatActivity  {
                         if (!task.isSuccessful()) {
 
                             //creo usuario en mi base de datos
-                            Toast.makeText(LoginActivity.this, "Sin Conexion, intente mas tarde.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.sinConexionIntenteMasTarde), Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
