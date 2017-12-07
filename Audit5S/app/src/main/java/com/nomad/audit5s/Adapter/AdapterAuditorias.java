@@ -116,7 +116,7 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
         private TextView text4s;
         private TextView text5s;
 
-        private TextView tagDate;
+
         private TextView tag1s;
         private TextView tag2s;
         private TextView tag3s;
@@ -136,7 +136,7 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
 
             Typeface roboto = Typeface.createFromAsset(itemView.getContext().getAssets(), "fonts/Roboto-Light.ttf");
             imageView = (ImageView) itemView.findViewById(R.id.imagenAreaResumenAuditorias);
-            tagDate = (TextView) itemView.findViewById(R.id.tagFechaAuditoria);
+
             tag1s = (TextView) itemView.findViewById(R.id.tagPuntaje1S);
             tag2s = (TextView) itemView.findViewById(R.id.tagPuntaje2s);
             tag3s = (TextView) itemView.findViewById(R.id.tagPuntaje3s);
@@ -154,7 +154,6 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
             tag5s=(TextView)itemView.findViewById(R.id.tagPuntaje5s);
 
 
-            tagDate.setTypeface(roboto);
             tag1s.setTypeface(roboto);
             tag2s.setTypeface(roboto);
             tag3s.setTypeface(roboto);

@@ -37,7 +37,7 @@ public class AdapterPagerAudits extends FragmentStatePagerAdapter {
         //LE CARGO LOS FRAGMENTS QUE QUIERO. UTILIZO LA LISTA DE PELICULAS Y SERIES PARA CREAR LOS FRAGMENTS.
 
         for (String unString : unaListaTitulos) {
-            if (unString.equals("My Audits")){
+            if (unString.equals("My Audits")||unString.equals("Mis auditorías")){
                 listaFragments.add(FragmentMyAudits.crearFragmentMyAudit());
             }
             if (unString.equals("Ranking")){

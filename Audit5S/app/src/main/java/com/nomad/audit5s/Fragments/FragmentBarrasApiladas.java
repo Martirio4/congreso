@@ -76,7 +76,7 @@ public class FragmentBarrasApiladas extends Fragment   {
         mChart.setMaxVisibleValueCount(40);
 
         // scaling can now only be done on x- and y-axis separately
-        mChart.setPinchZoom(false);
+        mChart.setPinchZoom(true);
 
         mChart.setDrawGridBackground(true);
         mChart.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.marfil));
@@ -158,7 +158,7 @@ public class FragmentBarrasApiladas extends Fragment   {
                     set1.setColor(ContextCompat.getColor(getContext(), R.color.semaVerde));
                 }
             }
-            set1.setLabel(getResources().getString(R.string.auditResult));
+            set1.setLabel(getResources().getString(R.string.auditResult1));
             set1.setStackLabels(new String[]{getResources().getString(R.string.auditResult)});
 
 

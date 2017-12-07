@@ -143,7 +143,7 @@ public class GraficosActivity extends AppCompatActivity {
         fabVerAuditoria = new FloatingActionButton(this);
         fabVerAuditoria.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
        fabVerAuditoria.setButtonSize(FloatingActionButton.SIZE_MINI);
-       fabVerAuditoria.setLabelText(getString(R.string.verAuditoria));
+       fabVerAuditoria.setLabelText(getResources().getString(R.string.verAuditoria));
        fabVerAuditoria.setImageResource(R.drawable.ic_find_in_page_black_24dp);
        fabMenuGraficos.addMenuButton(fabVerAuditoria);
 

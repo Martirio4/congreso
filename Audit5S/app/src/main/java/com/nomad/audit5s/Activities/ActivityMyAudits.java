@@ -21,6 +21,8 @@ import com.nomad.audit5s.Fragments.FragmentRanking;
 import com.nomad.audit5s.Model.Auditoria;
 import com.nomad.audit5s.R;
 
+import io.realm.Realm;
+
 public class ActivityMyAudits extends AppCompatActivity implements FragmentMyAudits.Graficable, FragmentRanking.Graficable {
 
     private ViewPager pager;
