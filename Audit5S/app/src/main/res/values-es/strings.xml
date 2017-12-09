@@ -42,240 +42,454 @@
 
 
 
-
-
-
-
-
-
     <!--enunciados-->
 
-    <string name="enunciado11">1.1 Use of existing resources in places that are non- save locations</string>
-    <string name="enunciado12">1.2 Use of existing resources in places that are to be saved</string>
-    <string name="enunciado13">1.3 Conservation of facilities and resources</string>
-    <string name="enunciado14">1.4 Control of conservation problems</string>
-    <string name="enunciado21">2.1 Identification and signage</string>
-    <string name="enunciado22">2.2 Definition and adaptation of places to store resources.</string>
-    <string name="enunciado23">2.3 Order of the resources</string>
+    <string name="enunciado11">1.1 Recursos existentes en sectores que NO son para guardar</string>
+    <string name="enunciado12">1.2 Recursos existentes en los lugares que son para guardar</string>
+    <string name="enunciado13">1.3 Estado de conservación de las instalaciones y recursos</string>
+    <string name="enunciado14">1.4 Control de los problemas de conservación</string>
+
+    <string name="enunciado21">2.1 Identificaciones y Señalizaciones</string>
+    <string name="enunciado22">2.2 Definición y Adecuación de lugares para guardar recursos</string>
+    <string name="enunciado23">2.3 Orden de los recursos</string>
     <string name="enunciado24">2.4 Layout</string>
-    <string name="enunciado31">3.1 Level of cleaning (dirt caused by people)</string>
-    <string name="enunciado32">3.2 Level of cleaning (dirt caused by the process or the external spaces)</string>
-    <string name="enunciado33">3.3 Cleaning standard</string>
-    <string name="enunciado34">3.4 Garbage baskets And other discart collectors</string>
-    <string name="enunciado41">4.1. Standardization of Paints, Identifications and Signsed
-</string>;
-    <string name="enunciado42">4.2. Hygiene and health
-</string>;
-    <string name="enunciado43">4.3. Routines and Systematics for Maintenance of 5S
-</string>;
-    <string name="enunciado44">4.4. Systematic of saveing for electronic documents
-</string>;
-    <string name="enunciado51">5.1. Self-discipline in the practice of 5S
-</string>;
-    <string name="enunciado52">5.2. Self-discipline in compliance with rules and procedures
-</string>;
-    <string name="enunciado53">5.3. Attitude of people
-</string>;
-    <string name="enunciado54">5.4. Self-discipline in the storage of electronic documents (if any)
-</string>;
+
+    <string name="enunciado31">3.1 Nivel de limpieza (suciedad provocada por las personas)</string>
+    <string name="enunciado32">3.2 Nivel de limpieza (suciedad provocada por el proceso o ambiental)</string>
+    <string name="enunciado33">3.3 Sistemática de Limpieza</string>
+    <string name="enunciado34">3.4 Cestos de basura y otros colectores de recursos descartados</string>
+
+    <string name="enunciado41">4.1. Estandarización de Pinturas, Identificaciones y Señalizaciones</string>;
+    <string name="enunciado42">4.2. Higiene y Salud</string>;
+    <string name="enunciado43">4.3. Rutinas y Sistemática para Mantenimiento de 5S</string>;
+    <string name="enunciado44">4.4. Sistemática de guardado para documentos electrónicos (cuando hubiese)</string>;
+
+    <string name="enunciado51">5.1. Autodisciplina en la práctica de 5S</string>;
+    <string name="enunciado52">5.2. Autodisciplina en el cumplimiento de normas, reglas y procedimientos</string>;
+    <string name="enunciado53">5.3. Postura de las personas</string>;
+    <string name="enunciado54">5.4. Autodisciplina en el guardado de documentos electrónicos (cuando hubiese)</string>;
 
 
     <!--criterios -->
     <!--primera s-->
-    <string name="punto111">In several places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste)</string>
-    <string name="punto112">In several places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).
+    <string name="punto111">En varios lugares fueron encontradas diversas anormalidades en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
 </string>
-    <string name="punto113">In some places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
-    <string name="punto114">In some places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).
+    <string name="punto112">En varios lugares fue encontrada una u otra anormalidad en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
+
 </string>
-    <string name="punto115">"every resources on floors, tables and other open space are used properly (no excess, improvisations, unnecessary resources, lack or waste).
-There may be insignificant irregularities."</string>
+    <string name="punto113">En uno u otro lugar fueron encontradas diversas anormalidades en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
 
-    <string name="punto121">In several places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste)</string>
-    <string name="punto122">In several places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
-    <string name="punto123">In some places, several anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
-    <string name="punto124">In some places, some anomalies were found in the use of resources (excessive proportions, improvisations, unnecessary resources, lack or waste).</string>
-    <string name="punto125">"Every resources in closets, drawers and other enclosed spaces are shared and used correctly  (no excess, improvisations, unnecessary resources, lack or waste).
-There may be insignificant irregularities.</string>
+    </string>
+    <string name="punto114">En uno u otro lugar fue encontrado una u otra anormalidad en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
 
-    <string name="punto131">There are widespread conservation problems and some compromise the safety or functionality of facilities and resources, according to environmental characteristics.</string>
-    <string name="punto133">There are conservation problems in some facilities or resource. some compromises the safety or functionality, according to environmental characteristics.</string>
-    <string name="punto132">There are widespread conservation problems but not compromise the safety or functionality of facilities and resources, according to environmental characteristics.</string>
-    <string name="punto134">There are conservation problems in some facilities or resource but not compromises the safety or functionality, according to environmental characteristics.</string>
-    <string name="punto135">All facilities and resources are in good condition. There may be insignificant irregularities for the characteristics of the environment.</string>
+</string>
+    <string name="punto115">Todos los recursos existentes en los pisos, mesas y otros espacios abiertos son compartidos y utilizados adecuadamente (no hay exceso, improvisaciones, recursos innecesarias, falta o desperdicios). Puede haber irregularidades insignificantes para las características del entorno.</string>
 
-    <string name="punto141">There is no formal justification for most conservation problems encountered</string>
-    <string name="punto142">There is no formal justification for some conservation problems, including for some that compromises the safety or functionality of facilities and resources, according to environmental characteristics.</string>
-    <string name="punto143">There is no formal justification for some conservation problems, but it does not compromises the safety or functionality of facilities and resources, according to environmental characteristics.</string>
-    <string name="punto144">There is no formal justification for one conservation problem, but it does not compromis the safety or functionality of facilities and resources, according to environmental characteristics.</string>
-    <string name="punto145">There is a formal justification for all conservation problems and none of them compromise the safety or functionality of facilities and resources. There may be insignificant irregularities for the characteristics of the environment.</string>
+    <string name="punto121">En varios lugares fueron encontradas diversas anormalidades en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
+
+    </string>
+    <string name="punto122">En varios lugares fue encontrada una u otra anormalidad en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
+
+    </string>
+    <string name="punto123">En uno u otro lugar fueron encontradas diversas anormalidades en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
+
+    </string>
+    <string name="punto124">En uno u otro lugar fue encontrado una u otra anormalidad en el uso de recursos (proporciones exceso, improvisaciones, recursos innecesarios, falta o desperdicio).
+
+    </string>
+    <string name="punto125">Todos los recursos existentes en los armarios, archivadores, cajones y otros espacios cerrados se comparten y utilizan correctamente (no hay exceso, improvisaciones, recursos innecesarios o en falta). Puede haber irregularidades insignificantes para las características del entorno.
+</string>
+
+    <string name="punto131">Hay problemas de conservación generalizados y uno u otro compromete la seguridad o la funcionalidad de las instalaciones y recursos, teniendo en cuenta las características do ambiente.
+
+
+    </string>
+    <string name="punto133">Hay problemas de conservación generalizados, mas ninguno compromete la seguridad o la funcionalidad de las instalaciones y recursos, teniendo en cuenta las características del ambiente.
+
+
+    </string>
+    <string name="punto132">Hay problemas de conservación en una u otra instalación o recurso. Uno u otro compromete la seguridad y/o funcionalidad, teniendo en cuenta las características do ambiente.
+
+
+    </string>
+    <string name="punto134">Hay problemas de conservación en una u otra instalación o recurso, mas ninguno compromete la seguridad y/o funcionalidad, teniendo en cuenta las características do ambiente.
+
+
+    </string>
+    <string name="punto135">Todas las instalaciones y los recursos están en buenas condiciones. Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+
+    <string name="punto141">No hay justificativa formal para la mayoría de los problemas de conservación encontrados (cuando hay problemas generalizados).
+
+
+    </string>
+    <string name="punto142">No hay justificativa formal para algunos problemas de conservación, inclusive para uno u otro que compromete la seguridad y/o la funcionalidad de las instalaciones y recursos, teniendo en cuenta las características do ambiente.
+
+
+    </string>
+    <string name="punto143">No hay justificativa formal para algunos problemas de conservación, mas ninguno compromete la seguridad y/o la funcionalidad de las instalaciones y recursos, teniendo en cuenta las características do ambiente.
+
+
+    </string>
+    <string name="punto144">No hay justificativa formal para uno u otro problema de conservación, mas ninguno compromete la seguridad y/o la funcionalidad de las instalaciones y recursos, teniendo en cuenta las características do ambiente.
+
+    </string>
+    <string name="punto145">Hay justificación formal para todos los problemas de conservación y ninguno compromete la seguridad y/o funcionalidad de las instalaciones y recursos, teniendo en cuenta las características del entorno. Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
 
     <!--segunda s-->
-    <string name="punto211">In several places there are deficiencies of identification and signaling. There is no plan for the correction of most of the deficiences</string>
-    <string name="punto212">In several places there are deficiencies of identification and signaling. There is no plan for the correction some of them.</string>
-    <string name="punto213">In some places there are deficiencies of identification and signaling. There is no plan for the correction some of them.</string>
-    <string name="punto214">In some places there are deficiencies of identification and signaling. There is a plan for the correction of them</string>
-    <string name="punto215">In all places there are identifications and signage  that facilitate the location and avoid the loss of time and risks. There may be insignificant irregularities for the characteristics of the environment.</string>
+    <string name="punto211">En  varios lugares hay deficiencias de identificación y señalización. No hay medidas concretas para la corrección de la mayoría.
 
-    <string name="punto221">In several places there are several resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
-    <string name="punto222">In several places there are some resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
-    <string name="punto223">In some places there are several resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
-    <string name="punto224">In some places there are some resources without defined  and suitable places for their storage (format, dimensions, type of material, etc.).</string>
-    <string name="punto225">There are defined and suitable places for all the resources used (format, dimensions, type of material, etc.). There may be insignificant irregularities for the characteristics of the environment.</string>
 
-    <string name="punto231">In several places were found several resources disordered, making access difficult (there are useful resources outside the places of store, mixture, difficulty of visual identification or risk problems).</string>
-    <string name="punto232">In several places were found some resources disordered, making access difficult (there are useful resources outside the places of store, mixture, difficulty of visual identification or risk problems).</string>
-    <string name="punto233">In some places were found several resources disordered, making access difficult (there are useful resources outside the places of store, mixture, difficulty of visual identification or risk problems).</string>
-    <string name="punto234">In some places were found some resources disordered, making access difficult (there are useful resources outside the places of store, mixture, difficulty of visual identification or risk problems).</string>
-    <string name="punto235">All resources are classified and organized (there are no resources available outside of storage places, mixed, difficulty of visual location or risk problems).There may be insignificant irregularities for the characteristics of the environment.</string>
+    </string>
+    <string name="punto212">En varios lugares hay deficiencias de identificación y señalización. No hay medidas concretas para la corrección de algunas.
 
-    <string name="punto241">In several places there are design deficiencies that promote fatigue, risks and lost time (planned distribution of productive and / or support resources, hampering circulation and access, incompatible space or volume, etc.). There is no plan for the correction of the majority.</string>
-    <string name="punto242">In several places there are design deficiencies that promote fatigue, risks and lost time (planned distribution of productive and / or support resources, hampering circulation and access, incompatible space or volume, etc.). There is no plan for the correction some of them.</string>
-    <string name="punto243">In some places there are design deficiencies that promote fatigue, risks and lost time (planned distribution of productive and / or support resources, hampering circulation and access, incompatible space or volume, etc.). There is no plan for the correction some of them.</string>
-    <string name="punto244">In some places there are design deficiencies that promote fatigue, risks and lost time (planned distribution of productive and / or support resources, hampering circulation and access, incompatible space or volume, etc.). There is a plan for the correction of them</string>
-    <string name="punto245">The location of all productive and support resources is appropriate, facilitates movement and / or access, avoiding risks, fatigue and loss of time. It may have insignificant irregularities for the characteristics of the environment.</string>
+
+    </string>
+    <string name="punto213">En uno u otro lugar hay deficiencias de identificación y/o señalización. No hay medidas concretas para la corrección de algunas.
+
+
+    </string>
+    <string name="punto214">En uno u otro lugar hay deficiencias de identificación y/o señalización. hay medidas concretas para la corrección de todas.
+
+
+    </string>
+    <string name="punto215">En todos los lugares hay identificaciones y señalizaciones que facilitan la ubicación y evitan la pérdida de tiempo y riesgos. Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+
+    <string name="punto221">En todos los lugares hay identificaciones y señalizaciones que facilitan la ubicación y evitan la pérdida de tiempo y riesgos. Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+    <string name="punto222">En varios ambientes hay uno u otro recurso sin  lugar de guarda definido y adecuado (formato, dimensiones, tipo de material, etc.).
+
+
+    </string>
+    <string name="punto223">En uno u otro ambiente hay varios recursos sin  lugares de guarda definidos y adecuados (formato, dimensiones, tipo de material, etc.).
+
+
+    </string>
+    <string name="punto224">En uno u otro ambiente hay uno u otro recurso sin  lugar de guarda definido y adecuado (formato, dimensiones, tipo de material, etc.).
+
+
+    </string>
+    <string name="punto225">Hay lugares definidos y adecuados para todos los recursos utilizados (forma, dimensiones, tipo de material, etc.). Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+
+    <string name="punto231">En varios lugares fueron encontrados diversos recursos desordenados, dificultando el acceso (hay recursos útiles fuera de los lugares de guarda, mezcla, dificultad de identificación visual o física o riesgo).
+
+
+    </string>
+    <string name="punto232">En varios lugares fue encontrado uno u otro recurso desordenado dificultando el acceso (hay recursos útiles fuera de los lugares de guarda, mezcla, dificultad de identificación visual o física o riesgo).
+
+
+    </string>
+    <string name="punto233">En uno u otro lugar fueron encontrados diversos recursos desordenados, dificultando el acceso (hay recursos útiles fuera de los lugares de guarda, mezcla, dificultad de identificación visual o física o riesgo).
+
+
+    </string>
+    <string name="punto234">En uno u otro lugar fue encontrado uno u otro recurso desordenado, dificultando el acceso (hay recursos útiles fuera de los lugares de guarda, mezcla, dificultad de identificación visual o física o riesgo).
+
+
+    </string>
+    <string name="punto235">Todas los recursos están clasificados y organizados (no hay recursos útiles fuera de los lugares de guarda, mezclados, dificultad de ubicación visual y problemas físicos o de riesgo). Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+
+    <string name="punto241">En varios ambientes hay deficiencias de Layout promoviendo desgastes, riesgos y desperdicio de tiempo (distribución planeada de los recursos productivos y/o de apoyo dificultando la circulación y el acceso; espacio incompatible con o volumen, etc.). No hay medidas concretas para la corrección de la mayoría.
+
+
+    </string>
+    <string name="punto242">En varios ambientes hay deficiencias de Layout promoviendo desgastes, riesgos y desperdicio de tiempo (distribución planeada de los recursos productivos y/o de apoyo dificultando la circulación y el acceso; espacio incompatible con o volumen, etc.). No hay medidas concretas para la corrección de algunas.
+
+
+    </string>
+    <string name="punto243">En uno u otro ambiente hay deficiencias de Layout promoviendo desgastes, riesgos y desperdicio de tiempo (distribución planeada de los recursos productivos y/o de apoyo dificultando la circulación y el acceso; espacio incompatible con o volumen, etc.). No hay medidas concretas para la corrección de algunas.
+
+
+    </string>
+    <string name="punto244">En uno u otro ambiente hay deficiencias de Layout promoviendo desgastes, riesgos y desperdicio de tiempo (distribución planeada de los recursos productivos y/o de apoyo dificultando la circulación y el acceso; espacio incompatible con o volumen, etc.). hay medidas concretas para la corrección de todas.
+
+
+    </string>
+    <string name="punto245">La disposición de todos los recursos productivos y el apoyo es apropiado, facilita la circulación y/o el acceso, evitando riesgos, desgaste y desperdicio de tiempo. Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+
 
     <!--tercera s-->
-    <string name="punto311">In several places there is dirt, all caused by the people of the area</string>
-    <string name="punto312">In several places there is  dirt, some provoked by the people of the area or by non compliance with the cleaning routine.</string>
-    <string name="punto313">In some places there is  dirt, some provoked by the people of the area or by non compliance with the cleaning routine.</string>
-    <string name="punto314">In some places there is dirt clearly provoked by people from other areas or simply by non compliance with the cleaning routine.</string>
-    <string name="punto315">There is no dirt caused by people or lack of cleaning routine. There may be insignificant irregularities for the characteristics of the environment.</string>
 
-    <string name="punto321">In several places there are source of dirt or accumulation of dirt of long time, generating risks of accidents and that are not contained.</string>
-    <string name="punto322">In some places there are source of dirt or accumulation of dirt of long time, generating risks of accidents and that are not contained.</string>
-    <string name="punto323">The sources of dirt or accumulation of dirt of long time, is not generating risks of accidents. There is no defined deadline for the removal of sources of dirt.</string>
-    <string name="punto324">The sources of dirt or accumulation of dirt of long time, is not generating risks of accidents. There is defined deadline for the removal of sources of dirt.</string>
-    <string name="punto325">Sources of dirt (machinery, equipment, handling of product) or dirt accumulated over time do not create a risk of accidents and the extinction of their source was considered technically and financially unviable by the company. There may be insignificant irregularities for the characteristics of the environment.</string>
+    <string name="punto311">En varios lugares hay suciedad, todas provocadas por las personas del propio ambiente.
 
-    <string name="punto331">There is no defined frequency and / or suitable for cleaning any type of dirt (generated by processes, handing of product,  weather, animals, trees, transport, etc.).</string>
-    <string name="punto332">There is no defined frequency and / or suitable for cleaning several type of dirt (generated by processes, handing of product,  weather, animals, trees, transport, etc.).</string>
-    <string name="punto333">There is no defined frequency and / or suitable for cleaning some type of dirt (generated by processes, handing of product,  weather, animals, trees, transport, etc.).</string>
-    <string name="punto334">There is a defined frequency and suitable for cleaning all type of dirt (generated by processes, handing of product,  weather, animals, trees, transport, etc.).The systematic does not include, in writing, all places of difficult access.</string>
-    <string name="punto335"> There is a defined frequency and suitable for cleaning all type of dirt (generated by processes, handing of product,  weather, animals, trees, transport, etc.). The routine  includes, all the places of difficult access.</string>
-    <string name="punto341">In several places there are several deficiencies in waste baskets, and other collectors  (quantity, identification, conservation, hygiene, size, cleaning frequency, identification, signaling, practice of selective collection, etc.).</string>
-    <string name="punto342">In several places there are some deficiencies in waste baskets, and other collectors  (quantity, identification, conservation, hygiene, size, cleaning frequency, identification, signaling, practice of selective collection, etc.).</string>
-    <string name="punto343">In some places there are several deficiencies in waste baskets, and other collectors  (quantity, identification, conservation, hygiene, size, cleaning frequency, identification, signaling, practice of selective collection, etc.).</string>
-    <string name="punto344">In some places there are some deficiencies in waste baskets, and other collectors  (quantity, identification, conservation, hygiene, size, cleaning frequency, identification, signaling, practice of selective collection, etc.).</string>
-    <string name="punto345">All waste baskets, and other collectors are suitable  (quantity, identification, conservation, hygiene, size, cleaning frequency, identification, signaling, practice of selective collection, etc.). There may be insignificant irregularities for the characteristics of the environment.</string>
-    <string name="verCriterios">Criterios</string>
-    <string name="criteriaTitulo">Criterios</string>
-    <string name="sacarFoto">Agregar foto</string>
-    <string name="guardarAuditoria">Guardar auditoría</string>
-    <string name="salir">Salir</string>
-    <string name="manageAreas">Gestionar areas</string>
-    <string name="myAudits">Mis auditorías</string>
-    <string name="addNewArea">Agregar nueva area</string>
-    <string name="auth_failed">Fallo de autenticación</string>
-    <string name="signed_out">Logout exitoso</string>
-    <string name="generarPDF">Enviar reporte PDF</string>
-    <string name="quit">Salir</string>
-    <string name="signOut">Log out</string>
-    <string name="settings">Configuración</string>
 
-    <string name="punto411">There are only a few rules on identifications and signage. Most do not obey any rules.</string>
-    <string name="punto412">There are some rules on identifications and signage. Most do not obey any standard.
-</string>
-    <string name="punto413">In all places there are identifications and signage. There may be some insignificant irregularity for the characteristics of the environment. Some paintings, identifications and signage do not obey a standard.
-</string>
-    <string name="punto414">In all places there are identifications and signage. There may be some insignificant irregularity for the characteristics of the environment. Few paintings, identifications and signage do not obey a standard.
-</string>
-    <string name="punto415">In all places there are identifications and signage. There may be an insignificant irregularity for the characteristics of the environment. All paintings, identifications and signage are standardized.
-</string>
-    <string name="punto421">There are some ergonomic problems and / or some hygiene problems in the work area, but there is no plan to solve it
-</string>
-    <string name="punto422">There are some ergonomic problem and / or  hygiene problem in the work area, but there is no study to solve them.
-</string>
-    <string name="punto423">There are some ergonomic problem and / or hygiene problem in the work area and there is study to solve them.
-</string>
-    <string name="punto424">There are some ergonomic problem and / or hygiene problem in the work area and there are concrete actions to solve it.
-</string>
-    <string name="punto425">There is no ergonomic or hygiene problem in the work area It may have insignificant irregularities for the characteristics of the environment.
-</string>
-    <string name="punto431">There is no system for maintenance of 5S. The practice is random.
-</string>
-    <string name="punto432">There is some system for maintenance to 5S, but it does not guarantee continuous improvement (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
-</string>
-    <string name="punto433">There is a system for continuous improvement of 5S, but there is a deficiency in several aspects  (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
-</string>
-    <string name="punto434">There is a system for continuous improvement of 5S, but there is a deficiency in some aspects  (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
-</string>
-    <string name="punto435">There is an efficient system for the continuous improvement of 5S  (evaluations, action plans, division of responsibilities, disclosure of rules, meetings, recognition, disclosure of results, etc.)
-</string>
-    <string name="punto441">There is no defined criteria for the electronic storage of documents.
-</string>
-    <string name="punto442">The possible definition for the electronic storage of documents  is not extended for all types (Net, CPU, E-mail).
-</string>
-    <string name="punto443">There is no defined protocol for the storage of electronic documents. (Net, CPU, E-mail). Some folders and shared files do not uniform denomination.
-</string>
-    <string name="punto444">There is defined  for the storage  of electronic documents (Net, CPU, E-mail).  There is no clear separation beetwen a personal and profesional files.
-</string>
-    <string name="punto445">There is a definition for keeping all types of electronic documents (network, CPU, E-mail). All shared files and folders have uniform names. There is a general separation beetwen of personal and profesional  files. There may be insignificant irregularities for the characteristics of the environment.
+    </string>
+    <string name="punto312">En varios lugares hay suciedad, una u otra provocada por las personas del propio ambiente o por no cumplimiento de la sistemática de limpieza.
+
+
+    </string>
+    <string name="punto313">En uno u otro lugar hay suciedad, una u otra provocada por las personas del propio ambiente o por no cumplimiento de la sistemática de limpieza.
+
+
+    </string>
+    <string name="punto314">En uno u otro lugar hay suciedad provocada apenas, y claramente, por personas de otros ambientes o apenas por no cumplimiento de la sistemática de limpieza.
+
+
+    </string>
+    <string name="punto315">No hay suciedad causada por las personas ni por la falta de rutina (sistemática) de limpieza. Puede haber irregularidades insignificantes para las características del entorno.
+    </string>
+
+    <string name="punto321">En varios lugares hay fuentes de suciedad o suciedad acumulada de largo tiempo, generando riesgos de accidentes y que no está siendo contenida.
+
+
+    </string>
+    <string name="punto322">En uno u otro lugar hay fuentes de suciedad o suciedad acumulada de largo tiempo, generando riesgos de accidentes y que no está siendo contenida y/o señalizada.
+
+
+    </string>
+    <string name="punto323">Las fuentes de suciedad o suciedad acumulada de largo tiempo no genera riesgos de accidentes. No hay un plazo definido para la eliminación de las fuentes.
+
+
+    </string>
+    <string name="punto324">Las fuentes de suciedad o suciedad acumulada de largo tiempo no genera riesgos de accidentes. Hay un plazo definido para la eliminación de las fuentes.
+
+
+    </string>
+    <string name="punto325">Las fuentes de suciedad (maquinas, equipos, manipulación de productos) o la suciedad acumulado con el tiempo no genera riesgo de accidentes y la extinción de su(s) fuente(s)  fue considerada inviable técnica y financieramente por los órganos competentes de la organización. Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+    <string name="punto331">No hay una frecuencia definida y/o adecuada para la limpieza de ningún tipo de suciedad (generada por procesos, manoseo de productos, ambiente, animales, árboles, transportes, etc.).
+
+
+    </string>
+    <string name="punto332">No hay una frecuencia definida y/o adecuada de limpieza para varios tipos de suciedad (generada por procesos, manoseo de productos, ambiente, animales, árboles, transportes, etc.).
+
+
+    </string>
+    <string name="punto333">No hay una frecuencia definida y/o adecuada de limpieza apenas para uno u otro tipo de suciedad (generada por procesos, manoseo de productos, ambiente, animales, árboles, transportes, etc.).
+
+
+    </string>
+    <string name="punto334">Hay una frecuencia definida y adecuada para la limpieza de todos los tipos de suciedad (generada por procesos, manoseo de productos, ambiente, animales, árboles, transportes, etc.). A sistemática no incluye, por escrito, todos los lugares de difícil acceso.
+
+
+    </string>
+    <string name="punto335">Hay una frecuencia definida y adecuada para la limpieza de todo tipo de suciedad (generada por procesos, manipulación de productos, clima, animales, árboles, transporte, etc.). La rutina (sistemática) incluye , por escrito, todos los lugares de difícil acceso.
+
+
+    </string>
+    <string name="punto341">En varios lugares hay deficiencias en las cestos de basura,  y otros colectores de recursos descartados (cantidad, identificación, conservación, higiene, tipo y tamaño, frecuencia de retirada, identificación, señalización, práctica de la colecta selectiva, etc.).
+
+
+    </string>
+    <string name="punto342">En varios lugares hay una u otra deficiencia en las cestos de basura,  u otros colectores de recursos descartados (cantidad, identificación, conservación, higiene, tipo y tamaño, frecuencia de retirada, identificación, señalización, práctica de la colecta selectiva, etc.).
+
+
+    </string>
+    <string name="punto343">En uno u otro lugar hay deficiencias en las cestos de basura,  y otros colectores de recursos descartados (cantidad, identificación, conservación, higiene, tipo y tamaño, frecuencia de retirada, identificación, señalización, práctica de la colecta selectiva, etc.).
+
+
+    </string>
+    <string name="punto344">En uno u otro lugar hay una u otra deficiencia en las cestos de basura,  u otros colectores de recursos descartados (cantidad, identificación, conservación, higiene, tipo y tamaño, frecuencia de retirada, identificación, señalización, práctica de la colecta selectiva, etc.).
+
+
+    </string>
+    <string name="punto345">Todas las papeleras, ceniceros y otros recolectores de recursos desechados son adecuados (cantidad, ubicación, conservación, higiene, tipo y tamaño, frecuencia de retiro, identificación, señalización, práctica de la recolección selectiva, etc.). Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+    <string name="punto411">Sólo hay una u otra deficiencia en las identificaciones y señalizaciones. La gran mayoría no obedece a ningún estándar.
+
+
+    </string>
+    <string name="punto412">Sólo hay una u otra deficiencia en las identificaciones y señalizaciones. Hay estándar sólo en algunas de ellas.
+
+
+    </string>
+    <string name="punto413">En todos los lugares hay identificaciones y señalizaciones. Puede existir una u otra irregularidad insignificante para las características del ambiente. Algunas pinturas, identificaciones y señalizaciones no obedecen a un estándar.
+
+
+    </string>
+    <string name="punto414">En todos los lugares hay identificaciones y señalizaciones. Puede existir una u otra irregularidad insignificante para las características del ambiente. Hay una u otra pintura, identificación o señalización fuera del estándar.
+
+
+    </string>
+    <string name="punto415">En todos los lugares hay identificaciones y señalizaciones. Puede haber una irregularidad insignificante para las características del entorno. Todas las pinturas, identificaciones y señalizaciones están estandarizadas.
+
+
+    </string>
+    <string name="punto421">Hay algunos problemas ergonómicos y/o s algunos problemas de higiene en el lugar de trabajo, mas no hay ningún estudio para solucionarlos.
+
+
+    </string>
+    <string name="punto422">Hay uno u otro problema ergonómico y/o hay uno u otro problema de higiene en el lugar de trabajo, mas no hay ningún estudio para solucionarlos.
+
+
+    </string>
+    <string name="punto423">Hay uno u otro problema ergonómico y/o hay uno u otro problema de higiene en el lugar de trabajo y hay estudio para solucionarlos.
+
+
+    </string>
+    <string name="punto424">Hay uno u otro problema ergonómico  y/o hay uno u otro problema de higiene en el lugar de trabajo y hay acciones concretas para solucionarlo.
+
+
+    </string>
+    <string name="punto425">No hay ningún problema ergonómico o de higiene en el lugar de trabajo   Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+    <string name="punto431">No hay sistemática para el mantenimiento de 5S. La práctica es aleatoria.
+
+
+    </string>
+    <string name="punto432">Hay una u otra sistemática para el mantenimiento de 5S, mas no garantiza la mejora continua (faltan evaluaciones numéricas, planes de acción, división de responsabilidades, estabelecimiento y divulgación de reglas, reuniones, reconocimiento, divulgación de resultados, etc.)
+
+
+    </string>
+    <string name="punto433">Hay una sistemática para la mejora continua de 5S, mas hay deficiencia en algunos aspectos (evaluaciones, planes de acción, división de responsabilidad, procedimientos, estabelecimiento y divulgación de reglas, reuniones, reconocimiento, divulgación de resultados, etc.)
+
+
+    </string>
+    <string name="punto434">Hay una sistemática para la mejora continua de 5S, mas hay deficiencia en uno u otro aspecto (evaluaciones, planes de acción, división de responsabilidad, procedimientos, estabelecimiento y divulgación de reglas, reuniones, reconocimiento, divulgación de resultados, etc.)
+
+
+    </string>
+    <string name="punto435">Hay un sistema eficiente para la mejora continua de 5S (evaluaciones, planes de acción, división de responsabilidades, procedimientos, establecimiento y divulgación de reglas, reuniones, reconocimiento, difusión de resultados, etc.).
+
+
+    </string>
+    <string name="punto441">No hay un criterio definido para la guarda de documentos electrónicos.
+
+
+    </string>
+    <string name="punto442">La posible definición para la guarda de documentos electrónicos no está extendida para todos los tipos (Red, CPU, Correo Electrónico).
+
+
+    </string>
+    <string name="punto443">No hay una definición para la guarda de todos los tipos de documentos electrónicos (Red, CPU, Correo Electrónico). Algunos directorios y archivos compartidos no tienen denominaciones uniformes.
+
+
+    </string>
+    <string name="punto444">Hay una definición para la guarda de todos los tipos de documentos electrónicos (Red, CPU, Correo Electrónico). Uno u otro archivo o directorio compartido no tienen denominaciones uniformes. No hay una separación generalizada de los archivos funcionales de los particulares.
+
+
+    </string>
+    <string name="punto445">Hay una definición para la guarda de todo tipo de documentos electrónicos (red, CPU, E-mail). Todos los archivos y directorios compartidos tienen nombres uniformes. Hay una separación general de los archivos funcionales de los personales. Puede haber irregularidades insignificantes para las características del entorno.
+
+
+    </string>
+    <string name="punto511">Una u otra de las  personas observadas/entrevistadas practican 5S en el día a día sin necesidad de monitoramiento.
+
+
+    </string>
+    <string name="punto512">Varias  personas observadas / entrevistadas no practican 5S en el día a día, sin necesidad de monitoramiento y cobro
+
+
+    </string>
+    <string name="punto513">Algunas de las personas observadas / entrevistadas no practican 5S en el día a día, sin necesidad de monitoramiento y cobro.
+
+
+    </string>
+    <string name="punto514">Apenas una u otra de las personas observadas / entrevistadas no practican 5S en el día a día, sin necesidad de monitoramiento y cobro,  inclusive en otros ambientes que ellas frecuentan o trabajan.
+
+
+    </string>
+    <string name="punto515">Todas las personas observadas / entrevistadas practican 5S  en el día a día, sin necesidad de seguimiento, incluso en otros entornos que ellos frecuentan o trabajan.
+
+
+    </string>
+    <string name="punto521">Una u otra de las  personas observadas / entrevistadas cumplen normas, reglas y procedimientos (seguridad, medio ambiente, calidad, etc.), sin  necesidad de monitoramiento o cobro.
+
+
+    </string>
+    <string name="punto522">Varias  personas observadas / entrevistadas no cumplen normas, reglas y procedimientos (seguridad, medio ambiente, calidad, etc.), sin  necesidad de monitoramiento o cobro.
+
+
+    </string>
+    <string name="punto523">Algunas de las personas observadas / entrevistadas no cumplen normas, reglas y procedimientos (seguridad, medio ambiente, calidad, etc.), sin  necesidad de monitoramiento o cobro.
+
+
+    </string>
+    <string name="punto524">Apenas una u otra de las personas observadas / entrevistadas no cumplen normas, reglas y procedimientos (seguridad, medio ambiente, calidad, etc.), sin  necesidad de monitoramiento o cobro.
+
+
+    </string>
+    <string name="punto525">Todas las personas observadas / entrevistadas cumplen con las normas, reglas y procedimientos (seguridad, medio ambiente, calidad, etc.), sin la necesidad de un seguimiento o de cobro.
+
+
+    </string>
+    <string name="punto531">"La mayoría de las personas observadas / entrevistadas  tienen problemas relacionados con la postura, tales como:
+* Comportamiento o relacionamiento inadecuado en el área
+* Material impropio expuesto en el lugar de trabajo (adhesivos, fotos obscenas, grafitis, etc.)
+* Utilización inadecuada de espacios colectivos (agua, energía, baño, copiadora, café/taza, etc.).
+* Práctica inadecuada do fumar
+* Falta de Espíritu de equipo
+* Falta de iniciativa para mejoras de 5S, etc."
+
+
+    </string>
+    <string name="punto532">"Varias  personas observadas / entrevistadas  tienen problemas relacionados a la postura, tales como:
+* Comportamiento o relacionamiento inadecuado en el área
+* Material impropio expuesto en el lugar de trabajo (adhesivos, fotos obscenas, grafitis, etc.)
+* Utilización inadecuada de espacios colectivos (agua, energía, baño, copiadora, café/taza, etc.).
+* Práctica inadecuada do fumar
+* Falta de Espíritu de equipo
+* Falta de iniciativa para mejoras de 5S, etc."
+
+
+    </string>
+    <string name="punto533">"Algunas de las personas observadas / entrevistadas tienen problemas relacionados a la postura, tales como:
+* Comportamiento o relacionamiento inadecuado en el área
+* Material impropio expuesto en el lugar de trabajo (adhesivos, fotos obscenas, grafitis, etc.)
+* Utilización inadecuada de espacios colectivos (agua, energía, baño, copiadora, café/taza, etc.).
+* Práctica inadecuada do fumar
+* Falta de Espíritu de equipo
+* Falta de iniciativa para mejoras de 5S, etc."
 </string>
 
-    <string name="punto511">Some of the people observed / interviewed, practice 5S in the day to day without need of monitoring or order
+    <string name="punto534">"Apenas una u otra entre las personas observadas / entrevistadas tienen problemas relacionados a la postura, tales como:
+* Comportamiento o relacionamiento inadecuado en el área
+* Material impropio expuesto en el lugar de trabajo (adhesivos, fotos obscenas, grafitis, etc.)
+* Utilización inadecuada de espacios colectivos (agua, energía, baño, copiadora, café/taza, etc.).
+* Práctica inadecuada do fumar
+* Falta de Espíritu de equipo
+* Falta de iniciativa para mejoras de 5S, etc."
 </string>
-    <string name="punto512">several of the people observed / interviewed, practice 5S in the day to day without need of monitoring or order
+
+    <string name="punto535">"Ninguna de las personas observadas / entrevistadas tienen problemas relacionados con la postura, tales como:
+* Comportamiento o relacionamiento inadecuado en el área * Material impropio expuesto en el lugar de trabajo (adhesivos, fotos obscenas, grafiti, etc.)
+* Uso inadecuado de los espacios colectivos (agua, energía, baño, copiadora, café / taza, etc.).
+* Práctica inadecuada de fumar
+* Falta de espíritu de equipo
+* Falta de iniciativa para mejoras 5S, etc."
 </string>
-    <string name="punto513">Some of the people observed / interviewed, do not practice 5S in the day to day without need of monitoring or order
-</string>
-    <string name="punto514">Few of the people observed / interviewed, do not practice 5S in the day to day without need of monitoring or order
-</string>
-    <string name="punto515">"All of people observed / interviewed, practice 5S in the day to day without need of monitoring or order
-Even in other areas that they frequent or work.
-"
-</string>
-    <string name="punto521">some of the people observed / interviewed comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
-</string>
-    <string name="punto522">several of the people observed / interviewed comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
-</string>
-    <string name="punto523">some of the people observed / interviewed do not comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
-</string>
-    <string name="punto524">Few of the people observed / interviewed do not comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
-</string>
-    <string name="punto525">All of people observed / interviewed do not comply with norms, rules and procedures (safety, environment, quality, etc.), without the need for monitoring or order
-</string>
-    <string name="punto531">"Most people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
-* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
-* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
-* Inadequate smoking practice
-* Lack of team spirit
-* Lack of initiative for 5S, etc.."
-</string>
-    <string name="punto532">"Several people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
-* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
-* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
-* Inadequate smoking practice
-* Lack of team spirit
-* Lack of initiative for 5S, etc.."
-</string>
-    <string name="punto533">"Some people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
-* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
-* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
-* Inadequate smoking practice
-* Lack of team spirit
-* Lack of initiative for 5S, etc.."
-</string>
-    <string name="punto534">"Few people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
-* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
-* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
-* Inadequate smoking practice
-* Lack of team spirit
-* Lack of initiative for 5S, etc.."
-</string>
-    <string name="punto535">"Non of the people observed / interviewed have problems, such as: * Inappropriate behavior in their area or in the area of others
-* Inadequate material displayed in the workplace (adhesives, obscene photos, graffiti, etc.)
-* Inadequate use of collective spaces (water, energy, bathroom, copier, coffee, etc.).
-* Inadequate smoking practice
-* Lack of team spirit
-* Lack of initiative for 5S, etc.."</string>
-    <string name="punto541">There are several anomalies in the storage of various types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names, outside the established standard, etc.).</string>
-    <string name="punto542">There are several anomalies in the storage of some types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
-    <string name="punto543">There are some anomalies in the storage of various types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
-    <string name="punto544">There are some anomalies in the storage of some types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
-    <string name="punto545">All electronic documents are used and stored in appropriate folders in accordance with the established standard. It may have insignificant irregularities for the characteristics of the environment.</string>
+
+    <string name="punto541">Hay varias anormalidades en la guarda de varios tipos de documentos electrónicos (obsoletismo, mezcla de documentos personales y funcionales, documentos fuera del directorio/archivo específico, denominaciones fuera del estándar establecido, etc.).
+    </string>
+    <string name="punto542">Hay varias anormalidades en la guarda uno u otro tipo de documento electrónico (obsoletismo, mezcla de documentos personales y funcionales, documentos fuera del directorio/archivo específico, denominaciones fuera del estándar establecido, etc.).
+    </string>
+    <string name="punto543">Hay una u otra anormalidad en la guarda de varios tipos de documentos electrónicos (obsolescencia, mezcla de documentos personales y funcionales, documentos fuera del directorio/archivo específico, denominaciones fuera del estándar establecido, etc.).
+    </string>
+    <string name="punto544">Hay una u otra anormalidad en la guarda de uno u otro tipo de documentos electrónicos (obsolescencia, mezcla de documentos personales y funcionales, documentos fuera del directorio/archivo específico, denominaciones fuera do estándar establecido, etc.).
+
+
+    </string>
+    <string name="punto545">Todos los documentos electrónicos se utilizan y están almacenados en directorios apropiados y con nombre de acuerdo con el estándar establecido. Puede haber irregularidades insignificantes para las características del entorno.
+    </string>
+
+
     <string name="ayuda">\?</string>
-    <string name="sinAreas">No hay areas creadas. vaya al menu: \"Configuración\" y luego a: \"Gestionar areas\"</string>
+    <string name="sinAreas">No hay áreas creadas. vaya al menu: \"Configuración\" y luego a: \"Gestionar áreas\"</string>
     <string name="verAuditoria">Detalle de auditoría</string>
     <string name="start">Comenzar auditoría</string>
     <string name="contact">Contactanos</string>
@@ -332,7 +546,7 @@ Even in other areas that they frequent or work.
     <string name="good">Bueno</string>
     <string name="auditResultFor">Resultado de la auditoría para:</string>
     <string name="titulo">Titulo:</string>
-    <string name="manageAuditAreas">Gestión de areas</string>
+    <string name="manageAuditAreas">Gestión de áreas</string>
     <string name="databaseAuditDelete">borrar base de datos</string>
     <string name="goBack">Volver</string>
     <string name="enunciado">Enunciado</string>
@@ -343,6 +557,20 @@ Even in other areas that they frequent or work.
     <string name="signIn">Ingresar</string>
     <string name="register">Registrarse</string>
     <string name="disclaimer">Por favor, regístrese. Sólo solicitamos su mail a modo de autentificación.</string>
-
+    <string name="verCriterios">Criterios</string>
+    <string name="criteriaTitulo">Criterios</string>
+    <string name="sacarFoto">Agregar foto</string>
+    <string name="guardarAuditoria">Guardar auditoría</string>
+    <string name="salir">Salir</string>
+    <string name="manageAreas">Gestionar áreas</string>
+    <string name="myAudits">Mis auditorías</string>
+    <string name="addNewArea">Agregar nueva área</string>
+    <string name="auth_failed">Fallo de autenticación</string>
+    <string name="signed_out">Logout exitoso</string>
+    <string name="generarPDF">Enviar reporte PDF</string>
+    <string name="quit">Salir</string>
+    <string name="signOut">Log out</string>
+    <string name="settings">Configuración</string>
+    <string name="auditResult1">Audit.</string>
 
 </resources>

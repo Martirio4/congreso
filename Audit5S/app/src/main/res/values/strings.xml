@@ -342,7 +342,7 @@ Even in other areas that they frequent or work.
     <string name="hinPass">password</string>
     <string name="signIn">Sign in</string>
     <string name="register">register</string>
-    <string name="disclaimer">Please register. an Email adress is required for authentication. Your data will not be used for any other purpose</string>
+    <string name="disclaimer">Please register. an Email address is required for authentication. Your data will not be used for any other purpose</string>
     <string name="auditResult1">Audit.</string>
 
 

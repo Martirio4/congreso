@@ -261,7 +261,7 @@ public class FragmentSubitem extends Fragment {
                         //User already refused to give us this permission or removed it
                         //Now he/she can mark "never ask again" (sic!)
                         Snackbar.make(getView(), getResources().getString(R.string.appNecesitaPermiso),
-                                Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.id.ok), new View.OnClickListener() {
+                                Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
                             @Override public void onClick(View view) {
                                 Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                                         new PermissionCallback() {

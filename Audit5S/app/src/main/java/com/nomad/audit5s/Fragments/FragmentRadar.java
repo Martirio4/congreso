@@ -114,6 +114,7 @@ public class FragmentRadar extends Fragment {
         mv.setChartView(mChart); // For bounds control
         mChart.setMarker(mv); // Set the marker to the chart
 
+
         setData();
 
         mChart.animateXY(

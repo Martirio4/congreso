@@ -93,11 +93,11 @@ public class FragmentRevisarAuditoria extends Fragment {
         
         punt1=view.findViewById(R.id.score1sVerAudit);
         punt1.setTypeface(robotoL);
-        punt2=view.findViewById(R.id.score2VerAudit);
+        punt2=view.findViewById(R.id.score2sVerAudit);
         punt2.setTypeface(robotoL);
-        punt3=view.findViewById(R.id.score3VerAudit);
+        punt3=view.findViewById(R.id.score3sVerAudit);
         punt3.setTypeface(robotoL);
-        punt4=view.findViewById(R.id.score4VerAudit);
+        punt4=view.findViewById(R.id.score4sVerAudit);
         punt4.setTypeface(robotoL);
 
         recycler1= view.findViewById(R.id.recycler1sVerAudit);

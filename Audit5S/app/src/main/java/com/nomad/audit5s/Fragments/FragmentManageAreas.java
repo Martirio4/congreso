@@ -310,6 +310,7 @@ public class FragmentManageAreas extends Fragment {
 
         new MaterialDialog.Builder(getContext())
                 .title(getResources().getString(R.string.addNewArea))
+                .inputRange(1,40)
                 .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
                 .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
                 .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))

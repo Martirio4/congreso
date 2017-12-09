@@ -17,5 +17,5 @@
     <dimen name="margenMini">4dp</dimen>
     <dimen name="altoTarjeta3">84dp</dimen>
     <dimen name="margenMicro">2dp</dimen>
-    <dimen name="titulosMain">30sp</dimen>
+    <dimen name="titulosMain">25sp</dimen>
 </resources>
