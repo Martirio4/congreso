@@ -491,9 +491,9 @@
     <string name="ayuda">\?</string>
     <string name="sinAreas">No hay áreas creadas. vaya al menu: \"Configuración\" y luego a: \"Gestionar áreas\"</string>
     <string name="verAuditoria">Detalle de auditoría</string>
-    <string name="start">Comenzar auditoría</string>
-    <string name="contact">Contactanos</string>
-    <string name="firstTime">Click aquí si es tu primera vez</string>
+    <string name="start">AUDITAR</string>
+    <string name="contact">CONTACTO</string>
+    <string name="firstTime">Primera vez, click aquí</string>
     <string name="autenticacionFallida">Autenticacion fallida</string>
     <string name="sinConexionIntenteMasTarde">No hay conexión a internet, intente mas tarde</string>
     <string name="reporteAuditoria">Reporte de auditoría.</string>
@@ -563,14 +563,14 @@
     <string name="guardarAuditoria">Guardar auditoría</string>
     <string name="salir">Salir</string>
     <string name="manageAreas">Gestionar áreas</string>
-    <string name="myAudits">Mis auditorías</string>
+    <string name="myAudits">AUDITORIAS</string>
     <string name="addNewArea">Agregar nueva área</string>
     <string name="auth_failed">Fallo de autenticación</string>
     <string name="signed_out">Logout exitoso</string>
     <string name="generarPDF">Enviar reporte PDF</string>
     <string name="quit">Salir</string>
     <string name="signOut">Log out</string>
-    <string name="settings">Configuración</string>
+    <string name="settings">AJUSTES</string>
     <string name="auditResult1">Audit.</string>
 
 </resources>

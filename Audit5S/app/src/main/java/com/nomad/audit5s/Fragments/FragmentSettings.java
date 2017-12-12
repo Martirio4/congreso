@@ -153,37 +153,48 @@ public class FragmentSettings extends Fragment {
 
     public void borrarBaseDeDatos(){
         Realm realm = Realm.getDefaultInstance();
-                                    realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
 
-                //borrar base de datos
-                RealmResults<Foto>fotis=realm.where(Foto.class)
-                        .findAll();
-                fotis.deleteAllFromRealm();
 
+        realm.executeTransaction(new Realm.Transaction() {
+        @Override
+        public void execute(Realm realm) {
+
+            String usuario= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+            RealmResults<Area>lasAreas=realm.where(Area.class)
+                    .equalTo("usuario",usuario)
+                    .findAll();
+            lasAreas.deleteAllFromRealm();
+
+            RealmResults<Auditoria> result2 = realm.where(Auditoria.class)
+                    .equalTo("usuario", usuario)
+                    .findAll();
+
+            for (Auditoria audit:result2
+                 ) {
                 RealmResults<SubItem>Subitems=realm.where(SubItem.class)
+                        .equalTo("auditoria",audit.getIdAuditoria())
                         .findAll();
                 Subitems.deleteAllFromRealm();
 
-
-                RealmResults<Area>Areas=realm.where(Area.class)
+                RealmResults<Foto>fotos=realm.where(Foto.class)
+                        .equalTo("auditoria",audit.getIdAuditoria())
                         .findAll();
-                Areas.deleteAllFromRealm();
+                fotos.deleteAllFromRealm();
+            }
+            result2.deleteAllFromRealm();
 
-                RealmResults<Auditoria>audits=realm.where(Auditoria.class)
-                        .findAll();
-                audits.deleteAllFromRealm();
+
 
                 //borrar directorios
-                File path = new File(Environment.getExternalStorageDirectory() + File.separator + "nomad" + File.separator + "audit5s");
+                File path = new File(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator+FirebaseAuth.getInstance().getCurrentUser().getEmail());
                if (deleteDirectory(path)){
                    Snackbar.make(areas,getResources().getString(R.string.confirmaBorrarBaseDeDato), Snackbar.LENGTH_SHORT)
                            .show();
                }
 
-
             }
+
         });
     }
 

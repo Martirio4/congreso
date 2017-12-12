@@ -18,3 +18,5 @@
 06/12/2017- cambio icono borrar area
 06/12/2017- fix calidad de todos los iconos.
 06/12/2017- fix doble landing
+12/12/2017-fix cada usuario tiene sus datos.
+12/12/2017- progressBar pantalla Login

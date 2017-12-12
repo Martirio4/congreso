@@ -37,9 +37,9 @@ public class LoginActivity extends AppCompatActivity  {
 
     private ImageButton loginBtn;
 
+    private ProgressBar progressBar;
 
     private ImageButton fakeFbLogin;
-    ProgressDialog progress;
     private String idFacebook, nombreFacebook, nombreMedioFacebook, apellidoFacebook, sexoFacebook, imagenFacebook, nombreCompletoFacebook, emailFacebook;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity  {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        progressBar=(ProgressBar) findViewById(R.id.progreso);
 
         mAuth = FirebaseAuth.getInstance();
         Realm.init(getApplicationContext());
@@ -138,6 +138,8 @@ public class LoginActivity extends AppCompatActivity  {
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setIndeterminate(true);
                 til1.setError(null);
                 til2.setError(null);
                 Integer validar =0;
@@ -236,6 +238,7 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     public void irALanding(){
+        progressBar.setVisibility(View.GONE);
         Intent unIntent = new Intent(this, ActivityLanding.class);
         startActivity(unIntent);
         Toast.makeText(this, getResources().getString(R.string.bienvenido)+mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
@@ -262,6 +265,7 @@ public class LoginActivity extends AppCompatActivity  {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
 
                         // ...

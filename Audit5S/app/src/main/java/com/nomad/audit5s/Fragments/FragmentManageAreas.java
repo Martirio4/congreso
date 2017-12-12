@@ -106,8 +106,11 @@ public class FragmentManageAreas extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_manage_aerea, container, false);
 
+        String usuario=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Area> result2 = realm.where(Area.class)
+                .equalTo("usuario",usuario)
                 .findAll();
         listaAreas=new RealmList<>();
         listaAreas.addAll(result2);
@@ -257,7 +260,7 @@ public class FragmentManageAreas extends Fragment {
                                 .setMaxHeight(480)
                                 .setQuality(75)
                                 .setCompressFormat(Bitmap.CompressFormat.JPEG)
-                                .setDestinationDirectoryPath(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "areas")
+                                .setDestinationDirectoryPath(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator+FirebaseAuth.getInstance().getCurrentUser().getEmail()+File.separator + "images" + File.separator + "areas")
                                 .compressToFile(fotoOriginal);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -294,7 +297,7 @@ public class FragmentManageAreas extends Fragment {
     }
     public void existeDirectorioImagenesAreas() {
         Boolean sePudo = true;
-        File dir = new File(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "areas");
+        File dir = new File(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator +FirebaseAuth.getInstance().getCurrentUser().getEmail()+ File.separator + "images" + File.separator + "areas");
         if (!dir.exists() || !dir.isDirectory()) {
             sePudo = dir.mkdirs();
         }
@@ -324,6 +327,7 @@ public class FragmentManageAreas extends Fragment {
                         unArea.setNombreArea(input.toString());
                         unArea.setFotoArea(unaFoto);
                         unArea.setIdArea("area" + UUID.randomUUID());
+                        unArea.setUsuario(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
                         //guardo nueva area en Realm
                         Realm realm = Realm.getDefaultInstance();

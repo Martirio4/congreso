@@ -311,6 +311,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         nuevaAuditoria.setIdAuditoria("AUDIT-"+UUID.randomUUID());
         idAuditoria=nuevaAuditoria.getIdAuditoria();
         nuevaAuditoria.setFechaAuditoria(determinarFecha());
+        nuevaAuditoria.setUsuario(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
 
         Area mAreaAuditada = realm.where(Area.class)
                 .equalTo("idArea", areaAuditada)

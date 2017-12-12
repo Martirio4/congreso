@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.Adapter.AdapterAuditorias;
 import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.Model.Auditoria;
@@ -45,8 +46,10 @@ public class FragmentMyAudits extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_my_audits, container, false);
+        String usuario=FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Auditoria> result2 = realm.where(Auditoria.class)
+                .equalTo("usuario", usuario)
                 .findAll();
         listaAuditorias=new RealmList<>();
         listaAuditorias.addAll(result2);

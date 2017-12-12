@@ -36,6 +36,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.Activities.ActivityAuditoria;
 import com.nomad.audit5s.Adapter.AdapterFotos;
 import com.nomad.audit5s.Model.Area;
@@ -443,11 +444,11 @@ public class FragmentSubitem extends Fragment {
                     if (existeDirectorioImagenes()) {
                         try {
                             fotoComprimida = new Compressor(getContext())
-                                    .setMaxWidth(600)
+                                    .setMaxWidth(640)
                                     .setMaxHeight(480)
-                                    .setQuality(100)
-                                    .setCompressFormat(Bitmap.CompressFormat.PNG)
-                                    .setDestinationDirectoryPath(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "evidencias")
+                                    .setQuality(75)
+                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                                    .setDestinationDirectoryPath(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s"+ File.separator  + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator + "images" + File.separator + "evidencias")
                                     .compressToFile(fotoOriginal);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -511,7 +512,7 @@ public class FragmentSubitem extends Fragment {
 
     public Boolean  existeDirectorioImagenes(){
         Boolean sePudo=true;
-        File dir = new File( getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" + File.separator + "images" + File.separator + "evidencias");
+        File dir = new File( getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s"+ File.separator + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator + "images" + File.separator + "evidencias");
         if(!dir.exists() || !dir.isDirectory()) {
             sePudo=dir.mkdirs();
         }

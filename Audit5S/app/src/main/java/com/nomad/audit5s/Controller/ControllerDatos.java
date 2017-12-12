@@ -349,8 +349,8 @@ public class ControllerDatos  {
 
     public List<String> traerListaViewPager(){
         List<String>unaLista=new ArrayList<>();
-        unaLista.add(context.getResources().getString(R.string.myAudits));
-        unaLista.add(context.getResources().getString(R.string.ranking));
+        unaLista.add("auditoria");
+        unaLista.add("ranking");
         return unaLista;
     }
 

@@ -209,7 +209,7 @@
                 android:layout_marginStart="@dimen/margenChico"
                 android:layout_marginEnd="@dimen/margenChico"
                 android:layout_marginTop="@dimen/margenChico"
-                android:text="Final score:"
+                android:text="@string/puntajeFinal"
                 android:maxLines="2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

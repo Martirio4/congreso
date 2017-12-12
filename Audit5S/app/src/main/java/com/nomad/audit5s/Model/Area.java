@@ -12,6 +12,7 @@ public class Area extends RealmObject{
     private String idArea;
     private String NombreArea;
     private Foto fotoArea;
+    private String usuario;
 
     public Area() {
     }
@@ -39,4 +40,13 @@ public class Area extends RealmObject{
     public void setFotoArea(Foto fotoArea) {
         this.fotoArea = fotoArea;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 }
+
