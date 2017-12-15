@@ -37,6 +37,12 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nomad.audit5s.Activities.ActivityAuditoria;
 import com.nomad.audit5s.Adapter.AdapterFotos;
 import com.nomad.audit5s.Model.Area;
@@ -84,6 +90,8 @@ public class FragmentSubitem extends Fragment {
 
     private Auditoria unaAuditoria;
     private RealmList<SubItem> unaListaSubitems;
+
+    private DatabaseReference mDatabase;
 
 
 
@@ -319,6 +327,12 @@ public class FragmentSubitem extends Fragment {
         fabGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //--guardar auditoria en firebase--//
+
+
+
+
+
                 fabMenu.close(true);
                if(completoTodosLosPuntos()){
                 avisable.cerrarAuditoria();
@@ -384,8 +398,55 @@ public class FragmentSubitem extends Fragment {
         return view;
     }
 
-    private Boolean completoTodosLosPuntos() {
+    private void sumarAuditoriaFirebase() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+        if (user!=null) {
+            final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("cantidadAuditorias");
+            final DatabaseReference referenceGlobal = mDatabase.child("estadisticas").child("cantidadAuditorias");
 
+            //---leer cantidad de auditorias---//
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                        String cantAuditorias =dataSnapshot.getValue().toString();
+                        Integer numeroAudits= Integer.parseInt(cantAuditorias)+1;
+                        reference.setValue(numeroAudits.toString());
+                    } else {
+                        reference.setValue("1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            //---leer cantidad de auditorias---//
+            referenceGlobal.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                        String cantAuditorias =dataSnapshot.getValue().toString();
+                        Integer numeroAudits= Integer.parseInt(cantAuditorias)+1;
+                        referenceGlobal.setValue(numeroAudits.toString());
+                    } else {
+                        referenceGlobal.setValue("1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
+    private Boolean completoTodosLosPuntos() {
+        Integer cantFotos=0;
         Realm realm = Realm.getDefaultInstance();
         RealmResults<SubItem> result2 = realm.where(SubItem.class)
                 .equalTo("auditoria", ActivityAuditoria.idAuditoria)
@@ -398,16 +459,68 @@ public class FragmentSubitem extends Fragment {
             if (unSub.getPuntuacion1()==null){
                 unaLista.add(unSub.getId());
             }
+            if (unSub.getListaFotos()!=null&& unSub.getListaFotos().size()>0){
+                cantFotos=cantFotos+unSub.getListaFotos().size();
+            }
         };
         if (unaLista.size()>0){
             Toast.makeText(getContext(), getResources().getString(R.string.completarItemFaltante)+unaLista.toString(), Toast.LENGTH_SHORT).show();
             return false;
         }
         else{
+            sumarAuditoriaFirebase();
+            registrarCantidadFotosFirebase(cantFotos);
             return true;
         }
     }
 
+    private void registrarCantidadFotosFirebase(final Integer cantFotos) {
+
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+
+        if (user!=null) {
+            final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("cantidadFotosTomadas");
+            final DatabaseReference referenceGlobal = mDatabase.child("estadisticas").child("cantidadFotosTomadas");
+
+            //---LEER Y SUMAR UN AREA AL USUARIO---//
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                        String cantidadFotos =dataSnapshot.getValue().toString();
+                        Integer numeroFotos= Integer.parseInt(cantidadFotos)+1;
+                        reference.setValue(numeroFotos.toString());
+                    } else {
+                        reference.setValue(cantFotos);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //---LEER Y SUMAR UN AREA AL GLOBAL---//
+            referenceGlobal.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                        String cantidadFotos =dataSnapshot.getValue().toString();
+                        Integer numeroFotos= Integer.parseInt(cantidadFotos)+1;
+                        referenceGlobal.setValue(numeroFotos.toString());
+                    } else {
+                        referenceGlobal.setValue("1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
 
     public static FragmentSubitem CrearfragmentSubItem(SubItem unSubItem) {

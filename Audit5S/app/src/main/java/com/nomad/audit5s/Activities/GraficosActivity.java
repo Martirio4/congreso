@@ -93,6 +93,8 @@ public class GraficosActivity extends AppCompatActivity {
     public static final int SALTO_LINEA=18;
     public static final int SEPARACIONFOTOS=9;
 
+    private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,10 +107,14 @@ public class GraficosActivity extends AppCompatActivity {
         promedioSeiton=0.0;
         promedioSeiri=0.0;
         promedio5s =0.0;
+
         Intent intent= getIntent();
         Bundle bundle=intent.getExtras();
         idAudit=bundle.getString(AUDIT);
         origenIntent=bundle.getString(ORIGEN);
+
+        //--guardar auditoria en firebase--//
+
 
 
         FragmentActivity unaActivity = (FragmentActivity) this;
@@ -422,6 +428,7 @@ public class GraficosActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... args) {
             enviarPDF();
+            registrarReportesEnviadosFirebase();
             return null;
         }
 
@@ -438,7 +445,53 @@ public class GraficosActivity extends AppCompatActivity {
 
         }
     }
-    
+
+    private void registrarReportesEnviadosFirebase() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+        if (user!=null) {
+            final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("reportesEnviados");
+            final DatabaseReference referenceGlobal = mDatabase.child("estadisticas").child("reportesEnviados");
+
+            //---leer cantidad de auditorias---//
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                        String cantReportes =dataSnapshot.getValue().toString();
+                        Integer numeroReportes= Integer.parseInt(cantReportes)+1;
+                        reference.setValue(numeroReportes.toString());
+                    } else {
+                        reference.setValue("1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            referenceGlobal.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                        String cantReportes =dataSnapshot.getValue().toString();
+                        Integer numeroReportes= Integer.parseInt(cantReportes)+1;
+                        referenceGlobal.setValue(numeroReportes.toString());
+                    } else {
+                        referenceGlobal.setValue("1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
     /*
     public void armarPagina(List<SubItem> unaLista){
 

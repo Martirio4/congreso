@@ -1,5 +1,6 @@
 package com.nomad.audit5s.Activities;
 
+import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -10,5 +11,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Aplicacion extends MultiDexApplication{
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+    }
 
 }

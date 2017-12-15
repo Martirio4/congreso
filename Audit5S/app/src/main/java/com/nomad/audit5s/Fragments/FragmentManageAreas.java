@@ -30,6 +30,12 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nomad.audit5s.Adapter.AdapterArea;
 import com.nomad.audit5s.Manifest;
 import com.nomad.audit5s.Model.Area;
@@ -74,6 +80,7 @@ public class FragmentManageAreas extends Fragment {
     private Avisable unAvisable;
 
     private TextView textView;
+    private DatabaseReference mDatabase;
 
 
     public FragmentManageAreas() {
@@ -338,6 +345,8 @@ public class FragmentManageAreas extends Fragment {
                             }
                         });
 
+                        registrarCantidadAreasFirebase();
+
                         updateAdapter();
                         Snackbar.make(getView(),unArea.getNombreArea()+getResources().getString(R.string.creadoExitosamente),Snackbar.LENGTH_SHORT)
                                 .show();
@@ -346,6 +355,53 @@ public class FragmentManageAreas extends Fragment {
                     }
                 }).show();
 
+    }
+
+    private void registrarCantidadAreasFirebase() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+
+        if (user!=null) {
+            final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("cantidadAreasCreadas");
+            final DatabaseReference referenceGlobal = mDatabase.child("estadisticas").child("cantidadAreasCreadas");
+
+            //---LEER Y SUMAR UN AREA AL USUARIO---//
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                            String cantidadAreas =dataSnapshot.getValue().toString();
+                            Integer numeroAreas= Integer.parseInt(cantidadAreas)+1;
+                            reference.setValue(numeroAreas.toString());
+                    } else {
+                        reference.setValue("1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //---LEER Y SUMAR UN AREA AL GLOBAL---//
+            referenceGlobal.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue()!=null) {
+                        String cantidadAreas =dataSnapshot.getValue().toString();
+                        Integer numeroAreas= Integer.parseInt(cantidadAreas)+1;
+                        referenceGlobal.setValue(numeroAreas.toString());
+                    } else {
+                        referenceGlobal.setValue("1");
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     //--------------por UX se reemplaza este metodo por un snackbar-----------------//

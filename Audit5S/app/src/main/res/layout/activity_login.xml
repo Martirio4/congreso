@@ -29,13 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ProgressBar
-        android:id="@+id/progreso"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/codBeta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
 
 
@@ -56,7 +50,7 @@
             android:layout_marginTop="30dp"
             adroid:errorTextAppearance="@style/error_appearance"
             android:textColorHint="@color/marfil"
-            android:layout_centerHorizontal="true"
+
             android:id="@+id/inputLayout1">
 
             <EditText
@@ -74,11 +68,11 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/inputLayout1"
+
             android:id="@+id/inputLayout2"
             adroid:errorTextAppearance="@style/error_appearance"
             android:textColorHint="@color/marfil"
-            android:layout_centerHorizontal="true"
+
             >
 
             <EditText
@@ -94,12 +88,10 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/inputLayout1"
             android:id="@+id/inputLayout3"
             android:visibility="gone"
             adroid:errorTextAppearance="@style/error_appearance"
             android:textColorHint="@color/marfil"
-            android:layout_centerHorizontal="true"
             >
 
             <EditText
@@ -114,47 +106,64 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/signIn"
-            android:id="@+id/buttonLogin"
-            android:layout_below="@id/inputLayout2"
-            android:background="@drawable/boton2"
-            android:textColor="@color/primary_text"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:layout_marginBottom="@dimen/margenChico"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register"
-            android:id="@+id/buttonRegister"
-            android:background="@drawable/boton2"
-            android:layout_below="@+id/buttonLogin"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/primary_text"
-            android:elevation="10dp"
-            android:layout_centerHorizontal="true"/>
-        <Button
-            android:layout_marginBottom="@dimen/margenChico"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ok"
-            android:visibility="gone"
-            android:id="@+id/okRegister"
-            android:background="@drawable/boton2"
-            android:layout_below="@+id/buttonLogin"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/primary_text"
-            android:elevation="10dp"
-            android:layout_centerHorizontal="true"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_alignStart="@+id/buttonRegister"
+                android:layout_alignEnd="@+id/buttonRegister"
+                android:layout_height="wrap_content"
+                android:text="@string/signIn"
+                android:id="@+id/buttonLogin"
+                android:background="@drawable/boton2"
+                android:textColor="@color/primary_text"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <Button
+                android:layout_marginBottom="@dimen/margenChico"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:id="@+id/buttonRegister"
+                android:background="@drawable/boton2"
+                android:layout_below="@+id/buttonLogin"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/primary_text"
+                android:elevation="10dp"
+                android:layout_centerHorizontal="true"/>
+            <Button
+                android:layout_marginBottom="@dimen/margenChico"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ok"
+                android:visibility="gone"
+                android:id="@+id/okRegister"
+                android:background="@drawable/boton2"
+                android:layout_below="@+id/buttonLogin"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/primary_text"
+                android:elevation="10dp"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progreso"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/contenedorBotones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
+        android:visibility="gone"
         android:id="@+id/disclaimer"
         android:layout_marginStart="@dimen/margenChico"
         android:layout_marginEnd="@dimen/margenChico"

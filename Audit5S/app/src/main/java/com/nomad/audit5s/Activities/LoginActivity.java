@@ -138,8 +138,7 @@ public class LoginActivity extends AppCompatActivity  {
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                progressBar.setIndeterminate(true);
+
                 til1.setError(null);
                 til2.setError(null);
                 Integer validar =0;
@@ -160,7 +159,7 @@ public class LoginActivity extends AppCompatActivity  {
                  mail = editUsuario.getText().toString().toLowerCase();
                  contraseña = editPass.getText().toString();
                 
-                    loguearFirebaseManual(mail, contraseña);
+                loguearFirebaseManual(mail, contraseña);
                 
                    editPass.setText(null);
                    editUsuario.setText(null);
@@ -183,6 +182,7 @@ public class LoginActivity extends AppCompatActivity  {
         botonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Integer control = 0;
                 til1.setError(null);
                 til2.setError(null);
@@ -206,6 +206,9 @@ public class LoginActivity extends AppCompatActivity  {
                     return;
                 }
                 if (editPass.getText().toString().equals(editRepePass.getText().toString())) {
+
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setIndeterminate(true);
 
                     final Usuario nuevoUsuario = new Usuario();
                     nuevoUsuario.setMail(editUsuario.getText().toString().toLowerCase());
@@ -253,6 +256,8 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     public void loguearFirebaseManual(String usuario, String pass){
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setIndeterminate(true);
         mAuth.signInWithEmailAndPassword(usuario, pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -265,8 +270,9 @@ public class LoginActivity extends AppCompatActivity  {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
+
                         }
+                        progressBar.setVisibility(View.GONE);
 
                         // ...
                     }
