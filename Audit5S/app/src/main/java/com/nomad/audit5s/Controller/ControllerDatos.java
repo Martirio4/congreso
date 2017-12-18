@@ -1,15 +1,14 @@
-package com.nomad.audit5s.Controller;
+package com.nomad.audit5s.controller;
 
 import android.content.Context;
 
-import com.nomad.audit5s.Activities.ActivityAuditoria;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.activities.ActivityAuditoria;
+import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
 import io.realm.RealmList;
 
 /**

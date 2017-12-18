@@ -1,27 +1,22 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nomad.audit5s.Adapter.AdapterArea;
-import com.nomad.audit5s.Fragments.FragmentManageAreas;
-import com.nomad.audit5s.Fragments.FragmentSeleccionAerea;
-import com.nomad.audit5s.Model.Area;
+import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
+import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
 
-import io.realm.Realm;
 import pl.tajchert.nammu.Nammu;
 
 public class ActivityLanding extends AppCompatActivity implements FragmentSeleccionAerea.Notificable {

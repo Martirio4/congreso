@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.nomad.audit5s.Adapter.AdapterArea;
-import com.nomad.audit5s.Fragments.FragmentManageAreas;
-import com.nomad.audit5s.Fragments.FragmentSettings;
-import com.nomad.audit5s.Model.Area;
+import com.nomad.audit5s.adapter.AdapterArea;
+import com.nomad.audit5s.fragments.FragmentManageAreas;
+import com.nomad.audit5s.fragments.FragmentSettings;
+import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
 
 import io.realm.Realm;
@@ -32,8 +32,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        layout=findViewById(R.id.contenedor_landing);
         cargarFragmentSettings();
-        layout=findViewById(R.id.contenedorSettings);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);

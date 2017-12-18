@@ -1,10 +1,6 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
-import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -33,14 +29,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nomad.audit5s.Controller.ControllerDatos;
-import com.nomad.audit5s.Fragments.FragmentBarrasApiladas;
-import com.nomad.audit5s.Fragments.FragmentManageAreas;
-import com.nomad.audit5s.Fragments.FragmentRadar;
-import com.nomad.audit5s.Model.Auditoria;
-import com.nomad.audit5s.Model.AuditoriaFirebase;
-import com.nomad.audit5s.Model.Foto;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.controller.ControllerDatos;
+import com.nomad.audit5s.fragments.FragmentBarrasApiladas;
+import com.nomad.audit5s.fragments.FragmentManageAreas;
+import com.nomad.audit5s.fragments.FragmentRadar;
+import com.nomad.audit5s.model.Auditoria;
+import com.nomad.audit5s.model.Foto;
+import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
 import com.nomad.mylibrary.PDFWriter;
 import com.nomad.mylibrary.PaperSize;
@@ -55,9 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import id.zelory.compressor.Compressor;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 
 public class GraficosActivity extends AppCompatActivity {

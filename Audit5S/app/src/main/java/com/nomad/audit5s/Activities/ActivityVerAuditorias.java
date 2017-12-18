@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,12 +10,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import com.nomad.audit5s.Adapter.AdapterPagerVerAudits;
-import com.nomad.audit5s.Controller.ControllerDatos;
+import com.nomad.audit5s.adapter.AdapterPagerVerAudits;
+import com.nomad.audit5s.controller.ControllerDatos;
 import com.nomad.audit5s.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActivityVerAuditorias extends AppCompatActivity {
 

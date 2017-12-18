@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -11,17 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.nomad.audit5s.Adapter.AdapterPagerAudits;
-import com.nomad.audit5s.Adapter.AdapterPagerSubItems;
-import com.nomad.audit5s.Controller.ControllerDatos;
-import com.nomad.audit5s.Fragments.FragmentMyAudits;
-import com.nomad.audit5s.Fragments.FragmentRanking;
-import com.nomad.audit5s.Model.Auditoria;
+import com.nomad.audit5s.adapter.AdapterPagerAudits;
+import com.nomad.audit5s.controller.ControllerDatos;
+import com.nomad.audit5s.fragments.FragmentMyAudits;
+import com.nomad.audit5s.fragments.FragmentRanking;
+import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.R;
-
-import io.realm.Realm;
 
 public class ActivityMyAudits extends AppCompatActivity implements FragmentMyAudits.Graficable, FragmentRanking.Graficable {
 

@@ -1,19 +1,16 @@
-package com.nomad.audit5s.Fragments;
+package com.nomad.audit5s.fragments;
 
 
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.IntentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +19,11 @@ import android.widget.Button;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
-import com.nomad.audit5s.Activities.ActivityLanding;
-import com.nomad.audit5s.Activities.LoginActivity;
-import com.nomad.audit5s.Model.Area;
-import com.nomad.audit5s.Model.Auditoria;
-import com.nomad.audit5s.Model.Foto;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.activities.LoginActivity;
+import com.nomad.audit5s.model.Area;
+import com.nomad.audit5s.model.Auditoria;
+import com.nomad.audit5s.model.Foto;
+import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
 
 import java.io.File;

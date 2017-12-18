@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Fragments;
+package com.nomad.audit5s.fragments;
 
 
 import android.graphics.Typeface;
@@ -12,10 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.nomad.audit5s.Activities.ActivityVerAuditorias;
-import com.nomad.audit5s.Adapter.AdapterVerAudit;
-import com.nomad.audit5s.Model.Auditoria;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.activities.ActivityVerAuditorias;
+import com.nomad.audit5s.adapter.AdapterVerAudit;
+import com.nomad.audit5s.model.Auditoria;
+import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
 
 import java.text.NumberFormat;
