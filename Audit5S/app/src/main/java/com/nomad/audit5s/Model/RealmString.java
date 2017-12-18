@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Model;
+package com.nomad.audit5s.model;
 
 import io.realm.RealmObject;
 

@@ -1,11 +1,11 @@
-package com.nomad.audit5s.Adapter;
+package com.nomad.audit5s.adapter;
 
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.nomad.audit5s.Fragments.FragmentRevisarAuditoria;
+import com.nomad.audit5s.fragments.FragmentRevisarAuditoria;
 
 import java.util.ArrayList;
 import java.util.List;

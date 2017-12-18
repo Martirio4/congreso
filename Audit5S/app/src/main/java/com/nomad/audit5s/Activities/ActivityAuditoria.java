@@ -1,11 +1,10 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,42 +13,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.text.SpannableString;
-import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.nomad.audit5s.Adapter.AdapterPagerSubItems;
-import com.nomad.audit5s.Controller.ControllerDatos;
-import com.nomad.audit5s.Fragments.FragmentManageAreas;
-import com.nomad.audit5s.Fragments.FragmentSubitem;
-import com.nomad.audit5s.Model.Area;
-import com.nomad.audit5s.Model.Auditoria;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.adapter.AdapterPagerSubItems;
+import com.nomad.audit5s.controller.ControllerDatos;
+import com.nomad.audit5s.fragments.FragmentSubitem;
+import com.nomad.audit5s.model.Area;
+import com.nomad.audit5s.model.Auditoria;
+import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
-import com.nomad.audit5s.Services.ServiceLoco;
-import com.nomad.mylibrary.PDFWriter;
-import com.nomad.mylibrary.PaperSize;
+import com.nomad.audit5s.services.ServiceLoco;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmResults;
-import pl.aprilapps.easyphotopicker.EasyImage;
 
 
 public class ActivityAuditoria extends AppCompatActivity implements FragmentSubitem.Avisable{

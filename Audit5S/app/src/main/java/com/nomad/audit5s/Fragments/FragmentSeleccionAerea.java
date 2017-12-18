@@ -1,13 +1,11 @@
-package com.nomad.audit5s.Fragments;
+package com.nomad.audit5s.fragments;
 
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,11 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.nomad.audit5s.Adapter.AdapterArea;
-import com.nomad.audit5s.Model.Area;
+import com.nomad.audit5s.adapter.AdapterArea;
+import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
-
-import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmList;

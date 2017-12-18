@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Adapter;
+package com.nomad.audit5s.adapter;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.nomad.audit5s.Model.Foto;
+import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.R;
 import com.squareup.picasso.Picasso;
 

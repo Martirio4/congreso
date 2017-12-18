@@ -1,16 +1,11 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.nomad.audit5s.Model.Usuario;
+import com.nomad.audit5s.model.Usuario;
 import com.nomad.audit5s.R;
 
 import io.realm.Realm;

@@ -1,31 +1,25 @@
-package com.nomad.audit5s.Fragments;
+package com.nomad.audit5s.fragments;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.annotation.NonNull;
 
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -36,15 +30,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nomad.audit5s.Adapter.AdapterArea;
-import com.nomad.audit5s.Manifest;
-import com.nomad.audit5s.Model.Area;
-import com.nomad.audit5s.Model.Foto;
+import com.nomad.audit5s.adapter.AdapterArea;
+import com.nomad.audit5s.model.Area;
+import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.R;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.acl.Permission;
 import java.util.UUID;
 
 import id.zelory.compressor.Compressor;
@@ -82,9 +74,15 @@ public class FragmentManageAreas extends Fragment {
     private TextView textView;
     private DatabaseReference mDatabase;
 
+    private LinearLayout linearSnackbar;
+
 
     public FragmentManageAreas() {
         // Required empty public constructor
+    }
+
+    public LinearLayout getLinearCoordinator() {
+        return linearSnackbar;
     }
 
     public interface Avisable{
@@ -112,6 +110,8 @@ public class FragmentManageAreas extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_manage_aerea, container, false);
+
+        linearSnackbar =view.findViewById(R.id.linearParaCoordinar);
 
         String usuario=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
@@ -348,7 +348,7 @@ public class FragmentManageAreas extends Fragment {
                         registrarCantidadAreasFirebase();
 
                         updateAdapter();
-                        Snackbar.make(getView(),unArea.getNombreArea()+getResources().getString(R.string.creadoExitosamente),Snackbar.LENGTH_SHORT)
+                        Snackbar.make(linearSnackbar,unArea.getNombreArea()+getResources().getString(R.string.creadoExitosamente),Snackbar.LENGTH_SHORT)
                                 .show();
 
 

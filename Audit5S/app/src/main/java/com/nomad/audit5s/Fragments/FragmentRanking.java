@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Fragments;
+package com.nomad.audit5s.fragments;
 
 
 import android.content.Context;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.nomad.audit5s.Adapter.AdapterAuditorias;
-import com.nomad.audit5s.Model.Area;
-import com.nomad.audit5s.Model.Auditoria;
+import com.nomad.audit5s.adapter.AdapterAuditorias;
+import com.nomad.audit5s.model.Area;
+import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.R;
 
 import io.realm.Realm;

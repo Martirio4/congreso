@@ -1,9 +1,8 @@
-package com.nomad.audit5s.Fragments;
+package com.nomad.audit5s.fragments;
 
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -25,15 +24,10 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
-import com.nomad.audit5s.Model.Area;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.RadarMarkerView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-
-import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.

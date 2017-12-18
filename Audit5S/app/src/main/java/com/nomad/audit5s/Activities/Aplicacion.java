@@ -1,7 +1,6 @@
-package com.nomad.audit5s.Activities;
+package com.nomad.audit5s.activities;
 
 import android.app.Application;
-import android.support.multidex.MultiDexApplication;
 
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -9,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by Martirio on 19/07/2017.
  */
 
-public class Aplicacion extends MultiDexApplication{
+public class Aplicacion extends Application{
 
     @Override
     public void onCreate() {

@@ -1,12 +1,12 @@
-package com.nomad.audit5s.Services;
+package com.nomad.audit5s.services;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.nomad.audit5s.Activities.ActivityAuditoria;
-import com.nomad.audit5s.Model.Auditoria;
+import com.nomad.audit5s.activities.ActivityAuditoria;
+import com.nomad.audit5s.model.Auditoria;
 
 import io.realm.Realm;
 

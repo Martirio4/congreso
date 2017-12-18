@@ -28,24 +28,8 @@
     <string name="ingreseContraseniaValida">Please enter a valid password.</string>
     <string name="caracteresContrasenia">Password must be at least 6 characters</string>
     <string name="contraseniasNoCoinciden">Passwords do not match.</string>
-    <string name="bienvenido">Welcome</string>
+    <string name="bienvenido">Welcome </string>
     <string name="quieroReportar">I want to report an issue</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!--enunciados-->

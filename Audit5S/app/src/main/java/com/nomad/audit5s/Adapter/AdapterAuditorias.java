@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Adapter;
+package com.nomad.audit5s.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -14,9 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nomad.audit5s.Controller.ControllerDatos;
-import com.nomad.audit5s.Model.Auditoria;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.controller.ControllerDatos;
+import com.nomad.audit5s.model.Auditoria;
+import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
 import com.squareup.picasso.Picasso;
 

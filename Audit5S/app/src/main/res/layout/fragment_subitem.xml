@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nomad.audit5s.Fragments.FragmentSubitem">
+    tools:context="com.nomad.audit5s.fragments.FragmentSubitem">
 <LinearLayout
     android:background="@color/blancoNomad"
     android:orientation="vertical"

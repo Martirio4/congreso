@@ -1,19 +1,15 @@
-package com.nomad.audit5s.Adapter;
+package com.nomad.audit5s.adapter;
 
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.nomad.audit5s.Fragments.FragmentMyAudits;
-import com.nomad.audit5s.Fragments.FragmentRanking;
-import com.nomad.audit5s.Fragments.FragmentSubitem;
-import com.nomad.audit5s.Model.SubItem;
+import com.nomad.audit5s.fragments.FragmentMyAudits;
+import com.nomad.audit5s.fragments.FragmentRanking;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.RealmList;
 
 /**
  * Created by Pablo on 31/5/2017.

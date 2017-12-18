@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.nomad.audit5s.Activities.ActivityVerAuditorias"
+        tools:context="com.nomad.audit5s.activities.ActivityVerAuditorias"
         android:id="@+id/layoutbotones">
 
     <android.support.v7.widget.Toolbar

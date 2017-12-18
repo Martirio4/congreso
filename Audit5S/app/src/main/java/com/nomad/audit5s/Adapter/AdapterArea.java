@@ -1,4 +1,4 @@
-package com.nomad.audit5s.Adapter;
+package com.nomad.audit5s.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.ContextWrapper;
 import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.github.clans.fab.FloatingActionButton;
-import com.nomad.audit5s.Fragments.FragmentManageAreas;
-import com.nomad.audit5s.Model.Area;
+import com.nomad.audit5s.fragments.FragmentManageAreas;
+import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
 import com.squareup.picasso.Picasso;
 
