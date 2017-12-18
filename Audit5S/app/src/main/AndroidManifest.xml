@@ -17,13 +17,7 @@
         <activity
             android:name=".activities.LoginActivity"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activities.ActivityAuditoria"
             android:parentActivityName=".activities.ActivityLanding"
@@ -51,7 +45,18 @@
             android:name=".services.ServiceLoco"
             android:stopWithTask="false" />
 
-        <activity android:name=".activities.ActivityOnboarding"></activity>
+        <activity
+            android:name=".activities.ActivityOnboarding"
+            android:launchMode="singleInstance">
+      
+        </activity>
+        <activity android:name=".activities.ActivitySplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

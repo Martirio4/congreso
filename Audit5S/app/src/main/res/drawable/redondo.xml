@@ -3,12 +3,14 @@
     android:shape="oval">
 
     <solid
-        android:color="@color/tile5"/>
+        android:color="@color/tile3"/>
 
     <size
-        android:width="85dp"
-        android:height="85dp"/>
+        android:width="200dp"
+        android:height="200dp"/>
     <stroke
-        android:width="6dp"
-        android:color="@color/marfil"></stroke>
+        android:width="3dp"
+        android:color="@color/semaAmarillo">
+
+    </stroke>
 </shape>

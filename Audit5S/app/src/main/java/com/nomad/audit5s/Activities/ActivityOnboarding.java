@@ -1,13 +1,19 @@
 package com.nomad.audit5s.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.fragments.onBoarding.FragmentOb1;
+import com.nomad.audit5s.fragments.onBoarding.FragmentOb2;
+import com.nomad.audit5s.fragments.onBoarding.FragmentOb3;
+import com.nomad.audit5s.fragments.onBoarding.FragmentOb4;
 
 public class ActivityOnboarding extends AppIntro {
 
@@ -19,39 +25,53 @@ public class ActivityOnboarding extends AppIntro {
 
         // Add your slide fragments here.
         // AppIntro will automatically generate the dots indicator and buttons.
-        addSlide(firstFragment);
-        addSlide(secondFragment);
-        addSlide(thirdFragment);
-        addSlide(fourthFragment);
-        a
+
+        addSlide(AppIntroFragment.newInstance("Bienvenido a e-5S", "Gestione su programa de 5S, de forma agil y confiable", R.drawable.logo3, ContextCompat.getColor(this,R.color.tile2)));
+
+        FragmentOb1 ob1= new FragmentOb1();
+        FragmentOb2 ob2= new FragmentOb2();
+        FragmentOb3 ob3= new FragmentOb3();
+        FragmentOb4 ob4= new FragmentOb4();
+
+        addSlide(ob1);
+        addSlide(ob2);
+        addSlide(ob3);
+        addSlide(ob4);
+
 
 
 
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setBarColor(Color.parseColor("#3F51B5"));
-        setSeparatorColor(Color.parseColor("#2196F3"));
+        setBarColor(ContextCompat.getColor(this,R.color.tile4));
+        setSeparatorColor(ContextCompat.getColor(this,R.color.blancoNomad));
 
         // Hide Skip/Done button.
-        showSkipButton(false);
-        setProgressButtonEnabled(false);
+        showSkipButton(true);
+        setProgressButtonEnabled(true);
 
         // Turn vibration on and set intensity.
         // NOTE: you will probably need to ask VIBRATE permission in Manifest.
-        setVibrate(true);
+        setVibrate(false);
         setVibrateIntensity(30);
     }
 
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        // Do something when users tap on Skip button.
+        goLogin();
+    }
+
+    private void goLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        this.finishAffinity();
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        // Do something when users tap on Done button.
+        goLogin();
     }
 
     @Override

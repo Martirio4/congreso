@@ -12,10 +12,10 @@ import com.nomad.audit5s.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Ob1 extends Fragment {
+public class FragmentOb3 extends Fragment {
 
 
-    public Ob1() {
+    public FragmentOb3() {
         // Required empty public constructor
     }
 

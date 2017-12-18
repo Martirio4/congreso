@@ -328,6 +328,7 @@ Even in other areas that they frequent or work.
     <string name="register">register</string>
     <string name="disclaimer">Please register. an Email address is required for authentication. Your data will not be used for any other purpose</string>
     <string name="auditResult1">Audit.</string>
+    <string name="textoSplash">e-5S</string>
 
 
 </resources>
