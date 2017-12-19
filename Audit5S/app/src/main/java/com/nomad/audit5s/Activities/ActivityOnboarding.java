@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.fragments.onBoarding.FragmentOb1;
@@ -15,7 +16,7 @@ import com.nomad.audit5s.fragments.onBoarding.FragmentOb2;
 import com.nomad.audit5s.fragments.onBoarding.FragmentOb3;
 import com.nomad.audit5s.fragments.onBoarding.FragmentOb4;
 
-public class ActivityOnboarding extends AppIntro {
+public class ActivityOnboarding extends AppIntro2 {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,8 +26,6 @@ public class ActivityOnboarding extends AppIntro {
 
         // Add your slide fragments here.
         // AppIntro will automatically generate the dots indicator and buttons.
-
-        addSlide(AppIntroFragment.newInstance("Bienvenido a e-5S", "Gestione su programa de 5S, de forma agil y confiable", R.drawable.logo3, ContextCompat.getColor(this,R.color.tile2)));
 
         FragmentOb1 ob1= new FragmentOb1();
         FragmentOb2 ob2= new FragmentOb2();
@@ -38,13 +37,10 @@ public class ActivityOnboarding extends AppIntro {
         addSlide(ob3);
         addSlide(ob4);
 
-
-
-
         // OPTIONAL METHODS
         // Override bar/separator color.
-        setBarColor(ContextCompat.getColor(this,R.color.tile4));
-        setSeparatorColor(ContextCompat.getColor(this,R.color.blancoNomad));
+        //setBarColor(ContextCompat.getColor(this,R.color.tile4));
+        //setSeparatorColor(ContextCompat.getColor(this,R.color.blancoNomad));
 
         // Hide Skip/Done button.
         showSkipButton(true);

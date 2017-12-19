@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.nomad.audit5s.activities.ActivitySplash"
-    android:background="@color/tile5"
     >
-
-
+<ImageView
+    android:scaleType="centerCrop"
+    android:src="@drawable/splash2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
     <TextView
-        android:textStyle="italic"
         android:textColor="@color/blancoNomad"
-        android:gravity="center"
-        android:background="@drawable/redondo"
-        android:text="@string/textoSplash"
-        android:textSize="@dimen/textoSplash"
-        android:layout_marginStart="@dimen/margenChico"
-        android:layout_gravity="center"
+        android:text="@string/version"
+        android:layout_marginEnd="@dimen/margenChico"
+        android:layout_marginBottom="@dimen/margenGrande"
+        android:layout_gravity="bottom|end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 
 </FrameLayout>
