@@ -157,7 +157,6 @@
         android:layout_height="wrap_content" />
     <TextView
         android:visibility="gone"
-        android:id="@+id/disclaimer"
         android:layout_marginStart="@dimen/margenChico"
         android:layout_marginEnd="@dimen/margenChico"
         android:textColor="@color/tile2"

@@ -15,6 +15,7 @@ import com.nomad.audit5s.fragments.onBoarding.FragmentOb1;
 import com.nomad.audit5s.fragments.onBoarding.FragmentOb2;
 import com.nomad.audit5s.fragments.onBoarding.FragmentOb3;
 import com.nomad.audit5s.fragments.onBoarding.FragmentOb4;
+import com.nomad.audit5s.fragments.onBoarding.FragmentOb5;
 
 public class ActivityOnboarding extends AppIntro2 {
 
@@ -27,15 +28,17 @@ public class ActivityOnboarding extends AppIntro2 {
         // Add your slide fragments here.
         // AppIntro will automatically generate the dots indicator and buttons.
 
-        FragmentOb1 ob1= new FragmentOb1();
         FragmentOb2 ob2= new FragmentOb2();
         FragmentOb3 ob3= new FragmentOb3();
         FragmentOb4 ob4= new FragmentOb4();
+        FragmentOb5 ob5= new FragmentOb5();
 
-        addSlide(ob1);
-        addSlide(ob2);
+
+
         addSlide(ob3);
+        addSlide(ob2);
         addSlide(ob4);
+        addSlide(ob5);
 
         // OPTIONAL METHODS
         // Override bar/separator color.
@@ -61,13 +64,14 @@ public class ActivityOnboarding extends AppIntro2 {
     private void goLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        this.finishAffinity();
+
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         goLogin();
+        ActivityOnboarding.this.finish();
     }
 
     @Override

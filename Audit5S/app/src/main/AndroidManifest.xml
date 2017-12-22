@@ -47,7 +47,8 @@
 
         <activity
             android:name=".activities.ActivityOnboarding"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            >
       
         </activity>
         <activity android:name=".activities.ActivitySplash">

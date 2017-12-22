@@ -1,18 +1,9 @@
 <resources>
     <string name="app_name">Auditoría 5S</string>
-    <string name="action_home">Volver</string>
-    <string name="action_settings">Menu</string>
     <string name="drawer_open">abrir drawer</string>
     <string name="drawer_close">cerrar drawer</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="SeleccionArea">Seleccione área a auditar</string>
-    <string name="nuevaArea">Nueva área</string>
-    <string name="nuevaAreaHint">Ingrese nombre para el área nueva</string>
-    <string name="guardarNuevaArea">Guardar área</string>
-    <string name="seEliminoFoto">Imagen cargada</string>
-    <string name="noSeEliminoFoto">imagen cargada. una copia se ha conservado</string>
 
     <!--SETTINGS ACTIVITY-->
     <string name="delteAreaOk">El área ha sido borrada</string>
@@ -488,7 +479,6 @@
     </string>
 
 
-    <string name="ayuda">\?</string>
     <string name="sinAreas">No hay áreas creadas. vaya al menu: \"Configuración\" y luego a: \"Gestionar áreas\"</string>
     <string name="verAuditoria">Detalle de auditoría</string>
     <string name="start">AUDITAR</string>
@@ -520,7 +510,6 @@
     <string name="seisoSeiso">Seiso / Limpieza</string>
     <string name="seiketsuSeiketsu">Seiketsu / Estandarización</string>
     <string name="shitsukeShitsuke">Shitsuke / Disciplina</string>
-    <string name="ranking">Ranking</string>
     <string name="noEncontroDatos">No se encontraron datos</string>
     <string name="dismiss">Salir</string>
     <string name="appNecesitaPermiso">La app necesita permiso para guardar las auditorías</string>
@@ -565,8 +554,6 @@
     <string name="manageAreas">Gestionar áreas</string>
     <string name="myAudits">AUDITORIAS</string>
     <string name="addNewArea">Agregar nueva área</string>
-    <string name="auth_failed">Fallo de autenticación</string>
-    <string name="signed_out">Logout exitoso</string>
     <string name="generarPDF">Enviar reporte PDF</string>
     <string name="quit">Salir</string>
     <string name="signOut">Log out</string>

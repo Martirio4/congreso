@@ -38,14 +38,9 @@ public class ActivitySplash extends AppCompatActivity {
                     ActivitySplash.this.finish();
                 }
                 else {
-                    Intent mainIntent = new Intent(ActivitySplash.this, ActivityOnboarding.class);
-                    ActivitySplash.this.startActivity(mainIntent);
-                    ActivitySplash.this.finish();
-                    /*
                     Intent mainIntent = new Intent(ActivitySplash.this, LoginActivity.class);
                     ActivitySplash.this.startActivity(mainIntent);
                     ActivitySplash.this.finish();
-                    */
                 }
 
             }

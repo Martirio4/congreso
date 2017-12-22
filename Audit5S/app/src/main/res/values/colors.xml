@@ -4,20 +4,9 @@
     <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorAccent">#ff5722</color>
 
-    <color name="primary">#2196f3</color>
-    <color name="primary_dark">#1976d2</color>
-    <color name="primary_light">#3f8594</color>
-
-    <color name="accent">#ff5722</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
-    <color name="icons">#FFFFFF</color>
     <color name="marfil">#FFFFFF</color>
-    <color name="hueso">#d7d7d7</color>
-    <color name="divider">#BDBDBD</color>
-
-
-    <color name="tile6">#4caf50</color>
 
 
     <color name="blancoNomad">#fcfbf5</color>
@@ -26,19 +15,11 @@
     <color name="light_grey">#EEEEEE</color>
     <color name="white_transparent">#99FFFFFF</color>
     <color name="black">#000</color>
-    <color name="rojoOscuro">#D32F2F</color>
 
 
     <color name="semaVerde">#2ecc71</color>
     <color name="semaAmarillo">#f1c40f</color>
     <color name="semaRojo">#e74c3c</color>
-
-    <color name="verda3">#517c4b</color>
-    <color name="verda2">#7ea669</color>
-    <color name="verda1">#afe792</color>
-    <color name="verda0">#dce3a4</color>
-    <color name="verda4">#395433</color>
-    <color name="roja0">#e83b21</color>
 
 
     <color name="tile1">#e3f2fd</color>

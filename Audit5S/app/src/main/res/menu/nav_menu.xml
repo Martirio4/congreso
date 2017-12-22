@@ -5,9 +5,7 @@
 
 
 
-    <item android:title="1S - Seiri - Sorting"
-        android:id="@+id/titulo1s"
-        >
+    <item android:title="@string/seiriSeiri">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -32,8 +30,7 @@
     </item>
 
 
-    <item android:title="2S - Seiton - Set In Order"
-        android:id="@+id/titulo2s">
+    <item android:title="@string/seitonSeiton">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -57,8 +54,7 @@
             </group>
         </menu>
     </item>
-    <item android:title="3S - Seiso - Shine"
-        android:id="@+id/titulo3s">
+    <item android:title="@string/seisoSeiso">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -82,9 +78,7 @@
             </group>
         </menu>
     </item>
-    <item android:title="4S - Seiketsu - Standarize"
-        android:id="@+id/titulo4s"
-        >
+    <item android:title="@string/seiketsuSeiketsu">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -108,9 +102,7 @@
             </group>
         </menu>
     </item>
-    <item android:title="5S - Shitsuke - Sustain"
-        android:id="@+id/titulo5s"
-        >
+    <item android:title="@string/shitsukeShitsuke">
         <menu>
             <group android:checkableBehavior="single">
                 <item

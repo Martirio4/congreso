@@ -1,18 +1,9 @@
 <resources>
     <string name="app_name">Audit5S</string>
-    <string name="action_home">Volver</string>
-    <string name="action_settings">Menu</string>
     <string name="drawer_open">drawer open</string>
     <string name="drawer_close">drawer close</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="SeleccionArea">Select Audit Area</string>
-    <string name="nuevaArea">New Area</string>
-    <string name="nuevaAreaHint">Enter new area name</string>
-    <string name="guardarNuevaArea">Save new area</string>
-    <string name="seEliminoFoto">Image loaded</string>
-    <string name="noSeEliminoFoto">image loaded. a backup image was saved to gallery</string>
 
     <!--SETTINGS ACTIVITY-->
     <string name="delteAreaOk">Area was succesfully deleted</string>
@@ -150,8 +141,6 @@ There may be insignificant irregularities.</string>
     <string name="manageAreas">Manage audit areas</string>
     <string name="myAudits">MY AUDITS</string>
     <string name="addNewArea">Add new Area</string>
-    <string name="auth_failed">Authentication failed</string>
-    <string name="signed_out">Signed out</string>
     <string name="generarPDF">Send PDF report</string>
     <string name="quit">Quit</string>
     <string name="signOut">Log out</string>
@@ -258,7 +247,6 @@ Even in other areas that they frequent or work.
     <string name="punto543">There are some anomalies in the storage of various types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
     <string name="punto544">There are some anomalies in the storage of some types of electronic documents (obsolete, mixed personal and profesional documents, documents outside the specific directory / file, file names outside the established standard, etc.).</string>
     <string name="punto545">All electronic documents are used and stored in appropriate folders in accordance with the established standard. It may have insignificant irregularities for the characteristics of the environment.</string>
-    <string name="ayuda">\?</string>
     <string name="sinAreas">No areas created. Go to \"Settings\" menu and then click \"Manage audit areas\"</string>
     <string name="verAuditoria">Audit detail</string>
     <string name="start">START AUDIT</string>
@@ -290,7 +278,6 @@ Even in other areas that they frequent or work.
     <string name="seisoSeiso">Seiso / Shine</string>
     <string name="seiketsuSeiketsu">Seiketsu / Standarize</string>
     <string name="shitsukeShitsuke">Shitsuke / Sustain</string>
-    <string name="ranking">Ranking</string>
     <string name="noEncontroDatos">No data found</string>
     <string name="dismiss">Dismiss</string>
     <string name="appNecesitaPermiso">App needs permission to store audit data</string>
@@ -328,8 +315,7 @@ Even in other areas that they frequent or work.
     <string name="register">register</string>
     <string name="disclaimer">Please register. an Email address is required for authentication. Your data will not be used for any other purpose</string>
     <string name="auditResult1">Audit.</string>
-    <string name="textoSplash">e-5S</string>
-    <string name="version">v1.0.10</string>
+    <string name="version" translatable="false">v1.0.10</string>
 
 
 </resources>
