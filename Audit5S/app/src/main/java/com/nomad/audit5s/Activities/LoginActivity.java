@@ -3,6 +3,7 @@ package com.nomad.audit5s.activities;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -239,7 +240,7 @@ public class LoginActivity extends AppCompatActivity  {
         progressBar.setVisibility(View.GONE);
         Intent unIntent = new Intent(this, ActivityLanding.class);
         startActivity(unIntent);
-        Toast.makeText(this, getResources().getString(R.string.bienvenido)+mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.bienvenido)+" "+mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
         LoginActivity.this.finish();
 
     }
@@ -264,6 +265,7 @@ public class LoginActivity extends AppCompatActivity  {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
+
                             Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
 
                         }

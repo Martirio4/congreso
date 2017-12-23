@@ -31,7 +31,7 @@ public class FragmentOb2 extends Fragment {
         View view= inflater.inflate(R.layout.fragment_ob1, container, false);
 
         ImageView imagen = (ImageView) view.findViewById(R.id.imagenVoladora);
-        imagen.setImageResource(R.drawable.areas2);
+        imagen.setImageResource(R.drawable.areas);
         imagen.setScaleType(ImageView.ScaleType.CENTER_CROP);
         return view;
     }

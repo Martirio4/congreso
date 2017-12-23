@@ -108,8 +108,8 @@
     <string name="addNewArea">Adicionar nova área</string>
     <string name="generarPDF">Enviar o reporte em PDF</string>
     <string name="quit">Sair</string>
-    <string name="signOut">Sair</string>
-    <string name="settings"> CONFIGURAÇÕES </string>
+    <string name="signOut">Desconecte sua conta</string>
+    <string name="settings"> CONFIGURAR </string>
     <string name="punto411"> Só há uma ou outra deficiência nas identificações e sinalizações. A grande maioria não obedece a nenhum padrão. </string>
     <string name="punto412"> Só há uma ou outra deficiência nas identificações e sinalizações. Há padrão apenas em algumas delas. </string>
     <string name="punto413"> Em todos os locais há identificações e sinalizações. Pode existir uma ou outra irregularidade insignificante para as características do ambiente. Algumas pinturas, identificações e sinalizações não obedecem a um padrão. </string>
@@ -154,7 +154,7 @@
     <string name="verAuditoria">Detalhe da Auditoria</string>
     <string name="start">INICIAR AUDITORIA</string>
     <string name="contact">CONTATE-NOS</string>
-    <string name="firstTime">Primeira vez? Cliqu aqui</string>
+    <string name="firstTime">Primeira vez? Clique aqui</string>
     <string name="autenticacionFallida"> Falha na autenticação.</string>
     <string name="sinConexionIntenteMasTarde"> Sem conexões à Internet, tente novamente mais tarde.</string>
     <string name="reporteAuditoria">Reporte de Auditoria.</string>
@@ -207,7 +207,7 @@
     <string name="auditResultFor">Resultado da auditoria para:</string>
     <string name="titulo">Título:</string>
     <string name="manageAuditAreas">Gerenciar as Áreas da auditoria</string>
-    <string name="databaseAuditDelete">Eliminar base de dados da auditoria</string>
+    <string name="databaseAuditDelete">Eliminar base de dados</string>
     <string name="goBack">Voltar</string>
     <string name="enunciado">Declaração </string>
     <string name="clicToAddComment">Clique aqui para addicionar um comentário</string>

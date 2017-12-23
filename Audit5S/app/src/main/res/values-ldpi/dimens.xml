@@ -15,4 +15,5 @@
     <dimen name="altoTarjeta3">84dp</dimen>
     <dimen name="margenMicro">2dp</dimen>
     <dimen name="titulosMain">20sp</dimen>
+    <dimen name="textoSettings">20sp</dimen>
 </resources>

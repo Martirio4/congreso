@@ -95,7 +95,7 @@
                 android:id="@+id/editTextRepePassword"
                 android:textColor="@color/marfil"
                 android:textAlignment="center"
-                android:hint="Password"
+                android:hint="@string/hinPass"
                 />
         </android.support.design.widget.TextInputLayout>
 
