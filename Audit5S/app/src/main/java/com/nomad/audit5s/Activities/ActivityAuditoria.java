@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,10 +21,13 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.adapter.AdapterPagerSubItems;
 import com.nomad.audit5s.controller.ControllerDatos;
+import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.fragments.FragmentSubitem;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.model.Auditoria;
@@ -76,6 +80,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     private ControllerDatos controllerDatos;
     private FloatingActionMenu fabMenu;
 
+    private Toolbar toolbar;
+
 
 
     @Override
@@ -122,7 +128,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         tools2.setTitle(s2);
 */
         // Get a support ActionBar corresponding to this toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.marfil));
 
@@ -421,6 +427,32 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                     }
                 })
                 .show();
+
+    }
+
+    @Override
+    public void mostrarToolbar() {
+
+        Typeface roboto=Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        TapTargetView.showFor(this,                 // `this` is an Activity
+                TapTarget.forToolbarNavigationIcon(toolbar, "This is a target", "We have the best targets, believe me")
+                        // All options below are optional
+                        .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
+                        .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                        .textTypeface(roboto)  // Specify a typeface for the text
+                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .tintTarget(false)                   // Whether to tint the target view's color
+                        .transparentTarget(true),           // Specify whether the target is transparent (displays the content underneath)
+
+                    new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);      // This call is optional
+
+                    }
+                });
+
 
     }
 

@@ -1,11 +1,13 @@
 package com.nomad.audit5s.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -20,6 +22,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,6 +91,8 @@ public class GraficosActivity extends AppCompatActivity {
     public static final int SEPARACIONFOTOS=9;
 
     private DatabaseReference mDatabase;
+
+    private SharedPreferences config;
 
 
     @Override
@@ -162,11 +168,7 @@ public class GraficosActivity extends AppCompatActivity {
                 startActivity(inten);
 
             }
-        });
-
-
-
-
+       });
 
         fabGenerarPDF = new FloatingActionButton(this);
         fabGenerarPDF.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
@@ -210,10 +212,66 @@ public class GraficosActivity extends AppCompatActivity {
             }
         });
 
+        config = getSharedPreferences("prefs",0);
+        boolean quiereVerTuto = config.getBoolean("quiereVerTuto",false);
+        boolean primeraVezFragmentRadar =config.getBoolean("primeraVezFragmentRadar",false);
 
+        //SI EL USUARIO ELIGIO VER TUTORIALES ME FIJO SI YA PASO POR ESTA PAGINA.
+        if (quiereVerTuto) {
+            if (!primeraVezFragmentRadar) {
 
+                SharedPreferences.Editor editor = config.edit();
+                editor.putBoolean("primeraVezFragmentRadar",true);
+                editor.commit();
 
+                seguirConTutorial();
+            }
+        }
 
+    }
+
+    private void seguirConTutorial() {
+        fabMenuGraficos.open(true);
+        Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
+
+        new TapTargetSequence(this)
+                .targets(
+                        TapTarget.forView(fabVerAuditoria, getResources().getString(R.string.tutorial_tit_graficos_ver), getResources().getString(R.string.tutorial_desc_graficos_ver))
+                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(true)
+                                .id(1)// Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false),                   // Whether to tint the target view's color
+                        TapTarget.forView(fabGenerarPDF, getResources().getString(R.string.tutorial_tit_graficos_pdf), getResources().getString(R.string.tutorial_desc_graficos_pdf))
+                                .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(true)
+                                .id(2)// Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false) )                 // Whether to tint the target view's color
+
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                       fabMenuGraficos.close(true);
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget tapTarget, boolean b) {
+
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                        // Boo
+                    }
+                })
+                .start();
     }
 
 

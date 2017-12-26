@@ -323,6 +323,16 @@ Even in other areas that they frequent or work.
     <string name="tutorial_tit_area">Manage audit areas</string>
     <string name="tutorial_desc_area">Click here to add or remove audit areas</string>
     <string name="tutorial_desc_manage">Click here to add an area, click red cross on area to delete it</string>
+    <string name="tutorial_tit_graficos_ver">Check audit details.</string>
+    <string name="tutorial_desc_graficos_ver">Click here to see audit details as scores and photos.</string>
+    <string name="tutorial_tit_graficos_pdf">Send PDF report.</string>
+    <string name="tutorial_desc_graficos_pdf">Click here to send a PDF report, with scores, photos and comments. You can use any of your mail accounts.</string>
+    <string name="tutorial_tit_subitem_general">Start to audit.</string>
+    <string name="tutorial_desc_subitem_general">This is your first audit! Read the statement and score.</string>
+    <string name="tutorial_tit_subitem_criteria">Check criteria.</string>
+    <string name="tutorial_desc_subitem_criteria">If you are not sure on how to score, you can always check criteria. you will find useful guidelines.</string>
+    <string name="tutorial_tit_subitem_foto">Take some photos</string>
+    <string name="tutorial_desc_subitem_foto">Add photos and comments on yout findings.</string>
 
 
 </resources>

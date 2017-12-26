@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,15 +20,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
@@ -88,6 +92,8 @@ public class FragmentSubitem extends Fragment {
 
     private SharedPreferences config;
 
+    private LinearLayout linear;
+    private Toolbar toolbar;
 
 
 
@@ -126,6 +132,7 @@ public class FragmentSubitem extends Fragment {
     public interface Avisable{
         public void cerrarAuditoria();
         public void salirDeAca();
+        public void mostrarToolbar();
     }
 
 
@@ -134,6 +141,8 @@ public class FragmentSubitem extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view= inflater.inflate(R.layout.fragment_subitem, container, false);
+
+
 
         Bundle bundle=getArguments();
         if (bundle==null){
@@ -157,6 +166,8 @@ public class FragmentSubitem extends Fragment {
         rb4 =(AppCompatRadioButton) view.findViewById(R.id.item4);
         rb5 =(AppCompatRadioButton) view.findViewById(R.id.item5);
         textViewEnunciado=(TextView) view.findViewById(R.id.textoEnunciado);
+
+        linear=view.findViewById(R.id.vistaCentral);
 
         rb1.setText("1");
         rb2.setText("2");
@@ -413,38 +424,55 @@ public class FragmentSubitem extends Fragment {
         Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
         new TapTargetSequence(getActivity())
                 .targets(
-                        TapTarget.forView(rb3, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
-                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
-                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
-                                .textTypeface(roboto)  // Specify a typeface for the text
-                                .drawShadow(true)                   // Whether to draw a drop shadow or not
-                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-                                .tintTarget(false)
-                                .id(1),                   // Whether to tint the target view's color
-                        TapTarget.forView(verCriterio, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                        TapTarget.forView(linear, getResources().getString(R.string.tutorial_tit_subitem_general), getResources().getString(R.string.tutorial_desc_subitem_general))
+                                .transparentTarget(true)
+                                .textColor(R.color.primary_text)
                                 .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
                                 .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
                                 .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
                                 .tintTarget(false)
+                                .icon(getResources().getDrawable(R.drawable.ic_check_black_24dp))
+                                .id(1),                   // Whether to tint the target view's color
+                        TapTarget.forView(verCriterio, getResources().getString(R.string.tutorial_tit_subitem_criteria), getResources().getString(R.string.tutorial_desc_subitem_criteria))
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.tutorial2)
+                                .textColor(R.color.primary_text)// Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .targetRadius(75)
                                 .id(2),                 // Whether to tint the target view's color
-                        TapTarget.forView(fabCamara, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
-                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                        TapTarget.forView(fabCamara, getResources().getString(R.string.tutorial_tit_subitem_foto), getResources().getString(R.string.tutorial_desc_subitem_foto))
+                                .outerCircleColor(R.color.tutorial2)
+                                .textColor(R.color.primary_text)// Specify a color for the outer circle
                                 .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
                                 .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
                                 .tintTarget(false)
                                 .id(3),
-                        TapTarget.forView(fabGuardar, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                        TapTarget.forView(fabCamara, getResources().getString(R.string.tutorial_tit_subitem_foto), getResources().getString(R.string.tutorial_desc_subitem_foto))
                                 .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
+                                .textColor(R.color.primary_text)
                                 .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
                                 .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
                                 .tintTarget(false)
-                                .id(4)
+                                .id(4),
+                        TapTarget.forView(fabGuardar, getResources().getString(R.string.tutorial_tit_subitem_foto), getResources().getString(R.string.tutorial_desc_subitem_foto))
+                                .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
+                                .textColor(R.color.primary_text)
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .id(5)
                 )
 
                 .listener(new TapTargetSequence.Listener() {
@@ -459,6 +487,7 @@ public class FragmentSubitem extends Fragment {
                     public void onSequenceStep(TapTarget tapTarget, boolean b) {
                         if (tapTarget.id()==4){
                             fabMenu.close(true);
+                            avisable.mostrarToolbar();
                         }
 
                     }
@@ -470,6 +499,7 @@ public class FragmentSubitem extends Fragment {
                 })
                 .start();
     }
+
 
     private void sumarAuditoriaFirebase() {
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();

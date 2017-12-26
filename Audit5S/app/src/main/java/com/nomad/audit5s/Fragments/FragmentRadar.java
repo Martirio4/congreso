@@ -1,6 +1,7 @@
 package com.nomad.audit5s.fragments;
 
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class FragmentRadar extends Fragment {
     private String areaAuditada;
 
     private FloatingActionMenu fab_menu;
+
 
 
 
@@ -148,6 +150,8 @@ public class FragmentRadar extends Fragment {
         l.setYEntrySpace(5f);
         l.setTextColor(Color.BLACK);
         l.setTextSize(15f);
+
+
 
 
         return view;
