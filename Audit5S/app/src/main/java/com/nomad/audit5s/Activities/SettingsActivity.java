@@ -1,6 +1,7 @@
 package com.nomad.audit5s.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.nomad.audit5s.adapter.AdapterArea;
 import com.nomad.audit5s.fragments.FragmentManageAreas;
 import com.nomad.audit5s.fragments.FragmentSettings;
@@ -141,4 +144,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
         super.onBackPressed();
         this.finish();
     }
+
+
 }

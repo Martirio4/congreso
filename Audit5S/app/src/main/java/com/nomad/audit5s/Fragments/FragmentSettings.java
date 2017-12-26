@@ -1,7 +1,10 @@
 package com.nomad.audit5s.fragments;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,9 +18,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.activities.LoginActivity;
 import com.nomad.audit5s.model.Area;
@@ -41,6 +48,8 @@ public class FragmentSettings extends Fragment {
     private Button borrar;
     private Button salir;
 
+    private ImageView lin1;
+
     public FragmentSettings() {
         // Required empty public constructor
     }
@@ -51,7 +60,7 @@ public class FragmentSettings extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_fragment_settings, container, false);
-
+        lin1=view.findViewById(R.id.targetnum);
         areas=(Button)view.findViewById(R.id.botonManageAreas);
         logout=(Button)view.findViewById(R.id.botonLogOut);
         borrar=(Button)view.findViewById(R.id.botonBorrarTodo);
@@ -144,7 +153,52 @@ public class FragmentSettings extends Fragment {
                 getActivity().finish();
             }
         });
+
+        ejecutarTutorial();
         return view;
+    }
+
+    public void ejecutarTutorial() {
+        SharedPreferences settings = getActivity().getSharedPreferences("prefs", 0);
+        boolean firstRun = settings.getBoolean("firstRunSetting", false);
+        if (!firstRun)//if running for first time
+        {
+            seguirConTutorial();
+
+        }
+
+    }
+
+    private void seguirConTutorial() {
+        Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
+
+        TapTargetView.showFor(getActivity(),                 // `this` is an Activity
+
+                TapTarget.forView(lin1, getResources().getString(R.string.tutorial_tit_area), getResources().getString(R.string.tutorial_desc_area))
+                        .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                        .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                        //.targetCircleColor(R.color.white)   // Specify a color for the target circle
+                        //.titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        //.titleTextColor(R.color.white)      // Specify the color of the title text
+                        //.descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        // .descriptionTextColor(R.color.red)  // Specify the color of the description text
+                        //.textColor(R.color.blue)            // Specify a color for both the title and description text
+                        .textTypeface(roboto)  // Specify a typeface for the text
+                        //.dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .tintTarget(false)                   // Whether to tint the target view's color
+                        .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                //.icon(Drawable)                     // Specify a custom drawable to draw as the target
+                       .targetRadius(70)                  // Specify the target radius (in dp)
+                ,
+                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);      // This call is optional
+                        areas.performClick();
+                    }
+                });
     }
 
     public void borrarBaseDeDatos(){

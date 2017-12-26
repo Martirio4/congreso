@@ -18,18 +18,38 @@
             android:layout_weight="50"
             android:layout_height="0dp">
 
-                <Button
-
-                    android:textAlignment="viewStart"
-                    android:textSize="@dimen/textoSettings"
-                    android:background="@android:color/transparent"
-                    android:drawableStart="@drawable/azul1"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/manageAuditAreas"
-                    android:id="@+id/botonManageAreas"
-                    android:textColor="@color/tile5"
-                    />
+                    android:layout_height="match_parent">
+
+                        <ImageView
+                            android:visibility="invisible"
+                            android:id="@+id/targetnum"
+                            android:alpha="0"
+                            android:src="@drawable/azul1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+
+
+                        <Button
+
+                            android:textAlignment="viewStart"
+                            android:textSize="@dimen/textoSettings"
+                            android:background="@android:color/transparent"
+                            android:drawableStart="@drawable/azul1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/manageAuditAreas"
+                            android:id="@+id/botonManageAreas"
+                            android:textColor="@color/tile5"
+                            />
+
+                </FrameLayout>
+
+
+
+
 
 
         </LinearLayout>

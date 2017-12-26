@@ -316,6 +316,13 @@ Even in other areas that they frequent or work.
     <string name="disclaimer">Please register. an Email address is required for authentication. Your data will not be used for any other purpose</string>
     <string name="auditResult1">Audit.</string>
     <string name="version" translatable="false">v1.0.10</string>
+    <string name="tutorial_tit_setting">Before starting to audit</string>
+    <string name="tutorial_desc_setting">First, we need to create an auditable area. Lets go to settings</string>
+    <string name="verTutorial">Thank you for downloading our app.\nDo you want to see a quick tutorial?</string>
+    <string name="no">No</string>
+    <string name="tutorial_tit_area">Manage audit areas</string>
+    <string name="tutorial_desc_area">Click here to add or remove audit areas</string>
+    <string name="tutorial_desc_manage">Here you can add or remove audit areas. Please add an area to continue tutorial</string>
 
 
 </resources>

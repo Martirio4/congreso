@@ -3,6 +3,7 @@ package com.nomad.audit5s.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +61,7 @@ public class FragmentManageAreas extends Fragment {
     private RecyclerView recyclerAreas;
     private AdapterArea adapterArea;
     private LinearLayoutManager layoutManager;
+    private SharedPreferences settings;
 
 
     private File fotoOriginal;
@@ -236,8 +240,52 @@ public class FragmentManageAreas extends Fragment {
 
             }
         });
-
+        settings=getActivity().getSharedPreferences("prefs",0);
+        ejecutarTutorial();
         return view;
+    }
+
+    public void ejecutarTutorial() {
+        boolean firstRun = settings.getBoolean("firstRunManage", false);
+        if (!firstRun)//if running for first time
+        {
+            seguirConTutorial();
+
+        }
+
+    }
+
+    private void seguirConTutorial() {
+        Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
+        fabMenuManage.open(true);
+
+        TapTargetView.showFor(getActivity(),                 // `this` is an Activity
+
+                TapTarget.forView(fabAgregarArea, getResources().getString(R.string.tutorial_tit_area), getResources().getString(R.string.tutorial_desc_manage))
+                        .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                        .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                        //.targetCircleColor(R.color.white)   // Specify a color for the target circle
+                        //.titleTextSize(20)                  // Specify the size (in sp) of the title text
+                        //.titleTextColor(R.color.white)      // Specify the color of the title text
+                        //.descriptionTextSize(10)            // Specify the size (in sp) of the description text
+                        // .descriptionTextColor(R.color.red)  // Specify the color of the description text
+                        //.textColor(R.color.blue)            // Specify a color for both the title and description text
+                        .textTypeface(roboto)  // Specify a typeface for the text
+                        //.dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                        .drawShadow(true)                   // Whether to draw a drop shadow or not
+                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .tintTarget(false)                   // Whether to tint the target view's color
+                        .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
+                        //.icon(Drawable)                     // Specify a custom drawable to draw as the target
+                        //.targetRadius(70)                  // Specify the target radius (in dp)
+                ,
+                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);      // This call is optional
+                        fabAgregarArea.performClick();
+                    }
+                });
     }
 
     @Override
@@ -346,8 +394,8 @@ public class FragmentManageAreas extends Fragment {
                         });
 
                         registrarCantidadAreasFirebase();
-
                         updateAdapter();
+
                         Snackbar.make(linearSnackbar,unArea.getNombreArea()+getResources().getString(R.string.creadoExitosamente),Snackbar.LENGTH_SHORT)
                                 .show();
 
