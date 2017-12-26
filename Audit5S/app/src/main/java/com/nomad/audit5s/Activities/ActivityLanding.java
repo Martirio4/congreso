@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
@@ -53,13 +54,14 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
 
     private Typeface roboto;
 
+    private SharedPreferences config;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         Nammu.init(getApplicationContext());
-
         setContentView(R.layout.activity_landing);
 
         botonIssue = (ImageButton) findViewById(R.id.btn_issue);
@@ -194,7 +196,15 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
             }
         });
 
-        ejecutarTutorial();
+        config = getSharedPreferences("prefs", 0);
+        boolean firstRun = config.getBoolean("firstRun", false);
+        if (!firstRun){
+            crearDialogoBienvenida();
+            SharedPreferences.Editor editor = config.edit();
+            editor.putBoolean("firstRun", true);
+            editor.commit();
+        }
+
     }
 
     public void cargarFragmentSeleccionArea() {
@@ -262,49 +272,49 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
 
     public void lanzarTuto() {
 
-        TapTargetView.showFor(this,                 // `this` is an Activity
-                TapTarget.forView(findViewById(R.id.btn_setting), getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
-                        .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
-                        .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
-                        //.targetCircleColor(R.color.white)   // Specify a color for the target circle
-                        //.titleTextSize(20)                  // Specify the size (in sp) of the title text
-                        //.titleTextColor(R.color.white)      // Specify the color of the title text
-                        //.descriptionTextSize(10)            // Specify the size (in sp) of the description text
-                       // .descriptionTextColor(R.color.red)  // Specify the color of the description text
-                        //.textColor(R.color.blue)            // Specify a color for both the title and description text
-                        .textTypeface(roboto)  // Specify a typeface for the text
-                        //.dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
-                        .drawShadow(true)                   // Whether to draw a drop shadow or not
-                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-                        .tintTarget(false)                   // Whether to tint the target view's color
-                        //.transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
-                        //.icon(Drawable)                     // Specify a custom drawable to draw as the target
-                        //.targetRadius(60)                  // Specify the target radius (in dp)
-                ,
-                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+        new TapTargetSequence(this)
+                .targets(
+                        TapTarget.forView(findViewById(R.id.btn_start), getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)
+                                .id(1)// Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false),                   // Whether to tint the target view's color
+                        TapTarget.forView(findViewById(R.id.btn_setting), getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)
+                                .id(2)// Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false) )                 // Whether to tint the target view's color
+
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
                     @Override
-                    public void onTargetClick(TapTargetView view) {
-                        super.onTargetClick(view);      // This call is optional
-                        botonSettings.performClick();
+                    public void onSequenceFinish() {
+                        // Yay
                     }
-                });
 
+                    @Override
+                    public void onSequenceStep(TapTarget tapTarget, boolean b) {
+                        if (tapTarget.id()==2){
+                            botonSettings.performClick();
+                        }
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                        // Boo
+                    }
+                })
+        .start();
     }
 
-    public void ejecutarTutorial() {
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
-        boolean firstRun = settings.getBoolean("firstRun", false);
-        if (!firstRun)//if running for first time
-        {   
-            crearDialogoBienvenida();
 
-        } else {
-            crearDialogoBienvenida();
-
-
-        }
-
-    }
 
     private void crearDialogoBienvenida() {
 
@@ -319,6 +329,10 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
+                            SharedPreferences.Editor editor = config.edit();
+                            editor.putBoolean("quiereVerTuto",true);
+                            editor.commit();
+
                             lanzarTuto();
                         }
                     })
@@ -326,7 +340,9 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
                     .onNegative(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
-
+                            SharedPreferences.Editor editor = config.edit();
+                            editor.putBoolean("quiereVerTuto",false);
+                            editor.commit();
                             //escribir las sharedPreferences para todos los fragments
                         }
                     })

@@ -322,7 +322,7 @@ Even in other areas that they frequent or work.
     <string name="no">No</string>
     <string name="tutorial_tit_area">Manage audit areas</string>
     <string name="tutorial_desc_area">Click here to add or remove audit areas</string>
-    <string name="tutorial_desc_manage">Here you can add or remove audit areas. Please add an area to continue tutorial</string>
+    <string name="tutorial_desc_manage">Click here to add an area, click red cross on area to delete it</string>
 
 
 </resources>

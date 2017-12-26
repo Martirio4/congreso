@@ -54,6 +54,8 @@ public class FragmentSettings extends Fragment {
         // Required empty public constructor
     }
 
+    private SharedPreferences config;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -154,20 +156,26 @@ public class FragmentSettings extends Fragment {
             }
         });
 
-        ejecutarTutorial();
+
+        config = getActivity().getSharedPreferences("prefs",0);
+        boolean quiereVerTuto = config.getBoolean("quiereVerTuto",false);
+        boolean primeraVezFragmentSetting=config.getBoolean("primeraVezFragmentSetting",false);
+
+        //SI EL USUARIO ELIGIO VER TUTORIALES ME FIJO SI YA PASO POR ESTA PAGINA.
+        if (quiereVerTuto) {
+            if (!primeraVezFragmentSetting) {
+
+                SharedPreferences.Editor editor = config.edit();
+                editor.putBoolean("primeraVezFragmentSetting",true);
+                editor.commit();
+
+                seguirConTutorial();
+            }
+        }
         return view;
     }
 
-    public void ejecutarTutorial() {
-        SharedPreferences settings = getActivity().getSharedPreferences("prefs", 0);
-        boolean firstRun = settings.getBoolean("firstRunSetting", false);
-        if (!firstRun)//if running for first time
-        {
-            seguirConTutorial();
 
-        }
-
-    }
 
     private void seguirConTutorial() {
         Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");

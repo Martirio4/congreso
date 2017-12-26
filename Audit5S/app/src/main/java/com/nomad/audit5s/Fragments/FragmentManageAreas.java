@@ -61,7 +61,8 @@ public class FragmentManageAreas extends Fragment {
     private RecyclerView recyclerAreas;
     private AdapterArea adapterArea;
     private LinearLayoutManager layoutManager;
-    private SharedPreferences settings;
+
+    private SharedPreferences config;
 
 
     private File fotoOriginal;
@@ -90,7 +91,6 @@ public class FragmentManageAreas extends Fragment {
     }
 
     public interface Avisable{
-
         public void salirDeAca();
     }
 
@@ -240,20 +240,27 @@ public class FragmentManageAreas extends Fragment {
 
             }
         });
-        settings=getActivity().getSharedPreferences("prefs",0);
-        ejecutarTutorial();
+
+        config = getActivity().getSharedPreferences("prefs",0);
+        boolean quiereVerTuto = config.getBoolean("quiereVerTuto",false);
+        boolean primeraVezFragmentManage=config.getBoolean("primeraVezFragmentManage",false);
+
+        //SI EL USUARIO ELIGIO VER TUTORIALES ME FIJO SI YA PASO POR ESTA PAGINA.
+        if (quiereVerTuto) {
+            if (!primeraVezFragmentManage) {
+
+                SharedPreferences.Editor editor = config.edit();
+                editor.putBoolean("primeraVezFragmentManage",true);
+                editor.commit();
+
+                seguirConTutorial();
+            }
+        }
+
         return view;
     }
 
-    public void ejecutarTutorial() {
-        boolean firstRun = settings.getBoolean("firstRunManage", false);
-        if (!firstRun)//if running for first time
-        {
-            seguirConTutorial();
 
-        }
-
-    }
 
     private void seguirConTutorial() {
         Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
@@ -273,7 +280,7 @@ public class FragmentManageAreas extends Fragment {
                         .textTypeface(roboto)  // Specify a typeface for the text
                         //.dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
                         .drawShadow(true)                   // Whether to draw a drop shadow or not
-                        .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                        .cancelable(true)                  // Whether tapping outside the outer circle dismisses the view
                         .tintTarget(false)                   // Whether to tint the target view's color
                         .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
                         //.icon(Drawable)                     // Specify a custom drawable to draw as the target
@@ -284,6 +291,7 @@ public class FragmentManageAreas extends Fragment {
                     public void onTargetClick(TapTargetView view) {
                         super.onTargetClick(view);      // This call is optional
                         fabAgregarArea.performClick();
+
                     }
                 });
     }

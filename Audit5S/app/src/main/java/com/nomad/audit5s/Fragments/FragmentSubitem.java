@@ -3,7 +3,9 @@ package com.nomad.audit5s.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -24,6 +26,8 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,6 +85,8 @@ public class FragmentSubitem extends Fragment {
     private RealmList<SubItem> unaListaSubitems;
 
     private DatabaseReference mDatabase;
+
+    private SharedPreferences config;
 
 
 
@@ -383,8 +389,86 @@ public class FragmentSubitem extends Fragment {
             }
         });
 
+        config = getActivity().getSharedPreferences("prefs",0);
+        boolean quiereVerTuto = config.getBoolean("quiereVerTuto",false);
+        boolean primeraVezFragmentSubitem =config.getBoolean("primeraVezFragmentSubitem",false);
+
+        //SI EL USUARIO ELIGIO VER TUTORIALES ME FIJO SI YA PASO POR ESTA PAGINA.
+        if (quiereVerTuto) {
+            if (!primeraVezFragmentSubitem) {
+
+                SharedPreferences.Editor editor = config.edit();
+                editor.putBoolean("primeraVezFragmentSubitem",true);
+                editor.commit();
+
+                seguirConTutorial();
+            }
+        }
 
         return view;
+    }
+
+    private void seguirConTutorial() {
+        fabMenu.open(true);
+        Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
+        new TapTargetSequence(getActivity())
+                .targets(
+                        TapTarget.forView(rb3, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .id(1),                   // Whether to tint the target view's color
+                        TapTarget.forView(verCriterio, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .id(2),                 // Whether to tint the target view's color
+                        TapTarget.forView(fabCamara, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .id(3),
+                        TapTarget.forView(fabGuardar, getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .id(4)
+                )
+
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
+                    @Override
+                    public void onSequenceFinish() {
+                        // Yay
+                    }
+
+                    @Override
+                    public void onSequenceStep(TapTarget tapTarget, boolean b) {
+                        if (tapTarget.id()==4){
+                            fabMenu.close(true);
+                        }
+
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                        // Boo
+                    }
+                })
+                .start();
     }
 
     private void sumarAuditoriaFirebase() {
