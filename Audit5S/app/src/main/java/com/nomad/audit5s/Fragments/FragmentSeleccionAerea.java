@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.adapter.AdapterArea;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
@@ -50,8 +51,10 @@ public class FragmentSeleccionAerea extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_seleccion_aerea, container, false);
         TextView textoSinAreas=(TextView)view.findViewById(R.id.textoSinAreas);
+        String usuario= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Area> result2 = realm.where(Area.class)
+                .equalTo("usuario", usuario)
                 .findAll();
 
         if  (result2.size()<1){

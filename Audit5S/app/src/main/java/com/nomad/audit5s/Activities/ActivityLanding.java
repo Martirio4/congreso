@@ -287,7 +287,7 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
                                 .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
-                                .cancelable(false)
+                                .cancelable(true)
                                 .id(2)// Whether tapping outside the outer circle dismisses the view
                                 .tintTarget(false) )                 // Whether to tint the target view's color
 
@@ -301,9 +301,6 @@ public class ActivityLanding extends AppCompatActivity implements FragmentSelecc
 
                     @Override
                     public void onSequenceStep(TapTarget tapTarget, boolean b) {
-                        if (tapTarget.id()==2){
-                            botonSettings.performClick();
-                        }
                     }
 
                     @Override
