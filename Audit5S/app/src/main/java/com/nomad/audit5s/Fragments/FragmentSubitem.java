@@ -481,14 +481,13 @@ public class FragmentSubitem extends Fragment {
                     @Override
                     public void onSequenceFinish() {
                         // Yay
+                        fabMenu.close(true);
+                        avisable.mostrarToolbar();
                     }
 
                     @Override
                     public void onSequenceStep(TapTarget tapTarget, boolean b) {
-                        if (tapTarget.id()==4){
-                            fabMenu.close(true);
-                            avisable.mostrarToolbar();
-                        }
+
 
                     }
 

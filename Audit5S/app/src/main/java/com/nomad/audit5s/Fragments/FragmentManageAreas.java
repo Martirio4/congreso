@@ -290,7 +290,7 @@ public class FragmentManageAreas extends Fragment {
                     @Override
                     public void onTargetClick(TapTargetView view) {
                         super.onTargetClick(view);      // This call is optional
-                        fabAgregarArea.performClick();
+                        
 
                     }
                 });

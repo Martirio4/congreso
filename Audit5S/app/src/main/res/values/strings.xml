@@ -334,5 +334,8 @@ Even in other areas that they frequent or work.
     <string name="tutorial_tit_subitem_foto">Take some photos</string>
     <string name="tutorial_desc_subitem_foto">Add photos and comments on yout findings.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
