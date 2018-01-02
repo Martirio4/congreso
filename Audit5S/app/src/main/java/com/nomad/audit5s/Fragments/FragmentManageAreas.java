@@ -268,7 +268,7 @@ public class FragmentManageAreas extends Fragment {
 
         TapTargetView.showFor(getActivity(),                 // `this` is an Activity
 
-                TapTarget.forView(fabAgregarArea, getResources().getString(R.string.tutorial_tit_area), getResources().getString(R.string.tutorial_desc_manage))
+                TapTarget.forView(fabAgregarArea, getResources().getString(R.string.tutorial_tit_manage), getResources().getString(R.string.tutorial_desc_manage))
                         .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
                         .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
                         //.targetCircleColor(R.color.white)   // Specify a color for the target circle

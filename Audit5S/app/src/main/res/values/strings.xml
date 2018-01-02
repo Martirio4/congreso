@@ -43,7 +43,7 @@
 </string>;
     <string name="enunciado43">4.3. Routines and Systematics for Maintenance of 5S
 </string>;
-    <string name="enunciado44">4.4. Systematic of saveing for electronic documents
+    <string name="enunciado44">4.4. Systematic of saving for electronic documents
 </string>;
     <string name="enunciado51">5.1. Self-discipline in the practice of 5S
 </string>;
@@ -286,7 +286,7 @@ Even in other areas that they frequent or work.
     <string name="avisoSignout">You are about to log out your account.</string>
     <string name="databaseDelete">Delete database</string>
     <string name="auditsWillBeDeleted">All your Audits will be permanently deleted</string>
-    <string name="confirmaBorrarBaseDeDato">All data was succesfully deleted</string>
+    <string name="confirmaBorrarBaseDeDato">All data was successfully deleted</string>
     <string name="selectArea">Select area</string>
     <string name="audit">Audit</string>
     <string name="target">Target</string>
@@ -322,20 +322,33 @@ Even in other areas that they frequent or work.
     <string name="no">No</string>
     <string name="tutorial_tit_area">Manage audit areas</string>
     <string name="tutorial_desc_area">Click here to add or remove audit areas</string>
-    <string name="tutorial_desc_manage">Click here to add an area, click red cross on area to delete it</string>
+    <string name="tutorial_desc_manage">Click here to add an area, to remove an area, click the red cross next to it.</string>
+    <string name="tutorial_tit_manage">Add an audit area</string>
     <string name="tutorial_tit_graficos_ver">Check audit details.</string>
-    <string name="tutorial_desc_graficos_ver">Click here to see audit details as scores and photos.</string>
+    <string name="tutorial_desc_graficos_ver">Click here to see audit score and photos.</string>
     <string name="tutorial_tit_graficos_pdf">Send PDF report.</string>
     <string name="tutorial_desc_graficos_pdf">Click here to send a PDF report, with scores, photos and comments. You can use any of your mail accounts.</string>
-    <string name="tutorial_tit_subitem_general">Start to audit.</string>
-    <string name="tutorial_desc_subitem_general">This is your first audit! Read the statement and score.</string>
+    <string name="tutorial_tit_subitem_general">Let\'s get started</string>
+    <string name="tutorial_desc_subitem_general">You are ready to audit! choose an area.</string>
     <string name="tutorial_tit_subitem_criteria">Check criteria.</string>
     <string name="tutorial_desc_subitem_criteria">If you are not sure on how to score, you can always check criteria. you will find useful guidelines.</string>
     <string name="tutorial_tit_subitem_foto">Take some photos</string>
-    <string name="tutorial_desc_subitem_foto">Add photos and comments on yout findings.</string>
+    <string name="tutorial_desc_subitem_foto">Add photos and comments on your findings.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tutorial_tit_strt">Start auditing</string>
+    <string name="tutorial_desc_strt">Pick an audit area, and start auditing right now.</string>
+    <string name="tutorial_tit_logout">Log out your account.</string>
+    <string name="tutorial_desc_logout">Click here if you want to logout your account or sign in with a different username.</string>
+    <string name="tutorial_tit_delete">Delete all data</string>
+    <string name="tutorial_desc_delete">Click here if you want to remove all data. all areas and audits will be deleted.</string>
+    <string name="tutorial_tit_guardar">Save your audit</string>
+    <string name="tutorial_desc_guardar">Once you have finished the audit save it and proceed to results.</string>
+    <string name="tutorial_tit_navegar">Navigate through the audit.</string>
+    <string name="tutorial_desc_navegar">Click here to navigate through the audit, or simply swipe the screen.</string>
+    <string name="tutorial_tit_subitem_inicial">Start audit.</string>
+    <string name="tutorial_desc_subitem_inicial">Read the statement and score taking criteria into account.</string>
 
 
 </resources>

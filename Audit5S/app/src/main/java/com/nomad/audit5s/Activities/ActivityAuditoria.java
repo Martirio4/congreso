@@ -432,7 +432,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     public void mostrarToolbar() {
         Typeface roboto=Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         TapTargetView.showFor(this,                 // `this` is an Activity
-                TapTarget.forToolbarNavigationIcon(toolbar, "This is a target", "We have the best targets, believe me")
+                TapTarget.forToolbarNavigationIcon(toolbar, getResources().getString(R.string.tutorial_tit_navegar), getResources().getString(R.string.tutorial_desc_navegar
+                ))
                         // All options below are optional
                         .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
                         .outerCircleAlpha(0.85f)

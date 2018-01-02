@@ -420,11 +420,10 @@ public class FragmentSubitem extends Fragment {
     }
 
     private void seguirConTutorial() {
-        fabMenu.open(true);
         Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
         new TapTargetSequence(getActivity())
                 .targets(
-                        TapTarget.forView(linear, getResources().getString(R.string.tutorial_tit_subitem_general), getResources().getString(R.string.tutorial_desc_subitem_general))
+                        TapTarget.forView(linear, getResources().getString(R.string.tutorial_tit_subitem_inicial), getResources().getString(R.string.tutorial_desc_subitem_inicial))
                                 .transparentTarget(true)
                                 .textColor(R.color.primary_text)
                                 .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
@@ -447,15 +446,7 @@ public class FragmentSubitem extends Fragment {
                                 .targetRadius(75)
                                 .id(2),                 // Whether to tint the target view's color
                         TapTarget.forView(fabCamara, getResources().getString(R.string.tutorial_tit_subitem_foto), getResources().getString(R.string.tutorial_desc_subitem_foto))
-                                .outerCircleColor(R.color.tutorial2)
-                                .textColor(R.color.blancoNomad)// Specify a color for the outer circle
-                                .outerCircleAlpha(0.95f)            // Specify the alpha amount for the outer circle
-                                .textTypeface(roboto)  // Specify a typeface for the text
-                                .drawShadow(true)                   // Whether to draw a drop shadow or not
-                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-                                .tintTarget(false)
-                                .id(3),
-                        TapTarget.forView(fabCamara, getResources().getString(R.string.tutorial_tit_subitem_foto), getResources().getString(R.string.tutorial_desc_subitem_foto))
+                                .transparentTarget(true)
                                 .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
                                 .textColor(R.color.primary_text)
                                 .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
@@ -464,9 +455,9 @@ public class FragmentSubitem extends Fragment {
                                 .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
                                 .tintTarget(false)
                                 .id(4),
-                        TapTarget.forView(fabGuardar, getResources().getString(R.string.tutorial_tit_subitem_foto), getResources().getString(R.string.tutorial_desc_subitem_foto))
-                                .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
-                                .textColor(R.color.primary_text)
+                        TapTarget.forView(fabGuardar, getResources().getString(R.string.tutorial_tit_guardar), getResources().getString(R.string.tutorial_desc_guardar))
+                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                                .transparentTarget(true)
                                 .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
@@ -487,6 +478,9 @@ public class FragmentSubitem extends Fragment {
 
                     @Override
                     public void onSequenceStep(TapTarget tapTarget, boolean b) {
+                        if (tapTarget.id()==2){
+                            fabMenu.open(true);
+                        }
 
 
                     }

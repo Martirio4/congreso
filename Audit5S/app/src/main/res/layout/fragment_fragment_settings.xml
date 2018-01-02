@@ -62,6 +62,18 @@
             android:layout_width="match_parent"
             android:layout_weight="50"
             android:layout_height="0dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                        <ImageView
+                            android:visibility="invisible"
+                            android:id="@+id/targetnum2"
+                            android:alpha="0"
+                            android:src="@drawable/azul2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
                 <Button
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/textoSettings"
@@ -73,6 +85,7 @@
                     android:background="@android:color/transparent"
                     android:textColor="@color/tile5"
                     />
+                </FrameLayout>
 
         </LinearLayout>
 
@@ -87,6 +100,17 @@
             android:layout_weight="50"
             android:layout_height="0dp">
 
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/targetnum3"
+                    android:alpha="0"
+                    android:src="@drawable/azul3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
                 <Button
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/textoSettings"
@@ -97,8 +121,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/databaseAuditDelete"
                     android:textColor="@color/tile5" />
-
-
+        </FrameLayout>
 
         </LinearLayout>
         <LinearLayout

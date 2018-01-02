@@ -160,7 +160,7 @@ public class FragmentLanding extends Fragment {
 
         new TapTargetSequence(getActivity())
                 .targets(
-                        TapTarget.forView(getActivity().findViewById(R.id.btn_start), getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                        TapTarget.forView(getActivity().findViewById(R.id.btn_start), getResources().getString(R.string.tutorial_tit_strt), getResources().getString(R.string.tutorial_desc_strt))
                                 .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
                                 .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text

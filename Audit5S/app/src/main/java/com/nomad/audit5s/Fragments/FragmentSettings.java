@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.activities.LoginActivity;
@@ -48,6 +49,8 @@ public class FragmentSettings extends Fragment {
     private Button borrar;
     private Button salir;
 
+    private ImageView lin2;
+    private ImageView lin3;
     private ImageView lin1;
 
     public FragmentSettings() {
@@ -63,6 +66,8 @@ public class FragmentSettings extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_fragment_settings, container, false);
         lin1=view.findViewById(R.id.targetnum);
+        lin2=view.findViewById(R.id.targetnum2);
+        lin3=view.findViewById(R.id.targetnum3);
         areas=(Button)view.findViewById(R.id.botonManageAreas);
         logout=(Button)view.findViewById(R.id.botonLogOut);
         borrar=(Button)view.findViewById(R.id.botonBorrarTodo);
@@ -179,34 +184,62 @@ public class FragmentSettings extends Fragment {
 
     private void seguirConTutorial() {
         Typeface roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
+        new TapTargetSequence(getActivity())
+                .targets(
+                        TapTarget.forView(lin1, getResources().getString(R.string.tutorial_tit_area), getResources().getString(R.string.tutorial_desc_area))
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .targetRadius(80)
+                                .id(1),                   // Whether to tint the target view's color
+                        TapTarget.forView(lin2, getResources().getString(R.string.tutorial_tit_logout), getResources().getString(R.string.tutorial_desc_logout))
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.tutorial1)
+                                .textColor(R.color.primary_text)
+                                .outerCircleAlpha(0.95f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .targetRadius(80)
+                                .id(2),                 // Whether to tint the target view's color
+                        TapTarget.forView(lin3, getResources().getString(R.string.tutorial_tit_delete), getResources().getString(R.string.tutorial_desc_delete))
+                                .transparentTarget(true)
+                                .outerCircleColor(R.color.tutorial2)
+                                .textColor(R.color.blancoNomad)// Specify a color for the outer circle
+                                .outerCircleAlpha(0.95f)            // Specify the alpha amount for the outer circle
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(true)                  // Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(false)
+                                .targetRadius(80)
+                                .id(3)
+                )
 
-        TapTargetView.showFor(getActivity(),                 // `this` is an Activity
-
-                TapTarget.forView(lin1, getResources().getString(R.string.tutorial_tit_area), getResources().getString(R.string.tutorial_desc_area))
-                        .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
-                        .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
-                        //.targetCircleColor(R.color.white)   // Specify a color for the target circle
-                        //.titleTextSize(20)                  // Specify the size (in sp) of the title text
-                        //.titleTextColor(R.color.white)      // Specify the color of the title text
-                        //.descriptionTextSize(10)            // Specify the size (in sp) of the description text
-                        // .descriptionTextColor(R.color.red)  // Specify the color of the description text
-                        //.textColor(R.color.blue)            // Specify a color for both the title and description text
-                        .textTypeface(roboto)  // Specify a typeface for the text
-                        //.dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
-                        .drawShadow(true)                   // Whether to draw a drop shadow or not
-                        .cancelable(true)                  // Whether tapping outside the outer circle dismisses the view
-                        .tintTarget(false)                   // Whether to tint the target view's color
-                        .transparentTarget(true)           // Specify whether the target is transparent (displays the content underneath)
-                //.icon(Drawable)                     // Specify a custom drawable to draw as the target
-                       .targetRadius(70)                  // Specify the target radius (in dp)
-                ,
-                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                .listener(new TapTargetSequence.Listener() {
+                    // This listener will tell us when interesting(tm) events happen in regards
+                    // to the sequence
                     @Override
-                    public void onTargetClick(TapTargetView view) {
-                        super.onTargetClick(view);      // This call is optional
+                    public void onSequenceFinish() {
 
                     }
-                });
+
+                    @Override
+                    public void onSequenceStep(TapTarget tapTarget, boolean b) {
+
+
+                    }
+
+                    @Override
+                    public void onSequenceCanceled(TapTarget lastTarget) {
+                        // Boo
+                    }
+                })
+                .start();
     }
 
     public void borrarBaseDeDatos(){
