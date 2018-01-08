@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +86,7 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
 
     @Override
     public void comenzarAuditoria(Area unArea) {
+
         Intent intent = new Intent(this, ActivityAuditoria.class);
         Bundle bundle = new Bundle();
         bundle.putString(ActivityAuditoria.IDAREA, unArea.getIdArea());
@@ -92,6 +94,7 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
         startActivity(intent);
         FragmentManager fragmentManager = (FragmentManager) this.getSupportFragmentManager();
         fragmentManager.popBackStack();
+
     }
 
     @Override

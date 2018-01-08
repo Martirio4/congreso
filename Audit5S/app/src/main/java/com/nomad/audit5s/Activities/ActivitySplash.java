@@ -2,10 +2,13 @@ package com.nomad.audit5s.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
+import com.nomad.audit5s.BuildConfig;
 import com.nomad.audit5s.R;
 
 public class ActivitySplash extends AppCompatActivity {
@@ -19,6 +22,8 @@ public class ActivitySplash extends AppCompatActivity {
     protected void onCreate(Bundle splash) {
         super.onCreate(splash);
         setContentView(R.layout.activity_splash);
+        TextView version=findViewById(R.id.versionApp);
+        version.setText(BuildConfig.VERSION_NAME);
 
         new Handler().postDelayed(new Runnable() {
             @Override

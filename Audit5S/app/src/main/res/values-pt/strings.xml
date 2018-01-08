@@ -221,37 +221,41 @@
 
     <!--cosas del tutorial-->
 
-    <string name="tutorial_tit_area">Manage audit areas</string>
-    <string name="tutorial_desc_area">Click here to add or remove audit areas</string>
-    <string name="tutorial_desc_manage">Click here to add an area, to remove an area, click the red cross next to it.</string>
-    <string name="tutorial_tit_manage">Add an audit area</string>
-    <string name="tutorial_tit_graficos_ver">Check audit details.</string>
-    <string name="tutorial_desc_graficos_ver">Click here to see audit score and photos.</string>
+    <string name="tutorial_tit_area">Gerenciar as Áreas da auditoria</string>
+    <string name="tutorial_desc_area">Clique aquí para adicionar o eliminar áreas para auditar </string>
+    <string name="tutorial_desc_manage"> Clique aquí para adicionar, para eliminar una área, clique a cruz bermelha ao lado.</string>
+    <string name="tutorial_tit_manage">Adicione uma area para auditar</string>
+    <string name="tutorial_tit_graficos_ver">Confira detalhes da auditoria.</string>
+    <string name="tutorial_desc_graficos_ver">Clique aquí para olhar a pontuação e fotos.</string>
     <string name="tutorial_tit_graficos_pdf">Send PDF report.</string>
-    <string name="tutorial_desc_graficos_pdf">Click here to send a PDF report, with scores, photos and comments. You can use any of your mail accounts.</string>
-    <string name="tutorial_tit_subitem_general">Let\'s get started</string>
-    <string name="tutorial_desc_subitem_general">You are ready to audit! choose an area.</string>
-    <string name="tutorial_tit_subitem_criteria">Check criteria.</string>
-    <string name="tutorial_desc_subitem_criteria">If you are not sure on how to score, you can always check criteria. you will find useful guidelines.</string>
-    <string name="tutorial_tit_subitem_foto">Take some photos</string>
-    <string name="tutorial_desc_subitem_foto">Add photos and comments on your findings.</string>
+    <string name="tutorial_desc_graficos_pdf">Clique aquí para enviar o relatório em PDF com pontuação, fotos e comentários. Você pode usar qualquer uma das suas contas de correio.</string>
+    <string name="tutorial_tit_subitem_general"> Vamos começar</string>
+    <string name="tutorial_desc_subitem_general"> Você está pronto para auditar! Escolha uma área.</string>
+    <string name="tutorial_tit_subitem_criteria"> Verificar os critérios.</string>
+    <string name="tutorial_desc_subitem_criteria"> Se você não tem certeza de como pontuar, sempre pode verificar os critérios. Você encontrará diretrizes úteis.</string>
+    <string name="tutorial_tit_subitem_foto">Tire algumas fotos </string>
+    <string name="tutorial_desc_subitem_foto">Adicione fotos e comentários sobre suas decobertas.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tutorial_tit_strt">Start auditing</string>
-    <string name="tutorial_desc_strt">Pick an audit area, and start auditing right now.</string>
-    <string name="tutorial_tit_logout">Log out your account.</string>
-    <string name="tutorial_desc_logout">Click here if you want to logout your account or sign in with a different username.</string>
-    <string name="tutorial_tit_delete">Delete all data</string>
-    <string name="tutorial_desc_delete">Click here if you want to remove all data. all areas and audits will be deleted.</string>
-    <string name="tutorial_tit_guardar">Save your audit</string>
-    <string name="tutorial_desc_guardar">Once you have finished the audit save it and proceed to results.</string>
-    <string name="tutorial_tit_navegar">Navigate through the audit.</string>
-    <string name="tutorial_desc_navegar">Click here to navigate through the audit, or simply swipe the screen.</string>
-    <string name="tutorial_tit_subitem_inicial">Start audit.</string>
-    <string name="tutorial_desc_subitem_inicial">Read the statement and score taking criteria into account.</string>
-    <string name="tutorial_tit_setting">Antes de empezar a auditar</string>
-    <string name="tutorial_desc_setting">Primero, debemos crear un área auditable. vamos a Ajustes.</string>
-    <string name="verTutorial">Gracias por descargar nuestra app.\nQuieres ver el tutorial?</string>
+    <string name="tutorial_tit_strt">Comece auditoria</string>
+    <string name="tutorial_desc_strt">Escolha uma área para auditar e comece a auditoria agora mesmo.</string>
+    <string name="tutorial_tit_logout"> Sair da sua conta.</string>
+    <string name="tutorial_desc_logout">Clique aquí se você quer sair da sua conta ou entrar com um nome de usuário diferente.</string>
+    <string name="tutorial_tit_delete"> Apague todos os dados</string>
+    <string name="tutorial_desc_delete">Clique aquí se você quer apagar todos os dados. Tudas as áreas e auditorias serão eliminadas.</string>
+    <string name="tutorial_tit_guardar">Salve sua auditoria</string>
+    <string name="tutorial_desc_guardar"> Depois de concluir a auditoria, salve-la e proceda aos resultados.</string>
+    <string name="tutorial_tit_navegar">Navegue pela auditoria.</string>
+    <string name="tutorial_desc_navegar">Clique aquí para navegar pela auditoria, ou simplesmente deslize a tela.</string>
+    <string name="tutorial_tit_subitem_inicial">Comece a auditoria.</string>
+    <string name="tutorial_desc_subitem_inicial"> Leia a declaração e pontue tendo em conta os critérios.</string>
+    <string name="tutorial_tit_setting">Antes de comezar a auditar</string>
+    <string name="tutorial_desc_setting"> Primeiro, precisamos criar uma área auditável. Vamos para Ajustes.</string>
+    <string name="verTutorial">Obrigado por baixar o nosso aplicativo.\nGostaria de olhar o tutorial?</string>
+
+    <string name="no">não</string>
+
+
 </resources>
 

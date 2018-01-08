@@ -595,4 +595,6 @@
     <string name="tutorial_desc_setting">Primero, debemos crear un área auditable. vamos a Ajustes.</string>
     <string name="verTutorial">Gracias por descargar nuestra app.\nQuieres ver el tutorial?</string>
 
+    <string name="no">No</string>
+
 </resources>

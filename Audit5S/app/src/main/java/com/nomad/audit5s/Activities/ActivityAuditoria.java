@@ -51,38 +51,14 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-
     private ViewPager pager;
     private AdapterPagerSubItems adapterPager;
-    private TabLayout tabLayout;
-
     public static String idAuditoria;
     public static String areaAuditada;
-    public static String fechaAuditoria;
-
     private String resultadoInputFoto;
-
-    private SubItem sub1;
-    private SubItem sub2;
-    private SubItem sub3;
-    private SubItem sub4;
-    private SubItem sub5;
-    private SubItem sub6;
-    private SubItem sub7;
-    private SubItem sub8;
-    private SubItem sub9;
-    private SubItem sub10;
-    private SubItem sub11;
-    private SubItem sub12;
-    private String Auditor;
-
-
     private ControllerDatos controllerDatos;
     private FloatingActionMenu fabMenu;
-
     private Toolbar toolbar;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,7 +204,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
             }
         });
 //        SETEAR EL TABLAYOUT
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(pager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -263,6 +240,8 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                 
             }
         });
+
+
 
 
         //updateTabTextColors();
