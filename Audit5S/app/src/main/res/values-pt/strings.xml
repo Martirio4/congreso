@@ -102,7 +102,7 @@
     <string name="criteriaTitulo">Criterio</string>
     <string name="sacarFoto">Adicionar Foto</string>
     <string name="guardarAuditoria">Salvar Auditoria</string>
-    <string name="salir">quit</string>
+    <string name="salir">Quit</string>
     <string name="manageAreas">Gerenciar áreas de auditoria </string>
     <string name="myAudits">MINHAS AUDITORIAS</string>
     <string name="addNewArea">Adicionar nova área</string>
