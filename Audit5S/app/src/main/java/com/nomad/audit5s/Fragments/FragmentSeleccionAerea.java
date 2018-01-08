@@ -110,11 +110,13 @@ public class FragmentSeleccionAerea extends Fragment {
         if (quiereVerTuto) {
             if (!primeraVezFragmentSubitem) {
 
-                SharedPreferences.Editor editor = config.edit();
-                editor.putBoolean("primeraVezFragmentSeleccion",true);
-                editor.commit();
+                if (result2.size()>=1) {
+                    SharedPreferences.Editor editor = config.edit();
+                    editor.putBoolean("primeraVezFragmentSeleccion",true);
+                    editor.commit();
 
-                seguirConTutorial();
+                    seguirConTutorial();
+                }
             }
         }
         return view;

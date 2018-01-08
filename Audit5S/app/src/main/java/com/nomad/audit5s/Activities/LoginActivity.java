@@ -1,5 +1,6 @@
 package com.nomad.audit5s.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -134,6 +136,20 @@ public class LoginActivity extends AppCompatActivity  {
         botonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                View focusedView = getCurrentFocus();
+    /*
+     * If no view is focused, an NPE will be thrown
+     *
+     * Maxim Dmitriev
+     */
+                if (focusedView != null) {
+                    inputManager.hideSoftInputFromWindow(focusedView.getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+
 
                 til1.setError(null);
                 til2.setError(null);

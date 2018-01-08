@@ -249,11 +249,14 @@ public class FragmentManageAreas extends Fragment {
         if (quiereVerTuto) {
             if (!primeraVezFragmentManage) {
 
-                SharedPreferences.Editor editor = config.edit();
-                editor.putBoolean("primeraVezFragmentManage",true);
-                editor.commit();
 
-                seguirConTutorial();
+
+                    SharedPreferences.Editor editor = config.edit();
+                    editor.putBoolean("primeraVezFragmentManage",true);
+                    editor.commit();
+
+                    seguirConTutorial();
+
             }
         }
 

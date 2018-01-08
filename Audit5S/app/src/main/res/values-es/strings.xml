@@ -560,4 +560,39 @@
     <string name="settings">AJUSTES</string>
     <string name="auditResult1">Audit.</string>
 
+    <!--//cosas del tutorial-->
+    <string name="tutorial_tit_area">Gestion de áreas</string>
+    <string name="tutorial_desc_area">Click aquí para agregar o eliminar áreas.</string>
+    <string name="tutorial_desc_manage">Click aquí para agregar un área, click en la cruz roja para eliminar.</string>
+    <string name="tutorial_tit_manage">Agrega un área de auditoría</string>
+    <string name="tutorial_tit_graficos_ver">Revisa la auditoría</string>
+    <string name="tutorial_desc_graficos_ver">Click aquí para ver puntajes y fotos.</string>
+    <string name="tutorial_tit_graficos_pdf">Enviar reporte PDF</string>
+    <string name="tutorial_desc_graficos_pdf">Click aquí para enviar un reporte PDF con puntajes, fotos y comentarios.</string>
+    <string name="tutorial_tit_subitem_general">Empecemos</string>
+    <string name="tutorial_desc_subitem_general">Estás listo para auditar. Selecciona un área.</string>
+    <string name="tutorial_tit_subitem_criteria">Revisar Criterios</string>
+    <string name="tutorial_desc_subitem_criteria">Si no estas seguro como puntuar, revisa los criterios.</string>
+    <string name="tutorial_tit_subitem_foto">Toma fotos</string>
+    <string name="tutorial_desc_subitem_foto">Agrega fotos y comentarios.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tutorial_tit_strt">Comienza la auditoría</string>
+    <string name="tutorial_desc_strt">Elige una área y comienza a auditar ahora mismo.</string>
+    <string name="tutorial_tit_logout">Desloguearse</string>
+    <string name="tutorial_desc_logout">Click aquí si quieres desloguear tu cuenta o ingresar cono otro usuario.</string>
+    <string name="tutorial_tit_delete">Borra todos los datos</string>
+    <string name="tutorial_desc_delete">Click aquí si quieres eliminar todas las auditorias y todas las areas.</string>
+    <string name="tutorial_tit_guardar">Guarda la auditoría</string>
+    <string name="tutorial_desc_guardar">Una vez que termines la auditoria, guárdala y procede a ver los resultados.</string>
+    <string name="tutorial_tit_navegar">Navega a traves de la auditoría</string>
+    <string name="tutorial_desc_navegar">Click aquí para navegar la auditoría o haz "swipe" para cambiar de pantalla.</string>
+    <string name="tutorial_tit_subitem_inicial">Comienza la auditoría</string>
+    <string name="tutorial_desc_subitem_inicial">Lee la declaración y puntúa teniendo en cuenta los criterios.</string>
+
+    <string name="tutorial_tit_setting">Antes de empezar a auditar</string>
+    <string name="tutorial_desc_setting">Primero, debemos crear un área auditable. vamos a Ajustes.</string>
+    <string name="verTutorial">Gracias por descargar nuestra app.\nQuieres ver el tutorial?</string>
+
 </resources>
