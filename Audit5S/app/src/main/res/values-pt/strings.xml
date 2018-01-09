@@ -155,7 +155,7 @@
     <string name="start">INICIAR AUDITORIA</string>
     <string name="contact">CONTATE-NOS</string>
     <string name="firstTime">Primeira vez? Clique aqui</string>
-    <string name="autenticacionFallida"> Falha na autenticação.</string>
+    <string name="autenticacionFallida"> Falha na autenticação.Por favor registre</string>
     <string name="sinConexionIntenteMasTarde"> Sem conexões à Internet, tente novamente mais tarde.</string>
     <string name="reporteAuditoria">Reporte de Auditoria.</string>
     <string name="enviarMail">Enviar o e-mail.</string>

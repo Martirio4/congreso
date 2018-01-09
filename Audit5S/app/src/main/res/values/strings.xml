@@ -252,7 +252,7 @@ Even in other areas that they frequent or work.
     <string name="start">START AUDIT</string>
     <string name="contact">CONTACT US</string>
     <string name="firstTime">First time? Click here</string>
-    <string name="autenticacionFallida">Authentication Failed.</string>
+    <string name="autenticacionFallida">Authentication Failed. Please register.</string>
     <string name="sinConexionIntenteMasTarde">No internet connections, please try again later.</string>
     <string name="reporteAuditoria">Audit report.</string>
     <string name="enviarMail">Send mail.</string>

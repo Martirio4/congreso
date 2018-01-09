@@ -484,7 +484,7 @@
     <string name="start">AUDITAR</string>
     <string name="contact">CONTACTO</string>
     <string name="firstTime">Primera vez, click aquí</string>
-    <string name="autenticacionFallida">Autenticacion fallida</string>
+    <string name="autenticacionFallida">Autenticacion fallida. Por favor, registrese.</string>
     <string name="sinConexionIntenteMasTarde">No hay conexión a internet, intente mas tarde</string>
     <string name="reporteAuditoria">Reporte de auditoría.</string>
     <string name="enviarMail">Enviar mail.</string>

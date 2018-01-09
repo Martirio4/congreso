@@ -238,27 +238,26 @@ public class LoginActivity extends AppCompatActivity  {
                 }
                 if (editPass.getText().toString().equals(editRepePass.getText().toString())) {
 
-                    progressBar.setVisibility(View.VISIBLE);
-                    progressBar.setIndeterminate(true);
+                    if (HTTPConnectionManager.isNetworkingOnline(LoginActivity.this)) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.setIndeterminate(true);
+                        String usuario= editUsuario.getText().toString();
+                        String pass= editPass.getText().toString();
 
-                    final Usuario nuevoUsuario = new Usuario();
-                    nuevoUsuario.setMail(editUsuario.getText().toString().toLowerCase());
-                    nuevoUsuario.setPass(editPass.getText().toString());
-                    Realm realm = Realm.getDefaultInstance();
-                    RealmResults<Usuario> mResults = realm.where(Usuario.class)
-                            .equalTo("mail",nuevoUsuario.getMail())
-                            .findAll();
-                    if (mResults.size()<1){
-                        realm.executeTransaction(new Realm.Transaction() {
-                            @Override
-                            public void execute(Realm realm) {
-                                Usuario mUser=realm.copyToRealm(nuevoUsuario);
-                            }
-                        });
-                        crearCuentaFirebase(nuevoUsuario.getMail(), nuevoUsuario.getPass());
+                        crearCuentaFirebase(usuario, pass);
+                    } else {
+                        Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
+                                .setAction(R.string.reintentar, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        botonOk.performClick();
+                                    }
+                                })
+                                .show();
                     }
-
                 }
+
+
                 else {
                     til3.setError(getResources().getString(R.string.contraseniasNoCoinciden));
                     editRepePass.setText("");
@@ -285,7 +284,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onRestart();
     }
 
-    public void loguearFirebaseManual(String usuario, String pass){
+    public void loguearFirebaseManual(final String usuario, final String pass){
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
         mAuth.signInWithEmailAndPassword(usuario, pass)
@@ -308,7 +307,7 @@ public class LoginActivity extends AppCompatActivity  {
                                         .setAction(R.string.reintentar, new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                botonRegister.performClick();
+                                                loguearFirebaseManual(usuario,pass);
                                             }
                                         })
                                         .show();
@@ -336,6 +335,22 @@ public class LoginActivity extends AppCompatActivity  {
                             botonOk.setVisibility(View.GONE);
                             botonLogin.setVisibility(View.VISIBLE);
                             botonRegister.setVisibility(View.VISIBLE);
+
+                            final Usuario nuevoUsuario = new Usuario();
+                            nuevoUsuario.setMail(editUsuario.getText().toString().toLowerCase());
+                            nuevoUsuario.setPass(editPass.getText().toString());
+
+                            Realm realm = Realm.getDefaultInstance();
+                            RealmResults<Usuario> mResults = realm.where(Usuario.class)
+                                    .equalTo("mail",email)
+                                    .findAll();
+                            if (mResults.size()<1){
+                                realm.executeTransaction(new Realm.Transaction() {
+                                    @Override
+                                    public void execute(Realm realm) {
+                                        Usuario mUser=realm.copyToRealm(nuevoUsuario);
+                                    }
+                                });
                         }
 
                         // If sign in fails, display a message to the user. If sign in succeeds
@@ -358,7 +373,8 @@ public class LoginActivity extends AppCompatActivity  {
 
                         // ...
                     }
-                });
+                };
+    });
     }
 
     @Override
