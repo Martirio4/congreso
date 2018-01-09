@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nomad.audit5s.model.Usuario;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.utils.HTTPConnectionManager;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -140,11 +141,7 @@ public class LoginActivity extends AppCompatActivity  {
                 InputMethodManager inputManager = (InputMethodManager) getSystemService(
                         Context.INPUT_METHOD_SERVICE);
                 View focusedView = getCurrentFocus();
-    /*
-     * If no view is focused, an NPE will be thrown
-     *
-     * Maxim Dmitriev
-     */
+
                 if (focusedView != null) {
                     inputManager.hideSoftInputFromWindow(focusedView.getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
@@ -172,9 +169,7 @@ public class LoginActivity extends AppCompatActivity  {
                  contraseña = editPass.getText().toString();
                 
                 loguearFirebaseManual(mail, contraseña);
-                
-                   editPass.setText(null);
-                   editUsuario.setText(null);
+
                 
             }
         });
@@ -183,17 +178,41 @@ public class LoginActivity extends AppCompatActivity  {
         botonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                til3.setVisibility(View.VISIBLE);
-                editRepePass.setVisibility(View.VISIBLE);
-                botonOk.setVisibility(View.VISIBLE);
-                botonRegister.setVisibility(View.GONE);
-                botonLogin.setVisibility(View.GONE);
+
+
+
+                if (HTTPConnectionManager.isNetworkingOnline(v.getContext())) {
+                    til3.setVisibility(View.VISIBLE);
+                    editRepePass.setVisibility(View.VISIBLE);
+                    botonOk.setVisibility(View.VISIBLE);
+                    botonRegister.setVisibility(View.GONE);
+                    botonLogin.setVisibility(View.GONE);
+                }
+                else {
+                    Snackbar.make(v,R.string.noHayInternet,Snackbar.LENGTH_LONG)
+                            .setAction(R.string.reintentar, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    botonRegister.performClick();
+                                }
+                            })
+                            .show();
+                }
             }
         });
         
         botonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                View focusedView = getCurrentFocus();
+
+                if (focusedView != null) {
+                    inputManager.hideSoftInputFromWindow(focusedView.getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                }
 
                 Integer control = 0;
                 til1.setError(null);
@@ -264,7 +283,6 @@ public class LoginActivity extends AppCompatActivity  {
     @Override
     protected void onRestart() {
         super.onRestart();
-        irALanding();
     }
 
     public void loguearFirebaseManual(String usuario, String pass){
@@ -282,8 +300,25 @@ public class LoginActivity extends AppCompatActivity  {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
 
-                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
+                            if (HTTPConnectionManager.isNetworkingOnline(LoginActivity.this)) {
+                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Snackbar.make(editUsuario,R.string.noHayInternetlogin,Snackbar.LENGTH_LONG)
+                                        .setAction(R.string.reintentar, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                botonRegister.performClick();
+                                            }
+                                        })
+                                        .show();
+                            }
 
+                        }
+                        else
+                        {
+                            editPass.setText(null);
+                            editUsuario.setText(null);
                         }
                         progressBar.setVisibility(View.GONE);
 
@@ -308,8 +343,17 @@ public class LoginActivity extends AppCompatActivity  {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
 
-                            //creo usuario en mi base de datos
-                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.sinConexionIntenteMasTarde), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.reintentar, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            crearCuentaFirebase(email,password);
+                                        }
+                                    })
+                                    .show();
+
+
                         }
 
                         // ...

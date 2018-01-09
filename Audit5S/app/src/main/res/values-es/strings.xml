@@ -596,5 +596,8 @@
     <string name="verTutorial">Gracias por descargar nuestra app.\nQuieres ver el tutorial?</string>
 
     <string name="no">No</string>
+    <string name="noHayInternet">Se requiere internet para registrar nuevos usuarios.</string>
+    <string name="noHayInternetlogin">Se requiere internet para el primer login</string>
+    <string name="reintentar">Retry</string>
 
 </resources>

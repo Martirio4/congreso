@@ -349,6 +349,9 @@ Even in other areas that they frequent or work.
     <string name="tutorial_desc_navegar">Click here to navigate through the audit, or simply swipe the screen.</string>
     <string name="tutorial_tit_subitem_inicial">Start audit.</string>
     <string name="tutorial_desc_subitem_inicial">Read the statement and score taking criteria into account.</string>
+    <string name="noHayInternet">Internet connection needed to register new users</string>
+    <string name="noHayInternetlogin">Internet connection needed for first login</string>
+    <string name="reintentar">Retry</string>
 
 
 </resources>

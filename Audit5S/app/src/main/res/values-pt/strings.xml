@@ -255,6 +255,9 @@
     <string name="verTutorial">Obrigado por baixar o nosso aplicativo.\nGostaria de olhar o tutorial?</string>
 
     <string name="no">não</string>
+    <string name="noHayInternet">É necessária a Internet para registrar novos usuários.</string>
+    <string name="noHayInternetlogin">É necessária a Internet para o primeiro login</string>
+    <string name="reintentar">Retry</string>
 
 
 </resources>
