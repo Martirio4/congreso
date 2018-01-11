@@ -249,8 +249,6 @@ public class FragmentManageAreas extends Fragment {
         if (quiereVerTuto) {
             if (!primeraVezFragmentManage) {
 
-
-
                     SharedPreferences.Editor editor = config.edit();
                     editor.putBoolean("primeraVezFragmentManage",true);
                     editor.commit();
@@ -273,7 +271,7 @@ public class FragmentManageAreas extends Fragment {
 
                 TapTarget.forView(fabAgregarArea, getResources().getString(R.string.tutorial_tit_manage), getResources().getString(R.string.tutorial_desc_manage))
                         .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
-                        .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                        .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
                         //.targetCircleColor(R.color.white)   // Specify a color for the target circle
                         //.titleTextSize(20)                  // Specify the size (in sp) of the title text
                         //.titleTextColor(R.color.white)      // Specify the color of the title text

@@ -104,19 +104,54 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <ImageView
-                    android:visibility="invisible"
-                    android:id="@+id/targetnum3"
-                    android:alpha="0"
-                    android:src="@drawable/azul3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
+                        <ImageView
+                            android:visibility="invisible"
+                            android:id="@+id/targetnum3"
+                            android:alpha="0"
+                            android:src="@drawable/azul3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <Button
+                            android:textAlignment="viewStart"
+                            android:textSize="@dimen/textoSettings"
+                            android:background="@android:color/transparent"
+                            android:id="@+id/botonTuto"
+                            android:drawableStart="@drawable/azul3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/tile5" />
+                </FrameLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:paddingStart="@dimen/margenChico"
+            android:paddingEnd="@dimen/margenChico"
+            android:background="@color/tile4"
+            android:id="@+id/lin5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="50"
+            android:layout_height="0dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:visibility="invisible"
+                        android:id="@+id/targetnum4"
+                        android:alpha="0"
+                        android:src="@drawable/azul4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
                 <Button
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/textoSettings"
                     android:background="@android:color/transparent"
                     android:id="@+id/botonBorrarTodo"
-                    android:drawableStart="@drawable/azul3"
+                    android:drawableStart="@drawable/azul4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/databaseAuditDelete"
@@ -127,7 +162,7 @@
         <LinearLayout
             android:paddingStart="@dimen/margenChico"
             android:paddingEnd="@dimen/margenChico"
-            android:background="@color/tile4"
+            android:background="@color/tile5"
             android:id="@+id/line4"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -136,17 +171,19 @@
                 <Button
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/textoSettings"
-                    android:drawableStart="@drawable/azul4"
+                    android:drawableStart="@drawable/azul5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/goBack"
                     android:id="@+id/botonVolver"
-                    android:textColor="@color/tile5"
+                    android:textColor="@color/tile1"
                     android:background="@android:color/transparent"
                     />
 
 
         </LinearLayout>
+
+
 </LinearLayout>
 
 

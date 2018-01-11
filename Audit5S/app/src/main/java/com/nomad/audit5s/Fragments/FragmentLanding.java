@@ -162,15 +162,24 @@ public class FragmentLanding extends Fragment {
                 .targets(
                         TapTarget.forView(getActivity().findViewById(R.id.btn_start), getResources().getString(R.string.tutorial_tit_strt), getResources().getString(R.string.tutorial_desc_strt))
                                 .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
-                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
                                 .cancelable(false)
                                 .id(1)// Whether tapping outside the outer circle dismisses the view
-                                .tintTarget(false),                   // Whether to tint the target view's color
-                        TapTarget.forView(getActivity().findViewById(R.id.btn_setting), getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .tintTarget(false),
+                        TapTarget.forView(getActivity().findViewById(R.id.btn_search), getResources().getString(R.string.tutorial_tit_search), getResources().getString(R.string.tutorial_desc_search))
                                 .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
-                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .outerCircleAlpha(0.95f)
+                                .textColor(R.color.primary_text)
+                                .textTypeface(roboto)  // Specify a typeface for the text
+                                .drawShadow(true)                   // Whether to draw a drop shadow or not
+                                .cancelable(true)
+                                .id(2)// Whether tapping outside the outer circle dismisses the view
+                                .tintTarget(true),// Whether to tint the target view's color
+                        TapTarget.forView(getActivity().findViewById(R.id.btn_setting), getResources().getString(R.string.tutorial_tit_setting), getResources().getString(R.string.tutorial_desc_setting))
+                                .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
+                                .outerCircleAlpha(0.85f)
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
                                 .cancelable(true)
@@ -214,6 +223,7 @@ public class FragmentLanding extends Fragment {
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         SharedPreferences.Editor editor = config.edit();
                         editor.putBoolean("quiereVerTuto",true);
+                        editor.putBoolean("estadoTuto",false);
                         editor.commit();
 
                         lanzarTuto();
@@ -225,6 +235,7 @@ public class FragmentLanding extends Fragment {
                     public void onClick(@NonNull MaterialDialog materialDialog, @NonNull DialogAction dialogAction) {
                         SharedPreferences.Editor editor = config.edit();
                         editor.putBoolean("quiereVerTuto",false);
+                        editor.putBoolean("estadoTuto",true);
                         editor.commit();
                         //escribir las sharedPreferences para todos los fragments
                     }
@@ -237,5 +248,31 @@ public class FragmentLanding extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.landinable =(Landinable)context;
+    }
+
+    @Override
+    public void onResume() {
+        SharedPreferences conf=getActivity().getSharedPreferences("prefs",0);
+        SharedPreferences.Editor editor = conf.edit();
+        Boolean estadoTuto=conf.getBoolean("estadoTuto",false);
+        Boolean quiereVerTuto = conf.getBoolean("quiereVerTuto",false);
+        Boolean primeraVezLanding=conf.getBoolean("primeraVezFragmentLanding",false);
+        Boolean firstRun = conf.getBoolean("firstRun", false);
+
+        if (!firstRun){
+            crearDialogoBienvenida();
+            editor.putBoolean("firstRun", true);
+            editor.commit();
+        }
+        else{
+            if (!estadoTuto&&quiereVerTuto){
+                if (!primeraVezLanding){
+                    editor.putBoolean("primeraVezFragmentLanding",true);
+                    editor.commit();
+                    lanzarTuto();
+                }
+            }
+        }
+        super.onResume();
     }
 }

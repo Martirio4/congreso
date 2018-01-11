@@ -352,6 +352,12 @@ Even in other areas that they frequent or work.
     <string name="noHayInternet">Internet connection needed to register new users</string>
     <string name="noHayInternetlogin">Internet connection needed for first login</string>
     <string name="reintentar">Retry</string>
+    <string name="activarTuto">Turn tutorial on</string>
+    <string name="desactivarTuto">Turn tutorial off</string>
+    <string name="tutorial_tit_tuto">Tutorial</string>
+    <string name="tutorial_desc_tuto">Click here to turn on and off the tutorial.</string>
+    <string name="tutorial_tit_search">Browse your audits</string>
+    <string name="tutorial_desc_search">Click here to browse your audits.</string>
 
 
 </resources>

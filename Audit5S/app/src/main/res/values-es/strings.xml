@@ -599,5 +599,10 @@
     <string name="noHayInternet">Se requiere internet para registrar nuevos usuarios.</string>
     <string name="noHayInternetlogin">Se requiere internet para el primer login</string>
     <string name="reintentar">Retry</string>
+    <string name="activarTuto">Activar tutorial</string>
+    <string name="desactivarTuto">Desactivar tutorial</string>
+    <string name="tutorial_desc_tuto">Click aquí para activar y desactivar el tutorial.</string>
+    <string name="tutorial_tit_search">Revise sus auditorias</string>
+    <string name="tutorial_desc_search">Click aquí para revisar sus auditorias terminadas.</string>
 
 </resources>

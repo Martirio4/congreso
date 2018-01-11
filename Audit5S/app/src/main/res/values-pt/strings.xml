@@ -237,6 +237,7 @@
     <string name="tutorial_desc_subitem_foto">Adicione fotos e comentários sobre suas decobertas.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tutorial_tit_strt">Comece auditoria</string>
     <string name="tutorial_desc_strt">Escolha uma área para auditar e comece a auditoria agora mesmo.</string>
@@ -258,7 +259,11 @@
     <string name="noHayInternet">É necessária a Internet para registrar novos usuários.</string>
     <string name="noHayInternetlogin">É necessária a Internet para o primeiro login</string>
     <string name="reintentar">Retry</string>
-
+    <string name="activarTuto">Active tutorial</string>
+    <string name="desactivarTuto">Desative tutorial</string>
+    <string name="tutorial_desc_tuto">Clique aqui para ativar e desativar o tutorial.</string>
+    <string name="tutorial_tit_search">Navegue pelas suas auditorias</string>
+    <string name="tutorial_desc_search">Clique aqui para navegar nas suas auditorias.</string>
 
 </resources>
 

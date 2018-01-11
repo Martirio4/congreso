@@ -238,15 +238,16 @@ public class GraficosActivity extends AppCompatActivity {
                 .targets(
                         TapTarget.forView(fabVerAuditoria, getResources().getString(R.string.tutorial_tit_graficos_ver), getResources().getString(R.string.tutorial_desc_graficos_ver))
                                 .outerCircleColor(R.color.tutorial2)      // Specify a color for the outer circle
-                                .outerCircleAlpha(0.75f)            // Specify the alpha amount for the outer circle
+                                .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
-                                .cancelable(true)
+                                .cancelable(false)
                                 .id(1)// Whether tapping outside the outer circle dismisses the view
                                 .tintTarget(false),                   // Whether to tint the target view's color
                         TapTarget.forView(fabGenerarPDF, getResources().getString(R.string.tutorial_tit_graficos_pdf), getResources().getString(R.string.tutorial_desc_graficos_pdf))
                                 .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
-                                .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
+                                .textColor(R.color.primary_text)// Specify the alpha amount for the outer circle
+                                .outerCircleAlpha(0.95f)
                                 .textTypeface(roboto)  // Specify a typeface for the text
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
                                 .cancelable(true)
@@ -259,8 +260,15 @@ public class GraficosActivity extends AppCompatActivity {
                     @Override
                     public void onSequenceFinish() {
                        fabMenuGraficos.close(true);
-                    }
 
+                    SharedPreferences config = config = getSharedPreferences("prefs",0);
+                    Boolean seTermino = config.getBoolean("estadoTuto",false);
+                    if (!seTermino) {
+                        SharedPreferences.Editor editor=config.edit();
+                        editor.putBoolean("estadoTuto",true);
+                        editor.commit();
+                    }
+                    }
                     @Override
                     public void onSequenceStep(TapTarget tapTarget, boolean b) {
 

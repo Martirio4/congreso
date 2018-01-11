@@ -129,7 +129,7 @@ public class FragmentSeleccionAerea extends Fragment {
                         .transparentTarget(true)
                         .textColor(R.color.primary_text)
                         .outerCircleColor(R.color.tutorial1)      // Specify a color for the outer circle
-                        .outerCircleAlpha(0.85f)            // Specify the alpha amount for the outer circle
+                        .outerCircleAlpha(0.95f)            // Specify the alpha amount for the outer circle
                         .textTypeface(roboto)  // Specify a typeface for the text
                         .drawShadow(true)                   // Whether to draw a drop shadow or not
                         .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
