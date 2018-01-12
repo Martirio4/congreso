@@ -9,11 +9,15 @@
     tools:context="com.nomad.audit5s.fragments.FragmentRevisarAuditoria">
     
     <LinearLayout
+        android:layout_marginTop="@dimen/margenChico"
+        android:layout_marginBottom="@dimen/margenChico"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:maxLines="2"
+            android:textSize="@dimen/textoAreaRevisarAudit"
             android:layout_marginTop="@dimen/margenMicro"
             android:layout_marginBottom="@dimen/margenMini"
             android:textColor="@color/tile5"
@@ -90,30 +94,27 @@
                 android:layout_height="wrap_content">
     
                 <TextView
+                    android:lines="2"
+                    android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/margenMini"
-
+                    android:background="@color/tile2"
                     android:layout_weight="80"
                     android:id="@+id/subitem1VerAudit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
 
+                
                 <TextView
-                    android:layout_gravity="start|top"
-                    android:textSize="12sp"
-                    android:text="@string/score"
-                    android:textColor="@color/tile5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:background="@color/tile3"
                     android:textAlignment="center"
                     android:layout_gravity="start|top"
                     android:layout_weight="10"
-                    android:textColor="@color/tile5"
+                    android:textColor="@color/tile1"
                     android:textSize="20sp"
                     android:id="@+id/score1sVerAudit"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -129,30 +130,27 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:lines="2"
+                    android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/margenMini"
-
+                    android:background="@color/tile2"
                     android:layout_weight="80"
                     android:id="@+id/subitem2VerAudit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
 
+                
                 <TextView
-                    android:layout_gravity="start|top"
-                    android:textSize="12sp"
-                    android:text="@string/score"
-                    android:textColor="@color/tile5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:background="@color/tile3"
                     android:textAlignment="center"
                     android:layout_gravity="start|top"
                     android:layout_weight="10"
-                    android:textColor="@color/tile5"
+                    android:textColor="@color/tile1"
                     android:textSize="20sp"
                     android:id="@+id/score2sVerAudit"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_marginBottom="@dimen/margenChico"
@@ -167,30 +165,27 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:lines="2"
+                    android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/margenMini"
-
+                    android:background="@color/tile2"
                     android:layout_weight="80"
                     android:id="@+id/subitem3VerAudit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
 
+               
                 <TextView
-                    android:layout_gravity="start|top"
-                    android:textSize="12sp"
-                    android:text="@string/score"
-                    android:textColor="@color/tile5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:background="@color/tile3"
                     android:textAlignment="center"
                     android:layout_gravity="start|top"
                     android:layout_weight="10"
-                    android:textColor="@color/tile5"
+                    android:textColor="@color/tile1"
                     android:textSize="20sp"
                     android:id="@+id/score3sVerAudit"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_marginBottom="@dimen/margenChico"
@@ -205,33 +200,30 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:lines="2"
+                    android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/margenMini"
-
+                    android:background="@color/tile2"
                     android:layout_weight="80"
                     android:id="@+id/subitem4VerAudit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
 
+         
                 <TextView
-                    android:layout_gravity="start|top"
-                    android:textSize="12sp"
-                    android:text="@string/score"
-                    android:textColor="@color/tile5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:background="@color/tile3"
                     android:textAlignment="center"
                     android:layout_gravity="start|top"
                     android:layout_weight="10"
-                    android:textColor="@color/tile5"
+                    android:textColor="@color/tile1"
                     android:textSize="20sp"
                     android:id="@+id/score4sVerAudit"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
-                android:layout_marginBottom="@dimen/margenChico"
+                android:layout_marginBottom="@dimen/margenGrande"
                 android:id="@+id/recycler4VerAudit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
