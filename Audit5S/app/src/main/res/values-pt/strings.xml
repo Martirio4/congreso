@@ -8,7 +8,7 @@
     <string name="delteAreaOk">Área eliminada corretamente</string>
     <string name="deleteTituloDialog">Eliminar a área escolhida</string>
     <string name="elArea">A área: </string>
-    <string name="deletePermanente">A área será eliminada totalmente.</string>
+    <string name="deletePermanente">e as auditorias relacionadas serão eliminada totalmente.</string>
     <string name="deseaContinuar">Deseja continuar?</string>
     <string name="delete">Eliminar</string>
     <string name="cancel">Cancelar</string>

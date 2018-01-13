@@ -18,13 +18,20 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.adapter.AdapterArea;
 import com.nomad.audit5s.fragments.FragmentManageAreas;
 import com.nomad.audit5s.fragments.FragmentSettings;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.model.Auditoria;
+import com.nomad.audit5s.model.Foto;
+import com.nomad.audit5s.model.SubItem;
+
+import java.io.File;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterArea.Eliminable, FragmentManageAreas.Avisable{
 
@@ -82,17 +89,58 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
 
     }
 
-    public void borrarDefinitivamente(Area unArea){
+    public void borrarDefinitivamente(final Area unArea){
+
         Realm realm = Realm.getDefaultInstance();
-        final Area mArea=realm.where(Area.class)
-                .equalTo("idArea",unArea.getIdArea())
-                .findFirst();
+
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                mArea.deleteFromRealm();
+
+                String usuario= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                RealmResults<Auditoria> result2 = realm.where(Auditoria.class)
+                        .equalTo("usuario", usuario)
+                        .findAll();
+
+                for (Auditoria audit:result2
+                        ) {
+                    if (audit.getAreaAuditada().getIdArea().equals(unArea.getIdArea())) {
+                        RealmResults<SubItem>Subitems=realm.where(SubItem.class)
+                                .equalTo("auditoria",audit.getIdAuditoria())
+                                .findAll();
+                        Subitems.deleteAllFromRealm();
+
+                        RealmResults<Foto>fotos=realm.where(Foto.class)
+                                .equalTo("auditoria",audit.getIdAuditoria())
+                                .findAll();
+                        for (Foto foti:fotos
+                             ) {
+                            File file = new File(foti.getRutaFoto());
+                            boolean deleted = file.delete();
+                        }
+                        fotos.deleteAllFromRealm();
+
+                        audit.deleteFromRealm();
+                    }
+                }
+
+
+                RealmResults<Area> lasAreas=realm.where(Area.class)
+                        .equalTo("idArea",unArea.getIdArea())
+                        .findAll();
+                    for (Area elArea:lasAreas
+                         ) {
+                        File file = new File(elArea.getFotoArea().getRutaFoto());
+                        boolean deleted = file.delete();
+                    }
+                lasAreas.deleteAllFromRealm();
             }
+
         });
+
+
+
 
         FragmentManager fragmentManager = (FragmentManager) this.getSupportFragmentManager();
         FragmentManageAreas fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
@@ -101,8 +149,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterArea.E
             fragmentManageAreas.updateAdapter();
             Snackbar.make(layout,getResources().getString(R.string.delteAreaOk),Snackbar.LENGTH_SHORT)
                     .show();
-
-        } else {
 
         }
     }

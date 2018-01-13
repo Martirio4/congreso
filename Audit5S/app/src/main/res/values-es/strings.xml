@@ -9,7 +9,7 @@
     <string name="delteAreaOk">El área ha sido borrada</string>
     <string name="deleteTituloDialog">Borrar área seleccionada</string>
     <string name="elArea">El área: </string>
-    <string name="deletePermanente">será borrada en forma permanente</string>
+    <string name="deletePermanente">y las auditorias relacionadas serán borradas en forma permanente</string>
     <string name="deseaContinuar">desea continuar?</string>
     <string name="delete">Borrar</string>
     <string name="cancel">Cancelar</string>

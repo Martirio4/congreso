@@ -9,7 +9,7 @@
     <string name="delteAreaOk">Area was succesfully deleted</string>
     <string name="deleteTituloDialog">Delete Selected Area</string>
     <string name="elArea">The area: </string>
-    <string name="deletePermanente">will be permanently deleted.</string>
+    <string name="deletePermanente">and related audits will be permanently deleted.</string>
     <string name="deseaContinuar">Do you wisht to continue?</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
