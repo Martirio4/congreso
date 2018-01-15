@@ -173,7 +173,7 @@
     <string name="favorAgregueComentario">Por favor, adicione comentário para esta foto</string>
     <string name="comment">Comentário</string>
     <string name="advertencia">Warning!</string>
-    <string name="auditoriaSinTerminar"> Auditoria não concluída não será salva </string>
+    <string name="auditoriaSinTerminar"> Auditoria não e concluída.</string>
     <string name="continuar">Continuar?</string>
     <string name="si">Sim</string>
     <string name="seiriSeiri">Seiri / Separar</string>
@@ -264,6 +264,8 @@
     <string name="tutorial_desc_tuto">Clique aqui para ativar e desativar o tutorial.</string>
     <string name="tutorial_tit_search">Navegue pelas suas auditorias</string>
     <string name="tutorial_desc_search">Clique aqui para navegar nas suas auditorias.</string>
+    <string name="deleteAudit">Eliminar a auditoria</string>
+    <string name="auditoriaSeEliminara">a auditoria será eliminada.</string>
 
 </resources>
 

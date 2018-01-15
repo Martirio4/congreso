@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -35,7 +36,11 @@ import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.model.Foto;
 
+import java.io.File;
+
 import pl.tajchert.nammu.Nammu;
+
+import static com.nomad.audit5s.fragments.FragmentSettings.deleteDirectory;
 
 public class ActivityLanding extends AppCompatActivity implements FragmentLanding.Landinable, FragmentSeleccionAerea.Notificable {
 
@@ -66,6 +71,14 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
         setContentView(R.layout.activity_landing);
 
         Nammu.init(getApplicationContext());
+
+        //borrar cache auditorias PDF
+        File path = new File(getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator+FirebaseAuth.getInstance().getCurrentUser().getEmail()+File.separator+"audits");
+        Boolean deleteDirectorio=deleteDirectory(path);
+        Toast.makeText(this, "es: "+deleteDirectorio, Toast.LENGTH_SHORT).show();
+
+
+
         lanzarLandingFragment();
         /*
         Fragment fragment = getSupportFragmentManager().findFragmentByTag("seleccion");

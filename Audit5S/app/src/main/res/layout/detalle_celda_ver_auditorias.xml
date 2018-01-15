@@ -5,9 +5,9 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:layout_marginStart="@dimen/margenChico"
-        android:layout_marginTop="@dimen/margenChico"
-        android:layout_marginBottom="@dimen/margenChico"
+        android:layout_marginStart="@dimen/margenMini"
+        android:layout_marginTop="@dimen/margenMini"
+        android:layout_marginBottom="@dimen/margenMini"
         android:layout_weight="30"
         android:layout_width="0dp"
         android:layout_height="@dimen/altoTarjeta">
@@ -47,7 +47,7 @@
     <android.support.v7.widget.CardView
         android:layout_marginBottom="@dimen/margenChico"
         android:layout_weight="40"
-        android:layout_margin="@dimen/margenChico"
+        android:layout_margin="@dimen/margenMini"
         android:layout_width="0dp"
         android:layout_height="@dimen/altoTarjeta">
 
@@ -191,9 +191,9 @@
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
         android:id="@+id/tarjetaPuntaje"
-        android:layout_marginTop="@dimen/margenChico"
-        android:layout_marginEnd="@dimen/margenChico"
-        android:layout_marginBottom="@dimen/margenChico"
+        android:layout_marginTop="@dimen/margenMini"
+        android:layout_marginEnd="@dimen/margenMini"
+        android:layout_marginBottom="@dimen/margenMini"
         android:layout_weight="30"
         android:layout_width="0dp"
         android:layout_height="@dimen/altoTarjeta">

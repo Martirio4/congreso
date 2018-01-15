@@ -34,16 +34,16 @@ public class ServiceLoco extends Service {
     public void onTaskRemoved(Intent rootIntent) {
         Log.e("ClearFromRecentService", "END");
 
-        Realm realm = Realm.getDefaultInstance();
-        final Auditoria mAuditDelete=realm.where(Auditoria.class)
-                .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
-                .findFirst();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                mAuditDelete.deleteFromRealm();
-            }
-        });
+//        Realm realm = Realm.getDefaultInstance();
+//        final Auditoria mAuditDelete=realm.where(Auditoria.class)
+//                .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
+//                .findFirst();
+//        realm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                mAuditDelete.deleteFromRealm();
+//            }
+//        });
 
         stopSelf();
     }

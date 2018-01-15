@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -31,16 +32,20 @@ import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.fragments.FragmentSubitem;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.model.Auditoria;
+import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.services.ServiceLoco;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
+import io.fabric.sdk.android.services.common.SafeToast;
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 
 public class ActivityAuditoria extends AppCompatActivity implements FragmentSubitem.Avisable{
@@ -302,10 +307,6 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
             }
         });
 
-
-
-
-
     }
     public String determinarFecha(){
         Calendar cal = Calendar.getInstance();
@@ -384,16 +385,39 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
                         Realm realm = Realm.getDefaultInstance();
-                        final Auditoria mAuditDelete=realm.where(Auditoria.class)
-                                .equalTo("idAuditoria", idAuditoria)
-                                .findFirst();
+
                         realm.executeTransaction(new Realm.Transaction() {
-                            @Override
-                            public void execute(Realm realm) {
-                                mAuditDelete.deleteFromRealm();
-                            }
-                        });
+                             @Override
+                             public void execute(Realm realm) {
+
+                                 String usuario = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                                 RealmResults<SubItem> Subitems = realm.where(SubItem.class)
+                                         .equalTo("auditoria", idAuditoria)
+                                         .findAll();
+                                 Subitems.deleteAllFromRealm();
+
+                                 RealmResults<Foto> fotos = realm.where(Foto.class)
+                                         .equalTo("auditoria", idAuditoria)
+                                         .findAll();
+                                 for (Foto foti : fotos
+                                         ) {
+                                     File file = new File(foti.getRutaFoto());
+                                     boolean deleted = file.delete();
+                                 }
+                                 fotos.deleteAllFromRealm();
+
+                                 Auditoria result2 = realm.where(Auditoria.class)
+                                         .equalTo("idAuditoria", idAuditoria)
+                                         .findFirst();
+
+                                 result2.deleteFromRealm();
+                             }
+                         });
+
+
                         ActivityAuditoria.this.finish();
                         ActivityAuditoria.super.onBackPressed();
                     }

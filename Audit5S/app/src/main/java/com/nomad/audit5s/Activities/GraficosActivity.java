@@ -11,10 +11,13 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +25,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.github.clans.fab.FloatingActionButton;
@@ -55,6 +60,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 public class GraficosActivity extends AppCompatActivity {
@@ -75,6 +81,7 @@ public class GraficosActivity extends AppCompatActivity {
     private FloatingActionButton fabGenerarPDF;
     private FloatingActionButton fabQuit;
     private FloatingActionButton fabVerAuditoria;
+    private FloatingActionButton fabBorrarAuditoria;
 
     private ProgressBar progressBar;
     private Double promedioSeiketsu;
@@ -93,6 +100,7 @@ public class GraficosActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     private SharedPreferences config;
+
 
 
     @Override
@@ -190,6 +198,53 @@ public class GraficosActivity extends AppCompatActivity {
             }
         });
 
+
+
+        fabBorrarAuditoria = new FloatingActionButton(this);
+        fabBorrarAuditoria.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
+        fabBorrarAuditoria.setButtonSize(FloatingActionButton.SIZE_MINI);
+        fabBorrarAuditoria.setLabelText(getString(R.string.deleteAudit));
+        fabBorrarAuditoria.setImageResource(R.drawable.ic_delete_forever_black_24dp);
+        fabMenuGraficos.addMenuButton(fabBorrarAuditoria);
+
+        fabBorrarAuditoria.setLabelColors(ContextCompat.getColor(this, R.color.tile3),
+                ContextCompat.getColor(this, R.color.light_grey),
+                ContextCompat.getColor(this, R.color.white_transparent));
+        fabBorrarAuditoria.setLabelTextColor(ContextCompat.getColor(this, R.color.black));
+
+        fabBorrarAuditoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                fabMenuGraficos.close(true);
+
+
+                new MaterialDialog.Builder(v.getContext())
+                        .title("Warning!")
+                        .title(getResources().getString(R.string.advertencia))
+                        .contentColor(ContextCompat.getColor(v.getContext(), R.color.primary_text))
+                        .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
+                        .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
+                        .content(getResources().getString(R.string.auditoriaSeEliminara)+"\n"+getResources().getString(R.string.continuar))
+                        .positiveText(getResources().getString(R.string.si))
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            borrarAuditoriaSeleccionada();
+                            }
+                        })
+                        .negativeText(getResources().getString(R.string.cancel))
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            }
+                        })
+                        .show();
+
+
+            }
+        });
+
         fabQuit = new FloatingActionButton(this);
         fabQuit.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
         fabQuit.setButtonSize(FloatingActionButton.SIZE_MINI);
@@ -206,11 +261,12 @@ public class GraficosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fabMenuGraficos.close(true);
-               Intent intent=new Intent(v.getContext(),ActivityLanding.class);
+                Intent intent=new Intent(v.getContext(),ActivityLanding.class);
                 startActivity(intent);
                 GraficosActivity.this.finish();
             }
         });
+
 
         config = getSharedPreferences("prefs",0);
         boolean quiereVerTuto = config.getBoolean("quiereVerTuto",false);
@@ -297,6 +353,7 @@ public class GraficosActivity extends AppCompatActivity {
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contenedorGraficos,graficoFragment,"radar");
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -309,6 +366,7 @@ public class GraficosActivity extends AppCompatActivity {
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contenedorGraficos,fragmentBarrasApiladas,"barras");
+        fragmentTransaction.addToBackStack(null);
        fragmentTransaction.commit();
     }
 
@@ -643,18 +701,16 @@ public class GraficosActivity extends AppCompatActivity {
     */
     public void outputToFile(String fileName, String pdfContent, String encoding) {
         if (existeDirectorio()) {
-            String pathe = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-            File newFile = new File(pathe+File.separator + "nomad" +File.separator+ "audit5s" + File.separator+"audits"+File.separator+fileName);
-            try {
-                newFile.createNewFile();
+            File newFile = new File(getExternalFilesDir(null)+ File.separator + "nomad" +File.separator+ "audit5s" + File.separator  + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator+"audits"+File.separator+fileName);
+
                 try {
                     FileOutputStream pdfFile = new FileOutputStream(newFile);
                     pdfFile.write(pdfContent.getBytes(encoding));
                     pdfFile.close();
+                    Uri path = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".my.package.name.provider",newFile);
 
-
-                    Uri path = Uri.fromFile(newFile);
+                    //Uri path = Uri.fromFile(newFile);
                     Intent emailIntent = new Intent(Intent.ACTION_SEND);
                     // set the type to 'email'
                     emailIntent.setType("vnd.android.cursor.dir/email");
@@ -666,9 +722,7 @@ public class GraficosActivity extends AppCompatActivity {
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.reporteAuditoria));
                     startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.enviarMail)));
 
-                } catch (FileNotFoundException e) {
-                    Log.e("NOMAD/ERROR", "exception", e);
-                }
+
             } catch (IOException e) {
                 Log.e("NOMAD/ERROR", "exception", e);
             }
@@ -680,7 +734,7 @@ public class GraficosActivity extends AppCompatActivity {
 
     private Boolean existeDirectorio() {
         Boolean sePudo=true;
-            File dir = new File(Environment.getExternalStorageDirectory()+ File.separator +"nomad"+ File.separator +"audit5s"+ File.separator + "audits");
+            File dir = new File(getExternalFilesDir(null)+ File.separator + "nomad" +File.separator+ "audit5s" + File.separator  + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator+"audits"+ File.separator);
             if (!dir.exists() || !dir.isDirectory()) {
                 sePudo = dir.mkdirs();
             }
@@ -998,6 +1052,43 @@ public class GraficosActivity extends AppCompatActivity {
         canvas.setMatrix(scaleMatrix);
         canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
         return scaledBitmap;
+    }
+
+    public void borrarAuditoriaSeleccionada(){
+        Realm realm = Realm.getDefaultInstance();
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+                String usuario = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                RealmResults<SubItem> Subitems = realm.where(SubItem.class)
+                        .equalTo("auditoria", idAudit)
+                        .findAll();
+                Subitems.deleteAllFromRealm();
+
+                RealmResults<Foto> fotos = realm.where(Foto.class)
+                        .equalTo("auditoria", idAudit)
+                        .findAll();
+                for (Foto foti : fotos
+                        ) {
+                    File file = new File(foti.getRutaFoto());
+                    boolean deleted = file.delete();
+                }
+                fotos.deleteAllFromRealm();
+
+                Auditoria result2 = realm.where(Auditoria.class)
+                        .equalTo("idAuditoria", idAudit)
+                        .findFirst();
+
+                result2.deleteFromRealm();
+            }
+        });
+
+        Intent intent= new Intent(GraficosActivity.this,ActivityMyAudits.class);
+        startActivity(intent);
+        GraficosActivity.this.finish();
     }
 }
 
