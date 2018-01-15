@@ -75,7 +75,6 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
         //borrar cache auditorias PDF
         File path = new File(getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator+FirebaseAuth.getInstance().getCurrentUser().getEmail()+File.separator+"audits");
         Boolean deleteDirectorio=deleteDirectory(path);
-        Toast.makeText(this, "es: "+deleteDirectorio, Toast.LENGTH_SHORT).show();
 
 
 

@@ -61,6 +61,7 @@ import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import pl.tajchert.nammu.Nammu;
 
 
 public class GraficosActivity extends AppCompatActivity {
@@ -733,8 +734,9 @@ public class GraficosActivity extends AppCompatActivity {
     }
 
     private Boolean existeDirectorio() {
+        Boolean hayPermit = Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         Boolean sePudo=true;
-            File dir = new File(getExternalFilesDir(null)+ File.separator + "nomad" +File.separator+ "audit5s" + File.separator  + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator+"audits"+ File.separator);
+            File dir = new File(getExternalFilesDir(null)+ File.separator + "nomad" +File.separator+ "audit5s" + File.separator  + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator+"audits");
             if (!dir.exists() || !dir.isDirectory()) {
                 sePudo = dir.mkdirs();
             }
