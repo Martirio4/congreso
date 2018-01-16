@@ -37,6 +37,7 @@ import com.nomad.audit5s.adapter.AdapterArea;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.utils.FuncionesPublicas;
 
 import java.io.File;
 import java.io.IOException;
@@ -170,52 +171,62 @@ public class FragmentManageAreas extends Fragment {
             public void onClick(final View v) {
 
 
+                if (FuncionesPublicas.isExternalStorageWritable()) {
+                    if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        fabMenuManage.close(true);
+                        EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
+                    }
+                    else {
+                        if (Nammu.shouldShowRequestPermissionRationale(FragmentManageAreas.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            //User already refused to give us this permission or removed it
+                            //Now he/she can mark "never ask again" (sic!)
+                            Snackbar.make(getView(), getResources().getString(R.string.appNecesitaPermiso),
+                                    Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
+                                @Override public void onClick(View view) {
+                                    Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                            new PermissionCallback() {
+                                                @Override
+                                                public void permissionGranted() {
+                                                    fabMenuManage.close(true);
+                                                    EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
+                                                }
 
-                if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    fabMenuManage.close(true);
-                    EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
+                                                @Override
+                                                public void permissionRefused() {
+                                                    Toast.makeText(getContext(), getResources().getString(R.string.permisoParaFotos), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            }).show();
+                        } else {
+                            //First time asking for permission
+                            // or phone doesn't offer permission
+                            // or user marked "never ask again"
+                            Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    new PermissionCallback() {
+                                        @Override
+                                        public void permissionGranted() {
+                                            fabMenuManage.close(true);
+                                            EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
+                                        }
+
+                                        @Override
+                                        public void permissionRefused() {
+                                            Toast.makeText(getContext(), getResources().getString(R.string.permisoParaFotos), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                        }
+                    }
                 }
                 else {
-                    if (Nammu.shouldShowRequestPermissionRationale(FragmentManageAreas.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        //User already refused to give us this permission or removed it
-                        //Now he/she can mark "never ask again" (sic!)
-                        Snackbar.make(getView(), getResources().getString(R.string.appNecesitaPermiso),
-                                Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
-                            @Override public void onClick(View view) {
-                                Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                        new PermissionCallback() {
-                                            @Override
-                                            public void permissionGranted() {
-                                                fabMenuManage.close(true);
-                                                EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
-                                            }
-
-                                            @Override
-                                            public void permissionRefused() {
-                                                Toast.makeText(getContext(), getResources().getString(R.string.permisoParaFotos), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        }).show();
-                    } else {
-                        //First time asking for permission
-                        // or phone doesn't offer permission
-                        // or user marked "never ask again"
-                        Nammu.askForPermission(FragmentManageAreas.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                new PermissionCallback() {
-                                    @Override
-                                    public void permissionGranted() {
-                                        fabMenuManage.close(true);
-                                        EasyImage.openChooserWithGallery(FragmentManageAreas.this, getResources().getString(R.string.seleccionaImagen), 1);
-                                    }
-
-                                    @Override
-                                    public void permissionRefused() {
-                                        Toast.makeText(getContext(), getResources().getString(R.string.permisoParaFotos), Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                    }
+                    new MaterialDialog.Builder(getContext())
+                            .title(getResources().getString(R.string.titNoMemoria))
+                            .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
+                            .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
+                            .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                            .content(getResources().getString(R.string.noMemoria))
+                           .show();
                 }
             }
         });
@@ -360,17 +371,12 @@ public class FragmentManageAreas extends Fragment {
         });
     }
     public void existeDirectorioImagenesAreas() {
+
         Boolean sePudo = true;
         File dir = new File(getContext().getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator +FirebaseAuth.getInstance().getCurrentUser().getEmail()+ File.separator + "images" + File.separator + "areas");
         if (!dir.exists() || !dir.isDirectory()) {
             sePudo = dir.mkdirs();
         }
-        if (sePudo) {
-
-        } else {
-            Toast.makeText(getContext(), getResources().getString(R.string.noSeCreoDirectorio), Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     public void crearDialogoNombreArea(final Foto unaFoto){

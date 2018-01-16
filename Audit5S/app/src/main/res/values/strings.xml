@@ -360,6 +360,8 @@ Even in other areas that they frequent or work.
     <string name="tutorial_desc_search">Click here to browse your audits.</string>
     <string name="deleteAudit">Delete audit</string>
     <string name="auditoriaSeEliminara">The audit will be deleted.</string>
+    <string name="titNoMemoria">No storage found</string>
+    <string name="noMemoria">Storage unavailable. Please insert an SD card or disconnect your device from computer.</string>
 
 
 </resources>
