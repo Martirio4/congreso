@@ -348,10 +348,6 @@ public class FragmentSubitem extends Fragment {
             public void onClick(View v) {
                 //--guardar auditoria en firebase--//
 
-
-
-
-
                 fabMenu.close(true);
                completoTodosLosPuntos();
 
@@ -379,28 +375,23 @@ public class FragmentSubitem extends Fragment {
                         .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
                         .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
                         .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
-                        .content(getResources().getString(R.string.auditoriaSinTerminar)+"\n"+getResources().getString(R.string.continuar))
+                        .content(getResources().getString(R.string.auditoriaSinTerminar)+"\n"+getResources().getString(R.string.guardardar))
                         .positiveText(getResources().getString(R.string.si))
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                avisable.salirDeAca();
+                            }
+                        })
+                        .negativeText(getResources().getString(R.string.no))
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
                                 FuncionesPublicas.borrarAuditoriaSeleccionada(ActivityAuditoria.idAuditoria);
                                 //aca lo que pasa si voy para atras
                                 fabMenu.close(true);
                                 avisable.salirDeAca();
-                            }
-                        })
-                        .negativeText(getResources().getString(R.string.cancel))
-                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-                            }
-                        })
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                avisable.cerrarAuditoria();
                             }
                         })
                         .show();
@@ -560,7 +551,7 @@ public class FragmentSubitem extends Fragment {
 
         for (SubItem unSub:result2
              ) {
-            if (unSub.getPuntuacion1()==null){
+            if (unSub.getPuntuacion1()==null||unSub.getPuntuacion1()==0){
                 unaLista.add(unSub.getId());
             }
             if (unSub.getListaFotos()!=null&& unSub.getListaFotos().size()>0){

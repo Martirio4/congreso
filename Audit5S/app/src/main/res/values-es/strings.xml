@@ -609,5 +609,6 @@
     <string name="titNoMemoria">No storage found</string>
     <string name="noMemoria">Storage unavailable. Please insert an SD card or disconnect your device from computer.</string>
     <string name="tutorial_tit_tuto">Tutorial</string>
+    <string name="guardardar">Desea guardar antes de salir?</string>
 
 </resources>

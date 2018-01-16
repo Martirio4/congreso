@@ -77,6 +77,7 @@ public class ControllerDatos  {
         RealmList<SubItem>unaLista=new RealmList<>();
         
         SubItem subItem1=new SubItem();
+        subItem1.setPuntuacion1(0);
         subItem1.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem1.setId("1S 1");
         subItem1.setaQuePertenece(context.getResources().getString(R.string.seiriSeiri));
@@ -89,6 +90,7 @@ public class ControllerDatos  {
         unaLista.add(subItem1);
 
         SubItem subItem12=new SubItem();
+        subItem12.setPuntuacion1(0);
         subItem12.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem12.setId("1S 2");
         subItem12.setaQuePertenece(context.getResources().getString(R.string.seiriSeiri));
@@ -101,6 +103,7 @@ public class ControllerDatos  {
         unaLista.add(subItem12);
 
         SubItem subItem13=new SubItem();
+        subItem13.setPuntuacion1(0);
         subItem13.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem13.setId("1S 3");
         subItem13.setaQuePertenece(context.getResources().getString(R.string.seiriSeiri));
@@ -113,6 +116,7 @@ public class ControllerDatos  {
         unaLista.add(subItem13);
 
         SubItem subItem14=new SubItem();
+        subItem14.setPuntuacion1(0);
         subItem14.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem14.setId("1S 4");
         subItem14.setaQuePertenece(context.getResources().getString(R.string.seiriSeiri));
@@ -125,6 +129,7 @@ public class ControllerDatos  {
         unaLista.add(subItem14);
 
         SubItem subItem21=new SubItem();
+        subItem21.setPuntuacion1(0);
         subItem21.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem21.setId("2S 1");
         subItem21.setaQuePertenece(context.getResources().getString(R.string.seitonSeiton));
@@ -137,6 +142,7 @@ public class ControllerDatos  {
         unaLista.add(subItem21);
 
         SubItem subItem22=new SubItem();
+        subItem22.setPuntuacion1(0);
         subItem22.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem22.setId("2S 2");
         subItem22.setaQuePertenece(context.getResources().getString(R.string.seitonSeiton));
@@ -149,6 +155,7 @@ public class ControllerDatos  {
         unaLista.add(subItem22);
 
         SubItem subItem23=new SubItem();
+        subItem23.setPuntuacion1(0);
         subItem23.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem23.setId("2S 3");
         subItem23.setaQuePertenece(context.getResources().getString(R.string.seitonSeiton));
@@ -161,6 +168,7 @@ public class ControllerDatos  {
         unaLista.add(subItem23);
 
         SubItem subItem24=new SubItem();
+        subItem24.setPuntuacion1(0);
         subItem24.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem24.setId("2S 4");
         subItem24.setaQuePertenece(context.getResources().getString(R.string.seitonSeiton));
@@ -173,6 +181,7 @@ public class ControllerDatos  {
         unaLista.add(subItem24);
 
         SubItem subItem31=new SubItem();
+        subItem31.setPuntuacion1(0);
         subItem31.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem31.setId("3S 1");
         subItem31.setaQuePertenece(context.getResources().getString(R.string.seisoSeiso));
@@ -185,6 +194,7 @@ public class ControllerDatos  {
         unaLista.add(subItem31);
 
         SubItem subItem32=new SubItem();
+        subItem32.setPuntuacion1(0);
         subItem32.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem32.setId("3S 2");
         subItem32.setaQuePertenece(context.getResources().getString(R.string.seisoSeiso));
@@ -197,6 +207,7 @@ public class ControllerDatos  {
         unaLista.add(subItem32);
 
         SubItem subItem33=new SubItem();
+        subItem33.setPuntuacion1(0);
         subItem33.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem33.setId("3S 3");
         subItem33.setaQuePertenece(context.getResources().getString(R.string.seisoSeiso));
@@ -209,6 +220,7 @@ public class ControllerDatos  {
         unaLista.add(subItem33);
 
         SubItem subItem34=new SubItem();
+        subItem34.setPuntuacion1(0);
         subItem34.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem34.setId("3S 4");
         subItem34.setaQuePertenece(context.getResources().getString(R.string.seisoSeiso));
@@ -222,6 +234,7 @@ public class ControllerDatos  {
 
 
         SubItem subItem41=new SubItem();
+        subItem41.setPuntuacion1(0);
         subItem41.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem41.setId("4S 1");
         subItem41.setaQuePertenece(context.getResources().getString(R.string.seiketsuSeiketsu));
@@ -235,6 +248,7 @@ public class ControllerDatos  {
 
 
         SubItem subItem42=new SubItem();
+        subItem42.setPuntuacion1(0);
         subItem42.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem42.setId("4S 2");
         subItem42.setaQuePertenece(context.getResources().getString(R.string.seiketsuSeiketsu));
@@ -247,6 +261,7 @@ public class ControllerDatos  {
         unaLista.add(subItem42);
 
         SubItem subItem43=new SubItem();
+        subItem43.setPuntuacion1(0);
         subItem43.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem43.setId("4S 3");
         subItem43.setaQuePertenece(context.getResources().getString(R.string.seiketsuSeiketsu));
@@ -259,6 +274,7 @@ public class ControllerDatos  {
         unaLista.add(subItem43);
 
         SubItem subItem44=new SubItem();
+        subItem44.setPuntuacion1(0);
         subItem44.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem44.setId("4S 4");
         subItem44.setaQuePertenece(context.getResources().getString(R.string.seiketsuSeiketsu));
@@ -271,6 +287,7 @@ public class ControllerDatos  {
         unaLista.add(subItem44);
 
         SubItem subItem51=new SubItem();
+        subItem51.setPuntuacion1(0);
         subItem51.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem51.setId("5S 1");
         subItem51.setaQuePertenece(context.getResources().getString(R.string.shitsukeShitsuke));
@@ -283,6 +300,7 @@ public class ControllerDatos  {
         unaLista.add(subItem51);
 
         SubItem subItem52=new SubItem();
+        subItem52.setPuntuacion1(0);
         subItem52.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem52.setId("5S 2");
         subItem52.setaQuePertenece(context.getResources().getString(R.string.shitsukeShitsuke));
@@ -295,6 +313,7 @@ public class ControllerDatos  {
         unaLista.add(subItem52);
 
         SubItem subItem53=new SubItem();
+        subItem53.setPuntuacion1(0);
         subItem53.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem53.setId("5S 3");
         subItem53.setaQuePertenece(context.getResources().getString(R.string.shitsukeShitsuke));
@@ -307,6 +326,7 @@ public class ControllerDatos  {
         unaLista.add(subItem53);
 
         SubItem subItem54=new SubItem();
+        subItem54.setPuntuacion1(0);
         subItem54.setAuditoria(ActivityAuditoria.idAuditoria);
         subItem54.setId("5S 4");
         subItem54.setaQuePertenece(context.getResources().getString(R.string.shitsukeShitsuke));
