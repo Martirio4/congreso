@@ -225,6 +225,7 @@ public class FragmentManageAreas extends Fragment {
                             .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
                             .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
                             .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                            .positiveText(getResources().getString(R.string.ok))
                             .content(getResources().getString(R.string.noMemoria))
                            .show();
                 }

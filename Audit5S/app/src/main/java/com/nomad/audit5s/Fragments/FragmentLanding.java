@@ -99,9 +99,9 @@ public class FragmentLanding extends Fragment {
         };
         View.OnClickListener listener2 = new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), SettingsActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+              Intent intent = new Intent(v.getContext(), SettingsActivity.class);
+              startActivity(intent);
             }
         };
         View.OnClickListener listener3 = new View.OnClickListener() {
@@ -115,7 +115,7 @@ public class FragmentLanding extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent send = new Intent(Intent.ACTION_SENDTO);
-                String uriText = "mailto:" + Uri.encode("risomartin@gmail.com") +
+                String uriText = "mailto:" + Uri.encode("contacto@benomad.com.ar") +
                         "?subject=" + Uri.encode(getResources().getString(R.string.quieroReportar)) +
                         "&body=" + Uri.encode(getResources().getString(R.string.textoIssue));
                 Uri uri = Uri.parse(uriText);

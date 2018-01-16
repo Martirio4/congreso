@@ -35,6 +35,7 @@ import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.model.Foto;
+import com.nomad.audit5s.utils.FuncionesPublicas;
 
 import java.io.File;
 
@@ -73,10 +74,11 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
         Nammu.init(getApplicationContext());
 
         //borrar cache auditorias PDF
-        File path = new File(getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator+FirebaseAuth.getInstance().getCurrentUser().getEmail()+File.separator+"audits");
-        Boolean deleteDirectorio=deleteDirectory(path);
 
-
+        if (FuncionesPublicas.isExternalStorageWritable()) {
+            File path = new File(getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator+FirebaseAuth.getInstance().getCurrentUser().getEmail()+File.separator+"audits");
+            Boolean deleteDirectorio=deleteDirectory(path);
+        }
 
         lanzarLandingFragment();
         /*

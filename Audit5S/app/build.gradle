@@ -8,8 +8,8 @@ android {
         applicationId "com.nomad.audit5s"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 7
-        versionName "1.10.10"
+        versionCode 8
+        versionName "1.20.00"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }

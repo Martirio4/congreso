@@ -46,6 +46,7 @@ import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.utils.FuncionesPublicas;
 import com.nomad.mylibrary.PDFWriter;
 import com.nomad.mylibrary.PaperSize;
 import com.nomad.mylibrary.StandardFonts;
@@ -62,6 +63,8 @@ import java.util.Locale;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import pl.tajchert.nammu.Nammu;
+
+import static com.nomad.audit5s.utils.FuncionesPublicas.borrarAuditoriaSeleccionada;
 
 
 public class GraficosActivity extends AppCompatActivity {
@@ -194,8 +197,19 @@ public class GraficosActivity extends AppCompatActivity {
         fabGenerarPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fabMenuGraficos.close(true);
-                new EnviarPDF().execute();
+                if (FuncionesPublicas.isExternalStorageWritable()) {
+                    fabMenuGraficos.close(true);
+                    new EnviarPDF().execute();
+                } else {
+                    new MaterialDialog.Builder(v.getContext())
+                            .title(getResources().getString(R.string.titNoMemoria))
+                            .contentColor(ContextCompat.getColor(v.getContext(), R.color.primary_text))
+                            .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
+                            .positiveText(getResources().getString(R.string.ok))
+                            .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
+                            .content(getResources().getString(R.string.noMemoria))
+                            .show();
+                }
             }
         });
 
@@ -231,7 +245,11 @@ public class GraficosActivity extends AppCompatActivity {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            borrarAuditoriaSeleccionada();
+                            if (FuncionesPublicas.borrarAuditoriaSeleccionada(idAudit)){
+                                Intent intent= new Intent(GraficosActivity.this,ActivityMyAudits.class);
+                                startActivity(intent);
+                                GraficosActivity.this.finish();
+                            }
                             }
                         })
                         .negativeText(getResources().getString(R.string.cancel))
@@ -1056,41 +1074,6 @@ public class GraficosActivity extends AppCompatActivity {
         return scaledBitmap;
     }
 
-    public void borrarAuditoriaSeleccionada(){
-        Realm realm = Realm.getDefaultInstance();
 
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-
-                String usuario = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-                RealmResults<SubItem> Subitems = realm.where(SubItem.class)
-                        .equalTo("auditoria", idAudit)
-                        .findAll();
-                Subitems.deleteAllFromRealm();
-
-                RealmResults<Foto> fotos = realm.where(Foto.class)
-                        .equalTo("auditoria", idAudit)
-                        .findAll();
-                for (Foto foti : fotos
-                        ) {
-                    File file = new File(foti.getRutaFoto());
-                    boolean deleted = file.delete();
-                }
-                fotos.deleteAllFromRealm();
-
-                Auditoria result2 = realm.where(Auditoria.class)
-                        .equalTo("idAuditoria", idAudit)
-                        .findFirst();
-
-                result2.deleteFromRealm();
-            }
-        });
-
-        Intent intent= new Intent(GraficosActivity.this,ActivityMyAudits.class);
-        startActivity(intent);
-        GraficosActivity.this.finish();
-    }
 }
 

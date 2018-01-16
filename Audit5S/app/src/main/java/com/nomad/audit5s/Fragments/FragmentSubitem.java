@@ -47,6 +47,7 @@ import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.utils.FuncionesPublicas;
 
 import java.io.File;
 import java.io.IOException;
@@ -267,51 +268,63 @@ public class FragmentSubitem extends Fragment {
         fabCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    fabMenu.close(true);
-                    EasyImage.openCamera(FragmentSubitem.this, 1);
+                if (FuncionesPublicas.isExternalStorageWritable()) {
+                    if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        fabMenu.close(true);
+                        EasyImage.openCamera(FragmentSubitem.this, 1);
+                    }
+                    else {
+                        if (Nammu.shouldShowRequestPermissionRationale(FragmentSubitem.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            //User already refused to give us this permission or removed it
+                            //Now he/she can mark "never ask again" (sic!)
+                            Snackbar.make(getView(), getResources().getString(R.string.appNecesitaPermiso),
+                                    Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
+                                @Override public void onClick(View view) {
+                                    Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                            new PermissionCallback() {
+                                                @Override
+                                                public void permissionGranted() {
+                                                    fabMenu.close(true);
+                                                    EasyImage.openCamera(FragmentSubitem.this, 1);
+                                                }
+
+                                                @Override
+                                                public void permissionRefused() {
+                                                    Toast.makeText(getContext(), getResources().getString(R.string.damePermiso), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            }).show();
+                        } else {
+                            //First time asking for permission
+                            // or phone doesn't offer permission
+                            // or user marked "never ask again"
+                            Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    new PermissionCallback() {
+                                        @Override
+                                        public void permissionGranted() {
+                                            fabMenu.close(true);
+                                            EasyImage.openCamera(FragmentSubitem.this, 1);
+                                        }
+
+                                        @Override
+                                        public void permissionRefused() {
+                                            Toast.makeText(getContext(), getResources().getString(R.string.damePermiso), Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                        }
+                    }
                 }
                 else {
-                    if (Nammu.shouldShowRequestPermissionRationale(FragmentSubitem.this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        //User already refused to give us this permission or removed it
-                        //Now he/she can mark "never ask again" (sic!)
-                        Snackbar.make(getView(), getResources().getString(R.string.appNecesitaPermiso),
-                                Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
-                            @Override public void onClick(View view) {
-                                Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                        new PermissionCallback() {
-                                            @Override
-                                            public void permissionGranted() {
-                                                fabMenu.close(true);
-                                                EasyImage.openCamera(FragmentSubitem.this, 1);
-                                            }
-
-                                            @Override
-                                            public void permissionRefused() {
-                                                Toast.makeText(getContext(), getResources().getString(R.string.damePermiso), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                            }
-                        }).show();
-                    } else {
-                        //First time asking for permission
-                        // or phone doesn't offer permission
-                        // or user marked "never ask again"
-                        Nammu.askForPermission(FragmentSubitem.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                new PermissionCallback() {
-                                    @Override
-                                    public void permissionGranted() {
-                                        fabMenu.close(true);
-                                        EasyImage.openCamera(FragmentSubitem.this, 1);
-                                    }
-
-                                    @Override
-                                    public void permissionRefused() {
-                                        Toast.makeText(getContext(), getResources().getString(R.string.damePermiso), Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                    }
+                    new MaterialDialog.Builder(getContext())
+                            .title(getResources().getString(R.string.titNoMemoria))
+                            .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
+                            .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
+                            .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                            .content(getResources().getString(R.string.noMemoria))
+                            .positiveText(getResources().getString(R.string.ok))
+                            .show();
                 }
             }
         });
@@ -340,9 +353,7 @@ public class FragmentSubitem extends Fragment {
 
 
                 fabMenu.close(true);
-               if(completoTodosLosPuntos()){
-                avisable.cerrarAuditoria();
-               }
+               completoTodosLosPuntos();
 
             }
         });
@@ -373,26 +384,23 @@ public class FragmentSubitem extends Fragment {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                Realm realm = Realm.getDefaultInstance();
-                                final Auditoria mAuditDelete=realm.where(Auditoria.class)
-                                        .equalTo("idAuditoria", ActivityAuditoria.idAuditoria)
-                                        .findFirst();
-                                realm.executeTransaction(new Realm.Transaction() {
-                                    @Override
-                                    public void execute(Realm realm) {
-                                        mAuditDelete.deleteFromRealm();
-                                    }
-                                });
+                                FuncionesPublicas.borrarAuditoriaSeleccionada(ActivityAuditoria.idAuditoria);
                                 //aca lo que pasa si voy para atras
                                 fabMenu.close(true);
                                 avisable.salirDeAca();
                             }
                         })
                         .negativeText(getResources().getString(R.string.cancel))
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
+                            }
+                        })
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                avisable.cerrarAuditoria();
                             }
                         })
                         .show();
@@ -541,7 +549,7 @@ public class FragmentSubitem extends Fragment {
         }
     }
 
-    private Boolean completoTodosLosPuntos() {
+    private void completoTodosLosPuntos() {
         Integer cantFotos=0;
         Realm realm = Realm.getDefaultInstance();
         RealmResults<SubItem> result2 = realm.where(SubItem.class)
@@ -560,13 +568,32 @@ public class FragmentSubitem extends Fragment {
             }
         };
         if (unaLista.size()>0){
-            Toast.makeText(getContext(), getResources().getString(R.string.completarItemFaltante)+unaLista.toString(), Toast.LENGTH_SHORT).show();
-            return false;
+            new MaterialDialog.Builder(getContext())
+                    .title("Warning!")
+                    .title(getResources().getString(R.string.advertencia))
+                    .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
+                    .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
+                    .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
+                    .content(getResources().getString(R.string.auditoriaSinTerminar)+"\n"+getResources().getString(R.string.continuar))
+                    .positiveText(getResources().getString(R.string.si))
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            avisable.cerrarAuditoria();
+                        }
+                    })
+                    .negativeText(getResources().getString(R.string.cancel))
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        }
+                    })
+                    .show();
         }
         else{
             sumarAuditoriaFirebase();
             registrarCantidadFotosFirebase(cantFotos);
-            return true;
+            avisable.cerrarAuditoria();
         }
     }
 
