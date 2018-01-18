@@ -102,4 +102,5 @@ public class FragmentRanking extends Fragment {
         super.onAttach(context);
         this.graficable=(Graficable)context;
     }
+
 }

@@ -2,6 +2,8 @@ package com.nomad.audit5s.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -11,22 +13,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.controller.ControllerDatos;
 import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
+import com.nomad.audit5s.utils.FuncionesPublicas;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.NumberFormat;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
+
+import static io.fabric.sdk.android.services.network.HttpRequest.post;
 
 /**
  * Created by elmar on 18/5/2017.
@@ -39,6 +50,7 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
     private RealmList<Auditoria> listaAuditoriasFavoritos;
     private View.OnClickListener listener;
     private AdapterView.OnLongClickListener listenerLong;
+    private String idAuditoria=null;
 
 
     public void setLongListener(View.OnLongClickListener unLongListener) {
@@ -80,10 +92,31 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final Auditoria unAuditoria = listaAuditsOriginales.get(position);
         AuditoriaViewHolder auditoriasViewHolder = (AuditoriaViewHolder) holder;
         auditoriasViewHolder.cargarAuditoria(unAuditoria);
+        ((AuditoriaViewHolder) holder).botonEliminarAuditoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialDialog.Builder(view.getContext())
+                        .contentColor(ContextCompat.getColor(view.getContext(), R.color.primary_text))
+                        .titleColor(ContextCompat.getColor(view.getContext(), R.color.tile4))
+                        .title(R.string.advertencia)
+                        .content(R.string.auditoriaSeEliminara)
+                        .positiveText(R.string.continuar)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                listaAuditsOriginales.remove(position);
+                                FuncionesPublicas.borrarAuditoriaSeleccionada(unAuditoria.getIdAuditoria());
+                                AdapterAuditorias.this.notifyDataSetChanged();
+                            }
+                        })
+                        .negativeText(R.string.cancel)
+                        .show();
+            }
+        });
     }
 
     @Override
@@ -125,6 +158,7 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
         private TextView tag5s;
 
         private CardView tarjetaPutaje;
+        private ImageButton botonEliminarAuditoria;
 
 
 
@@ -152,6 +186,7 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
             text5s = (TextView) itemView.findViewById(R.id.puntaje5s);
             tag4s=(TextView)itemView.findViewById(R.id.tagPuntaje4s);
             tag5s=(TextView)itemView.findViewById(R.id.tagPuntaje5s);
+            botonEliminarAuditoria = (ImageButton) itemView.findViewById(R.id.botonEliminarAuditoria);
 
 
             tag1s.setTypeface(roboto);
@@ -172,99 +207,102 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
 
         public void cargarAuditoria(Auditoria unAuditoria) {
 
-            //COMIENZA CALCULO PUNTAJES
-            if (unAuditoria.getIdAuditoria()!=null && !unAuditoria.getIdAuditoria().isEmpty()) {
-                ControllerDatos controllerDatos=new ControllerDatos(context);
-                List<String> listaSeiri=controllerDatos.traerSeiri();
-                List<String>listaSeiton=controllerDatos.traerSeiton();
-                List<String>listaSeiso=controllerDatos.traerSeiso();
-                List<String>listaSeiketsu=controllerDatos.traerSeiketsu();
-                List<String>listaShitsuke=controllerDatos.traerShitsuke();
 
-                Realm realm = Realm.getDefaultInstance();
+                //COMIENZA CALCULO PUNTAJES
+                if (unAuditoria.getIdAuditoria()!=null && !unAuditoria.getIdAuditoria().isEmpty()) {
+                    ControllerDatos controllerDatos=new ControllerDatos(context);
+                    List<String> listaSeiri=controllerDatos.traerSeiri();
+                    List<String>listaSeiton=controllerDatos.traerSeiton();
+                    List<String>listaSeiso=controllerDatos.traerSeiso();
+                    List<String>listaSeiketsu=controllerDatos.traerSeiketsu();
+                    List<String>listaShitsuke=controllerDatos.traerShitsuke();
 
-                Integer sumaSeiri=0;
-                Integer sumaSeiton =0;
-                Integer sumaSeiso=0;
-                Integer sumaSeiketsu=0;
-                Integer sumaShitsuke=0;
+                    Realm realm = Realm.getDefaultInstance();
 
-                for (SubItem sub:unAuditoria.getSubItems()
-                     ) {
-                    if (sub.getId().equals("1S 1")||sub.getId().equals("1S 2")||sub.getId().equals("1S 3")||sub.getId().equals("1S 4")){
-                        if (sub.getPuntuacion1()!=null) {
-                            sumaSeiri = sumaSeiri + sub.getPuntuacion1();
+                    Integer sumaSeiri=0;
+                    Integer sumaSeiton =0;
+                    Integer sumaSeiso=0;
+                    Integer sumaSeiketsu=0;
+                    Integer sumaShitsuke=0;
+
+                    for (SubItem sub:unAuditoria.getSubItems()
+                         ) {
+                        if (sub.getId().equals("1S 1")||sub.getId().equals("1S 2")||sub.getId().equals("1S 3")||sub.getId().equals("1S 4")){
+                            if (sub.getPuntuacion1()!=null) {
+                                sumaSeiri = sumaSeiri + sub.getPuntuacion1();
+                            }
+                        }
+                        if (sub.getId().equals("2S 1")||sub.getId().equals("2S 2")||sub.getId().equals("2S 3")||sub.getId().equals("2S 4")) {
+                            if (sub.getPuntuacion1()!=null) {
+                                sumaSeiton = sumaSeiton + sub.getPuntuacion1();
+                            }
+                        }
+                        if (sub.getId().equals("3S 1")||sub.getId().equals("3S 2")||sub.getId().equals("3S 3")||sub.getId().equals("3S 4")) {
+                            if (sub.getPuntuacion1()!=null) {
+                                sumaSeiso = sumaSeiso + sub.getPuntuacion1();
+                            }
+                        }
+                        if (sub.getId().equals("4S 1")||sub.getId().equals("4S 2")||sub.getId().equals("4S 3")||sub.getId().equals("4S 4")) {
+                            if (sub.getPuntuacion1()!=null) {
+                                sumaSeiketsu = sumaSeiketsu + sub.getPuntuacion1();
+                            }
+                        }
+                        if (sub.getId().equals("5S 1")||sub.getId().equals("5S 2")||sub.getId().equals("5S 3")||sub.getId().equals("5S 4")) {
+                            if (sub.getPuntuacion1()!=null) {
+                                sumaShitsuke = sumaShitsuke + sub.getPuntuacion1();
+                            }
                         }
                     }
-                    if (sub.getId().equals("2S 1")||sub.getId().equals("2S 2")||sub.getId().equals("2S 3")||sub.getId().equals("2S 4")) {
-                        if (sub.getPuntuacion1()!=null) {
-                            sumaSeiton = sumaSeiton + sub.getPuntuacion1();
-                        }
-                    }
-                    if (sub.getId().equals("3S 1")||sub.getId().equals("3S 2")||sub.getId().equals("3S 3")||sub.getId().equals("3S 4")) {
-                        if (sub.getPuntuacion1()!=null) {
-                            sumaSeiso = sumaSeiso + sub.getPuntuacion1();
-                        }
-                    }
-                    if (sub.getId().equals("4S 1")||sub.getId().equals("4S 2")||sub.getId().equals("4S 3")||sub.getId().equals("4S 4")) {
-                        if (sub.getPuntuacion1()!=null) {
-                            sumaSeiketsu = sumaSeiketsu + sub.getPuntuacion1();
-                        }
-                    }
-                    if (sub.getId().equals("5S 1")||sub.getId().equals("5S 2")||sub.getId().equals("5S 3")||sub.getId().equals("5S 4")) {
-                        if (sub.getPuntuacion1()!=null) {
-                            sumaShitsuke = sumaShitsuke + sub.getPuntuacion1();
-                        }
-                    }
-                }
 
-                Double promedioSeiri=((sumaSeiri/4.0)/5.0);
-                Double promedioSeiton=((sumaSeiton /4.0)/5.0);
-                Double promedioSeiso=((sumaSeiso/4.0)/5.0);
-                Double promedioSeiketsu=((sumaSeiketsu/4.0)/5.0);
-                Double promedioShitsuke=((sumaShitsuke/4.0)/5.0);
-                Double promedio5s =((promedioSeiso+promedioSeiri+promedioSeiton+promedioSeiketsu+promedioShitsuke)/5);
-                //FIN CALCULO PUNTAJES
+                    Double promedioSeiri=((sumaSeiri/4.0)/5.0);
+                    Double promedioSeiton=((sumaSeiton /4.0)/5.0);
+                    Double promedioSeiso=((sumaSeiso/4.0)/5.0);
+                    Double promedioSeiketsu=((sumaSeiketsu/4.0)/5.0);
+                    Double promedioShitsuke=((sumaShitsuke/4.0)/5.0);
+                    Double promedio5s =((promedioSeiso+promedioSeiri+promedioSeiton+promedioSeiketsu+promedioShitsuke)/5);
+                    //FIN CALCULO PUNTAJES
 
-                if (promedio5s <=0.5f){
-                    tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaRojo));
-                }
-                else{
-                    if (promedio5s <0.8f){
-                        tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaAmarillo));
+                    if (promedio5s <=0.5f){
+                        tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context, R.color.semaRojo));
                     }
                     else{
-                        tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaVerde));
+                        if (promedio5s <0.8f){
+                            tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaAmarillo));
+                        }
+                        else{
+                            tarjetaPutaje.setBackgroundColor(ContextCompat.getColor(context,R.color.semaVerde));
+                        }
                     }
+
+
+                    Locale locale = new Locale("en","US");
+                    NumberFormat format = NumberFormat.getPercentInstance(locale);
+                    String percentage1 = format.format(promedioSeiri);
+                    String percentage2 = format.format(promedioSeiton);
+                    String percentage3 = format.format(promedioSeiso);
+                    String percentage4 = format.format(promedioSeiketsu);
+                    String percentage5 = format.format(promedioShitsuke);
+                    String percentage6 = format.format(promedio5s);
+
+                    text1s.setText(percentage1);
+                    text2s.setText(percentage2);
+                    text3s.setText(percentage3);
+                    text4s.setText(percentage4);
+                    text5s.setText(percentage5);
+                    textFinal.setText(percentage6);
+                    textFecha.setText(unAuditoria.getFechaAuditoria());
+                    textFoto.setText(unAuditoria.getAreaAuditada().getNombreArea());
+
+                    File f =new File(unAuditoria.getAreaAuditada().getFotoArea().getRutaFoto());
+                    Picasso.with(imageView.getContext())
+                            .load(f)
+                            .into(imageView);
                 }
 
-
-                Locale locale = new Locale("en","US");
-                NumberFormat format = NumberFormat.getPercentInstance(locale);
-                String percentage1 = format.format(promedioSeiri);
-                String percentage2 = format.format(promedioSeiton);
-                String percentage3 = format.format(promedioSeiso);
-                String percentage4 = format.format(promedioSeiketsu);
-                String percentage5 = format.format(promedioShitsuke);
-                String percentage6 = format.format(promedio5s);
-
-                text1s.setText(percentage1);
-                text2s.setText(percentage2);
-                text3s.setText(percentage3);
-                text4s.setText(percentage4);
-                text5s.setText(percentage5);
-                textFinal.setText(percentage6);
-                textFecha.setText(unAuditoria.getFechaAuditoria());
-                textFoto.setText(unAuditoria.getAreaAuditada().getNombreArea());
-
-                File f =new File(unAuditoria.getAreaAuditada().getFotoArea().getRutaFoto());
-                Picasso.with(imageView.getContext())
-                        .load(f)
-                        .into(imageView);
-            }
 
         }
     }
+
 
 
 }

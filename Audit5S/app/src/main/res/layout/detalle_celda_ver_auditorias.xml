@@ -45,9 +45,9 @@
 
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
-        android:layout_marginBottom="@dimen/margenChico"
+        android:layout_marginBottom="@dimen/margenMini"
         android:layout_weight="40"
-        android:layout_margin="@dimen/margenMini"
+       android:layout_marginTop="@dimen/margenMini"
         android:layout_width="0dp"
         android:layout_height="@dimen/altoTarjeta">
 
@@ -234,5 +234,12 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+    <ImageButton
+        android:background="@android:color/transparent"
+        android:id="@+id/botonEliminarAuditoria"
+        android:src="@drawable/exitmedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
