@@ -216,13 +216,13 @@ public class GraficosActivity extends AppCompatActivity {
 
 
         fabBorrarAuditoria = new FloatingActionButton(this);
-        fabBorrarAuditoria.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
+        fabBorrarAuditoria.setColorNormal(ContextCompat.getColor(this, R.color.semaRojo));
         fabBorrarAuditoria.setButtonSize(FloatingActionButton.SIZE_MINI);
         fabBorrarAuditoria.setLabelText(getString(R.string.deleteAudit));
         fabBorrarAuditoria.setImageResource(R.drawable.ic_delete_forever_black_24dp);
         fabMenuGraficos.addMenuButton(fabBorrarAuditoria);
 
-        fabBorrarAuditoria.setLabelColors(ContextCompat.getColor(this, R.color.tile3),
+        fabBorrarAuditoria.setLabelColors(ContextCompat.getColor(this, R.color.semaRojo),
                 ContextCompat.getColor(this, R.color.light_grey),
                 ContextCompat.getColor(this, R.color.white_transparent));
         fabBorrarAuditoria.setLabelTextColor(ContextCompat.getColor(this, R.color.black));

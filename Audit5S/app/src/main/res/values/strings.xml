@@ -304,7 +304,7 @@ Even in other areas that they frequent or work.
     <string name="auditResultFor">Audit Result for:</string>
     <string name="titulo">Title:</string>
     <string name="manageAuditAreas">Manage Audit Areas</string>
-    <string name="databaseAuditDelete">delete audit database</string>
+    <string name="databaseAuditDelete">delete data</string>
     <string name="goBack">Go back</string>
     <string name="enunciado">Statement</string>
     <string name="clicToAddComment">Click here to add comment</string>
@@ -363,6 +363,7 @@ Even in other areas that they frequent or work.
     <string name="titNoMemoria">No storage found</string>
     <string name="noMemoria">Storage unavailable. Please insert an SD card or disconnect your device from computer.</string>
     <string name="guardardar">Do you want to save before quitting?</string>
+    <string name="usuarioRepetido">User with this email already exists.</string>
 
 
 </resources>

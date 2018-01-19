@@ -412,7 +412,7 @@ public class FragmentManageAreas extends Fragment {
                         registrarCantidadAreasFirebase();
                         updateAdapter();
 
-                        Snackbar.make(linearSnackbar,unArea.getNombreArea()+getResources().getString(R.string.creadoExitosamente),Snackbar.LENGTH_SHORT)
+                        Snackbar.make(linearSnackbar,unArea.getNombreArea()+" "+getResources().getString(R.string.creadoExitosamente),Snackbar.LENGTH_SHORT)
                                 .show();
 
 

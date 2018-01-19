@@ -1,10 +1,8 @@
 package com.nomad.audit5s.fragments;
 
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,13 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.activities.LoginActivity;
 import com.nomad.audit5s.model.Area;
@@ -70,7 +66,7 @@ public class FragmentSettings extends Fragment {
         config = getActivity().getSharedPreferences("prefs",0);
 
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_fragment_settings, container, false);
+        View view= inflater.inflate(R.layout.fragment_settings, container, false);
         lin1=view.findViewById(R.id.targetnum);
         lin2=view.findViewById(R.id.targetnum2);
         lin3=view.findViewById(R.id.targetnum3);

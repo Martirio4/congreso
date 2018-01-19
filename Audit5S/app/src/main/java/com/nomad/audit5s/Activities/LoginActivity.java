@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -331,6 +332,7 @@ public class LoginActivity extends AppCompatActivity  {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
                         if (task.isSuccessful()) {
                             botonOk.setVisibility(View.GONE);
                             botonLogin.setVisibility(View.VISIBLE);
@@ -342,39 +344,38 @@ public class LoginActivity extends AppCompatActivity  {
 
                             Realm realm = Realm.getDefaultInstance();
                             RealmResults<Usuario> mResults = realm.where(Usuario.class)
-                                    .equalTo("mail",email)
+                                    .equalTo("mail", email)
                                     .findAll();
-                            if (mResults.size()<1){
+                            if (mResults.size() < 1) {
                                 realm.executeTransaction(new Realm.Transaction() {
                                     @Override
                                     public void execute(Realm realm) {
-                                        Usuario mUser=realm.copyToRealm(nuevoUsuario);
+                                        Usuario mUser = realm.copyToRealm(nuevoUsuario);
                                     }
                                 });
+                            }
                         }
+                        else{
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
+                                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.usuarioRepetido), Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
+                                            .setAction(R.string.reintentar, new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    crearCuentaFirebase(email,password);
+                                                }
+                                            })
+                                            .show();
 
-                            progressBar.setVisibility(View.GONE);
-                            Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
-                                    .setAction(R.string.reintentar, new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            crearCuentaFirebase(email,password);
-                                        }
-                                    })
-                                    .show();
-
-
+                                }
                         }
-
-                        // ...
+                        progressBar.setVisibility(View.GONE);
                     }
-                };
-    });
+                });
+
     }
 
     @Override

@@ -108,7 +108,7 @@
     <string name="addNewArea">Adicionar nova área</string>
     <string name="generarPDF">Enviar o reporte em PDF</string>
     <string name="quit">Sair</string>
-    <string name="signOut">Desconecte sua conta</string>
+    <string name="signOut">Sair de sua conta</string>
     <string name="settings"> CONFIGURAR </string>
     <string name="punto411"> Só há uma ou outra deficiência nas identificações e sinalizações. A grande maioria não obedece a nenhum padrão. </string>
     <string name="punto412"> Só há uma ou outra deficiência nas identificações e sinalizações. Há padrão apenas em algumas delas. </string>
@@ -187,7 +187,7 @@
     <string name="damePermiso"> Conceda permissões de armazenamento para tirar fotos </string>
     <string name="completarItemFaltante"> Você deve completar itens:</string>
     <string name="avisoSignout"> Você está prestes a sair da sua conta.</string>
-    <string name="databaseDelete">Eliminar base de dados</string>
+    <string name="databaseDelete">Eliminar dados</string>
     <string name="auditsWillBeDeleted"> Todas as suas auditorias serão eliminadas permanentemente </string>
     <string name="confirmaBorrarBaseDeDato"> Todos os dados foram eliminados com sucesso </string>
     <string name="selectArea">Escolha Área</string>
@@ -270,6 +270,7 @@
     <string name="noMemoria">Storage unavailable. Please insert an SD card or disconnect your device from computer.</string>
     <string name="tutorial_tit_tuto">Tutorial</string>
     <string name="guardardar">Deseja salvar antes de sair?</string>
+    <string name="usuarioRepetido">O e-mail foi registrado anteriormente.</string>
 
 </resources>
 

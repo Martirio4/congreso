@@ -515,8 +515,8 @@
     <string name="appNecesitaPermiso">La app necesita permiso para guardar las auditorías</string>
     <string name="damePermiso">Por favor, conceda permiso para guardar las auditorías</string>
     <string name="completarItemFaltante">Debe completar los item:</string>
-    <string name="avisoSignout">Esta a punto de hacer logout de su cuenta</string>
-    <string name="databaseDelete">Borrar base de daros</string>
+    <string name="avisoSignout">Esta a punto de salir de su cuenta</string>
+    <string name="databaseDelete">Borrar datos</string>
     <string name="auditsWillBeDeleted">Todas sus auditorías seran borradas en forma permanente</string>
     <string name="confirmaBorrarBaseDeDato">La información fue borrada con éxito.</string>
     <string name="selectArea">Seleccionar área</string>
@@ -556,7 +556,7 @@
     <string name="addNewArea">Agregar nueva área</string>
     <string name="generarPDF">Enviar reporte PDF</string>
     <string name="quit">Salir</string>
-    <string name="signOut">Log out</string>
+    <string name="signOut">Salir de su cuenta</string>
     <string name="settings">AJUSTES</string>
     <string name="auditResult1">Audit.</string>
 
@@ -576,20 +576,19 @@
     <string name="tutorial_tit_subitem_foto">Toma fotos</string>
     <string name="tutorial_desc_subitem_foto">Agrega fotos y comentarios.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tutorial_tit_strt">Comienza la auditoría</string>
     <string name="tutorial_desc_strt">Elige una área y comienza a auditar ahora mismo.</string>
-    <string name="tutorial_tit_logout">Desloguearse</string>
-    <string name="tutorial_desc_logout">Click aquí si quieres desloguear tu cuenta o ingresar con otro usuario.</string>
+    <string name="tutorial_tit_logout">Salir de tu cuenta out</string>
+    <string name="tutorial_desc_logout">Click aquí para hacer salir de tu cuenta o ingresar con otro usuario.</string>
     <string name="tutorial_tit_delete">Borra todos los datos</string>
     <string name="tutorial_desc_delete">Click aquí si quieres eliminar todas las auditorias y todas las areas.</string>
     <string name="tutorial_tit_guardar">Guarda la auditoría</string>
-    <string name="tutorial_desc_guardar">Una vez que termines la auditoria, guárdala y procede a ver los resultados.</string>
+    <string name="tutorial_desc_guardar">Una vez que termines la auditoría, guárdala y procede a ver los resultados.</string>
     <string name="tutorial_tit_navegar">Navega a traves de la auditoría</string>
-    <string name="tutorial_desc_navegar">Click aquí para navegar la auditoría o haz "swipe" para cambiar de pantalla.</string>
+    <string name="tutorial_desc_navegar">Click aquí para navegar la auditoría o deslize la pantalla.</string>
     <string name="tutorial_tit_subitem_inicial">Comienza la auditoría</string>
-    <string name="tutorial_desc_subitem_inicial">Lee la declaración y puntúa teniendo en cuenta los criterios.</string>
+    <string name="tutorial_desc_subitem_inicial">Lee el enunciado y puntúa teniendo en cuenta los criterios.</string>
 
     <string name="tutorial_tit_setting">Antes de empezar a auditar</string>
     <string name="tutorial_desc_setting">Primero, debemos crear un área auditable. vamos a Ajustes.</string>
@@ -604,11 +603,12 @@
     <string name="tutorial_desc_tuto">Click aquí para activar y desactivar el tutorial.</string>
     <string name="tutorial_tit_search">Revise sus auditorias</string>
     <string name="tutorial_desc_search">Click aquí para revisar sus auditorias terminadas.</string>
-    <string name="deleteAudit">Borrar auditoria</string>
-    <string name="auditoriaSeEliminara">La auditoria será eliminada.</string>
+    <string name="deleteAudit">Borrar auditoría</string>
+    <string name="auditoriaSeEliminara">La auditoría será eliminada.</string>
     <string name="titNoMemoria">No storage found</string>
     <string name="noMemoria">Storage unavailable. Please insert an SD card or disconnect your device from computer.</string>
     <string name="tutorial_tit_tuto">Tutorial</string>
     <string name="guardardar">Desea guardar antes de salir?</string>
+    <string name="usuarioRepetido">El mail ya fue registrado anteriormente</string>
 
 </resources>
