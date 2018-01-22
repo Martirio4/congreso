@@ -6,8 +6,11 @@ import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,10 +20,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.nomad.audit5s.model.Usuario;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.utils.HTTPConnectionManager;
+
+import java.net.PasswordAuthentication;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -60,7 +68,7 @@ public class LoginActivity extends AppCompatActivity  {
     private String mail;
     private String contraseña;
 
-    private TextView titulo;
+    private TextView passwordOlvidada;
 
     // [END declare_auth]
 
@@ -70,6 +78,8 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         progressBar=(ProgressBar) findViewById(R.id.progreso);
+        passwordOlvidada=findViewById(R.id.passwordOlvidada);
+        passwordOlvidada.setVisibility(View.VISIBLE);
 
         mAuth = FirebaseAuth.getInstance();
         Realm.init(getApplicationContext());
@@ -78,39 +88,43 @@ public class LoginActivity extends AppCompatActivity  {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user= firebaseAuth.getCurrentUser();
                 mDatabase= FirebaseDatabase.getInstance().getReference();
-
-
                 if (user!=null){
-                    DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("datos");
-                    String mail;
-                    String foto;
-                    if (user.getEmail() == null||user.getEmail().isEmpty()){
-                        mail=user.getDisplayName();
-                        reference.child("nombre").setValue(user.getDisplayName());
+
+                    //QUE HAGO SI EL USER NO ESTA VERIFICADO
+                   /* if (!user.isEmailVerified()){
+                       new MaterialDialog.Builder(LoginActivity.this)
+                                .contentColor(ContextCompat.getColor(LoginActivity.this, R.color.primary_text))
+                                .titleColor(ContextCompat.getColor(LoginActivity.this, R.color.tile4))
+                                .title(R.string.titNoVerificado)
+                                .cancelable(true)
+                                .content(FirebaseAuth.getInstance().getCurrentUser().getEmail()+"\n"+getResources().getString(R.string.descNoVerificado))
+                                .negativeText(R.string.resend)
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        irALanding();
+                                    }
+                                })
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        sendEmailVerification();
+                                        irALanding();
+                                    }
+                                })
+                                .positiveText(R.string.later)
+                                .neutralText(R.string.loginVerificado)
+                                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                                    }
+                                })
+                                .show();
                     }
-                    else{
-                        mail=user.getEmail();
-                        reference.child("email").setValue(user.getEmail());
-                        reference.child("nombre").setValue(user.getDisplayName());
-
-                    }
-                    if (user.getPhotoUrl()==null){
-                        foto="sinFoto";
-                        reference.child("foto").setValue("sinFoto");
-
-                    }
-                    else{
-                        foto=user.getPhotoUrl().toString();
-                        reference.child("foto").setValue(user.getPhotoUrl().toString());
-                    }
-
-
-                    irALanding();
-
-
-
-                }
-                else{
+                    else{*/
+                        irALanding();
+                    //}
 
                 }
             }
@@ -128,11 +142,39 @@ public class LoginActivity extends AppCompatActivity  {
         botonLogin = (Button) findViewById(R.id.buttonLogin);
         botonRegister = (Button) findViewById(R.id.buttonRegister);
         botonOk=(Button)findViewById(R.id.okRegister);
-        
+
         editUsuario= (EditText) findViewById(R.id.editTextUsuario);
         editPass = (EditText) findViewById(R.id.editTextPassword);
         editRepePass = (EditText) findViewById(R.id.editTextRepePassword);
         editUsuario.setTypeface(roboto);
+
+        //SETEO VISIBILIDADES
+        til3.setVisibility(View.GONE);
+        editRepePass.setVisibility(View.GONE);
+        botonOk.setVisibility(View.GONE);
+        editRepePass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+        //CLICK PASSWORD OLVIDADA
+        passwordOlvidada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editUsuario==null ||editUsuario.getText().toString().isEmpty()){
+                    Snackbar.make(view,getResources().getString(R.string.noMail),Snackbar.LENGTH_LONG)
+                            .show();
+                }
+                else{
+                    reestablecerContrasenia();
+                }
+
+            }
+        });
+
+
+
+
+
+
+
 
         //COMPROBAR SI COINCIDE USUARIO Y CONTRASEÑA
         botonLogin.setOnClickListener(new View.OnClickListener() {
@@ -180,14 +222,12 @@ public class LoginActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
 
-
-
                 if (HTTPConnectionManager.isNetworkingOnline(v.getContext())) {
                     til3.setVisibility(View.VISIBLE);
                     editRepePass.setVisibility(View.VISIBLE);
                     botonOk.setVisibility(View.VISIBLE);
                     botonRegister.setVisibility(View.GONE);
-                    botonLogin.setVisibility(View.GONE);
+                    passwordOlvidada.setVisibility(View.GONE);
                 }
                 else {
                     Snackbar.make(v,R.string.noHayInternet,Snackbar.LENGTH_LONG)
@@ -342,6 +382,8 @@ public class LoginActivity extends AppCompatActivity  {
                             nuevoUsuario.setMail(editUsuario.getText().toString().toLowerCase());
                             nuevoUsuario.setPass(editPass.getText().toString());
 
+                            guardarUsuarioDatabase();
+
                             Realm realm = Realm.getDefaultInstance();
                             RealmResults<Usuario> mResults = realm.where(Usuario.class)
                                     .equalTo("mail", email)
@@ -361,15 +403,20 @@ public class LoginActivity extends AppCompatActivity  {
                                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.usuarioRepetido), Toast.LENGTH_LONG).show();
                                 }
                                 else{
-                                    Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
-                                            .setAction(R.string.reintentar, new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
-                                                    crearCuentaFirebase(email,password);
-                                                }
-                                            })
-                                            .show();
+                                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.datosErroneos), Toast.LENGTH_LONG).show();
+                                    }
+                                    else{
+                                        Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
+                                                .setAction(R.string.reintentar, new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        crearCuentaFirebase(email,password);
+                                                    }
+                                                })
+                                                .show();
 
+                                    }
                                 }
                         }
                         progressBar.setVisibility(View.GONE);
@@ -397,5 +444,87 @@ public class LoginActivity extends AppCompatActivity  {
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
+    }
+
+    private void sendEmailVerification() {
+        // Disable button
+        botonRegister.setEnabled(false);
+
+        // Send verification email
+        // [START send_email_verification]
+        final FirebaseUser user = mAuth.getCurrentUser();
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // [START_EXCLUDE]
+                        // Re-enable button
+                        botonRegister.setEnabled(true);
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this,
+                                    R.string.mailVerificacionEnviado + user.getEmail(),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            Log.e("SENDMAIL_EXCEPTION", "sendEmailVerification", task.getException());
+                            Toast.makeText(LoginActivity.this,
+                                    R.string.errorMailVerificacion, Toast.LENGTH_SHORT).show();
+                        }
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END send_email_verification]
+    }
+
+    private void guardarUsuarioDatabase(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("datos");
+        //String mail;
+        //String foto;
+        if (user.getEmail() == null||user.getEmail().isEmpty()){
+            mail=user.getDisplayName();
+            reference.child("nombre").setValue(user.getDisplayName());
+        }
+        else{
+            mail=user.getEmail();
+            reference.child("email").setValue(user.getEmail());
+            reference.child("nombre").setValue(user.getDisplayName());
+        }
+       /* if (user.getPhotoUrl()==null){
+            foto="sinFoto";
+            reference.child("foto").setValue("sinFoto");
+
+        }
+        else{
+            foto=user.getPhotoUrl().toString();
+            reference.child("foto").setValue(user.getPhotoUrl().toString());
+        }
+        */
+    }
+    public void reestablecerContrasenia(){
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setIndeterminate(true);
+        final String email = editUsuario.getText().toString();
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.mailReestablecimientoEnviado)+ email, Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Snackbar.make(passwordOlvidada, getResources().getString(R.string.mailReestablecerError)+ email, Toast.LENGTH_SHORT)
+                                    .setAction(R.string.reintentar, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            reestablecerContrasenia();
+                                        }
+                                    });
+
+                        }
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
     }
 }

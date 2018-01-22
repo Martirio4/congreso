@@ -31,7 +31,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/contenedorBotones"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/textViewLogin"
@@ -57,47 +57,44 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:id="@+id/inputLayout2"
-            adroid:errorTextAppearance="@style/error_appearance"
-            android:textColorHint="@color/marfil"
-
-            >
-
-            <EditText
-                android:layout_width="300dp"
-                android:inputType="textPassword"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTextPassword"
-                android:textColor="@color/marfil"
-                android:textAlignment="center"
-                android:hint="@string/hinPass"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/inputLayout3"
-            android:visibility="gone"
-            adroid:errorTextAppearance="@style/error_appearance"
-            android:textColorHint="@color/marfil"
-            >
+                android:layout_weight="80"
+                android:id="@+id/inputLayout2"
+                adroid:errorTextAppearance="@style/error_appearance"
+                android:textColorHint="@color/marfil"
+                >
 
-            <EditText
-                android:visibility="gone"
-                android:layout_width="300dp"
-                android:inputType="textPassword"
-                android:layout_height="wrap_content"
-                android:id="@+id/editTextRepePassword"
-                android:textColor="@color/marfil"
-                android:textAlignment="center"
-                android:hint="@string/hinPass"
-                />
-        </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:inputType="textPassword"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextPassword"
+                    android:textColor="@color/marfil"
+                    android:textAlignment="center"
+                    android:hint="@string/hinPass"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageButton
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:layout_weight="20"
+                android:src="@drawable/ic_remove_red_eye_black_24dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -115,6 +112,19 @@
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"/>
 
+            <TextView
+                android:layout_marginTop="@dimen/margenChico"
+                android:layout_below="@id/buttonLogin"
+                android:id="@+id/passwordOlvidada"
+               android:layout_centerHorizontal="true"
+                android:textSize="10sp"
+                android:textColor="@color/marfil"
+                android:text="@string/forgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
             <Button
                 android:layout_marginBottom="@dimen/margenChico"
                 android:layout_gravity="center_horizontal"
@@ -128,13 +138,16 @@
                 android:textColor="@color/primary_text"
                 android:elevation="10dp"
                 android:layout_centerHorizontal="true"/>
+
             <Button
                 android:layout_marginBottom="@dimen/margenChico"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_alignStart="@id/buttonLogin"
+                android:layout_alignEnd="@id/buttonLogin"
                 android:layout_height="wrap_content"
                 android:text="Ok"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/okRegister"
                 android:background="@drawable/boton2"
                 android:layout_below="@+id/buttonLogin"
