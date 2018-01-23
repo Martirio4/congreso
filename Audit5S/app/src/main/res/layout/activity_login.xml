@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:focusable="true"
@@ -10,63 +10,66 @@
 
 
     <TextView
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="20"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/e5s"
         android:textSize="50sp"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textColor="@color/marfil"
         android:id="@+id/textViewLogin"
-        android:layout_centerHorizontal="true"
         />
 
-
-
-
-
-
-
-
+    <!--CONTENEDOR DE COSAS-->
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/contenedorBotones"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/textViewLogin"
-        android:layout_centerHorizontal="true">
+        android:layout_weight="80"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            adroid:errorTextAppearance="@style/error_appearance"
-            android:textColorHint="@color/marfil"
-
-            android:id="@+id/inputLayout1">
-
-            <EditText
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/mail"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/marfil"
-                android:textAlignment="center"
-                android:id="@+id/editTextUsuario"/>
-
-        </android.support.design.widget.TextInputLayout>
+        <!--LINEAR DUMMIE SEPARACION START-->
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_weight="10"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </LinearLayout>
 
+        <!--LINEAR CONTENEDOR DE COSAS-->
+        <LinearLayout
+            android:layout_weight="80"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <!--MAIL DEL USUARIO-->
             <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="80"
+                adroid:errorTextAppearance="@style/error_appearance"
+                android:textColorHint="@color/marfil"
+                android:id="@+id/inputLayout1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/mail"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/marfil"
+                    android:textAlignment="center"
+                    android:id="@+id/editTextUsuario"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!--CONTRASENIA DEL USUARIO-->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/inputLayout2"
+                adroid:passwordToggleEnabled="true"
                 adroid:errorTextAppearance="@style/error_appearance"
                 android:textColorHint="@color/marfil"
                 >
@@ -82,114 +85,70 @@
                     />
             </android.support.design.widget.TextInputLayout>
 
-            <ImageButton
-                android:layout_gravity="center_vertical"
-                android:background="@android:color/transparent"
-                android:layout_weight="20"
-                android:src="@drawable/ic_remove_red_eye_black_24dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
 
 
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            <!--BOTON LOGIN-->
             <Button
-                android:layout_width="0dp"
-                android:layout_alignStart="@+id/buttonRegister"
-                android:layout_alignEnd="@+id/buttonRegister"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/signIn"
                 android:id="@+id/buttonLogin"
                 android:background="@drawable/boton2"
                 android:textColor="@color/primary_text"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"/>
 
+            <!--OLVIDE LA PASS-->
             <TextView
-                android:layout_marginTop="@dimen/margenChico"
-                android:layout_below="@id/buttonLogin"
+                android:gravity="center"
+                android:padding="@dimen/margenMini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/passwordOlvidada"
-               android:layout_centerHorizontal="true"
-                android:textSize="10sp"
-                android:textColor="@color/marfil"
                 android:text="@string/forgot"
+                android:textColor="@color/marfil"
+                />
+
+
+            <!--BOTON REGISTRARSE-->
+
+
+                <!--BOTON LOGIN-->
+                <Button
+                    android:layout_marginTop="48dp"
+                    android:layout_gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register"
+                    android:id="@+id/buttonRegister"
+                    android:background="@drawable/boton"
+                    android:textColor="@color/blancoNomad"
+                    android:elevation="10dp"
+                    />
+
+            <ProgressBar
+                android:visibility="gone"
+                android:id="@+id/progressBar"
+                android:layout_marginTop="@dimen/margenGrande"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+        </LinearLayout>
 
-
-
-            <Button
-                android:layout_marginBottom="@dimen/margenChico"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:id="@+id/buttonRegister"
-                android:background="@drawable/boton2"
-                android:layout_below="@+id/buttonLogin"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/primary_text"
-                android:elevation="10dp"
-                android:layout_centerHorizontal="true"/>
-
-            <Button
-                android:layout_marginBottom="@dimen/margenChico"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="0dp"
-                android:layout_alignStart="@id/buttonLogin"
-                android:layout_alignEnd="@id/buttonLogin"
-                android:layout_height="wrap_content"
-                android:text="Ok"
-                android:visibility="visible"
-                android:id="@+id/okRegister"
-                android:background="@drawable/boton2"
-                android:layout_below="@+id/buttonLogin"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/primary_text"
-                android:elevation="10dp"
-                android:layout_centerHorizontal="true"/>
-
-        </RelativeLayout>
-
-
+        <!--LINEAR DUMMIE SEPARACION END-->
+        <LinearLayout
+            android:layout_weight="10"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </LinearLayout>
 
     </LinearLayout>
-    <ProgressBar
-        android:id="@+id/progreso"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/contenedorBotones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:visibility="gone"
-        android:layout_marginStart="@dimen/margenChico"
-        android:layout_marginEnd="@dimen/margenChico"
-        android:textColor="@color/tile2"
-        android:layout_marginTop="@dimen/margenGrande"
-        android:textSize="16sp"
-        android:textAlignment="center"
-        android:layout_below="@id/contenedorBotones"
-        android:text="@string/disclaimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="10"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-</RelativeLayout>
+</LinearLayout>

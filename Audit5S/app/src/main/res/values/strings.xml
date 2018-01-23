@@ -365,7 +365,7 @@ Even in other areas that they frequent or work.
     <string name="guardardar">Do you want to save before quitting?</string>
     <string name="usuarioRepetido">User with this email already exists.</string>
     <string name="datosErroneos">Wrong password</string>
-    <string name="forgot">I forgot my password</string>
+    <string name="forgot">Forgot password?</string>
     <string name="noMail">Please enter a valid email to reset your password</string>
     <string name="mailReestablecimientoEnviado">Instructions sent to: </string>
     <string name="mailVerificacionEnviado">Verification mail sent to:</string>
@@ -375,7 +375,10 @@ Even in other areas that they frequent or work.
     <string name="resend">Resend</string>
     <string name="later">Later</string>
     <string name="loginVerificado">I\'ve done it</string>
-    <string name="mailReestablecerError">Instructios could not be sent. Check connection.</string>
+    <string name="mailReestablecerError">Instructios could not be sent. Check your connection.</string>
+    <string name="verPass">Show password</string>
+    <string name="passwordOlvidada">Password recovery</string>
+    <string name="enviaremosInstrucciones">We will send a password recovery mail to:</string>
 
 
 </resources>

@@ -12,8 +12,11 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -48,27 +52,25 @@ public class LoginActivity extends AppCompatActivity  {
     private ProgressBar progressBar;
 
     private ImageButton fakeFbLogin;
-    private String idFacebook, nombreFacebook, nombreMedioFacebook, apellidoFacebook, sexoFacebook, imagenFacebook, nombreCompletoFacebook, emailFacebook;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
 
     private EditText editUsuario;
     private EditText editPass;
-    private EditText editRepePass;
 
     private TextInputLayout til1;
     private TextInputLayout til2;
-    private TextInputLayout til3;
 
     private Button botonLogin;
     private Button botonRegister;
-    private Button botonOk;
 
     private String mail;
     private String contraseña;
 
     private TextView passwordOlvidada;
+
+    private CheckBox checkPass;
 
     // [END declare_auth]
 
@@ -77,7 +79,7 @@ public class LoginActivity extends AppCompatActivity  {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        progressBar=(ProgressBar) findViewById(R.id.progreso);
+        progressBar=findViewById(R.id.progressBar);
         passwordOlvidada=findViewById(R.id.passwordOlvidada);
         passwordOlvidada.setVisibility(View.VISIBLE);
 
@@ -130,29 +132,25 @@ public class LoginActivity extends AppCompatActivity  {
             }
         };
 
+
+
+
         TextView unTextview = (TextView) findViewById(R.id.textViewLogin);
         Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         unTextview.setTypeface(roboto);
 
-         til1 = (TextInputLayout) findViewById(R.id.inputLayout1);
-         til2 = (TextInputLayout) findViewById(R.id.inputLayout2);
-         til3 = (TextInputLayout) findViewById(R.id.inputLayout3);
+         til1 =  findViewById(R.id.inputLayout1);
+         til2 =  findViewById(R.id.inputLayout2);
 
 
-        botonLogin = (Button) findViewById(R.id.buttonLogin);
-        botonRegister = (Button) findViewById(R.id.buttonRegister);
-        botonOk=(Button)findViewById(R.id.okRegister);
+        botonLogin = findViewById(R.id.buttonLogin);
+        botonRegister = findViewById(R.id.buttonRegister);
 
-        editUsuario= (EditText) findViewById(R.id.editTextUsuario);
-        editPass = (EditText) findViewById(R.id.editTextPassword);
-        editRepePass = (EditText) findViewById(R.id.editTextRepePassword);
+        editUsuario = findViewById(R.id.editTextUsuario);
+        editPass = findViewById(R.id.editTextPassword);
         editUsuario.setTypeface(roboto);
 
-        //SETEO VISIBILIDADES
-        til3.setVisibility(View.GONE);
-        editRepePass.setVisibility(View.GONE);
-        botonOk.setVisibility(View.GONE);
-        editRepePass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
 
         //CLICK PASSWORD OLVIDADA
         passwordOlvidada.setOnClickListener(new View.OnClickListener() {
@@ -203,6 +201,10 @@ public class LoginActivity extends AppCompatActivity  {
                     til2.setError(getResources().getString(R.string.ingreseContraseniaValida));
                     validar = validar + 1;
                 }
+                if (editPass.getText().toString().length() < 6) {
+                    til2.setError(getResources().getString(R.string.caracteresContrasenia));
+                    validar = validar + 1;
+                }
 
                 if (validar > 0) {
                     return;
@@ -222,26 +224,72 @@ public class LoginActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
 
-                if (HTTPConnectionManager.isNetworkingOnline(v.getContext())) {
-                    til3.setVisibility(View.VISIBLE);
-                    editRepePass.setVisibility(View.VISIBLE);
-                    botonOk.setVisibility(View.VISIBLE);
-                    botonRegister.setVisibility(View.GONE);
-                    passwordOlvidada.setVisibility(View.GONE);
+//                SI EL BOTON ESTA INVISIBLE QUE REGISTRE EL USUARIO
+                if (botonLogin.getVisibility()==View.GONE){
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    View focusedView = getCurrentFocus();
+
+                    if (focusedView != null) {
+                        inputManager.hideSoftInputFromWindow(focusedView.getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+
+                    Integer control = 0;
+                    til1.setError(null);
+                    til2.setError(null);
+
+                    if (editUsuario.getText().toString().isEmpty()) {
+                        til1.setError(getResources().getString(R.string.ingreseUsuarioValido));
+                        control = control + 1;
+                    }
+
+                    if (editPass.getText().toString().isEmpty()) {
+                        til2.setError(getResources().getString(R.string.ingreseContraseniaValida));
+                        control = control + 1;
+                    }
+                    if (editPass.getText().toString().length() < 6) {
+                        til2.setError(getResources().getString(R.string.caracteresContrasenia));
+                        control = control + 1;
+                    }
+
+                    if (control > 0) {
+                        return;
+                    }
+
+                    if (HTTPConnectionManager.isNetworkingOnline(LoginActivity.this)) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        progressBar.setIndeterminate(true);
+                        String usuario= editUsuario.getText().toString();
+                        String pass= editPass.getText().toString();
+
+                        crearCuentaFirebase(usuario, pass);
+                    } else {
+                        Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
+                                .setAction(R.string.reintentar, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        botonRegister.performClick();
+                                    }
+                                })
+                                .show();
+                    }
+
                 }
                 else {
-                    Snackbar.make(v,R.string.noHayInternet,Snackbar.LENGTH_LONG)
-                            .setAction(R.string.reintentar, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    botonRegister.performClick();
-                                }
-                            })
-                            .show();
+
+                    botonLogin.setVisibility(View.GONE);
+                    passwordOlvidada.setVisibility(View.GONE);
+                    editPass.setText(null);
+                    editUsuario.setText(null);
+                    editUsuario.requestFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(editUsuario, InputMethodManager.SHOW_IMPLICIT);
+
                 }
             }
         });
-        
+        /*
         botonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,7 +306,6 @@ public class LoginActivity extends AppCompatActivity  {
                 Integer control = 0;
                 til1.setError(null);
                 til2.setError(null);
-                til3.setError(null);
 
                 if (editUsuario.getText().toString().isEmpty()) {
                     til1.setError(getResources().getString(R.string.ingreseUsuarioValido));
@@ -266,48 +313,40 @@ public class LoginActivity extends AppCompatActivity  {
                 }
 
                 if (editPass.getText().toString().isEmpty()) {
-                    til3.setError(getResources().getString(R.string.ingreseContraseniaValida));
                     control = control + 1;
                 }
                 if (editPass.getText().toString().length() < 6) {
-                    til3.setError(getResources().getString(R.string.caracteresContrasenia));
                     control = control + 1;
                 }
 
                 if (control > 0) {
                     return;
                 }
-                if (editPass.getText().toString().equals(editRepePass.getText().toString())) {
 
-                    if (HTTPConnectionManager.isNetworkingOnline(LoginActivity.this)) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        progressBar.setIndeterminate(true);
-                        String usuario= editUsuario.getText().toString();
-                        String pass= editPass.getText().toString();
+                if (HTTPConnectionManager.isNetworkingOnline(LoginActivity.this)) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setIndeterminate(true);
+                    String usuario= editUsuario.getText().toString();
+                    String pass= editPass.getText().toString();
 
-                        crearCuentaFirebase(usuario, pass);
-                    } else {
-                        Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
-                                .setAction(R.string.reintentar, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        botonOk.performClick();
-                                    }
-                                })
-                                .show();
-                    }
+                    crearCuentaFirebase(usuario, pass);
+                } else {
+                    Snackbar.make(editUsuario,R.string.noHayInternet,Snackbar.LENGTH_LONG)
+                            .setAction(R.string.reintentar, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    botonOk.performClick();
+                                }
+                            })
+                            .show();
                 }
 
 
-                else {
-                    til3.setError(getResources().getString(R.string.contraseniasNoCoinciden));
-                    editRepePass.setText("");
-                }
             }
 
             ;
 
-        });
+        });*/
 
     }
 
@@ -341,7 +380,14 @@ public class LoginActivity extends AppCompatActivity  {
                         if (!task.isSuccessful()) {
 
                             if (HTTPConnectionManager.isNetworkingOnline(LoginActivity.this)) {
-                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
+
+                                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.datosErroneos), Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.autenticacionFallida), Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                             else {
                                 Snackbar.make(editUsuario,R.string.noHayInternetlogin,Snackbar.LENGTH_LONG)
@@ -357,6 +403,8 @@ public class LoginActivity extends AppCompatActivity  {
                         }
                         else
                         {
+                            til1.setError(null);
+                            til2.setError(null);
                             editPass.setText(null);
                             editUsuario.setText(null);
                         }
@@ -374,9 +422,9 @@ public class LoginActivity extends AppCompatActivity  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            botonOk.setVisibility(View.GONE);
                             botonLogin.setVisibility(View.VISIBLE);
                             botonRegister.setVisibility(View.VISIBLE);
+                            passwordOlvidada.setVisibility(View.VISIBLE);
 
                             final Usuario nuevoUsuario = new Usuario();
                             nuevoUsuario.setMail(editUsuario.getText().toString().toLowerCase());
@@ -442,8 +490,17 @@ public class LoginActivity extends AppCompatActivity  {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
+
+        if (botonLogin.getVisibility()==View.GONE){
+            botonLogin.setVisibility(View.VISIBLE);
+            passwordOlvidada.setVisibility(View.VISIBLE);
+        }
+        else{
+            super.onBackPressed();
+            finishAffinity();
+        }
+
+
     }
 
     private void sendEmailVerification() {
@@ -506,25 +563,49 @@ public class LoginActivity extends AppCompatActivity  {
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
         final String email = editUsuario.getText().toString();
-        mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.mailReestablecimientoEnviado)+ email, Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Snackbar.make(passwordOlvidada, getResources().getString(R.string.mailReestablecerError)+ email, Toast.LENGTH_SHORT)
-                                    .setAction(R.string.reintentar, new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            reestablecerContrasenia();
-                                        }
-                                    });
 
-                        }
-                        progressBar.setVisibility(View.GONE);
+        new MaterialDialog.Builder(LoginActivity.this)
+                .contentColor(ContextCompat.getColor(LoginActivity.this, R.color.primary_text))
+                .titleColor(ContextCompat.getColor(LoginActivity.this, R.color.tile4))
+                .title(R.string.passwordOlvidada)
+                .cancelable(true)
+                .content(getResources().getString(R.string.enviaremosInstrucciones)+"\n"+ email+"\n"+getResources().getString(R.string.deseaContinuar))
+                .positiveText(R.string.ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        mAuth.sendPasswordResetEmail(email)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.mailReestablecimientoEnviado)+ email, Toast.LENGTH_LONG).show();
+                                        }
+                                        else {
+                                            if (task.getException().getMessage().equals("There is no user record corresponding to this identifier. The user may have been deleted.")){
+                                                Toast.makeText(LoginActivity.this, "no such user", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+                                                Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
+                                            }
+                                            
+                                        }
+                                        progressBar.setVisibility(View.GONE);
+                                    }
+                                });
                     }
-                });
+                })
+                .negativeText(R.string.cancel)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                    }
+                })
+                .show();
+
+
     }
+
+
 }
