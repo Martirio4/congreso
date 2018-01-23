@@ -96,8 +96,10 @@ public class FragmentManageAreas extends Fragment {
     }
 
     public void updateAdapter() {
+        String usuario=FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Realm realm=Realm.getDefaultInstance();
         RealmResults<Area> result3 = realm.where(Area.class)
+                .equalTo("usuario",usuario)
                 .findAll();
         listaAreas=new RealmList<>();
         listaAreas.addAll(result3);

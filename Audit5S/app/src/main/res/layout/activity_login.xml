@@ -5,7 +5,7 @@
     android:focusableInTouchMode="true"
     android:layout_height="match_parent"
     xmlns:adroid="http://schemas.android.com/apk/res-auto"
-    android:background="@color/tile4">
+    android:background="@drawable/fondo_login">
 
 
 
@@ -89,13 +89,14 @@
 
             <!--BOTON LOGIN-->
             <Button
+                android:elevation="10dp"
                 android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/signIn"
                 android:id="@+id/buttonLogin"
                 android:background="@drawable/boton2"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/blancoNomad"
                 android:layout_gravity="center_horizontal"/>
 
             <!--OLVIDE LA PASS-->

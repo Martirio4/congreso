@@ -13,8 +13,16 @@
             android:right="16dp"
             android:top="1dp"
             android:bottom="1dp"/>
-        <solid
-            android:color="@color/tile3"/>
+
+    <gradient
+        android:angle="45"
+        android:gradientRadius="300dp"
+        android:startColor="@color/tile4.5"
+        android:endColor="@color/tile5"
+        />
+    <corners
+        android:radius="@dimen/margenGrande"
+        />
 
 
 

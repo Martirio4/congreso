@@ -18,7 +18,7 @@
     <string name="caracteresContrasenia">A senha deve ter pelo menos 6 caracteres.</string>
     <string name="contraseniasNoCoinciden"> A senha não corresponde.</string>
     <string name="bienvenido">Bem-vindo </string>
-    <string name="quieroReportar"> Quero relatar um problema.</string>
+    <string name="quieroReportar">Eu quero falar con equipi da e-5S.</string>
     <!--enunciados-->
     <string name="enunciado11"> 1.1. Utilização dos recursos existentes nos locais abertos </string>
     <string name="enunciado12"> 1.2. Utilização dos recursos existentes nos compartimentos fechados </string>
@@ -89,7 +89,7 @@
     <string name="punto324"> A fonte de sujeira ou sujeira acumulada ao longo do tempo não gera riscos de acidentes. Há um prazo definido para a eliminação da fonte. </string>
     <string name="punto325"> A fonte de sujeira (máquinas, equipamentos, manuseio de produtos) ou sujeira acumulada ao longo do tempo não gera riscos de acidentes e a extinção de sua(s) fonte(s) foi considerada inviável técnica e financeiramente pelos órgãos competentes da organização. Pode existir uma ou outra irregularidade insignificante para as características do ambiente. </string>
     <string name="punto331"> Não há uma freqüência definida e/ou adequada para a limpeza de nenhum tipo de sujeira (gerada por processos, manuseio de produtos, intempéries, animais, árvores, transportes, etc.).</string>
-    <string name="punto332"> Não há uma freqüência definida e/ou adequada de limpeza para vários tipos de sujeira (gerada por processos, manuseio de produtos, intempéries, animais, árvores, transportes, etc.).</string>
+    <string name="punto332signin"> Não há uma freqüência definida e/ou adequada de limpeza para vários tipos de sujeira (gerada por processos, manuseio de produtos, intempéries, animais, árvores, transportes, etc.).</string>
     <string name="punto333"> Não há uma freqüência definida e/ou adequada de limpeza apenas para um ou outro tipo de sujeira (gerada por processos, manuseio de produtos, intempéries, animais, árvores, transportes, etc.).</string>
     <string name="punto334"> Há uma freqüência definida e adequada para a limpeza de todo o tipo de sujeira (gerada por processos, manuseio de produtos, intempéries, animais, árvores, transportes, etc.). A sistemática não inclui, por escrito, todos os locais de difícil acesso. </string>
     <string name="punto335"> Há uma freqüência definida e adequada para a limpeza de todo o tipo de sujeira (gerada por processos, manuseio de produtos, intempéries, animais, árvores, transportes, etc.). A sistemática inclui, por escrito, todos os locais de difícil acesso. </string>
@@ -102,7 +102,7 @@
     <string name="criteriaTitulo">Criterio</string>
     <string name="sacarFoto">Adicionar Foto</string>
     <string name="guardarAuditoria">Salvar Auditoria</string>
-    <string name="salir">Quit</string>
+    <string name="salir">Sair</string>
     <string name="manageAreas">Gerenciar áreas de auditoria </string>
     <string name="myAudits">MINHAS AUDITORIAS</string>
     <string name="addNewArea">Adicionar nova área</string>
@@ -155,7 +155,7 @@
     <string name="start">INICIAR AUDITORIA</string>
     <string name="contact">CONTATE-NOS</string>
     <string name="firstTime">Primeira vez? Clique aqui</string>
-    <string name="autenticacionFallida"> Falha na autenticação.Por favor registre</string>
+    <string name="autenticacionFallida"> Falha na autenticação.Por favor registre-se</string>
     <string name="sinConexionIntenteMasTarde"> Sem conexões à Internet, tente novamente mais tarde.</string>
     <string name="reporteAuditoria">Reporte de Auditoria.</string>
     <string name="enviarMail">Enviar o e-mail.</string>
@@ -271,19 +271,22 @@
     <string name="tutorial_tit_tuto">Tutorial</string>
     <string name="guardardar">Deseja salvar antes de sair?</string>
     <string name="usuarioRepetido">O e-mail foi registrado anteriormente.</string>
-    <string name="datosErroneos">Wrong password</string>
-    <string name="forgot">I forgot my password</string>
-    <string name="noMail">Please enter a valid email to reset your password</string>
-    <string name="mailReestablecimientoEnviado">We sent a mail with instructions to:</string>
+    <string name="datosErroneos">Senha errada</string>
+    <string name="forgot">Esqueci minha senha</string>
+    <string name="noMail">" Digite um email válido para redefinir sua senha"</string>
+    <string name="mailReestablecimientoEnviado">Email enviado para:</string>
     <string name="mailVerificacionEnviado">Verification mail sent to:</string>
     <string name="errorMailVerificacion">Verification mail was not send. Check connection.</string>
     <string name="titNoVerificado">Unverified user</string>
     <string name="descNoVerificado">is not verified. if you want us to resend rverification mail click \"Resend\"</string>
-    <string name="resend">Resend</string>
-    <string name="mailReestablecerError">Instructios could not be sent. Check connection.</string>
-    <string name="verPass">Show password</string>
-    <string name="passwordOlvidada">Password recovery</string>
-    <string name="enviaremosInstrucciones">We will send a password recovery mail to:</string>
+    <string name="resend">Reenviar</string>
+    <string name="mailReestablecerError">Instruções não podem ser enviadas. Verifique a conexão.</string>
+    <string name="verPass">Mostrar senha</string>
+    <string name="passwordOlvidada">Recuperação de senha</string>
+    <string name="enviaremosInstrucciones">Enviaremos um email de recuperação de senha para:</string>
+    <string name="later">Após</string>
+    <string name="tit_quit">Sair</string>
+    <string name="des_quit">Deseja sair do e-5S?</string>
 
 </resources>
 

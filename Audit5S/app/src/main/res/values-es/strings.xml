@@ -20,7 +20,7 @@
     <string name="caracteresContrasenia">La contraseña debe tener al menos 6 caracteres</string>
     <string name="contraseniasNoCoinciden">Las contraseñas no coinciden</string>
     <string name="bienvenido">Bienvenido </string>
-    <string name="quieroReportar">Quiero reportar un problema</string>
+    <string name="quieroReportar">Quiero contactar con el equipo de e-5S</string>
 
 
 
@@ -263,7 +263,7 @@
 
 
     </string>
-    <string name="punto332">No hay una frecuencia definida y/o adecuada de limpieza para varios tipos de suciedad (generada por procesos, manoseo de productos, ambiente, animales, árboles, transportes, etc.).
+    <string name="punto332signin">No hay una frecuencia definida y/o adecuada de limpieza para varios tipos de suciedad (generada por procesos, manoseo de productos, ambiente, animales, árboles, transportes, etc.).
 
 
     </string>
@@ -610,18 +610,21 @@
     <string name="tutorial_tit_tuto">Tutorial</string>
     <string name="guardardar">Desea guardar antes de salir?</string>
     <string name="usuarioRepetido">El mail ya fue registrado anteriormente</string>
-    <string name="datosErroneos">Wrong password</string>
-    <string name="forgot">Forgot password?</string>
-    <string name="noMail">Please enter a valid email to reset your password</string>
-    <string name="mailReestablecimientoEnviado">We sent a mail with instructions to:</string>
+    <string name="datosErroneos">Contraseña incorrecta</string>
+    <string name="forgot">Olvide mi constraseña</string>
+    <string name="noMail">Ingrese un mail válido para recuperar su contraseña</string>
+    <string name="mailReestablecimientoEnviado">mail enviado a:</string>
     <string name="mailVerificacionEnviado">Verification mail sent to:</string>
     <string name="errorMailVerificacion">Verification mail was not send. Check connection.</string>
     <string name="titNoVerificado">Unverified user</string>
     <string name="descNoVerificado">is not verified. if you want us to resend rverification mail click \"Resend\"</string>
-    <string name="resend">Resend</string>
-    <string name="mailReestablecerError">Instructios could not be sent. Check connection.</string>
-    <string name="verPass">Show password</string>
-    <string name="passwordOlvidada">Password recovery</string>
-    <string name="enviaremosInstrucciones">We will send a password recovery mail to:</string>
+    <string name="resend">Reenviar</string>
+    <string name="mailReestablecerError">" No se han enviado las instrucciones, verifique su conexión."</string>
+    <string name="verPass">Mostrar constraseña</string>
+    <string name="passwordOlvidada">Recuperación de contraseña</string>
+    <string name="enviaremosInstrucciones">Enviaremos un mail de recuperación a:</string>
+    <string name="later">Luego</string>
+    <string name="tit_quit">Salir</string>
+    <string name="des_quit">Salir de e-5S?</string>
 
 </resources>

@@ -30,6 +30,7 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.nomad.audit5s.adapter.AdapterAuditorias;
 import com.nomad.audit5s.fragments.FragmentLanding;
 import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.model.Area;
@@ -127,9 +128,22 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
             fragmentManager.popBackStack();
             lanzarLandingFragment();
         } else {
+            new MaterialDialog.Builder(this)
+                    .contentColor(ContextCompat.getColor(this, R.color.primary_text))
+                    .titleColor(ContextCompat.getColor(this, R.color.tile4))
+                    .title(R.string.quit)
+                    .content(R.string.des_quit)
+                    .positiveText(R.string.quit)
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            ActivityLanding.super.onBackPressed();
+                            finishAffinity();
+                        }
+                    })
+                    .negativeText(R.string.cancel)
+                    .show();
 
-            super.onBackPressed();
-            finishAffinity();
         }
 
     }

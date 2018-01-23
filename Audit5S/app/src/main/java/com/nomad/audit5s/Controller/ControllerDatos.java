@@ -213,7 +213,7 @@ public class ControllerDatos  {
         subItem33.setaQuePertenece(context.getResources().getString(R.string.seisoSeiso));
         subItem33.setEnunciado(context.getString(R.string.enunciado33));
         subItem33.setPunto1(context.getString(R.string.punto331));
-        subItem33.setPunto2(context.getString(R.string.punto332));
+        subItem33.setPunto2(context.getString(R.string.punto332signin));
         subItem33.setPunto3(context.getString(R.string.punto333));
         subItem33.setPunto4(context.getString(R.string.punto334));
         subItem33.setPunto5(context.getString(R.string.punto335));
