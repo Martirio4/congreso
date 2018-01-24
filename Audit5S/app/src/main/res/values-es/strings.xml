@@ -614,10 +614,6 @@
     <string name="forgot">Olvide mi constraseña</string>
     <string name="noMail">Ingrese un mail válido para recuperar su contraseña</string>
     <string name="mailReestablecimientoEnviado">mail enviado a:</string>
-    <string name="mailVerificacionEnviado">Verification mail sent to:</string>
-    <string name="errorMailVerificacion">Verification mail was not send. Check connection.</string>
-    <string name="titNoVerificado">Unverified user</string>
-    <string name="descNoVerificado">is not verified. if you want us to resend rverification mail click \"Resend\"</string>
     <string name="resend">Reenviar</string>
     <string name="mailReestablecerError">" No se han enviado las instrucciones, verifique su conexión."</string>
     <string name="verPass">Mostrar constraseña</string>

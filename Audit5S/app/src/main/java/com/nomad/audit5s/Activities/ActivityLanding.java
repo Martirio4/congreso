@@ -1,5 +1,6 @@
 package com.nomad.audit5s.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -15,8 +16,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -30,15 +33,25 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nomad.audit5s.adapter.AdapterAuditorias;
 import com.nomad.audit5s.fragments.FragmentLanding;
 import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.R;
 import com.nomad.audit5s.model.Foto;
+import com.nomad.audit5s.services.ServiceLoco;
 import com.nomad.audit5s.utils.FuncionesPublicas;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import pl.tajchert.nammu.Nammu;
 
@@ -69,8 +82,11 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+        startService(new Intent(getBaseContext(), ServiceLoco.class));
+        FrameLayout frame = findViewById(R.id.contenedor_landing_completo);
 
         Nammu.init(getApplicationContext());
 
@@ -82,6 +98,7 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
         }
 
         lanzarLandingFragment();
+
         /*
         Fragment fragment = getSupportFragmentManager().findFragmentByTag("seleccion");
         if (fragment!=null&&fragment.isVisible()){
@@ -137,13 +154,14 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            FuncionesPublicas.sumarUsoDeApp(ActivityLanding.this);
+                            sumarVecesAbiertoFirebase();
                             ActivityLanding.super.onBackPressed();
                             finishAffinity();
                         }
                     })
                     .negativeText(R.string.cancel)
                     .show();
-
         }
 
     }
@@ -177,4 +195,38 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+    public void sumarVecesAbiertoFirebase() {
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference();
+        if (user!=null) {
+
+            SharedPreferences sharedPreferences=getSharedPreferences("prefs",0);
+            final Integer vecesUsuario=sharedPreferences.getInt("cantidadUsos",0);
+
+            Calendar cal = Calendar.getInstance();
+            Date date=cal.getTime();
+
+            String monthNumber  = (String) DateFormat.format("MM",   date); // 06
+            String year         = (String) DateFormat.format("yyyy", date); // 2013
+
+            final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("abrioApp").child(monthNumber+"-"+year);
+
+            //---leer cantidad de auditorias---//
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    reference.setValue(vecesUsuario);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+    }
+
+
+
 }

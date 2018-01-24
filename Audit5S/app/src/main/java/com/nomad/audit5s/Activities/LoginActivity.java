@@ -503,36 +503,36 @@ public class LoginActivity extends AppCompatActivity  {
 
     }
 
-    private void sendEmailVerification() {
-        // Disable button
-        botonRegister.setEnabled(false);
-
-        // Send verification email
-        // [START send_email_verification]
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        // [START_EXCLUDE]
-                        // Re-enable button
-                        botonRegister.setEnabled(true);
-
-                        if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this,
-                                    R.string.mailVerificacionEnviado + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            Log.e("SENDMAIL_EXCEPTION", "sendEmailVerification", task.getException());
-                            Toast.makeText(LoginActivity.this,
-                                    R.string.errorMailVerificacion, Toast.LENGTH_SHORT).show();
-                        }
-                        // [END_EXCLUDE]
-                    }
-                });
-        // [END send_email_verification]
-    }
+//    private void sendEmailVerification() {
+//        // Disable button
+//        botonRegister.setEnabled(false);
+//
+//        // Send verification email
+//        // [START send_email_verification]
+//        final FirebaseUser user = mAuth.getCurrentUser();
+//        user.sendEmailVerification()
+//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        // [START_EXCLUDE]
+//                        // Re-enable button
+//                        botonRegister.setEnabled(true);
+//
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(LoginActivity.this,
+//                                    R.string.mailVerificacionEnviado + user.getEmail(),
+//                                    Toast.LENGTH_SHORT).show();
+//                        } else {
+//
+//                            Log.e("SENDMAIL_EXCEPTION", "sendEmailVerification", task.getException());
+//                            Toast.makeText(LoginActivity.this,
+//                                    R.string.errorMailVerificacion, Toast.LENGTH_SHORT).show();
+//                        }
+//                        // [END_EXCLUDE]
+//                    }
+//                });
+//        // [END send_email_verification]
+//    }
 
     private void guardarUsuarioDatabase(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

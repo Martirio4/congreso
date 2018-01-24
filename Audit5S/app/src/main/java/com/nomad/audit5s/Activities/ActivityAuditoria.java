@@ -70,7 +70,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auditoria);
 
-        startService(new Intent(getBaseContext(), ServiceLoco.class));
+
 
         Intent intent= getIntent();
         Bundle bundle= intent.getExtras();

@@ -1,9 +1,18 @@
 package com.nomad.audit5s.utils;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Environment;
+import android.text.format.DateFormat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nomad.audit5s.activities.ActivityMyAudits;
 import com.nomad.audit5s.activities.GraficosActivity;
 import com.nomad.audit5s.model.Auditoria;
@@ -11,6 +20,8 @@ import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.model.SubItem;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -20,6 +31,8 @@ import io.realm.RealmResults;
  */
 
 public class FuncionesPublicas {
+
+
 
     public static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
@@ -62,6 +75,15 @@ public class FuncionesPublicas {
         });
         return true;
 
+
+    }
+    public static void sumarUsoDeApp(Context context){
+        SharedPreferences config = context.getSharedPreferences("prefs",0);
+        Integer cantidadUsos = config.getInt("cantidadUsos",0);
+
+        SharedPreferences.Editor editor = config.edit();
+        editor.putInt("cantidadUsos",cantidadUsos+1);
+        editor.commit();
 
     }
 
