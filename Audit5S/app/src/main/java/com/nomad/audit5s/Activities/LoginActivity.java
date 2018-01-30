@@ -391,6 +391,7 @@ public class LoginActivity extends AppCompatActivity {
             reference.child("nombre").setValue(user.getDisplayName());
         } else {
             mail = user.getEmail();
+            reference.child("uid").setValue(user.getUid());
             reference.child("email").setValue(user.getEmail());
             reference.child("nombre").setValue(user.getDisplayName());
         }

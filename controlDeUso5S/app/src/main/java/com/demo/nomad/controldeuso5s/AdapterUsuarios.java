@@ -116,13 +116,9 @@ public class AdapterUsuarios extends RecyclerView.Adapter implements View.OnClic
 
             if (unUsuario.getEstadisticas()==null){
                 nombreUsuario.setText(unUsuario.getDatos().getEmail());
-                auditorias.setText("sin datos");
-                areas.setText("sin datos");
-                fotos.setText("sin datos");
-                reportes.setText("sin datos");
+
             }
             else {
-
 
                 if (unUsuario.getEstadisticas().getCantidadAuditorias() != null && !unUsuario.getEstadisticas().getCantidadAuditorias().isEmpty()) {
                     auditorias.setText(unUsuario.getEstadisticas().getCantidadAuditorias().toString());

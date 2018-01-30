@@ -296,6 +296,8 @@ public class GraficosActivity extends AppCompatActivity {
             if (!primeraVezFragmentRadar) {
 
                 SharedPreferences.Editor editor = config.edit();
+
+
                 editor.putBoolean("primeraVezFragmentRadar",true);
                 editor.commit();
 

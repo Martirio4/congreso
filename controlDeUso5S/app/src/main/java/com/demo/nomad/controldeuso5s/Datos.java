@@ -6,6 +6,15 @@ package com.demo.nomad.controldeuso5s;
 
 public class Datos {
     private String email;
+    private String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getEmail() {
         return email;

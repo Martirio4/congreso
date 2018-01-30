@@ -379,7 +379,7 @@ public class LoginActivity extends AppCompatActivity {
                 .titleColor(ContextCompat.getColor(LoginActivity.this, R.color.tile4))
                 .title("passolvi")
                 .cancelable(true)
-                .content("telamando" + "\n" + mail + "\n" + "continuar")
+                .content("te mando la pass" + "\n" + mail + "\n" + "continuar")
                 .positiveText("ok")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -389,10 +389,10 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "yatelamande" + mail, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "ya te la mande" + mail, Toast.LENGTH_LONG).show();
                                 } else {
-                                    if (task.getException().getMessage().equals("There is no user record corresponding to this identifier. The user may have been deleted.")) {
-                                        Toast.makeText(LoginActivity.this, "no such user", Toast.LENGTH_SHORT).show();
+                                    if (task.getException().getMessage().equals("no hay usuario con ese nombre.")) {
+                                        Toast.makeText(LoginActivity.this, "no existe el usuario", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(LoginActivity.this, "error", Toast.LENGTH_SHORT).show();
                                     }

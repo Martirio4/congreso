@@ -15,8 +15,8 @@
         android:layout_weight="20"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-
-        android:textSize="50sp"
+        android:text="estadisticas 5s"
+        android:textSize="40sp"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textColor="@color/marfil"
@@ -57,7 +57,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:hint="mail"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/marfil"
                     android:textAlignment="center"
@@ -75,6 +75,7 @@
                 >
 
                 <EditText
+                    android:hint="contraseña"
                     android:layout_width="match_parent"
                     android:inputType="textPassword"
                     android:layout_height="wrap_content"
@@ -93,7 +94,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:text="login"
                 android:id="@+id/buttonLogin"
                 android:background="@drawable/boton2"
                 android:textColor="@color/blancoNomad"
@@ -106,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/passwordOlvidada"
-
+                android:text="olvide mi contraseña"
                 android:textColor="@color/marfil"
                 />
 
@@ -120,7 +121,7 @@
                     android:layout_gravity="bottom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:text="registrarse"
                     android:id="@+id/buttonRegister"
                     android:background="@drawable/boton"
                     android:textColor="@color/blancoNomad"
