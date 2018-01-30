@@ -124,7 +124,7 @@ public class AdapterAuditorias extends RecyclerView.Adapter implements View.OnCl
         return listaAuditsOriginales.size();
     }
 
-    @Override
+
     public void onClick(View view) {
         listener.onClick(view);
     }

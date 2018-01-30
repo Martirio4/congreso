@@ -606,7 +606,7 @@ public class FragmentSubitem extends Fragment {
                         Integer numeroFotos= Integer.parseInt(cantidadFotos)+1;
                         reference.setValue(numeroFotos.toString());
                     } else {
-                        reference.setValue(cantFotos);
+                        reference.setValue(cantFotos.toString());
                     }
                 }
 

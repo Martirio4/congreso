@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,10 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,7 +51,10 @@ public class FragmentLanding extends Fragment {
     private LinearLayout lin2;
     private LinearLayout lin3;
     private LinearLayout lin4;
+    private LinearLayout lin5;
     private Landinable landinable;
+    private ImageButton animationTarget;
+    private Animation animation;
 
     private Typeface roboto;
 
@@ -82,6 +89,7 @@ public class FragmentLanding extends Fragment {
         lin2 = view.findViewById(R.id.lin2);
         lin3 = view.findViewById(R.id.lin3);
         lin4 = view.findViewById(R.id.line4);
+        lin5 = view.findViewById(R.id.line5);
 
         roboto = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Light.ttf");
         texto1.setTypeface(roboto);
@@ -144,6 +152,26 @@ public class FragmentLanding extends Fragment {
         lin4.setOnClickListener(listener4);
         texto4.setOnClickListener(listener4);
 
+        //PARA LA PRUEBA DE ANIMACION
+        View.OnLongClickListener listenerLong= new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (lin5.getVisibility()==View.VISIBLE){
+                    lin5.setVisibility(View.GONE);
+                }
+                else{
+                    lin5.setVisibility(View.VISIBLE);
+                    animationTarget.startAnimation(animation);
+                }
+                return true;
+            }
+        };
+
+        botonIssue.setOnLongClickListener(listenerLong);
+        lin4.setOnLongClickListener(listenerLong);
+        texto4.setOnLongClickListener(listenerLong);
+        //PARA LA PRUEBA DE ANIMACION
+
         config = getActivity().getSharedPreferences("prefs", 0);
         boolean firstRun = config.getBoolean("firstRun", false);
         if (!firstRun){
@@ -152,6 +180,10 @@ public class FragmentLanding extends Fragment {
             editor.putBoolean("firstRun", true);
             editor.commit();
         }
+
+        animationTarget= view.findViewById(R.id.btn_star);
+        animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.rotate_around_center_point);
+        animationTarget.startAnimation(animation);
 
         return view;
     }
