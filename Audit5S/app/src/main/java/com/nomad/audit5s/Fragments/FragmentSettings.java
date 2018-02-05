@@ -1,10 +1,13 @@
 package com.nomad.audit5s.fragments;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -19,10 +22,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nomad.audit5s.activities.LoginActivity;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.model.Auditoria;
@@ -45,12 +55,16 @@ public class FragmentSettings extends Fragment {
     private Button areas;
     private Button borrar;
     private Button tuto;
+    private Button rate;
 
 
     private ImageView lin1;
     private ImageView lin2;
     private ImageView lin3;
     private ImageView lin4;
+    private ImageView lin5;
+
+    private DatabaseReference mDatabase;
 
 
     public FragmentSettings() {
@@ -64,19 +78,23 @@ public class FragmentSettings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         config = getActivity().getSharedPreferences("prefs",0);
-
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_settings, container, false);
         lin1=view.findViewById(R.id.targetnum);
         lin2=view.findViewById(R.id.targetnum2);
         lin3=view.findViewById(R.id.targetnum3);
+        lin5=view.findViewById(R.id.targetnum5);
         lin4=view.findViewById(R.id.targetnum4);
+
         areas=view.findViewById(R.id.botonManageAreas);
         Button logout=view.findViewById(R.id.botonLogOut);
         borrar=view.findViewById(R.id.botonBorrarTodo);
         tuto=view.findViewById(R.id.botonTuto);
+        rate = view.findViewById(R.id.botonRateApp);
         Button salir=view.findViewById(R.id.botonVolver);
         Typeface roboto = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Light.ttf");
+
+        rate.setTypeface(roboto);
         areas.setTypeface(roboto);
         logout.setTypeface(roboto);
         borrar.setTypeface(roboto);
@@ -211,6 +229,17 @@ public class FragmentSettings extends Fragment {
             }
         });
 
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences.Editor editor = config.edit();
+                editor.putBoolean("quiereVerRating", false);
+                editor.commit();
+                registrarEnvioDeRating();
+                rateApp();
+            }
+        });
 
 
         boolean quiereVerTuto = config.getBoolean("quiereVerTuto",false);
@@ -229,6 +258,27 @@ public class FragmentSettings extends Fragment {
         return view;
     }
 
+    private void registrarEnvioDeRating() {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        if (user != null) {
+            final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("calificoApp");
+
+            //---leer cantidad de auditorias---//
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    reference.setValue("si");
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
 
 
     private void seguirConTutorial() {
@@ -266,7 +316,7 @@ public class FragmentSettings extends Fragment {
                                 .tintTarget(false)
                                 .targetRadius(80)
                                 .id(4),
-                        TapTarget.forView(lin4, getResources().getString(R.string.tutorial_tit_delete), getResources().getString(R.string.tutorial_desc_delete))
+                        TapTarget.forView(lin5, getResources().getString(R.string.tutorial_tit_delete), getResources().getString(R.string.tutorial_desc_delete))
                                 .transparentTarget(false)
                                 .outerCircleColor(R.color.tutorial1)
                                 .textColor(R.color.primary_text)
@@ -401,5 +451,35 @@ public class FragmentSettings extends Fragment {
 
         }
         */
+    }
+    public void rateApp()
+    {
+        try
+        {
+            Intent rateIntent = rateIntentForUrl("market://details");
+            startActivity(rateIntent);
+        }
+        catch (ActivityNotFoundException e)
+        {
+            Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
+            startActivity(rateIntent);
+        }
+    }
+
+    private Intent rateIntentForUrl(String url)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url,getActivity().getPackageName())));
+        int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
+        }
+        else
+        {
+            //noinspection deprecation
+            flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
+        }
+        intent.addFlags(flags);
+        return intent;
     }
 }

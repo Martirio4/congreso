@@ -129,12 +129,11 @@
             android:paddingStart="@dimen/margenChico"
             android:paddingEnd="@dimen/margenChico"
             android:background="@color/tile4"
-            android:id="@+id/lin5"
+            android:id="@+id/lin4"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_weight="50"
             android:layout_height="0dp">
-
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -155,10 +154,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/databaseAuditDelete"
-                    android:textColor="@color/tile5" />
+                    android:textColor="@color/tile3" />
         </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingStart="@dimen/margenChico"
+            android:paddingEnd="@dimen/margenChico"
+            android:background="@color/tile4.5"
+            android:id="@+id/lin5"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="50"
+            android:layout_height="0dp">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                        <ImageView
+                            android:visibility="invisible"
+                            android:id="@+id/targetnum5"
+                            android:alpha="0"
+                            android:src="@drawable/azul5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+                        <Button
+                            android:textAlignment="viewStart"
+                            android:textSize="@dimen/textoSettings"
+                            android:background="@android:color/transparent"
+                            android:id="@+id/botonRateApp"
+                            android:drawableStart="@drawable/azul5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/rateOurApp"
+                            android:textColor="@color/tile2" />
+                </FrameLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:paddingStart="@dimen/margenChico"
             android:paddingEnd="@dimen/margenChico"
@@ -171,7 +205,7 @@
                 <Button
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/textoSettings"
-                    android:drawableStart="@drawable/azul5"
+                    android:drawableStart="@drawable/blanco6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/goBack"

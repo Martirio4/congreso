@@ -58,12 +58,6 @@
             android:name=".services.ServiceLoco"
             android:stopWithTask="false" />
 
-        <activity
-            android:name=".activities.ActivityOnboarding"
-            android:launchMode="singleInstance"
-            >
-      
-        </activity>
         <activity android:name=".activities.ActivitySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

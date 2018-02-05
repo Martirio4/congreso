@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
@@ -152,7 +154,10 @@ public class FragmentLanding extends Fragment {
         lin4.setOnClickListener(listener4);
         texto4.setOnClickListener(listener4);
 
+        lin5.setVisibility(View.GONE);
+
         //PARA LA PRUEBA DE ANIMACION
+        /*
         View.OnLongClickListener listenerLong= new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -171,7 +176,7 @@ public class FragmentLanding extends Fragment {
         lin4.setOnLongClickListener(listenerLong);
         texto4.setOnLongClickListener(listenerLong);
         //PARA LA PRUEBA DE ANIMACION
-
+    */
         config = getActivity().getSharedPreferences("prefs", 0);
         boolean firstRun = config.getBoolean("firstRun", false);
         if (!firstRun){
@@ -181,9 +186,17 @@ public class FragmentLanding extends Fragment {
             editor.commit();
         }
 
+/*
         animationTarget= view.findViewById(R.id.btn_star);
         animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.rotate_around_center_point);
         animationTarget.startAnimation(animation);
+
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        Integer dpi=metrics.densityDpi;
+        Toast.makeText(getActivity(), dpi.toString(), Toast.LENGTH_LONG).show();
+        */
+
 
         return view;
     }

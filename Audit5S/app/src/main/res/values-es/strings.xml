@@ -10,31 +10,19 @@
     <string name="deleteTituloDialog">Borrar área seleccionada</string>
     <string name="elArea">El área: </string>
     <string name="deletePermanente">y las auditorias relacionadas serán borradas en forma permanente</string>
-    <string name="deseaContinuar">desea continuar?</string>
+    <string name="deseaContinuar">quieres continuar?</string>
     <string name="delete">Borrar</string>
     <string name="cancel">Cancelar</string>
 
     <!--LOGIN ACTIVITY-->
-    <string name="ingreseUsuarioValido">Ingrese un nombre de usuario válido</string>
-    <string name="ingreseContraseniaValida">Ingrese una contraseña válida</string>
+    <string name="ingreseUsuarioValido">Ingresa un nombre de usuario válido</string>
+    <string name="ingreseContraseniaValida">Ingresa una contraseña válida</string>
     <string name="caracteresContrasenia">La contraseña debe tener al menos 6 caracteres</string>
     <string name="contraseniasNoCoinciden">Las contraseñas no coinciden</string>
     <string name="bienvenido">Bienvenido </string>
     <string name="quieroReportar">Quiero contactar con el equipo de e-5S</string>
 
-
-
-
-
-
-
-
-
-
-
-
     <!--enunciados-->
-
     <string name="enunciado11">1.1 Recursos existentes en sectores que NO son para guardar</string>
     <string name="enunciado12">1.2 Recursos existentes en los lugares que son para guardar</string>
     <string name="enunciado13">1.3 Estado de conservación de las instalaciones y recursos</string>
@@ -479,16 +467,16 @@
     </string>
 
 
-    <string name="sinAreas">No hay áreas creadas. vaya al menu: \"Configuración\" y luego a: \"Gestionar áreas\"</string>
+    <string name="sinAreas">No hay áreas creadas. ve al menu: \"Configuración\" y luego a: \"Gestionar áreas\"</string>
     <string name="verAuditoria">Detalle de auditoría</string>
     <string name="start">AUDITAR</string>
     <string name="contact">CONTACTO</string>
     <string name="firstTime">Primera vez, click aquí</string>
-    <string name="autenticacionFallida">Autenticacion fallida. Por favor, registrese.</string>
-    <string name="sinConexionIntenteMasTarde">No hay conexión a internet, intente mas tarde</string>
+    <string name="autenticacionFallida">Autenticacion fallida. Por favor, regístrate.</string>
+    <string name="sinConexionIntenteMasTarde">No hay conexión a internet, intenta mas tarde</string>
     <string name="reporteAuditoria">Reporte de auditoría.</string>
     <string name="enviarMail">Enviar mail.</string>
-    <string name="errorRevisarPermisos">Error, controle permisos.</string>
+    <string name="errorRevisarPermisos">Error, controla permisos.</string>
     <string name="tituloPdf">Reporte de auditoría de 5S</string>
     <string name="ResultadoFinal">Resultado final.</string>
     <string name="puntajeFinal">Puntaje final: </string>
@@ -496,10 +484,10 @@
     <string name="score">Puntaje: </string>
     <string name="detalleAuditoria">Detalle de auditoría</string>
     <string name="misAuditorias">Mis auditorías</string>
-    <string name="textoIssue">Por favor, diganos si tuvo problemas usando nuestra app, sugerencias también son bienvenidas</string>
+    <string name="textoIssue">Por favor, dinos si tuviste problemas usando nuestra app, sugerencias también son bienvenidas</string>
     <string name="audit5s">Auditoría 5S</string>
     <string name="agregarComentario">Agregar comentario</string>
-    <string name="favorAgregueComentario">Por favor, ingrese un comentario para la foto.</string>
+    <string name="favorAgregueComentario">Por favor, ingresa un comentario para la foto.</string>
     <string name="comment">comentario</string>
     <string name="advertencia">Atención!</string>
     <string name="auditoriaSinTerminar">La auditoría no esta finalizada.</string>
@@ -513,20 +501,20 @@
     <string name="noEncontroDatos">No se encontraron datos</string>
     <string name="dismiss">Salir</string>
     <string name="appNecesitaPermiso">La app necesita permiso para guardar las auditorías</string>
-    <string name="damePermiso">Por favor, conceda permiso para guardar las auditorías</string>
-    <string name="completarItemFaltante">Debe completar los item:</string>
-    <string name="avisoSignout">Esta a punto de salir de su cuenta</string>
+    <string name="damePermiso">Por favor, concede permiso para guardar las auditorías</string>
+    <string name="completarItemFaltante">Debes completar los item:</string>
+    <string name="avisoSignout">Estas a punto de salir de tu cuenta</string>
     <string name="databaseDelete">Borrar datos</string>
-    <string name="auditsWillBeDeleted">Todas sus auditorías seran borradas en forma permanente</string>
+    <string name="auditsWillBeDeleted">Todas tus auditorías seran borradas en forma permanente</string>
     <string name="confirmaBorrarBaseDeDato">La información fue borrada con éxito.</string>
     <string name="selectArea">Seleccionar área</string>
     <string name="audit">Auditoría</string>
     <string name="target">Objetivo</string>
     <string name="seleccionaImagen">Elegir imagen</string>
     <string name="ok">Ok</string>
-    <string name="permisoParaFotos">Por favor, conceda permisos para guardar las fotos</string>
+    <string name="permisoParaFotos">Por favor, concede permisos para guardar las fotos</string>
     <string name="noSeCreoDirectorio">El directorio solicitado no fue creado</string>
-    <string name="nombreArea">Ingrese el nombre de la nueva área</string>
+    <string name="nombreArea">Ingresa el nombre de la nueva área</string>
     <string name="areaName">nombre del área</string>
     <string name="creadoExitosamente"> fue creada con éxito</string>
     <string name="auditResult">Resultado de la auditoría</string>
@@ -545,7 +533,7 @@
     <string name="hinPass">contraseña</string>
     <string name="signIn">Ingresar</string>
     <string name="register">Registrarse</string>
-    <string name="disclaimer">Por favor, regístrese. Sólo solicitamos su mail a modo de autentificación.</string>
+    <string name="disclaimer">Por favor, regístrate. Sólo solicitamos tu mail a modo de autentificación.</string>
     <string name="verCriterios">Criterios</string>
     <string name="criteriaTitulo">Criterios</string>
     <string name="sacarFoto">Agregar foto</string>
@@ -580,7 +568,7 @@
     <string name="tutorial_tit_strt">Comienza la auditoría</string>
     <string name="tutorial_desc_strt">Elige una área y comienza a auditar ahora mismo.</string>
     <string name="tutorial_tit_logout">Salir de tu cuenta out</string>
-    <string name="tutorial_desc_logout">Click aquí para hacer salir de tu cuenta o ingresar con otro usuario.</string>
+    <string name="tutorial_desc_logout">Click aquí para salir de tu cuenta o ingresar con otro usuario.</string>
     <string name="tutorial_tit_delete">Borra todos los datos</string>
     <string name="tutorial_desc_delete">Click aquí si quieres eliminar todas las auditorias y todas las areas.</string>
     <string name="tutorial_tit_guardar">Guarda la auditoría</string>
@@ -601,26 +589,30 @@
     <string name="activarTuto">Activar tutorial</string>
     <string name="desactivarTuto">Desactivar tutorial</string>
     <string name="tutorial_desc_tuto">Click aquí para activar y desactivar el tutorial.</string>
-    <string name="tutorial_tit_search">Revise sus auditorias</string>
-    <string name="tutorial_desc_search">Click aquí para revisar sus auditorias terminadas.</string>
+    <string name="tutorial_tit_search">Revisa tus auditorias</string>
+    <string name="tutorial_desc_search">Click aquí para revisar tus auditorias terminadas.</string>
     <string name="deleteAudit">Borrar auditoría</string>
     <string name="auditoriaSeEliminara">La auditoría será eliminada.</string>
-    <string name="titNoMemoria">No storage found</string>
-    <string name="noMemoria">Storage unavailable. Please insert an SD card or disconnect your device from computer.</string>
+    <string name="titNoMemoria">Sin almacenamiento</string>
+    <string name="noMemoria">Sin almacenamiento disponible. Inserta una memoria SD o desconecta tu dispositivo de la PC.</string>
     <string name="tutorial_tit_tuto">Tutorial</string>
-    <string name="guardardar">Desea guardar antes de salir?</string>
+    <string name="guardardar">Deseas guardar antes de salir?</string>
     <string name="usuarioRepetido">El mail ya fue registrado anteriormente</string>
     <string name="datosErroneos">Contraseña incorrecta</string>
     <string name="forgot">Olvide mi constraseña</string>
-    <string name="noMail">Ingrese un mail válido para recuperar su contraseña</string>
+    <string name="noMail">Ingresa un mail válido para recuperar su contraseña</string>
     <string name="mailReestablecimientoEnviado">mail enviado a:</string>
     <string name="resend">Reenviar</string>
-    <string name="mailReestablecerError">" No se han enviado las instrucciones, verifique su conexión."</string>
+    <string name="mailReestablecerError">" No se han enviado las instrucciones, verifique tu conexión."</string>
     <string name="verPass">Mostrar constraseña</string>
     <string name="passwordOlvidada">Recuperación de contraseña</string>
     <string name="enviaremosInstrucciones">Enviaremos un mail de recuperación a:</string>
     <string name="later">Luego</string>
     <string name="tit_quit">Salir</string>
     <string name="des_quit">Salir de e-5S?</string>
+    <string name="rateUsl1">Gracias por usar nuestra App!</string>
+    <string name="rateUsl2">¿Te gustaría ayudarnos clasificando la App en la tienda de aplicaciones?</string>
+    <string name="titRating">Apoya esta app.</string>
+    <string name="rateOurApp">Califica la App</string>
 
 </resources>

@@ -376,6 +376,10 @@ Even in other areas that they frequent or work.
     <string name="enviaremosInstrucciones">We will send a password recovery mail to:</string>
     <string name="tit_quit">Quit</string>
     <string name="des_quit">Do you want to quit e-5S?</string>
+    <string name="rateUsl1">Thank you for using our app!</string>
+    <string name="rateUsl2">Would you like to help us by rating the app in the App store?</string>
+    <string name="titRating">Support this app</string>
+    <string name="rateOurApp">Rate our app</string>
 
 
 </resources>

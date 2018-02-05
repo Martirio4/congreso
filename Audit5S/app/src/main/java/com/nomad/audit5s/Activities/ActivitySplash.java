@@ -38,26 +38,5 @@ public class ActivitySplash extends AppCompatActivity {
 
     }
 
-    //metodo onBoarding Viejo
-    public void metodoSelectorOnBoarding(){
-        SharedPreferences settings = getSharedPreferences("prefs", 0);
-        boolean firstRun = settings.getBoolean("firstRun", false);
-        if (!firstRun)//if running for first time
-        //Splash will load for first time
-        {
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("firstRun", true);
-            editor.commit();
-
-            Intent mainIntent = new Intent(ActivitySplash.this, ActivityOnboarding.class);
-            ActivitySplash.this.startActivity(mainIntent);
-            ActivitySplash.this.finish();
-        }
-        else {
-            Intent mainIntent = new Intent(ActivitySplash.this, LoginActivity.class);
-            ActivitySplash.this.startActivity(mainIntent);
-            ActivitySplash.this.finish();
-        }
-    }
 
 }

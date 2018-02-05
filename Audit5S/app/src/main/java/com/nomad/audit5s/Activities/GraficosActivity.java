@@ -1,5 +1,6 @@
 package com.nomad.audit5s.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -26,6 +28,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
@@ -69,9 +72,9 @@ import static com.nomad.audit5s.utils.FuncionesPublicas.borrarAuditoriaSeleccion
 
 public class GraficosActivity extends AppCompatActivity {
 
-    public static final String AUDIT="AUDIT";
-    public static final String AREA="AREA";
-    public static final String ORIGEN="ORIGEN";
+    public static final String AUDIT = "AUDIT";
+    public static final String AREA = "AREA";
+    public static final String ORIGEN = "ORIGEN";
 
     private String origenIntent;
     private String idAudit;
@@ -80,7 +83,7 @@ public class GraficosActivity extends AppCompatActivity {
     private Double promedioSeiton;
     private Double promedioSeiso;
     private Double promedio5s;
-    
+
     private FloatingActionMenu fabMenuGraficos;
     private FloatingActionButton fabGenerarPDF;
     private FloatingActionButton fabQuit;
@@ -97,14 +100,13 @@ public class GraficosActivity extends AppCompatActivity {
     private Bitmap fotoOriginal;
 
 
-    public static final int MARGEN_IZQUIERDO=30;
-    public static final int SALTO_LINEA=18;
-    public static final int SEPARACIONFOTOS=9;
+    public static final int MARGEN_IZQUIERDO = 30;
+    public static final int SALTO_LINEA = 18;
+    public static final int SEPARACIONFOTOS = 9;
 
     private DatabaseReference mDatabase;
 
     private SharedPreferences config;
-
 
 
     @Override
@@ -112,20 +114,21 @@ public class GraficosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficos);
 
-        progressBar=(ProgressBar) findViewById(R.id.progressBar);
+        config = getSharedPreferences("prefs", 0);
 
-        promedioSeiso=0.0;
-        promedioSeiton=0.0;
-        promedioSeiri=0.0;
-        promedio5s =0.0;
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        Intent intent= getIntent();
-        Bundle bundle=intent.getExtras();
-        idAudit=bundle.getString(AUDIT);
-        origenIntent=bundle.getString(ORIGEN);
+        promedioSeiso = 0.0;
+        promedioSeiton = 0.0;
+        promedioSeiri = 0.0;
+        promedio5s = 0.0;
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        idAudit = bundle.getString(AUDIT);
+        origenIntent = bundle.getString(ORIGEN);
 
         //--guardar auditoria en firebase--//
-
 
 
         FragmentActivity unaActivity = (FragmentActivity) this;
@@ -136,51 +139,40 @@ public class GraficosActivity extends AppCompatActivity {
 
         if (fragmentRadar != null && fragmentRadar.isVisible()) {
 
-        }
-        else{
+        } else {
             cargarGraficoRadar();
             cargarGraficoBarras();
-
-            Realm realm=Realm.getDefaultInstance();
-            Auditoria mAudit=realm.where(Auditoria.class)
-                    .equalTo("idAuditoria",idAudit)
-                    .findFirst();
-
         }
 
 
+        fabMenuGraficos = (FloatingActionMenu) findViewById(R.id.menuSalida);
 
-
-
-        
-        fabMenuGraficos= (FloatingActionMenu) findViewById(R.id.menuSalida);
-
-        fabMenuGraficos.setMenuButtonColorNormal(ContextCompat.getColor(this,R.color.colorAccent));
+        fabMenuGraficos.setMenuButtonColorNormal(ContextCompat.getColor(this, R.color.colorAccent));
 
         fabVerAuditoria = new FloatingActionButton(this);
         fabVerAuditoria.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
-       fabVerAuditoria.setButtonSize(FloatingActionButton.SIZE_MINI);
-       fabVerAuditoria.setLabelText(getResources().getString(R.string.verAuditoria));
-       fabVerAuditoria.setImageResource(R.drawable.ic_find_in_page_black_24dp);
-       fabMenuGraficos.addMenuButton(fabVerAuditoria);
+        fabVerAuditoria.setButtonSize(FloatingActionButton.SIZE_MINI);
+        fabVerAuditoria.setLabelText(getResources().getString(R.string.verAuditoria));
+        fabVerAuditoria.setImageResource(R.drawable.ic_find_in_page_black_24dp);
+        fabMenuGraficos.addMenuButton(fabVerAuditoria);
 
-       fabVerAuditoria.setLabelColors(ContextCompat.getColor(this, R.color.tile3),
-        ContextCompat.getColor(this, R.color.light_grey),
-        ContextCompat.getColor(this, R.color.white_transparent));
-       fabVerAuditoria.setLabelTextColor(ContextCompat.getColor(this, R.color.black));
+        fabVerAuditoria.setLabelColors(ContextCompat.getColor(this, R.color.tile3),
+                ContextCompat.getColor(this, R.color.light_grey),
+                ContextCompat.getColor(this, R.color.white_transparent));
+        fabVerAuditoria.setLabelTextColor(ContextCompat.getColor(this, R.color.black));
 
-       fabVerAuditoria.setOnClickListener(new View.OnClickListener() {
+        fabVerAuditoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fabMenuGraficos.close(true);
-                Intent inten=new Intent(v.getContext(), ActivityVerAuditorias.class);
-                Bundle bundle123=new Bundle();
-                bundle123.putString(ActivityVerAuditorias.AUDITORIA,idAudit);
+                Intent inten = new Intent(v.getContext(), ActivityVerAuditorias.class);
+                Bundle bundle123 = new Bundle();
+                bundle123.putString(ActivityVerAuditorias.AUDITORIA, idAudit);
                 inten.putExtras(bundle123);
                 startActivity(inten);
 
             }
-       });
+        });
 
         fabGenerarPDF = new FloatingActionButton(this);
         fabGenerarPDF.setColorNormal(ContextCompat.getColor(this, R.color.tile3));
@@ -214,7 +206,6 @@ public class GraficosActivity extends AppCompatActivity {
         });
 
 
-
         fabBorrarAuditoria = new FloatingActionButton(this);
         fabBorrarAuditoria.setColorNormal(ContextCompat.getColor(this, R.color.semaRojo));
         fabBorrarAuditoria.setButtonSize(FloatingActionButton.SIZE_MINI);
@@ -240,16 +231,16 @@ public class GraficosActivity extends AppCompatActivity {
                         .contentColor(ContextCompat.getColor(v.getContext(), R.color.primary_text))
                         .titleColor(ContextCompat.getColor(v.getContext(), R.color.tile4))
                         .backgroundColor(ContextCompat.getColor(v.getContext(), R.color.tile1))
-                        .content(getResources().getString(R.string.auditoriaSeEliminara)+"\n"+getResources().getString(R.string.continuar))
+                        .content(getResources().getString(R.string.auditoriaSeEliminara) + "\n" + getResources().getString(R.string.continuar))
                         .positiveText(getResources().getString(R.string.si))
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            if (FuncionesPublicas.borrarAuditoriaSeleccionada(idAudit)){
-                                Intent intent= new Intent(GraficosActivity.this,ActivityMyAudits.class);
-                                startActivity(intent);
-                                GraficosActivity.this.finish();
-                            }
+                                if (FuncionesPublicas.borrarAuditoriaSeleccionada(idAudit)) {
+                                    Intent intent = new Intent(GraficosActivity.this, ActivityMyAudits.class);
+                                    startActivity(intent);
+                                    GraficosActivity.this.finish();
+                                }
                             }
                         })
                         .negativeText(getResources().getString(R.string.cancel))
@@ -280,16 +271,14 @@ public class GraficosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fabMenuGraficos.close(true);
-                Intent intent=new Intent(v.getContext(),ActivityLanding.class);
-                startActivity(intent);
-                GraficosActivity.this.finish();
+                //metodo rating
+                metodoRating();
             }
         });
 
 
-        config = getSharedPreferences("prefs",0);
-        boolean quiereVerTuto = config.getBoolean("quiereVerTuto",false);
-        boolean primeraVezFragmentRadar =config.getBoolean("primeraVezFragmentRadar",false);
+        boolean quiereVerTuto = config.getBoolean("quiereVerTuto", false);
+        boolean primeraVezFragmentRadar = config.getBoolean("primeraVezFragmentRadar", false);
 
         //SI EL USUARIO ELIGIO VER TUTORIALES ME FIJO SI YA PASO POR ESTA PAGINA.
         if (quiereVerTuto) {
@@ -298,7 +287,7 @@ public class GraficosActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = config.edit();
 
 
-                editor.putBoolean("primeraVezFragmentRadar",true);
+                editor.putBoolean("primeraVezFragmentRadar", true);
                 editor.commit();
 
                 seguirConTutorial();
@@ -329,23 +318,24 @@ public class GraficosActivity extends AppCompatActivity {
                                 .drawShadow(true)                   // Whether to draw a drop shadow or not
                                 .cancelable(true)
                                 .id(2)// Whether tapping outside the outer circle dismisses the view
-                                .tintTarget(false) )                 // Whether to tint the target view's color
+                                .tintTarget(false))                 // Whether to tint the target view's color
 
                 .listener(new TapTargetSequence.Listener() {
                     // This listener will tell us when interesting(tm) events happen in regards
                     // to the sequence
                     @Override
                     public void onSequenceFinish() {
-                       fabMenuGraficos.close(true);
+                        fabMenuGraficos.close(true);
 
-                    SharedPreferences config = config = getSharedPreferences("prefs",0);
-                    Boolean seTermino = config.getBoolean("estadoTuto",false);
-                    if (!seTermino) {
-                        SharedPreferences.Editor editor=config.edit();
-                        editor.putBoolean("estadoTuto",true);
-                        editor.commit();
+                        SharedPreferences config = config = getSharedPreferences("prefs", 0);
+                        Boolean seTermino = config.getBoolean("estadoTuto", false);
+                        if (!seTermino) {
+                            SharedPreferences.Editor editor = config.edit();
+                            editor.putBoolean("estadoTuto", true);
+                            editor.commit();
+                        }
                     }
-                    }
+
                     @Override
                     public void onSequenceStep(TapTarget tapTarget, boolean b) {
 
@@ -360,115 +350,115 @@ public class GraficosActivity extends AppCompatActivity {
     }
 
 
-    public void cargarGraficoRadar(){
-        FragmentRadar graficoFragment= new FragmentRadar();
-        Bundle bundle=new Bundle();
+    public void cargarGraficoRadar() {
+        FragmentRadar graficoFragment = new FragmentRadar();
+        Bundle bundle = new Bundle();
         bundle.putDouble(FragmentRadar.PUNJTAJE1, promedioSeiri);
         bundle.putDouble(FragmentRadar.PUNJTAJE2, promedioSeiton);
         bundle.putDouble(FragmentRadar.PUNJTAJE3, promedioSeiso);
         bundle.putDouble(FragmentRadar.PUNJTAJE4, promedioSeiketsu);
         bundle.putDouble(FragmentRadar.PUNJTAJE5, promedioShitsuke);
-        bundle.putString(FragmentRadar.AREA,areaAuditada);
+        bundle.putString(FragmentRadar.AREA, areaAuditada);
 
         graficoFragment.setArguments(bundle);
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.contenedorGraficos,graficoFragment,"radar");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.contenedorGraficos, graficoFragment, "radar");
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
-    public void cargarGraficoBarras(){
-        FragmentBarrasApiladas fragmentBarrasApiladas= new FragmentBarrasApiladas();
+    public void cargarGraficoBarras() {
+        FragmentBarrasApiladas fragmentBarrasApiladas = new FragmentBarrasApiladas();
 
-        Bundle bundle=new Bundle();
+        Bundle bundle = new Bundle();
         bundle.putDouble(FragmentBarrasApiladas.PROMEDIO3S, promedio5s);
         fragmentBarrasApiladas.setArguments(bundle);
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.contenedorGraficos,fragmentBarrasApiladas,"barras");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.contenedorGraficos, fragmentBarrasApiladas, "barras");
         fragmentTransaction.addToBackStack(null);
-       fragmentTransaction.commit();
+        fragmentTransaction.commit();
     }
 
-    public void calcularPuntajes(){
-        ControllerDatos controllerDatos=new ControllerDatos(this);
-        List<String>listaSeiri=controllerDatos.traerSeiri();
-        List<String>listaSeiton=controllerDatos.traerSeiton();
-        List<String>listaSeiso=controllerDatos.traerSeiso();
-        List<String>listaSeiketsu=controllerDatos.traerSeiketsu();
-        List<String>listaShitsuke=controllerDatos.traerShitsuke();
+    public void calcularPuntajes() {
+        ControllerDatos controllerDatos = new ControllerDatos(this);
+        List<String> listaSeiri = controllerDatos.traerSeiri();
+        List<String> listaSeiton = controllerDatos.traerSeiton();
+        List<String> listaSeiso = controllerDatos.traerSeiso();
+        List<String> listaSeiketsu = controllerDatos.traerSeiketsu();
+        List<String> listaShitsuke = controllerDatos.traerShitsuke();
         Realm realm = Realm.getDefaultInstance();
 
-        Auditoria mAudit=realm.where(Auditoria.class)
-                .equalTo("idAuditoria",idAudit)
+        Auditoria mAudit = realm.where(Auditoria.class)
+                .equalTo("idAuditoria", idAudit)
                 .findFirst();
-        areaAuditada=mAudit.getAreaAuditada().getNombreArea();
+        areaAuditada = mAudit.getAreaAuditada().getNombreArea();
 
-        Integer sumaSeiri=0;
-        Integer sumaSeiton =0;
-        Integer sumaSeiso=0;
-        Integer sumaSeiketsu=0;
-        Integer sumaShitsuke=0;
+        Integer sumaSeiri = 0;
+        Integer sumaSeiton = 0;
+        Integer sumaSeiso = 0;
+        Integer sumaSeiketsu = 0;
+        Integer sumaShitsuke = 0;
 
-        for (String unString:listaSeiri
-             ) {
+        for (String unString : listaSeiri
+                ) {
             SubItem resultSeiri = realm.where(SubItem.class)
-                    .equalTo("pertenencia", idAudit+unString)
+                    .equalTo("pertenencia", idAudit + unString)
                     .findFirst();
-            if (resultSeiri.getPuntuacion1()!=null) {
+            if (resultSeiri.getPuntuacion1() != null) {
                 sumaSeiri = sumaSeiri + resultSeiri.getPuntuacion1();
             }
         }
-        for (String unString:listaSeiton
+        for (String unString : listaSeiton
                 ) {
             SubItem resultSeiton = realm.where(SubItem.class)
-                    .equalTo("pertenencia", idAudit+unString)
+                    .equalTo("pertenencia", idAudit + unString)
                     .findFirst();
-            if (resultSeiton.getPuntuacion1()!=null) {
+            if (resultSeiton.getPuntuacion1() != null) {
                 sumaSeiton = sumaSeiton + resultSeiton.getPuntuacion1();
             }
         }
-        for (String unString:listaSeiso
+        for (String unString : listaSeiso
                 ) {
             SubItem resultSeiso = realm.where(SubItem.class)
-                    .equalTo("pertenencia", idAudit+unString)
+                    .equalTo("pertenencia", idAudit + unString)
                     .findFirst();
-            if (resultSeiso.getPuntuacion1()!=null) {
+            if (resultSeiso.getPuntuacion1() != null) {
                 sumaSeiso = sumaSeiso + resultSeiso.getPuntuacion1();
             }
         }
-        for (String unString:listaSeiketsu
+        for (String unString : listaSeiketsu
                 ) {
             SubItem resultSeiketsu = realm.where(SubItem.class)
-                    .equalTo("pertenencia", idAudit+unString)
+                    .equalTo("pertenencia", idAudit + unString)
                     .findFirst();
-            if (resultSeiketsu.getPuntuacion1()!=null) {
+            if (resultSeiketsu.getPuntuacion1() != null) {
                 sumaSeiketsu = sumaSeiketsu + resultSeiketsu.getPuntuacion1();
             }
         }
-        for (String unString:listaShitsuke
+        for (String unString : listaShitsuke
                 ) {
             SubItem resultShitsuke = realm.where(SubItem.class)
-                    .equalTo("pertenencia", idAudit+unString)
+                    .equalTo("pertenencia", idAudit + unString)
                     .findFirst();
-            if (resultShitsuke.getPuntuacion1()!=null) {
+            if (resultShitsuke.getPuntuacion1() != null) {
                 sumaShitsuke = sumaShitsuke + resultShitsuke.getPuntuacion1();
             }
         }
-        promedioSeiri=((sumaSeiri/4.0)/5.0);
-        promedioSeiton=((sumaSeiton /4.0)/5.0);
-        promedioSeiso=((sumaSeiso/4.0)/5.0);
-        promedioSeiketsu=((sumaSeiketsu/4.0)/5.0);
-        promedioShitsuke=((sumaShitsuke/4.0)/5.0);
+        promedioSeiri = ((sumaSeiri / 4.0) / 5.0);
+        promedioSeiton = ((sumaSeiton / 4.0) / 5.0);
+        promedioSeiso = ((sumaSeiso / 4.0) / 5.0);
+        promedioSeiketsu = ((sumaSeiketsu / 4.0) / 5.0);
+        promedioShitsuke = ((sumaShitsuke / 4.0) / 5.0);
 
-        promedio5s =(promedioSeiso+promedioSeiri+promedioSeiton+promedioSeiketsu+promedioShitsuke)/5.0;
+        promedio5s = (promedioSeiso + promedioSeiri + promedioSeiton + promedioSeiketsu + promedioShitsuke) / 5.0;
 
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 Auditoria mAudit = realm.where(Auditoria.class)
-                        .equalTo("idAuditoria",idAudit)
+                        .equalTo("idAuditoria", idAudit)
                         .findFirst();
                 mAudit.setPuntajeFinal(promedio5s);
             }
@@ -476,21 +466,15 @@ public class GraficosActivity extends AppCompatActivity {
         });
 
 
-
     }
 
-    @Override
-    public void onBackPressed() {
-        if (origenIntent.equals("myAudits")){
-            Intent unIntent= new Intent(this, ActivityMyAudits.class);
-            startActivity(unIntent);
-            GraficosActivity.this.finish();
-        }
-        else {
-            super.onBackPressed();
-            this.finish();
-        }
+    public void irALanding(){
+        Intent intent = new Intent(this, ActivityLanding.class);
+        startActivity(intent);
+        GraficosActivity.this.finish();
     }
+
+
 
     /*
     public void enviarePDF(){
@@ -558,9 +542,6 @@ public class GraficosActivity extends AppCompatActivity {
     */
 
 
-
-
-
     private class EnviarPDF extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -585,9 +566,9 @@ public class GraficosActivity extends AppCompatActivity {
     }
 
     private void registrarReportesEnviadosFirebase() {
-        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-        if (user!=null) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        if (user != null) {
             final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("reportesEnviados");
             final DatabaseReference referenceGlobal = mDatabase.child("estadisticas").child("reportesEnviados");
 
@@ -595,9 +576,9 @@ public class GraficosActivity extends AppCompatActivity {
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.getValue()!=null) {
-                        String cantReportes =dataSnapshot.getValue().toString();
-                        Integer numeroReportes= Integer.parseInt(cantReportes)+1;
+                    if (dataSnapshot.getValue() != null) {
+                        String cantReportes = dataSnapshot.getValue().toString();
+                        Integer numeroReportes = Integer.parseInt(cantReportes) + 1;
                         reference.setValue(numeroReportes.toString());
                     } else {
                         reference.setValue("1");
@@ -613,9 +594,9 @@ public class GraficosActivity extends AppCompatActivity {
             referenceGlobal.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.getValue()!=null) {
-                        String cantReportes =dataSnapshot.getValue().toString();
-                        Integer numeroReportes= Integer.parseInt(cantReportes)+1;
+                    if (dataSnapshot.getValue() != null) {
+                        String cantReportes = dataSnapshot.getValue().toString();
+                        Integer numeroReportes = Integer.parseInt(cantReportes) + 1;
                         referenceGlobal.setValue(numeroReportes.toString());
                     } else {
                         referenceGlobal.setValue("1");
@@ -723,44 +704,43 @@ public class GraficosActivity extends AppCompatActivity {
     public void outputToFile(String fileName, String pdfContent, String encoding) {
         if (existeDirectorio()) {
 
-            File newFile = new File(getExternalFilesDir(null)+ File.separator + "nomad" +File.separator+ "audit5s" + File.separator  + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator+"audits"+File.separator+fileName);
+            File newFile = new File(getExternalFilesDir(null) + File.separator + "nomad" + File.separator + "audit5s" + File.separator + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator + "audits" + File.separator + fileName);
 
-                try {
-                    FileOutputStream pdfFile = new FileOutputStream(newFile);
-                    pdfFile.write(pdfContent.getBytes(encoding));
-                    pdfFile.close();
-                    Uri path = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".my.package.name.provider",newFile);
+            try {
+                FileOutputStream pdfFile = new FileOutputStream(newFile);
+                pdfFile.write(pdfContent.getBytes(encoding));
+                pdfFile.close();
+                Uri path = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".my.package.name.provider", newFile);
 
-                    //Uri path = Uri.fromFile(newFile);
-                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                    // set the type to 'email'
-                    emailIntent.setType("vnd.android.cursor.dir/email");
-                    String to[] = {""};
-                    emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-                    // the attachment
-                    emailIntent.putExtra(Intent.EXTRA_STREAM, path);
-                    // the mail subject
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.reporteAuditoria));
-                    startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.enviarMail)));
+                //Uri path = Uri.fromFile(newFile);
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                // set the type to 'email'
+                emailIntent.setType("vnd.android.cursor.dir/email");
+                String to[] = {""};
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+                // the attachment
+                emailIntent.putExtra(Intent.EXTRA_STREAM, path);
+                // the mail subject
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.reporteAuditoria));
+                startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.enviarMail)));
 
 
             } catch (IOException e) {
                 Log.e("NOMAD/ERROR", "exception", e);
             }
-        }
-        else{
+        } else {
             Toast.makeText(this, getResources().getString(R.string.errorRevisarPermisos), Toast.LENGTH_SHORT).show();
         }
     }
 
     private Boolean existeDirectorio() {
         Boolean hayPermit = Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        Boolean sePudo=true;
-            File dir = new File(getExternalFilesDir(null)+ File.separator + "nomad" +File.separator+ "audit5s" + File.separator  + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator+"audits");
-            if (!dir.exists() || !dir.isDirectory()) {
-                sePudo = dir.mkdirs();
-            }
-            return sePudo;
+        Boolean sePudo = true;
+        File dir = new File(getExternalFilesDir(null) + File.separator + "nomad" + File.separator + "audit5s" + File.separator + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator + "audits");
+        if (!dir.exists() || !dir.isDirectory()) {
+            sePudo = dir.mkdirs();
+        }
+        return sePudo;
     }
 
     public Bitmap screenShot(View view) {
@@ -771,86 +751,85 @@ public class GraficosActivity extends AppCompatActivity {
         return bitmap;
     }
 
-    public void cargarGraficos(Auditoria unAudit){
+    public void cargarGraficos(Auditoria unAudit) {
         writer.newPage();
 
-        int cursorX=MARGEN_IZQUIERDO;
-        int cursorY=792;
+        int cursorX = MARGEN_IZQUIERDO;
+        int cursorY = 792;
         //fuente titulo
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
         //escribir titulo
-        writer.addText(cursorX,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
-        cursorY=cursorY-MARGEN_IZQUIERDO;
-        cursorX=cursorX+MARGEN_IZQUIERDO;
+        writer.addText(cursorX, PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO, 20, getResources().getString(R.string.tituloPdf));
+        cursorY = cursorY - MARGEN_IZQUIERDO;
+        cursorX = cursorX + MARGEN_IZQUIERDO;
         //fuente fecha escribir fecga
 
-        cursorY=cursorY-SALTO_LINEA;
+        cursorY = cursorY - SALTO_LINEA;
 
 
         //linea separacion
-        writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
-        cursorY=PaperSize.LETTER_HEIGHT-65;
-        cursorY=cursorY-SALTO_LINEA;
-        cursorX=MARGEN_IZQUIERDO;
+        writer.addLine(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65), PaperSize.LETTER_WIDTH - MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65));
+        cursorY = PaperSize.LETTER_HEIGHT - 65;
+        cursorY = cursorY - SALTO_LINEA;
+        cursorX = MARGEN_IZQUIERDO;
 
 
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT-(75),12,getResources().getString(R.string.ResultadoFinal));
-
+        writer.addText(PaperSize.LETTER_WIDTH - 4 * MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (75), 12, getResources().getString(R.string.ResultadoFinal));
 
 
         //agrego puntaje final
-        Locale locale = new Locale("en","US");
+        Locale locale = new Locale("en", "US");
         NumberFormat format = NumberFormat.getPercentInstance(locale);
         String percentage1 = format.format(unAudit.getPuntajeFinal());
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(85+SALTO_LINEA),12,getResources().getString(R.string.puntajeFinal)+percentage1);
+        writer.addText(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (85 + SALTO_LINEA), 12, getResources().getString(R.string.puntajeFinal) + percentage1);
 
         View rootView = this.getWindow().getDecorView().findViewById(android.R.id.content);
         View v = rootView.findViewById(R.id.contenedorGraficos);
 
-        Bitmap unBitmap=screenShot(v);
-        Bitmap scaledBitmap= scaleSinRotar(unBitmap,250);
-       // Bitmap SunBitmap=Bitmap.createScaledBitmap(unBitmap, 300,510,false);
-        writer.addImage(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-85-SALTO_LINEA-scaledBitmap.getHeight()-SEPARACIONFOTOS,scaledBitmap);
+        Bitmap unBitmap = screenShot(v);
+        Bitmap scaledBitmap = scaleSinRotar(unBitmap, 250);
+        // Bitmap SunBitmap=Bitmap.createScaledBitmap(unBitmap, 300,510,false);
+        writer.addImage(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - 85 - SALTO_LINEA - scaledBitmap.getHeight() - SEPARACIONFOTOS, scaledBitmap);
 
     }
 
 
-    public void enviarPDF(){
+    public void enviarPDF() {
 
-        ControllerDatos controllerDatos=new ControllerDatos(this);
-        Realm realm= Realm.getDefaultInstance();
-        Auditoria mAudit= realm.where(Auditoria.class)
-                .equalTo("idAuditoria",idAudit)
+        ControllerDatos controllerDatos = new ControllerDatos(this);
+        Realm realm = Realm.getDefaultInstance();
+        Auditoria mAudit = realm.where(Auditoria.class)
+                .equalTo("idAuditoria", idAudit)
                 .findFirst();
 
-        List<String>alistaSeiri=controllerDatos.traerSeiri();
-        List<String>alistaSeiton=controllerDatos.traerSeiton();
-        List<String>alistaSeiso=controllerDatos.traerSeiso();
-        List<String>alistaSeiketsu=controllerDatos.traerSeiketsu();
-        List<String>alistaShitsuke=controllerDatos.traerShitsuke();
+        List<String> alistaSeiri = controllerDatos.traerSeiri();
+        List<String> alistaSeiton = controllerDatos.traerSeiton();
+        List<String> alistaSeiso = controllerDatos.traerSeiso();
+        List<String> alistaSeiketsu = controllerDatos.traerSeiketsu();
+        List<String> alistaShitsuke = controllerDatos.traerShitsuke();
 
-        List<SubItem>unListaSeiri=new ArrayList<>();
-        List<SubItem>unListaSeiton=new ArrayList<>();
-        List<SubItem>unListaSeiso=new ArrayList<>();
-        List<SubItem>unListaSeiketsu=new ArrayList<>();
-        List<SubItem>unListaShitsuke=new ArrayList<>();
+        List<SubItem> unListaSeiri = new ArrayList<>();
+        List<SubItem> unListaSeiton = new ArrayList<>();
+        List<SubItem> unListaSeiso = new ArrayList<>();
+        List<SubItem> unListaSeiketsu = new ArrayList<>();
+        List<SubItem> unListaShitsuke = new ArrayList<>();
 
-        for (SubItem sub:mAudit.getSubItems()
+        for (SubItem sub : mAudit.getSubItems()
                 ) {
-            if (alistaSeiri.contains(sub.getId())){
+            if (alistaSeiri.contains(sub.getId())) {
                 unListaSeiri.add(sub);
             }
-            if (alistaSeiton.contains(sub.getId())){
+            if (alistaSeiton.contains(sub.getId())) {
                 unListaSeiton.add(sub);
             }
-            if (alistaSeiso.contains(sub.getId())){
+            if (alistaSeiso.contains(sub.getId())) {
                 unListaSeiso.add(sub);
             }
-            if (alistaSeiketsu.contains(sub.getId())){
+            if (alistaSeiketsu.contains(sub.getId())) {
                 unListaSeiketsu.add(sub);
             }
-            if (alistaShitsuke.contains(sub.getId())){
+            if (alistaShitsuke.contains(sub.getId())) {
                 unListaShitsuke.add(sub);
             }
         }
@@ -867,155 +846,150 @@ public class GraficosActivity extends AppCompatActivity {
         crearPdfEse(unListaShitsuke);
         cargarGraficos(mAudit);
 
-        outputToFile("5S Report-"+mAudit.getAreaAuditada().getNombreArea()+"-"+mAudit.getFechaAuditoria()+".pdf", writer.asString(), "ISO-8859-1");
+        outputToFile("5S Report-" + mAudit.getAreaAuditada().getNombreArea() + "-" + mAudit.getFechaAuditoria() + ".pdf", writer.asString(), "ISO-8859-1");
     }
-
 
 
     /**
      * Scales the provided bitmap to have the height and width provided.
      * (Alternative method for scaling bitmaps
      * since Bitmap.createScaledBitmap(...) produces bad (blocky) quality bitmaps.)
-
      */
 
-    public void crearPdfEse(List<SubItem> laLista){
+    public void crearPdfEse(List<SubItem> laLista) {
 
-        Integer cursorX=0;
-        Integer cursorY=792;
+        Integer cursorX = 0;
+        Integer cursorY = 792;
         Integer renglonesFoto;
 
 //        traigo la auditoria que quiero armar
-        Realm realm= Realm.getDefaultInstance();
-        Auditoria mAudit= realm.where(Auditoria.class)
-                .equalTo("idAuditoria",idAudit)
+        Realm realm = Realm.getDefaultInstance();
+        Auditoria mAudit = realm.where(Auditoria.class)
+                .equalTo("idAuditoria", idAudit)
                 .findFirst();
 
 //        declaro el pdwriter
         //fuente titulo
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
         //escribir titulo
-        writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
-        cursorY=cursorY-MARGEN_IZQUIERDO;
-        cursorX=cursorX+MARGEN_IZQUIERDO;
+        writer.addText(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO, 20, getResources().getString(R.string.tituloPdf));
+        cursorY = cursorY - MARGEN_IZQUIERDO;
+        cursorX = cursorX + MARGEN_IZQUIERDO;
         //fuente fecha escribir fecga
-        writer.addText(cursorX, cursorY-SALTO_LINEA,12,getResources().getString(R.string.fecha)+mAudit.getFechaAuditoria());
-        cursorY=cursorY-SALTO_LINEA;
+        writer.addText(cursorX, cursorY - SALTO_LINEA, 12, getResources().getString(R.string.fecha) + mAudit.getFechaAuditoria());
+        cursorY = cursorY - SALTO_LINEA;
         writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-        writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
+        writer.addText(PaperSize.LETTER_WIDTH - 4 * MARGEN_IZQUIERDO, cursorY, 12, laLista.get(0).getaQuePertenece());
 
         //linea separacion
-        writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
-        cursorY=PaperSize.LETTER_HEIGHT-65;
-        cursorY=cursorY-SALTO_LINEA;
-        cursorX=MARGEN_IZQUIERDO;
+        writer.addLine(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65), PaperSize.LETTER_WIDTH - MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65));
+        cursorY = PaperSize.LETTER_HEIGHT - 65;
+        cursorY = cursorY - SALTO_LINEA;
+        cursorX = MARGEN_IZQUIERDO;
 //        EMPIEZO A RECORRER LOS SUBITEMS
-        recorrerSubitemLista(laLista,cursorX, cursorY,mAudit.getFechaAuditoria());
+        recorrerSubitemLista(laLista, cursorX, cursorY, mAudit.getFechaAuditoria());
     }
 
-    private void recorrerSubitemLista(List<SubItem>laLista,int x, int y,String fecha) {
-        int cursorX=x;
-        int cursorY=y;
+    private void recorrerSubitemLista(List<SubItem> laLista, int x, int y, String fecha) {
+        int cursorX = x;
+        int cursorY = y;
         for (SubItem sub : laLista) {
-            cursorX=MARGEN_IZQUIERDO;
-            cursorY = cursorY-(SEPARACIONFOTOS/2);
-            if (cursorY<2*MARGEN_IZQUIERDO) {
+            cursorX = MARGEN_IZQUIERDO;
+            cursorY = cursorY - (SEPARACIONFOTOS / 2);
+            if (cursorY < 2 * MARGEN_IZQUIERDO) {
                 writer.newPage();
 
-                cursorX=0;
-                cursorY=792;
+                cursorX = 0;
+                cursorY = 792;
                 //fuente titulo
                 writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
                 //escribir titulo
-                writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
-                cursorY=cursorY-MARGEN_IZQUIERDO;
-                cursorX=cursorX+MARGEN_IZQUIERDO;
+                writer.addText(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO, 20, getResources().getString(R.string.tituloPdf));
+                cursorY = cursorY - MARGEN_IZQUIERDO;
+                cursorX = cursorX + MARGEN_IZQUIERDO;
                 //fuente fecha escribir fecga
-                writer.addText(cursorX, cursorY-SALTO_LINEA,12,getResources().getString(R.string.fecha)+fecha);
-                cursorY=cursorY-SALTO_LINEA;
+                writer.addText(cursorX, cursorY - SALTO_LINEA, 12, getResources().getString(R.string.fecha) + fecha);
+                cursorY = cursorY - SALTO_LINEA;
                 writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-                writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
+                writer.addText(PaperSize.LETTER_WIDTH - 4 * MARGEN_IZQUIERDO, cursorY, 12, laLista.get(0).getaQuePertenece());
 
                 //linea separacion
-                writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
-                cursorY=PaperSize.LETTER_HEIGHT-65;
-                cursorY=cursorY-SALTO_LINEA;
-                cursorX=MARGEN_IZQUIERDO;
+                writer.addLine(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65), PaperSize.LETTER_WIDTH - MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65));
+                cursorY = PaperSize.LETTER_HEIGHT - 65;
+                cursorY = cursorY - SALTO_LINEA;
+                cursorX = MARGEN_IZQUIERDO;
 
             }
 
-            writer.addText(cursorX,cursorY-SALTO_LINEA,12,sub.getEnunciado());
-            cursorY=cursorY-SALTO_LINEA;
-            writer.addText(cursorX,cursorY-SALTO_LINEA,12,getResources().getString(R.string.score)+sub.getPuntuacion1().toString());
-            cursorY=cursorY-2*SALTO_LINEA;
+            writer.addText(cursorX, cursorY - SALTO_LINEA, 12, sub.getEnunciado());
+            cursorY = cursorY - SALTO_LINEA;
+            writer.addText(cursorX, cursorY - SALTO_LINEA, 12, getResources().getString(R.string.score) + sub.getPuntuacion1().toString());
+            cursorY = cursorY - 2 * SALTO_LINEA;
 
             //renglonesFoto=Math.round(sub.getListaFotos().size()/3);
-            for (Foto foto:sub.getListaFotos()
+            for (Foto foto : sub.getListaFotos()
                     ) {
-                Foto unaFoto=foto;
-                File unFile= new File(unaFoto.getRutaFoto());
+                Foto unaFoto = foto;
+                File unFile = new File(unaFoto.getRutaFoto());
                 BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                bmOptions.inScaled=false;
-                Bitmap rawBitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(),bmOptions);
-                Bitmap bitmapScaled = scaleBitmap(rawBitmap,270);
+                bmOptions.inScaled = false;
+                Bitmap rawBitmap = BitmapFactory.decodeFile(unFile.getAbsolutePath(), bmOptions);
+                Bitmap bitmapScaled = scaleBitmap(rawBitmap, 270);
 
 
 //                    SI LA FOTO NO ENTRA EN LO QUE QUEDA DE PAGINA
-                if (cursorY-bitmapScaled.getHeight()<SALTO_LINEA){
+                if (cursorY - bitmapScaled.getHeight() < SALTO_LINEA) {
                     //si la imagen no entra armo una pagina nueva
                     //vuelvo a poner los titulos y demas
                     writer.newPage();
-                    cursorX=0;
-                    cursorY=792;
+                    cursorX = 0;
+                    cursorY = 792;
                     //fuente titulo
                     writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
                     //escribir titulo
-                    writer.addText(MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO,20,getResources().getString(R.string.tituloPdf));
-                    cursorY=cursorY-MARGEN_IZQUIERDO;
-                    cursorX=cursorX+MARGEN_IZQUIERDO;
+                    writer.addText(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - MARGEN_IZQUIERDO, 20, getResources().getString(R.string.tituloPdf));
+                    cursorY = cursorY - MARGEN_IZQUIERDO;
+                    cursorX = cursorX + MARGEN_IZQUIERDO;
                     //fuente fecha escribir fecga
-                    writer.addText(cursorX, cursorY-SALTO_LINEA,12,getResources().getString(R.string.fecha)+fecha);
-                    cursorY=cursorY-SALTO_LINEA;
+                    writer.addText(cursorX, cursorY - SALTO_LINEA, 12, getResources().getString(R.string.fecha) + fecha);
+                    cursorY = cursorY - SALTO_LINEA;
                     writer.setFont(StandardFonts.SUBTYPE, StandardFonts.HELVETICA, StandardFonts.WIN_ANSI_ENCODING);
-                    writer.addText(PaperSize.LETTER_WIDTH-4*MARGEN_IZQUIERDO, cursorY,12,laLista.get(0).getaQuePertenece());
+                    writer.addText(PaperSize.LETTER_WIDTH - 4 * MARGEN_IZQUIERDO, cursorY, 12, laLista.get(0).getaQuePertenece());
 
                     //linea separacion
-                    writer.addLine( MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65),PaperSize.LETTER_WIDTH-MARGEN_IZQUIERDO,PaperSize.LETTER_HEIGHT-(65));
-                    cursorY=PaperSize.LETTER_HEIGHT-65;
-                    cursorY=cursorY-SALTO_LINEA;
-                    cursorX=MARGEN_IZQUIERDO;
+                    writer.addLine(MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65), PaperSize.LETTER_WIDTH - MARGEN_IZQUIERDO, PaperSize.LETTER_HEIGHT - (65));
+                    cursorY = PaperSize.LETTER_HEIGHT - 65;
+                    cursorY = cursorY - SALTO_LINEA;
+                    cursorX = MARGEN_IZQUIERDO;
 
                     //FINALMENTE AGREGO LA FOTO
-                    writer.addImage(cursorX,cursorY-bitmapScaled.getHeight(),bitmapScaled);
-                    writer.addText(cursorX,cursorY-bitmapScaled.getHeight()-SEPARACIONFOTOS,10,unaFoto.getComentario());
-                    cursorX=cursorX+bitmapScaled.getWidth()+ SALTO_LINEA;
-                    cursorY=cursorY-bitmapScaled.getHeight();
-                }
-                else{
+                    writer.addImage(cursorX, cursorY - bitmapScaled.getHeight(), bitmapScaled);
+                    writer.addText(cursorX, cursorY - bitmapScaled.getHeight() - SEPARACIONFOTOS, 10, unaFoto.getComentario());
+                    cursorX = cursorX + bitmapScaled.getWidth() + SALTO_LINEA;
+                    cursorY = cursorY - bitmapScaled.getHeight();
+                } else {
 //                        SI HAY LUGAR HACIA ABAJO CHEQUEO QUE ENTRE HORIZONTALMENTE
-                    if (cursorX+bitmapScaled.getWidth()>612-MARGEN_IZQUIERDO){
+                    if (cursorX + bitmapScaled.getWidth() > 612 - MARGEN_IZQUIERDO) {
 //                            NO ENTRA
 //                            LA PONGO ABAJO
-                        cursorX=MARGEN_IZQUIERDO;
-                        cursorY=cursorY-bitmapScaled.getHeight()-SEPARACIONFOTOS;
-                        writer.addImage(cursorX,cursorY,bitmapScaled);
-                        writer.addText(cursorX,cursorY-SEPARACIONFOTOS,10,unaFoto.getComentario());
-                        cursorX=cursorX+bitmapScaled.getWidth();
+                        cursorX = MARGEN_IZQUIERDO;
+                        cursorY = cursorY - bitmapScaled.getHeight() - SEPARACIONFOTOS;
+                        writer.addImage(cursorX, cursorY, bitmapScaled);
+                        writer.addText(cursorX, cursorY - SEPARACIONFOTOS, 10, unaFoto.getComentario());
+                        cursorX = cursorX + bitmapScaled.getWidth();
 
-                    }
-                    else {
+                    } else {
                         if (cursorX == MARGEN_IZQUIERDO) {
                             writer.addImage(cursorX, cursorY - bitmapScaled.getHeight(), bitmapScaled);
-                            writer.addText(cursorX,cursorY-bitmapScaled.getHeight()-SEPARACIONFOTOS,10,unaFoto.getComentario());
+                            writer.addText(cursorX, cursorY - bitmapScaled.getHeight() - SEPARACIONFOTOS, 10, unaFoto.getComentario());
                             cursorX = cursorX + bitmapScaled.getWidth();
-                            cursorY = cursorY-bitmapScaled.getHeight();
-                        }
-                        else {
+                            cursorY = cursorY - bitmapScaled.getHeight();
+                        } else {
 //                       ENTRA EN LA MISMA LINEA
                             writer.addImage(cursorX + SEPARACIONFOTOS, cursorY, bitmapScaled);
-                            writer.addText(cursorX+SEPARACIONFOTOS,cursorY-SEPARACIONFOTOS,10,unaFoto.getComentario());
+                            writer.addText(cursorX + SEPARACIONFOTOS, cursorY - SEPARACIONFOTOS, 10, unaFoto.getComentario());
                             cursorX = cursorX + SEPARACIONFOTOS + bitmapScaled.getWidth();
-                            cursorY=cursorY-SEPARACIONFOTOS;
+                            cursorY = cursorY - SEPARACIONFOTOS;
                         }
                     }
                 }
@@ -1028,15 +1002,14 @@ public class GraficosActivity extends AppCompatActivity {
         Matrix rotMatrix = new Matrix();
         rotMatrix.postRotate(90);
 
-        if (elBit.getWidth()>elBit.getHeight()){
-            bitmap=elBit;
+        if (elBit.getWidth() > elBit.getHeight()) {
+            bitmap = elBit;
+        } else {
+            bitmap = Bitmap.createBitmap(elBit, 0, 0, elBit.getWidth(), elBit.getHeight(), rotMatrix, true);
         }
-        else{
-            bitmap=Bitmap.createBitmap(elBit , 0, 0, elBit.getWidth(), elBit .getHeight(), rotMatrix, true);
-        }
-        Double proporcion=(bitmap.getWidth()*1.00/bitmap.getHeight()*1.00);
+        Double proporcion = (bitmap.getWidth() * 1.00 / bitmap.getHeight() * 1.00);
 
-        int newHeight=(int)Math.round(newWidth / proporcion);
+        int newHeight = (int) Math.round(newWidth / proporcion);
         Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
 
         float scaleX = newWidth / (float) bitmap.getWidth();
@@ -1046,7 +1019,7 @@ public class GraficosActivity extends AppCompatActivity {
 
         Matrix scaleMatrix = new Matrix();
         scaleMatrix.setScale(scaleX, scaleY, pivotX, pivotY);
-        if (bitmap.getHeight()>bitmap.getWidth()){
+        if (bitmap.getHeight() > bitmap.getWidth()) {
             scaleMatrix.postRotate(90);
         }
         Canvas canvas = new Canvas(scaledBitmap);
@@ -1054,12 +1027,13 @@ public class GraficosActivity extends AppCompatActivity {
         canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
         return scaledBitmap;
     }
+
     public static Bitmap scaleSinRotar(Bitmap bitmap, int newWidth) {
 
 
-        Double proporcion=(bitmap.getWidth()*1.00/bitmap.getHeight()*1.00);
+        Double proporcion = (bitmap.getWidth() * 1.00 / bitmap.getHeight() * 1.00);
 
-        int newHeight=(int)Math.round(newWidth / proporcion);
+        int newHeight = (int) Math.round(newWidth / proporcion);
         Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
 
         float scaleX = newWidth / (float) bitmap.getWidth();
@@ -1074,6 +1048,202 @@ public class GraficosActivity extends AppCompatActivity {
         canvas.setMatrix(scaleMatrix);
         canvas.drawBitmap(bitmap, 0, 0, new Paint(Paint.FILTER_BITMAP_FLAG));
         return scaledBitmap;
+    }
+
+    public void metodoRating() {
+        boolean quiereVerRating = config.getBoolean("quiereVerRating", true);
+
+        if (quiereVerRating) {
+            Integer contadorPaRating = config.getInt("contadorPaRating", 0);
+            final SharedPreferences.Editor editor = config.edit();
+
+            if (contadorPaRating == 0 || contadorPaRating == 4) {
+                //dialogo de rating
+
+                new MaterialDialog.Builder(this)
+                        .title(getResources().getString(R.string.titRating))
+                        .buttonsGravity(GravityEnum.CENTER)
+                        .contentColor(ContextCompat.getColor(this, R.color.primary_text))
+                        .backgroundColor(ContextCompat.getColor(this, R.color.tile1))
+                        .positiveText(getResources().getString(R.string.ok))
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                editor.putBoolean("quiereVerRating", false);
+                                editor.commit();
+                                rateApp();
+                                registrarEnvioDeRating();
+                            }
+                        })
+                        .negativeText(getResources().getString(R.string.no))
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                editor.putBoolean("quiereVerRating", false);
+                                editor.commit();
+
+                                irALanding();
+                            }
+                        })
+                        .neutralText(getResources().getString(R.string.later))
+                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                editor.putInt("contadorPaRating", 1);
+                                editor.commit();
+                                irALanding();
+                            }
+                        })
+                        .titleColor(ContextCompat.getColor(this, R.color.tile4))
+                        .content(getResources().getString(R.string.rateUsl1)+"\n"+getResources().getString(R.string.rateUsl2))
+                        .show();
+
+            } else {
+                contadorPaRating = contadorPaRating + 1;
+                editor.putInt("contadorPaRating", contadorPaRating);
+                editor.commit();
+                irALanding();
+            }
+
+        }
+        else{
+            irALanding();
+        }
+
+    }
+
+    private void registrarEnvioDeRating() {
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            if (user != null) {
+                final DatabaseReference reference = mDatabase.child("usuarios").child(user.getUid()).child("estadisticas").child("calificoApp");
+
+                //---leer cantidad de auditorias---//
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        reference.setValue("si");
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+    }
+
+
+    public void metodoRatingOnBack() {
+        boolean quiereVerRating = config.getBoolean("quiereVerRating", true);
+
+        if (quiereVerRating) {
+            Integer contadorPaRating = config.getInt("contadorPaRating", 0);
+            final SharedPreferences.Editor editor = config.edit();
+
+            if (contadorPaRating == 0 || contadorPaRating == 4) {
+                //dialogo de rating
+
+                new MaterialDialog.Builder(this)
+                        .title(getResources().getString(R.string.titRating))
+                        .buttonsGravity(GravityEnum.CENTER)
+                        .contentColor(ContextCompat.getColor(this, R.color.primary_text))
+                        .backgroundColor(ContextCompat.getColor(this, R.color.tile1))
+                        .positiveText(getResources().getString(R.string.ok))
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                editor.putBoolean("quiereVerRating", false);
+                                editor.commit();
+                                rateApp();
+                            }
+                        })
+                        .negativeText(getResources().getString(R.string.no))
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                editor.putBoolean("quiereVerRating", false);
+                                editor.commit();
+
+                                definirDondeIrOnBack();
+                            }
+                        })
+                        .neutralText(getResources().getString(R.string.later))
+                        .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                editor.putInt("contadorPaRating", 1);
+                                editor.commit();
+
+                                definirDondeIrOnBack();
+                            }
+                        })
+                        .titleColor(ContextCompat.getColor(this, R.color.tile4))
+                        .content(getResources().getString(R.string.rateUsl1)+"\n"+getResources().getString(R.string.rateUsl2))
+                        .show();
+
+            } else {
+                contadorPaRating = contadorPaRating + 1;
+                editor.putInt("contadorPaRating", contadorPaRating);
+                editor.commit();
+                definirDondeIrOnBack();
+
+            }
+
+        }
+        else{
+            definirDondeIrOnBack();
+        }
+
+    }
+
+
+    public void rateApp()
+    {
+        try
+        {
+            Intent rateIntent = rateIntentForUrl("market://details");
+            startActivity(rateIntent);
+        }
+        catch (ActivityNotFoundException e)
+        {
+            Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
+            startActivity(rateIntent);
+        }
+    }
+
+    private Intent rateIntentForUrl(String url)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
+        int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
+        if (Build.VERSION.SDK_INT >= 21)
+        {
+            flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
+        }
+        else
+        {
+            //noinspection deprecation
+            flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
+        }
+        intent.addFlags(flags);
+        return intent;
+    }
+    @Override
+    public void onBackPressed() {
+        metodoRatingOnBack();
+
+    }
+
+    public void definirDondeIrOnBack(){
+        if (origenIntent.equals("myAudits")) {
+            Intent unIntent = new Intent(GraficosActivity.this, ActivityMyAudits.class);
+            startActivity(unIntent);
+        } else {
+            GraficosActivity.super.onBackPressed();
+
+        }
+        GraficosActivity.this.finish();
     }
 
 

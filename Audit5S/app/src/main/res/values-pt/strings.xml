@@ -283,6 +283,10 @@
     <string name="later">Após</string>
     <string name="tit_quit">Sair</string>
     <string name="des_quit">Deseja sair do e-5S?</string>
+    <string name="rateUsl1">Obrigado por usar nosso aplicativo!</string>
+    <string name="rateUsl2">Você gostaria de nos ajudar a avaliar o aplicativo na App Store?</string>
+    <string name="titRating">Apoie este aplicativo</string>
+    <string name="rateOurApp">Avalie o aplicativo</string>
 
 </resources>
 
