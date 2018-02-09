@@ -131,9 +131,9 @@ public class GraficosActivity extends AppCompatActivity {
         //--guardar auditoria en firebase--//
 
 
-        FragmentActivity unaActivity = (FragmentActivity) this;
+        FragmentActivity unaActivity = this;
         FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-        FragmentManageAreas fragmentRadar = (FragmentManageAreas) fragmentManager.findFragmentByTag("radar");
+        FragmentRadar fragmentRadar = (FragmentRadar) fragmentManager.findFragmentByTag("radar");
 
         calcularPuntajes();
 
