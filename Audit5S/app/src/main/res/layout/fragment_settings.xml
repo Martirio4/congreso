@@ -47,11 +47,6 @@
 
                 </FrameLayout>
 
-
-
-
-
-
         </LinearLayout>
         <LinearLayout
             android:paddingStart="@dimen/margenChico"

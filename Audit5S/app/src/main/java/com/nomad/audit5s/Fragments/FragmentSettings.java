@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
@@ -210,6 +211,7 @@ public class FragmentSettings extends Fragment {
                     editor.putBoolean("primeraVezFragmentLanding",false);
                     editor.commit();
                     tuto.setText(R.string.desactivarTuto);
+                    Toast.makeText(getContext(), getResources().getString(R.string.tutoIsOn), Toast.LENGTH_SHORT).show();
 
                 }
                 else{
@@ -225,6 +227,7 @@ public class FragmentSettings extends Fragment {
 
                     editor.commit();
                     tuto.setText(R.string.activarTuto);
+                    Toast.makeText(getContext(), getResources().getString(R.string.tutoIsOff), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -316,7 +319,7 @@ public class FragmentSettings extends Fragment {
                                 .tintTarget(false)
                                 .targetRadius(80)
                                 .id(4),
-                        TapTarget.forView(lin5, getResources().getString(R.string.tutorial_tit_delete), getResources().getString(R.string.tutorial_desc_delete))
+                        TapTarget.forView(lin4, getResources().getString(R.string.tutorial_tit_delete), getResources().getString(R.string.tutorial_desc_delete))
                                 .transparentTarget(false)
                                 .outerCircleColor(R.color.tutorial1)
                                 .textColor(R.color.primary_text)

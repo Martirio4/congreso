@@ -287,6 +287,8 @@
     <string name="rateUsl2">Você gostaria de nos ajudar a avaliar o aplicativo na App Store?</string>
     <string name="titRating">Apoie este aplicativo</string>
     <string name="rateOurApp">Avalie o aplicativo</string>
+    <string name="tutoIsOn">Tutorial foi ativado</string>
+    <string name="tutoIsOff">Tutorial foi desligado</string>
 
 </resources>
 

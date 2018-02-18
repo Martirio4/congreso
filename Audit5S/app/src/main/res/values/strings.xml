@@ -380,6 +380,8 @@ Even in other areas that they frequent or work.
     <string name="rateUsl2">Would you like to help us by rating the app in the App store?</string>
     <string name="titRating">Support this app</string>
     <string name="rateOurApp">Rate our app</string>
+    <string name="tutoIsOn">Tutorial has been turned on</string>
+    <string name="tutoIsOff">Tutorial has been turned off</string>
 
 
 </resources>

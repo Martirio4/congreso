@@ -614,5 +614,7 @@
     <string name="rateUsl2">¿Te gustaría ayudarnos clasificando la App en la tienda de aplicaciones?</string>
     <string name="titRating">Apoya esta app.</string>
     <string name="rateOurApp">Califica la App</string>
+    <string name="tutoIsOn">El tutorial ha sido activado</string>
+    <string name="tutoIsOff">El tutorial ha sido desactivado</string>
 
 </resources>
