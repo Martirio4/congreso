@@ -53,9 +53,6 @@ public class AdapterPagerSubItems extends FragmentStatePagerAdapter {
 
     public void setListaSubItems(RealmList<SubItem> listaSubItems) {
         this.listaSubItems = listaSubItems;
-        for (SubItem unSubItem : listaSubItems) {
-            listaFragments.add(FragmentSubitem.CrearfragmentSubItem(unSubItem));
-        }
         notifyDataSetChanged();
     }
 

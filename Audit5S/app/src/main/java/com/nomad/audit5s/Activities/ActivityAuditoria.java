@@ -80,10 +80,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
         drawerLayout = (DrawerLayout) findViewById(R.id.elDrawer);
         navigationView = (NavigationView) findViewById(R.id.naview);
-        pager=(ViewPager)findViewById(R.id.viewPagerAuditoria);
+
         fabMenu=(FloatingActionMenu)findViewById(R.id.fab_menu);
 
 //        SETEAR EL VIEWPAGER
+        pager=(ViewPager)findViewById(R.id.viewPagerAuditoria);
+
         controllerDatos=new ControllerDatos(this);
         adapterPager=new AdapterPagerSubItems(getSupportFragmentManager());
         adapterPager.setListaSubItems(controllerDatos.traerSubItems());
