@@ -2,23 +2,21 @@ package com.nomad.audit5s.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -26,43 +24,34 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.firebase.auth.FirebaseAuth;
+import com.nomad.audit5s.R;
 import com.nomad.audit5s.adapter.AdapterPagerSubItems;
 import com.nomad.audit5s.controller.ControllerDatos;
-import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
 import com.nomad.audit5s.fragments.FragmentSubitem;
 import com.nomad.audit5s.model.Area;
 import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.model.SubItem;
-import com.nomad.audit5s.R;
-import com.nomad.audit5s.services.ServiceLoco;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
 
-import io.fabric.sdk.android.services.common.SafeToast;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
 
-public class ActivityAuditoria extends AppCompatActivity implements FragmentSubitem.Avisable{
+public class ActivityAuditoria extends AppCompatActivity implements FragmentSubitem.Avisable {
 
-    public static final String IDAUDITORIA ="IDAUDITORIA";
-    public static final String IDAREA="IDAREA";
+    public static final String IDAREA = "IDAREA";
 
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private ViewPager pager;
-    private AdapterPagerSubItems adapterPager;
     public static String idAuditoria;
     public static String areaAuditada;
-    private String resultadoInputFoto;
-    private ControllerDatos controllerDatos;
-    private FloatingActionMenu fabMenu;
     private Toolbar toolbar;
 
     @Override
@@ -70,24 +59,25 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auditoria);
 
+        //RECIBO EL BUNDLE
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
 
+        if (bundle!=null) {
+            areaAuditada = bundle.getString(IDAREA);
+        }
 
-        Intent intent= getIntent();
-        Bundle bundle= intent.getExtras();
-
-        areaAuditada=bundle.getString(IDAREA);
+        //INSTANCIO NUEVA AUDITORIA
         instanciarNuevaAuditoria();
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.elDrawer);
-        navigationView = (NavigationView) findViewById(R.id.naview);
-
-        fabMenu=(FloatingActionMenu)findViewById(R.id.fab_menu);
+        drawerLayout =  findViewById(R.id.elDrawer);
+        NavigationView navigationView =  findViewById(R.id.naview);
+        pager =  findViewById(R.id.viewPagerAuditoria);
 
 //        SETEAR EL VIEWPAGER
-        pager=(ViewPager)findViewById(R.id.viewPagerAuditoria);
+        ControllerDatos controllerDatos = new ControllerDatos(this);
+        AdapterPagerSubItems adapterPager = new AdapterPagerSubItems(getSupportFragmentManager());
 
-        controllerDatos=new ControllerDatos(this);
-        adapterPager=new AdapterPagerSubItems(getSupportFragmentManager());
         adapterPager.setListaSubItems(controllerDatos.traerSubItems());
         adapterPager.setUnaListaTitulos(controllerDatos.traerTitulos());
         pager.setAdapter(adapterPager);
@@ -111,12 +101,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         tools2.setTitle(s2);
 */
         // Get a support ActionBar corresponding to this toolbar
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar =  findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.marfil));
 
         Typeface robotoR = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
-        TextView unText=toolbar.findViewById(R.id.textoToolbar);
+        TextView unText = toolbar.findViewById(R.id.textoToolbar);
         unText.setTypeface(robotoR);
         unText.setTextColor(getResources().getColor(R.color.tile5));
 
@@ -127,7 +117,6 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
         }
 
-        View headerLayout = navigationView.getHeaderView(0);
 
 //        TOGGLE PARA EL BOTON HAMBURGUESA
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
@@ -141,70 +130,70 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    switch (item.getItemId()) {
-                        case R.id.item11:
-                            pager.setCurrentItem(0);
-                            break;
-                        case R.id.item12:
-                            pager.setCurrentItem(1);
-                            break;
-                        case R.id.item13:
-                            pager.setCurrentItem(2);
-                            break;
-                        case R.id.item14:
-                            pager.setCurrentItem(3);
-                            break;
-                        case R.id.item21:
-                            pager.setCurrentItem(4);
-                            break;
-                        case R.id.item22:
-                            pager.setCurrentItem(5);
-                            break;
-                        case R.id.item23:
-                            pager.setCurrentItem(6);
-                            break;
-                        case R.id.item24:
-                            pager.setCurrentItem(7);
-                            break;
-                        case R.id.item31:
-                            pager.setCurrentItem(8);
-                            break;
-                        case R.id.item32:
-                            pager.setCurrentItem(9);
-                            break;
-                        case R.id.item33:
-                            pager.setCurrentItem(10);
-                            break;
-                        case R.id.item34:
-                            pager.setCurrentItem(11);
-                            break;
-                        case R.id.item41:
-                            pager.setCurrentItem(12);
-                            break;
-                        case R.id.item42:
-                            pager.setCurrentItem(13);
-                            break;
-                        case R.id.item43:
-                            pager.setCurrentItem(14);
-                            break;
-                        case R.id.item44:
-                            pager.setCurrentItem(15);
-                            break;
-                        case R.id.item51:
-                            pager.setCurrentItem(16);
-                            break;
-                        case R.id.item52:
-                            pager.setCurrentItem(17);
-                            break;
-                        case R.id.item53:
-                            pager.setCurrentItem(18);
-                            break;
-                        case R.id.item54:
-                            pager.setCurrentItem(19);
-                            break;
+                switch (item.getItemId()) {
+                    case R.id.item11:
+                        pager.setCurrentItem(0);
+                        break;
+                    case R.id.item12:
+                        pager.setCurrentItem(1);
+                        break;
+                    case R.id.item13:
+                        pager.setCurrentItem(2);
+                        break;
+                    case R.id.item14:
+                        pager.setCurrentItem(3);
+                        break;
+                    case R.id.item21:
+                        pager.setCurrentItem(4);
+                        break;
+                    case R.id.item22:
+                        pager.setCurrentItem(5);
+                        break;
+                    case R.id.item23:
+                        pager.setCurrentItem(6);
+                        break;
+                    case R.id.item24:
+                        pager.setCurrentItem(7);
+                        break;
+                    case R.id.item31:
+                        pager.setCurrentItem(8);
+                        break;
+                    case R.id.item32:
+                        pager.setCurrentItem(9);
+                        break;
+                    case R.id.item33:
+                        pager.setCurrentItem(10);
+                        break;
+                    case R.id.item34:
+                        pager.setCurrentItem(11);
+                        break;
+                    case R.id.item41:
+                        pager.setCurrentItem(12);
+                        break;
+                    case R.id.item42:
+                        pager.setCurrentItem(13);
+                        break;
+                    case R.id.item43:
+                        pager.setCurrentItem(14);
+                        break;
+                    case R.id.item44:
+                        pager.setCurrentItem(15);
+                        break;
+                    case R.id.item51:
+                        pager.setCurrentItem(16);
+                        break;
+                    case R.id.item52:
+                        pager.setCurrentItem(17);
+                        break;
+                    case R.id.item53:
+                        pager.setCurrentItem(18);
+                        break;
+                    case R.id.item54:
+                        pager.setCurrentItem(19);
+                        break;
 
 
-                    }
+                }
 
                 drawerLayout.closeDrawers();
                 return true;
@@ -212,7 +201,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         });
 //        SETEAR EL TABLAYOUT
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(pager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -244,30 +233,13 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
             @Override
             public void onPageScrollStateChanged(int state) {
-                
+
             }
         });
 
-
-
-
-        //updateTabTextColors();
-
-
     }
 
-/*
-    private void updateTabTextColors(){
-        LinearLayout tabsContainer=(LinearLayout)tabLayout.getChildAt(0);
 
-        for(int i =4;i<8;i++){
-            LinearLayout item = (LinearLayout) tabsContainer.getChildAt(i);
-            TextView tv =(TextView)item.getChildAt(1);
-            tv.setTextColor(ContextCompat.getColor(this, R.color.tile1));
-        }
-
-    }
-    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -282,13 +254,12 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
     }
 
 
-
-    public void instanciarNuevaAuditoria(){
+    public void instanciarNuevaAuditoria() {
 //   CREAR UNA AUDITORIA NUEVA
-        final Auditoria nuevaAuditoria=new Auditoria();
-        Realm realm= Realm.getDefaultInstance();
-        nuevaAuditoria.setIdAuditoria("AUDIT-"+UUID.randomUUID());
-        idAuditoria=nuevaAuditoria.getIdAuditoria();
+        final Auditoria nuevaAuditoria = new Auditoria();
+        Realm realm = Realm.getDefaultInstance();
+        nuevaAuditoria.setIdAuditoria("AUDIT-" + UUID.randomUUID());
+        idAuditoria = nuevaAuditoria.getIdAuditoria();
         nuevaAuditoria.setFechaAuditoria(determinarFecha());
         nuevaAuditoria.setUsuario(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
@@ -304,24 +275,25 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-               Auditoria auditoriaRealm= realm.copyToRealmOrUpdate(nuevaAuditoria);
+                Auditoria auditoriaRealm = realm.copyToRealmOrUpdate(nuevaAuditoria);
                 updateSubItems(realm, auditoriaRealm);
             }
         });
 
     }
-    public String determinarFecha(){
+
+    public String determinarFecha() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String date=sdf.format(cal.getTime());
-        return date;
+        return  sdf.format(cal.getTime());
+
     }
 
     @Override
     public void cerrarAuditoria() {
 
-        Intent intent=new Intent(this, GraficosActivity.class);
-        Bundle bundle=new Bundle();
+        Intent intent = new Intent(this, GraficosActivity.class);
+        Bundle bundle = new Bundle();
         bundle.putString(GraficosActivity.AUDIT, idAuditoria);
         bundle.putString(GraficosActivity.ORIGEN, "auditoria");
         intent.putExtras(bundle);
@@ -330,43 +302,20 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
     }
 
-    public void calcularPuntajeAuditoria(){
-
-    }
-
     @Override
     public void salirDeAca() {
-        Intent intent= new Intent(this, ActivityLanding.class);
+        Intent intent = new Intent(this, ActivityLanding.class);
         startActivity(intent);
         this.finish();
     }
 
-    public void pedirComment(){
+    public void updateSubItems(Realm realm, final Auditoria unAudit) {
+        ControllerDatos controler = new ControllerDatos(this);
+        RealmList<SubItem> unaListaDummie = controler.traerSubItems();
 
-        new MaterialDialog.Builder(this)
-                .title(getResources().getString(R.string.agregarComentario))
-                .content(getResources().getString(R.string.favorAgregueComentario))
-                .inputType(InputType.TYPE_CLASS_TEXT)
-                .input(getResources().getString(R.string.comment),"", new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(MaterialDialog dialog, CharSequence input) {
-                        resultadoInputFoto=input.toString();
-                        entregarString();
-                    }
-                }).show();
-    }
-
-    private String entregarString() {
-        return resultadoInputFoto;
-    }
-
-    public void updateSubItems(Realm realm, final Auditoria unAudit){
-        ControllerDatos controler= new ControllerDatos(this);
-        RealmList<SubItem>unaListaDummie=controler.traerSubItems();
-
-        for (final SubItem sub:unaListaDummie
+        for (final SubItem sub : unaListaDummie
                 ) {
-            sub.setPertenencia(idAuditoria+sub.getId());
+            sub.setPertenencia(idAuditoria + sub.getId());
             sub.setAuditoria(idAuditoria);
             SubItem subItemSubidoARealm = realm.copyToRealmOrUpdate(sub);
             unAudit.getSubItems().add(subItemSubidoARealm);
@@ -382,7 +331,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                 .contentColor(ContextCompat.getColor(this, R.color.primary_text))
                 .titleColor(ContextCompat.getColor(this, R.color.tile4))
                 .backgroundColor(ContextCompat.getColor(this, R.color.tile1))
-                .content(getResources().getString(R.string.auditoriaSinTerminar)+"\n"+getResources().getString(R.string.continuar))
+                .content(getResources().getString(R.string.auditoriaSinTerminar) + "\n" + getResources().getString(R.string.continuar))
                 .positiveText(getResources().getString(R.string.si))
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -391,33 +340,33 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                         Realm realm = Realm.getDefaultInstance();
 
                         realm.executeTransaction(new Realm.Transaction() {
-                             @Override
-                             public void execute(Realm realm) {
+                            @Override
+                            public void execute(Realm realm) {
 
-                                 String usuario = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                String usuario = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-                                 RealmResults<SubItem> Subitems = realm.where(SubItem.class)
-                                         .equalTo("auditoria", idAuditoria)
-                                         .findAll();
-                                 Subitems.deleteAllFromRealm();
+                                RealmResults<SubItem> Subitems = realm.where(SubItem.class)
+                                        .equalTo("auditoria", idAuditoria)
+                                        .findAll();
+                                Subitems.deleteAllFromRealm();
 
-                                 RealmResults<Foto> fotos = realm.where(Foto.class)
-                                         .equalTo("auditoria", idAuditoria)
-                                         .findAll();
-                                 for (Foto foti : fotos
-                                         ) {
-                                     File file = new File(foti.getRutaFoto());
-                                     boolean deleted = file.delete();
-                                 }
-                                 fotos.deleteAllFromRealm();
+                                RealmResults<Foto> fotos = realm.where(Foto.class)
+                                        .equalTo("auditoria", idAuditoria)
+                                        .findAll();
+                                for (Foto foti : fotos
+                                        ) {
+                                    File file = new File(foti.getRutaFoto());
+                                    boolean deleted = file.delete();
+                                }
+                                fotos.deleteAllFromRealm();
 
-                                 Auditoria result2 = realm.where(Auditoria.class)
-                                         .equalTo("idAuditoria", idAuditoria)
-                                         .findFirst();
+                                Auditoria result2 = realm.where(Auditoria.class)
+                                        .equalTo("idAuditoria", idAuditoria)
+                                        .findFirst();
 
-                                 result2.deleteFromRealm();
-                             }
-                         });
+                                result2.deleteFromRealm();
+                            }
+                        });
 
 
                         ActivityAuditoria.this.finish();
@@ -435,7 +384,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
 
     @Override
     public void mostrarToolbar() {
-        Typeface roboto=Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
+        Typeface roboto = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
         TapTargetView.showFor(this,                 // `this` is an Activity
                 TapTarget.forToolbarNavigationIcon(toolbar, getResources().getString(R.string.tutorial_tit_navegar), getResources().getString(R.string.tutorial_desc_navegar
                 ))
@@ -449,7 +398,7 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                         .tintTarget(false)                   // Whether to tint the target view's color
                         .transparentTarget(true),           // Specify whether the target is transparent (displays the content underneath)
 
-                    new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
                     @Override
                     public void onTargetClick(TapTargetView view) {
                         super.onTargetClick(view);      // This call is optional
@@ -457,11 +406,4 @@ public class ActivityAuditoria extends AppCompatActivity implements FragmentSubi
                 });
 
     }
-
-    public void cerrarSinGuardar(){
-
-
-
-    }
-
 }

@@ -3,6 +3,7 @@ package com.nomad.audit5s.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -39,6 +40,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nomad.audit5s.Manifest;
 import com.nomad.audit5s.adapter.AdapterAuditorias;
 import com.nomad.audit5s.fragments.FragmentLanding;
 import com.nomad.audit5s.fragments.FragmentSeleccionAerea;
@@ -49,10 +51,12 @@ import com.nomad.audit5s.services.ServiceLoco;
 import com.nomad.audit5s.utils.FuncionesPublicas;
 
 import java.io.File;
+import java.security.Permission;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import io.realm.Realm;
 import pl.tajchert.nammu.Nammu;
 
 import static com.nomad.audit5s.fragments.FragmentSettings.deleteDirectory;
@@ -91,10 +95,18 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
         Nammu.init(getApplicationContext());
 
         //borrar cache auditorias PDF
+        if (Nammu.checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+        Integer permisoParaEscribir = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (FuncionesPublicas.isExternalStorageWritable()) {
+                File path = new File(getExternalFilesDir(null) + File.separator + "nomad" + File.separator + "audit5s" + File.separator + FirebaseAuth.getInstance().getCurrentUser().getEmail() + File.separator + "audits");
+                Boolean deleteDirectorio = deleteDirectory(path);
+            }
+        }
 
-        if (FuncionesPublicas.isExternalStorageWritable()) {
-            File path = new File(getExternalFilesDir(null)+ File.separator + "nomad" + File.separator + "audit5s" +File.separator+FirebaseAuth.getInstance().getCurrentUser().getEmail()+File.separator+"audits");
-            Boolean deleteDirectorio=deleteDirectory(path);
+        config = getSharedPreferences("prefs", 0);
+        boolean firstRun = config.getBoolean("firstRun", false);
+        if (!firstRun){
+            crearAuditoriaEjemplo();
         }
 
         lanzarLandingFragment();
@@ -105,6 +117,12 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
             getSupportFragmentManager().popBackStackImmediate();
         }
         */
+
+
+    }
+
+    private void crearAuditoriaEjemplo() {
+        Realm realm = Realm.getDefaultInstance();
     }
 
     private void lanzarLandingFragment() {
@@ -118,15 +136,15 @@ public class ActivityLanding extends AppCompatActivity implements FragmentLandin
 
     @Override
     public void comenzarAuditoria(Area unArea) {
-
         Intent intent = new Intent(this, ActivityAuditoria.class);
         Bundle bundle = new Bundle();
+
         bundle.putString(ActivityAuditoria.IDAREA, unArea.getIdArea());
         intent.putExtras(bundle);
         startActivity(intent);
+
         FragmentManager fragmentManager = (FragmentManager) this.getSupportFragmentManager();
         fragmentManager.popBackStack();
-
     }
 
     @Override

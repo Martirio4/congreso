@@ -2,13 +2,20 @@ package com.nomad.audit5s.controller;
 
 import android.content.Context;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.activities.ActivityAuditoria;
+import com.nomad.audit5s.model.Area;
+import com.nomad.audit5s.model.Foto;
 import com.nomad.audit5s.model.SubItem;
 import com.nomad.audit5s.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
+import io.realm.Realm;
 import io.realm.RealmList;
 
 /**
@@ -392,4 +399,7 @@ public class ControllerDatos  {
         lista.add("5S Shitsuke");
         return lista;
     }
+
+
+
 }

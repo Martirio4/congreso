@@ -50,7 +50,7 @@ public class ActivityVerAuditorias extends AppCompatActivity {
 
         idAuditoria=bundle.getString(AUDITORIA);
 
-        pager=(ViewPager)findViewById(R.id.viewPagerVerAudit);
+        pager= findViewById(R.id.viewPagerVerAudit);
 
 //        SETEAR EL VIEWPAGER
         controllerDatos=new ControllerDatos(this);
@@ -62,7 +62,7 @@ public class ActivityVerAuditorias extends AppCompatActivity {
 
 
         //        SETEAR EL TABLAYOUT
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(pager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
