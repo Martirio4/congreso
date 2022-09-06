@@ -117,12 +117,12 @@
                     android:layout_height="match_parent" />
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginBottom="@dimen/margenChico"
                 android:id="@+id/recycler1sVerAudit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
             <!--SEGUNDO SUBITEM-->
             <LinearLayout
                 android:orientation="horizontal"
@@ -152,12 +152,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
             </LinearLayout>
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginBottom="@dimen/margenChico"
                 android:id="@+id/recycler2VerAudit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
             <!--TERCER SUBITEM-->
             <LinearLayout
                 android:orientation="horizontal"
@@ -187,12 +187,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
             </LinearLayout>
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginBottom="@dimen/margenChico"
                 android:id="@+id/recycler3VerAudit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
             <!--CUARTO SUBITEM-->
             <LinearLayout
                 android:orientation="horizontal"
@@ -222,12 +222,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
             </LinearLayout>
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginBottom="@dimen/margenGrande"
                 android:id="@+id/recycler4VerAudit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
     </ScrollView>

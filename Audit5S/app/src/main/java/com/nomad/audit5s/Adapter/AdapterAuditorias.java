@@ -2,13 +2,13 @@ package com.nomad.audit5s.adapter;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.content.ContextCompat;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.firebase.auth.FirebaseAuth;
 import com.nomad.audit5s.controller.ControllerDatos;
 import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.model.SubItem;
@@ -29,13 +28,11 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.NumberFormat;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
 import io.realm.RealmList;
-import io.realm.RealmResults;
 
 import static io.fabric.sdk.android.services.network.HttpRequest.post;
 

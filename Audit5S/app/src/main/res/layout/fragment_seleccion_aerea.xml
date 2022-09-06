@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
 
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="@dimen/margenChico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:layout_marginStart="@dimen/margenChico"
@@ -47,14 +47,14 @@
         android:visibility="gone"
         />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerArea"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/margenChico"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 <LinearLayout

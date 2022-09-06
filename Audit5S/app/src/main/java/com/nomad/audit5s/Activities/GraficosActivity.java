@@ -12,15 +12,14 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,7 +42,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nomad.audit5s.controller.ControllerDatos;
 import com.nomad.audit5s.fragments.FragmentBarrasApiladas;
-import com.nomad.audit5s.fragments.FragmentManageAreas;
 import com.nomad.audit5s.fragments.FragmentRadar;
 import com.nomad.audit5s.model.Auditoria;
 import com.nomad.audit5s.model.Foto;
@@ -55,7 +53,6 @@ import com.nomad.mylibrary.PaperSize;
 import com.nomad.mylibrary.StandardFonts;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -64,11 +61,7 @@ import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 import pl.tajchert.nammu.Nammu;
-
-import static com.nomad.audit5s.utils.FuncionesPublicas.borrarAuditoriaSeleccionada;
-
 
 public class GraficosActivity extends AppCompatActivity {
 

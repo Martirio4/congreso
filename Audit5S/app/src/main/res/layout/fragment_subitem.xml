@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <androidx.appcompat.widget.AppCompatRadioButton
             android:textColorHighlight="@color/colorAccent"
             app:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <androidx.appcompat.widget.AppCompatRadioButton
             android:textColorHighlight="@color/colorAccent"
             app:buttonTint="@color/tile4"
             android:id="@+id/item2"
@@ -49,7 +49,7 @@
             android:layout_margin="@dimen/margenChico"
            />
 
-        <android.support.v7.widget.AppCompatRadioButton
+        <androidx.appcompat.widget.AppCompatRadioButton
             android:textColorHighlight="@color/colorAccent"
             app:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
@@ -58,7 +58,7 @@
             android:id="@+id/item3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <android.support.v7.widget.AppCompatRadioButton
+        <androidx.appcompat.widget.AppCompatRadioButton
             android:textColorHighlight="@color/colorAccent"
             app:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
@@ -67,7 +67,7 @@
             android:id="@+id/item4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <android.support.v7.widget.AppCompatRadioButton
+        <androidx.appcompat.widget.AppCompatRadioButton
             android:textColorHighlight="@color/colorAccent"
             app:buttonTint="@color/tile4"
             android:layout_margin="@dimen/margenChico"
@@ -86,13 +86,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="@dimen/margenChico"
         android:id="@+id/recyclerFotos"
         android:layout_width="match_parent"
         android:layout_height="@dimen/altoImageViewCargarArea">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 </LinearLayout>

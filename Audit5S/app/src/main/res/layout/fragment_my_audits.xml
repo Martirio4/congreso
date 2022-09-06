@@ -6,7 +6,7 @@
     tools:context="com.nomad.audit5s.fragments.FragmentSeleccionAerea">
 
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerArea"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/margenChico"
@@ -14,7 +14,7 @@
             android:layout_height="match_parent"
 
             >
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
 
 

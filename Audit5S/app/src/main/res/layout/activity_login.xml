@@ -47,7 +47,7 @@
             android:layout_height="match_parent">
 
             <!--MAIL DEL USUARIO-->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 adroid:errorTextAppearance="@style/error_appearance"
@@ -62,10 +62,10 @@
                     android:textColor="@color/marfil"
                     android:textAlignment="center"
                     android:id="@+id/editTextUsuario"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!--CONTRASENIA DEL USUARIO-->
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/inputLayout2"
@@ -83,7 +83,7 @@
                     android:textAlignment="center"
                     android:hint="@string/hinPass"
                     />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
 

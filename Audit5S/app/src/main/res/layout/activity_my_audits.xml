@@ -9,7 +9,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
 
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <!--<LinearLayout-->
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tabLayoutMyAudits"
@@ -56,19 +56,19 @@
             app:tabMode="fixed"
             app:tabTextColor="@color/tile2"
             app:tabGravity="fill"/>
-        <android.support.design.widget.CoordinatorLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:orientation="vertical"
             android:id="@+id/contenedorMyAudits"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerMyAudits"
                 android:layout_width="match_parent"
                 android:background="@color/marfil"
                 android:layout_height="match_parent">
-            </android.support.v4.view.ViewPager>
+            </androidx.viewpager.widget.ViewPager>
 
-        </android.support.design.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 
